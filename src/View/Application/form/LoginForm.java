@@ -142,10 +142,10 @@ public class LoginForm extends javax.swing.JPanel {
         String Correo = this.txtUsuario.getText(); 
        String Password = this.txtContraseña.getText(); 
         Personas personas = PersonasController.callApiAndProcessResponse(Correo, Password);
-         Recuperaciones Recuperaciones2 = new Recuperaciones();
+        /* Recuperaciones Recuperaciones2 = new Recuperaciones();
        String Code =  Recuperaciones2.mandarCorreo(Correo);
 
-        System.out.println(Code);
+        System.out.println(Code);*/
         if (personas != null) {
              Application.login();
         } else {

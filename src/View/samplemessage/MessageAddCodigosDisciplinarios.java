@@ -35,11 +35,9 @@ import org.json.JSONObject;
  *
  * @author educs
  */
-public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
+public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
 
-    public int id;
-    
-    public MessageEditCodigosDisciplinarios() {
+    public MessageAddCodigosDisciplinarios() {
 
         initComponents();
         setOpaque(false);
@@ -138,7 +136,7 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
-        
+        enviarDatosHaciaApi();
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
@@ -146,52 +144,55 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
         btnAceptar.addActionListener(event);
     }
 
-    public void actualizarDatosHaciaApi() {
-    int num = 4;
-    int num1 = 1;
+    private void enviarDatosHaciaApi() {
 
-    MessageEditCodigosDisciplinarios msg = new MessageEditCodigosDisciplinarios();
-    // Obtener los valores seleccionados del ComboBox y el texto del TextField
-    int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbTiposCodigosConductuales) + num;
-    int idNivelCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbNivelCodigoConductual) + num1;
-    String codigoConductual = txtCodigoConductual.getText();
+        int num = 4;
+        int num1 = 1;
 
-    System.out.println(idTipoCodigoConductual);
-    System.out.println(idNivelCodigoConductual);
-    System.out.println(codigoConductual);
+        MessageAddCodigosDisciplinarios msg = new MessageAddCodigosDisciplinarios();
+        // Obtener los valores seleccionados del ComboBox y el texto del TextField
+        int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbTiposCodigosConductuales) + num;
+        int idNivelCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbNivelCodigoConductual) + num1;
+        String codigoConductual = txtCodigoConductual.getText();
 
-    try {
-        // Crear un objeto JSON con los datos recopilados
-        JSONObject jsonData = new JSONObject();
-        jsonData.put("idCodigoConductual", id);
-        jsonData.put("idTipoCodigoConductual", idTipoCodigoConductual);
-        jsonData.put("idNivelCodigoConductual", idNivelCodigoConductual);
-        jsonData.put("codigoConductual", codigoConductual);
+        System.out.println(idTipoCodigoConductual);
+        System.out.println(idNivelCodigoConductual);
+        System.out.println(codigoConductual);
+        try {
+            // Crear un objeto JSON con los datos recopilados
+            JSONObject jsonData = new JSONObject();
+            jsonData.put("idTipoCodigoConductual", idTipoCodigoConductual);
+            jsonData.put("idNivelCodigoConductual", idNivelCodigoConductual);
+            jsonData.put("codigoConductual", codigoConductual);
 
-        // Llamar al método putApiAsync para enviar los datos de actualización
-        String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductuales/update"; // Reemplaza esto con la URL de tu API
-        String jsonString = jsonData.toString();
+            // Llamar al método postApiAsync para enviar los datos
+            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductuales/save"; // Reemplaza esto con la URL de tu API
+            String jsonString = jsonData.toString();
 
-        CompletableFuture<Boolean> putFuture = ControllerFull.putApiAsync(endpointUrl, jsonString);
+            CompletableFuture<Boolean> postFuture = ControllerFull.postApiAsync(endpointUrl, jsonString);
 
-        // Manejar la respuesta de la API
-        putFuture.thenAccept(success -> {
-            if (success) {
-                // La solicitud PUT fue exitosa
-                System.out.println("Datos actualizados correctamente en la API");
-                
-                // Realizar las acciones necesarias después de la actualización, si es necesario
-            } else {
-                // La solicitud PUT falló
-                System.out.println("Error al actualizar los datos en la API");
-            }
-        });
-    } catch (JSONException e) {
-        // Manejar la excepción JSONException aquí
-        System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+            // Manejar la respuesta de la API
+            postFuture.thenAccept(success -> {
+                if (success) {
+                    // La solicitud POST fue exitosa
+                    System.out.println("Datos enviados correctamente a la API");
+
+                    CodigosDisciplinarios cd = new CodigosDisciplinarios();
+                    cd.deleteAllTableRows(cd.table1);
+                    cd.cargarDatos();
+                    boolean pC = panelClosing() == true;
+                    GlassPanePopup.closePopupLast();
+
+                } else {
+                    // La solicitud POST falló
+                    System.out.println("Error al enviar los datos a la API");
+                }
+            });
+        } catch (JSONException e) {
+            // Manejar la excepción JSONException aquí
+            System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+        }
     }
-}
-
 
     private int obtenerIdSeleccionadoComboBox(JComboBox<String> comboBox) {
         int selectedIndex = (int) comboBox.getSelectedIndex();
