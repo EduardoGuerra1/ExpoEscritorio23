@@ -8,6 +8,13 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 import View.aplicacion.Application;
+import View.glasspanepopup.GlassPanePopup;
+import View.samplemessage.Message;
+import expoescritorio.Controller.PersonasController;
+import expoescritorio.Models.Personas;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -130,7 +137,27 @@ public class LoginForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEntrarActionPerformed
-        Application.login();
+        String Correo = this.txtUsuario.getText(); 
+       String Password = this.txtContraseña.getText(); 
+        Personas personas = PersonasController.callApiAndProcessResponse(Correo, Password);
+        if (personas != null) {
+             Application.login();
+        } else {
+            Message obj = new Message();
+            obj.txtTitle.setText("Aviso");
+            obj.txtContent.setText("Datos incorrectos" );
+            obj.eventOK(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+
+                    System.out.println("Click OK");
+                    GlassPanePopup.closePopupLast();
+                }
+            });
+            GlassPanePopup.showPopup(obj);
+        }
+        
+       
     }//GEN-LAST:event_cmdEntrarActionPerformed
 
     private class LoginFormLayout implements LayoutManager {
