@@ -11,6 +11,8 @@ import View.aplicacion.Application;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import expoescritorio.Controller.PersonasController;
+import expoescritorio.Controller.Recuperaciones;
+import expoescritorio.Models.CodigoRecuperacion;
 import expoescritorio.Models.Personas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -140,6 +142,10 @@ public class LoginForm extends javax.swing.JPanel {
         String Correo = this.txtUsuario.getText(); 
        String Password = this.txtContraseña.getText(); 
         Personas personas = PersonasController.callApiAndProcessResponse(Correo, Password);
+         Recuperaciones Recuperaciones2 = new Recuperaciones();
+       String Code =  Recuperaciones2.mandarCorreo(Correo);
+
+        System.out.println(Code);
         if (personas != null) {
              Application.login();
         } else {

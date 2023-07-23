@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="af33777b-6ed6-4a84-b850-cce7d635be17" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.properties" afterDir="false" />
-    </list>
+    <list default="true" id="af33777b-6ed6-4a84-b850-cce7d635be17" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +19,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/50379/Desktop/Expo 2023/Escritorio/ExpoEscritorio",
+    "last_opened_file_path": "C:/Users/50379/Desktop/Expo 2023/Api/ApiSQl/ApiGod",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -34,6 +32,7 @@
       <option name="presentableId" value="Default" />
       <updated>1690092133950</updated>
       <workItem from="1690092134895" duration="49000" />
+      <workItem from="1690096592684" duration="222000" />
     </task>
     <servers />
   </component>
