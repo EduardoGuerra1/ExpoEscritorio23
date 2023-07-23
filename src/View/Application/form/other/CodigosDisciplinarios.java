@@ -339,11 +339,11 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
                 });
                 GlassPanePopup.closePopupLast();
                 Timer timer = new Timer(500, (ActionEvent e) -> {
-                deleteAllTableRows(table1);
-                cargarDatos();
-            });
-            timer.setRepeats(false);
-            timer.start();
+                    deleteAllTableRows(table1);
+                    cargarDatos();
+                });
+                timer.setRepeats(false);
+                timer.start();
             }
         });
         GlassPanePopup.showPopup(obj);

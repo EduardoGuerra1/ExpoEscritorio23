@@ -30,6 +30,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import org.json.JSONException;
 import org.json.JSONObject;
+import raven.toast.Notifications;
+
 
 /**
  *
@@ -68,6 +70,8 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
             // Manejar las excepciones aquí
             System.out.println("Error al obtener la lista de niveles de códigos conductuales: " + e.getMessage());
         }
+        String selectedText = (String) cbTiposCodigosConductuales.getSelectedItem();
+                txtCodigoConductual.setText(selectedText);
         // Agrega el ActionListener al JComboBox
         cbTiposCodigosConductuales.addActionListener(new ActionListener() {
             @Override
@@ -77,6 +81,7 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
                 txtCodigoConductual.setText(selectedText);
             }
         });
+        
     }
 
     @Override
@@ -146,7 +151,13 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
-        enviarDatosHaciaApi();
+        
+        if(txtCodigoConductual.getText().isEmpty()){
+            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Seleccione un tipo de código");
+        }else{
+            enviarDatosHaciaApi();
+        }
+        
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
