@@ -45,7 +45,7 @@ public class LoginForm extends javax.swing.JPanel {
         /*cmdEntrar.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:none;"
                 + "focusWidth:0");*/
-        txtUsuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Usuario");
+        txtUsuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Correo");
         txtContraseña.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Contraseña");
     }
 
@@ -72,7 +72,7 @@ public class LoginForm extends javax.swing.JPanel {
         lbTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbTitulo.setText("Bienvenido a SAE");
 
-        lbUsuario.setText("Usuario");
+        lbUsuario.setText("Correo");
 
         lbContraseña.setText("Contraseña");
 
