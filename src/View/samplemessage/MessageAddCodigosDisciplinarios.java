@@ -68,7 +68,15 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
             // Manejar las excepciones aquí
             System.out.println("Error al obtener la lista de niveles de códigos conductuales: " + e.getMessage());
         }
-
+        // Agrega el ActionListener al JComboBox
+        cbTiposCodigosConductuales.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtiene el elemento seleccionado y actualiza el JTextField
+                String selectedText = (String) cbTiposCodigosConductuales.getSelectedItem();
+                txtCodigoConductual.setText(selectedText);
+            }
+        });
     }
 
     @Override
@@ -124,6 +132,8 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         jLabel2.setText("Código Disciplinario:");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, -1, -1));
         add(cbNivelCodigoConductual, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 160, -1));
+
+        txtCodigoConductual.setEnabled(false);
         add(txtCodigoConductual, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 230, 50));
 
         jLabel3.setText("Nivel de Código:");
@@ -207,8 +217,8 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         // Realiza las acciones necesarias antes de cerrar el panel
         System.out.println("El panel se va a cerrar.");
         CodigosDisciplinarios cd = new CodigosDisciplinarios();
-                    cd.deleteAllTableRows(cd.table1);
-                    cd.cargarDatos();
+        cd.deleteAllTableRows(cd.table1);
+        cd.cargarDatos();
         return false;
     }
 // Método para obtener el ID seleccionado de un JComboBox

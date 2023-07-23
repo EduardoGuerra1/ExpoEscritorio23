@@ -103,6 +103,9 @@
       </Constraints>
     </Component>
     <Component class="View.BotonesText.CustomTextField" name="txtCodigoConductual">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>

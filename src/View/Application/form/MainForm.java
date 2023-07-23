@@ -22,6 +22,7 @@ import View.Application.form.other.PantallaInicio;
 import View.Application.form.other.CodigosDisciplinarios;
 import View.Application.form.other.HorariosClases;
 import View.Application.form.other.LlegadasTarde;
+import View.Application.form.other.Observaciones;
 import View.Application.form.other.SolicitudesPermisos;
 import View.menu.Menu;
 import View.menu.MenuAction;
@@ -80,14 +81,16 @@ public class MainForm extends JLayeredPane {
                 if (subIndex == 1) {
                     Application.showForm(new CodigosDisciplinarios());
                 } else if (subIndex == 2) {
-                    Application.showForm(new SolicitudesPermiso());
+                    Application.showForm(new Observaciones());
                 } else if (subIndex == 3) {
-                    Application.showForm(new LlegadasTarde());
+                    Application.showForm(new SolicitudesPermiso());
                 } else if (subIndex == 4) {
-                    Application.showForm(new Asistencias());
+                    Application.showForm(new LlegadasTarde());
                 } else if (subIndex == 5) {
-                    Application.showForm(new Avisos());
+                    Application.showForm(new Asistencias());
                 } else if (subIndex == 6) {
+                    Application.showForm(new Avisos());
+                } else if (subIndex == 7) {
                     Application.showForm(new HorariosClases());
                 } else {
                     action.cancel();
