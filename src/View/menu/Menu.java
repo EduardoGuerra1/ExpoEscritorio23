@@ -34,7 +34,7 @@ public class Menu extends JPanel {
         {"Visitas Enfermeria"},
         {"Salones", "Reservar Salon", "Salones Reservados"},
         {"~Adicionales~"},
-        {"Ajustes"},
+        {"Credenciales"},
         {"Cerrar Sesión"}
     };
 

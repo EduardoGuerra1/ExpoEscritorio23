@@ -1,13 +1,15 @@
 package View.Application.form;
 
 import View.aplicacion.Application;
-import View.Application.form.Password;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import expoescritorio.Controller.PersonasController;
 import expoescritorio.Models.Personas;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,11 +17,35 @@ import java.awt.event.ActionListener;
  */
 public class LoginForm extends javax.swing.JPanel {
 
-    /**
-     * Creates new form LoginForm
-     */
+    private CardLayout cardLayout;
+    private JPanel cardPanel;
+    private LoginForm loginPanel;
+    private PasswordForm passwordPanel;
+
     public LoginForm() {
         initComponents();
+
+        /*// Crear el CardLayout y el panel que contendrá los paneles a alternar
+        cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout);
+
+        // Agregar el cardPanel al formulario
+        setLayout(new BorderLayout());
+        add(cardPanel, BorderLayout.CENTER);
+
+        // Crea una instancia del formulario de inicio de sesión
+        loginPanel = this;
+
+        // Crea una instancia del formulario de restablecimiento de contraseña
+        passwordPanel = new PasswordForm();
+
+        // Asigna un nombre para identificar los paneles en el CardLayout
+        cardPanel.add(loginPanel, "loginPanel");
+        // cardPanel.add(passwordPanel, "passwordPanel");
+
+        // Muestra el panel de inicio de sesión al principio
+        cardLayout.show(cardPanel, "loginPanel");*/
+
     }
 
     /**
@@ -94,6 +120,11 @@ public class LoginForm extends javax.swing.JPanel {
         btnContraseña.setBorder(null);
         btnContraseña.setBorderPainted(false);
         btnContraseña.setContentAreaFilled(false);
+        btnContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnContraseñaMouseClicked(evt);
+            }
+        });
         btnContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContraseñaActionPerformed(evt);
@@ -133,34 +164,32 @@ public class LoginForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-       String Correo = this.txtCorreo.getText(); 
-       String Password = this.txtContraseña.getText(); 
+        String Correo = this.txtCorreo.getText();
+        String Password = this.txtContraseña.getText();
         Personas personas = PersonasController.callApiAndProcessResponse(Correo, Password);
-        int id = personas.getIdTipoPersona(); 
-        if (personas != null ) {  
+        int id = personas.getIdTipoPersona();
+        if (personas != null) {
             System.out.println(id);
-            if(id == 4){
-            Application.login();
-            }
-            else
-            {
-             Message obj = new Message();
-            obj.txtTitle.setText("Aviso");
-            obj.txtContent.setText("No puede Entrar solo Administrador " );
-            obj.eventOK(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
+            if (id == 4) {
+                Application.login();
+            } else {
+                Message obj = new Message();
+                obj.txtTitle.setText("Aviso");
+                obj.txtContent.setText("No puede Entrar solo Administrador ");
+                obj.eventOK(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
 
-                    System.out.println("Click OK");
-                    GlassPanePopup.closePopupLast();
-                }
-            });
-            GlassPanePopup.showPopup(obj);
+                        System.out.println("Click OK");
+                        GlassPanePopup.closePopupLast();
+                    }
+                });
+                GlassPanePopup.showPopup(obj);
             }
         } else {
             Message obj = new Message();
             obj.txtTitle.setText("Aviso");
-            obj.txtContent.setText("Datos incorrectos" );
+            obj.txtContent.setText("Datos incorrectos");
             obj.eventOK(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
@@ -176,9 +205,13 @@ public class LoginForm extends javax.swing.JPanel {
 
     private void btnContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContraseñaActionPerformed
         // TODO add your handling code here
-        
-        
+
     }//GEN-LAST:event_btnContraseñaActionPerformed
+
+    private void btnContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContraseñaMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btnContraseñaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

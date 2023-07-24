@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
  *
  * @author gyaci
  */
-public class Password extends javax.swing.JPanel {
+public class PasswordForm extends javax.swing.JPanel {
     
     private RecuCorreo recuCorreo;
     private RecuSMS recuSMS;
@@ -18,7 +18,7 @@ public class Password extends javax.swing.JPanel {
     /**
      * Creates new form Password
      */
-    public Password() {
+    public PasswordForm() {
         initComponents();
         
          recuCorreo = new RecuCorreo();
