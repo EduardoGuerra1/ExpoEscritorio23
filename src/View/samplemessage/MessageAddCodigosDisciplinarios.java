@@ -28,10 +28,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.Timer;
 import org.json.JSONException;
 import org.json.JSONObject;
 import raven.toast.Notifications;
-
+import Services.Validaciones;
 
 /**
  *
@@ -71,7 +72,7 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
             System.out.println("Error al obtener la lista de niveles de códigos conductuales: " + e.getMessage());
         }
         String selectedText = (String) cbTiposCodigosConductuales.getSelectedItem();
-                txtCodigoConductual.setText(selectedText);
+        txtCodigoConductual.setText(selectedText);
         // Agrega el ActionListener al JComboBox
         cbTiposCodigosConductuales.addActionListener(new ActionListener() {
             @Override
@@ -81,7 +82,7 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
                 txtCodigoConductual.setText(selectedText);
             }
         });
-        
+
     }
 
     @Override
@@ -151,13 +152,21 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
-        
-        if(txtCodigoConductual.getText().isEmpty()){
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Seleccione un tipo de código");
-        }else{
+
+        if (txtCodigoConductual.getText().isEmpty()) {
+            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+        }  else {
             enviarDatosHaciaApi();
+            Timer timer = new Timer(500, (ActionEvent e) -> {
+                CodigosDisciplinarios cd = new CodigosDisciplinarios();
+
+                cd.cargarDatos();
+                cd.deleteAllTableRows(cd.table1);
+            });
+            timer.setRepeats(false);
+            timer.start();
         }
-        
+
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
@@ -199,8 +208,10 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
                     System.out.println("Datos enviados correctamente a la API");
 
                     CodigosDisciplinarios cd = new CodigosDisciplinarios();
-                    cd.deleteAllTableRows(cd.table1);
+
                     cd.cargarDatos();
+
+                    cd.deleteAllTableRows(cd.table1);
                     boolean pC = panelClosing() == true;
                     GlassPanePopup.closePopupLast();
 
@@ -228,8 +239,9 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         // Realiza las acciones necesarias antes de cerrar el panel
         System.out.println("El panel se va a cerrar.");
         CodigosDisciplinarios cd = new CodigosDisciplinarios();
-        cd.deleteAllTableRows(cd.table1);
+
         cd.cargarDatos();
+        cd.deleteAllTableRows(cd.table1);
         return false;
     }
 // Método para obtener el ID seleccionado de un JComboBox

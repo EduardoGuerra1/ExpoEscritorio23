@@ -43,6 +43,7 @@ public class LoginForm extends javax.swing.JPanel {
                 + "showRevealButton:true;"
                 + "showCapsLock:true");
         cmdEntrar.putClientProperty(FlatClientProperties.BUTTON_TYPE, "roundRect");
+        cmdEntrar1.putClientProperty(FlatClientProperties.BUTTON_TYPE, "roundRect");
 
         /*cmdEntrar.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:none;"
@@ -57,6 +58,7 @@ public class LoginForm extends javax.swing.JPanel {
 
         login = new javax.swing.JPanel();
         cmdEntrar = new javax.swing.JButton();
+        cmdEntrar1 = new javax.swing.JButton();
         lbTitulo = new javax.swing.JLabel();
         lbUsuario = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
@@ -68,6 +70,14 @@ public class LoginForm extends javax.swing.JPanel {
         cmdEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdEntrarActionPerformed(evt);
+            }
+        });
+
+        cmdEntrar1.setText("Se me olvidó la contraseña pipip");
+        cmdEntrar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        cmdEntrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEntrar1ActionPerformed(evt);
             }
         });
 
@@ -99,11 +109,14 @@ public class LoginForm extends javax.swing.JPanel {
             .addGroup(loginLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(lbTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(loginLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cmdEntrar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         loginLayout.setVerticalGroup(
             loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(49, Short.MAX_VALUE)
                 .addComponent(lbTitulo)
                 .addGap(18, 18, 18)
                 .addComponent(lbUsuario)
@@ -113,8 +126,10 @@ public class LoginForm extends javax.swing.JPanel {
                 .addComponent(lbContraseña)
                 .addGap(5, 5, 5)
                 .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(18, 18, 18)
                 .addComponent(cmdEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cmdEntrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -129,10 +144,10 @@ public class LoginForm extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 70, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 70, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("login");
@@ -165,6 +180,10 @@ public class LoginForm extends javax.swing.JPanel {
         
        
     }//GEN-LAST:event_cmdEntrarActionPerformed
+
+    private void cmdEntrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEntrar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdEntrar1ActionPerformed
 
     private class LoginFormLayout implements LayoutManager {
 
@@ -235,12 +254,13 @@ public class LoginForm extends javax.swing.JPanel {
                 height += UIScale.scale(labelGap);
                 height += txtUsuario.getPreferredSize().height;
                 height += UIScale.scale(textGap);
-
                 height += lbContraseña.getPreferredSize().height;
                 height += UIScale.scale(labelGap);
                 height += txtContraseña.getPreferredSize().height;
                 height += UIScale.scale(buttonGap);
                 height += cmdEntrar.getPreferredSize().height;
+                height += UIScale.scale(buttonGap);
+                height += cmdEntrar1.getPreferredSize().height;
                 return new Dimension(0, height);
             }
         }
@@ -274,6 +294,8 @@ public class LoginForm extends javax.swing.JPanel {
                 y += txtContraseña.getPreferredSize().height + UIScale.scale(buttonGap);
 
                 cmdEntrar.setBounds(x, y, width, cmdEntrar.getPreferredSize().height);
+                cmdEntrar1.setBounds(x, y, width, cmdEntrar1.getPreferredSize().height);
+               
             }
 
         }
@@ -281,6 +303,7 @@ public class LoginForm extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdEntrar;
+    private javax.swing.JButton cmdEntrar1;
     private javax.swing.JLabel lbContraseña;
     private javax.swing.JLabel lbTitulo;
     private javax.swing.JLabel lbUsuario;

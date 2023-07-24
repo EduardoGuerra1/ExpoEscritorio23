@@ -5,6 +5,7 @@
 package View.samplemessage;
 
 import View.Application.form.other.CodigosDisciplinarios;
+import View.Application.form.other.TiposCodigos;
 import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.kitfox.svg.A;
@@ -28,6 +29,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.Timer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -148,7 +150,16 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
+        
+        actualizarDatosHaciaApi();
+        Timer timer = new Timer(500, (ActionEvent e) -> {
+            TiposCodigos tc = new TiposCodigos();
 
+            tc.cargarDatos();
+            tc.deleteAllTableRows(tc.table1);
+        });
+        timer.setRepeats(false);
+        timer.start();
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
