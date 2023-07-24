@@ -173,8 +173,8 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
 
         MessageEditCodigosDisciplinarios msg = new MessageEditCodigosDisciplinarios();
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
-        int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbTiposCodigosConductuales) + num;
-        int idNivelCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbNivelCodigoConductual) + num1;
+        int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbTiposCodigosConductuales,false) ;
+        int idNivelCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbNivelCodigoConductual,true);
         String codigoConductual = txtCodigoConductual.getText();
 
         System.out.println(idTipoCodigoConductual);
@@ -213,13 +213,18 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
         }
     }
 
-    private int obtenerIdSeleccionadoComboBox(JComboBox<String> comboBox) {
+    private int obtenerIdSeleccionadoComboBox(JComboBox<String> comboBox, Boolean band) {
         int selectedIndex = (int) comboBox.getSelectedIndex();
+        String txt = comboBox.getItemAt(selectedIndex);
+        if(band){
+            return NivelesCodigosConductualesController.getNivelesCodigosConductualesNameAsync(txt).join();
+        }
+        else{
+            return TiposCodigosConductualesController.getTiposCodigosConductualesNameAsync(txt).join();
+        }
         // Aquí deberías obtener el ID correspondiente al valor seleccionado en el ComboBox
         // Puedes tener una lista de objetos con ID y valor asociado y buscar el ID basado en el valor seleccionado.
         // Por simplicidad, aquí asumiremos que el valor seleccionado es el ID directamente.
-
-        return selectedIndex;
     }
 
     public boolean panelClosing() {
