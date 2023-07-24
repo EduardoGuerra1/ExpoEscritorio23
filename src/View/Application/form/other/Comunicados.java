@@ -8,7 +8,9 @@ import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import com.formdev.flatlaf.FlatClientProperties;
 import expoescritorio.Controller.ControllerFull;
+import static expoescritorio.Controller.Funciones.GetComunicados;
 import static expoescritorio.Controller.Funciones.GetObservaciones;
+import expoescritorio.Models.ComunicadosModel;
 import expoescritorio.Models.ObservacionesString;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,28 +39,22 @@ public class Comunicados extends javax.swing.JPanel {
     }
 
     public void cargarDatos(){
-        CompletableFuture<List<ObservacionesString>> futureObservaciones = GetObservaciones();
+        CompletableFuture<List<ComunicadosModel>> futureObservaciones = GetComunicados();
         futureObservaciones.thenAccept(obsList -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
             // Agregar las columnas al modelo de tabla
-            tableModel.addColumn("ID Observacion");
-            tableModel.addColumn("Estudiante");
-            tableModel.addColumn("Docente");
-            tableModel.addColumn("Periodo");
-            tableModel.addColumn("Fecha");
+            tableModel.addColumn("ID Comunicado");
+            tableModel.addColumn("Grado");
             tableModel.addColumn("Detalle");
-            tableModel.addColumn("Estudiante");
+            tableModel.addColumn("Fecha");
 
             // Agregar los datos de Observaciones a la tabla
-            for (ObservacionesString observacion : obsList) {
+            for (ComunicadosModel observacion : obsList) {
                 Object[] rowData = {
-                        observacion.getIdObservacion(),
-                        observacion.getEstudiante(),
-                        observacion.getDocente(),
-                        observacion.getIdPeriodo(),
-                        observacion.getFecha(),
+                        observacion.getIdComunicado(),
+                        observacion.getIdGrado(),
                         observacion.getDetalle(),
-                        observacion.getIdEstudiante()
+                        observacion.getFecha()
                 };
                 tableModel.addRow(rowData);
             }
