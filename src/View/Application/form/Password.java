@@ -49,7 +49,7 @@ public class Password extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 51, 102));
 
         btnSMS.setBackground(new java.awt.Color(0, 51, 102));
-        btnSMS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/SMSS (1).png"))); // NOI18N
+        btnSMS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/QR Code-amico (3).png"))); // NOI18N
         btnSMS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSMSActionPerformed(evt);
@@ -74,7 +74,7 @@ public class Password extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setForeground(java.awt.Color.lightGray);
-        jLabel3.setText("Recuperacion de contraseña por SMS");
+        jLabel3.setText("Recuperacion de contraseña por QR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

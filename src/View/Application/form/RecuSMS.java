@@ -29,7 +29,6 @@ public class RecuSMS extends javax.swing.JPanel {
 
         jTextField2 = new javax.swing.JTextField();
         txtTelefono1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         btnRegresosms = new javax.swing.JButton();
         label1 = new java.awt.Label();
         txtTelefono = new javax.swing.JTextField();
@@ -41,12 +40,10 @@ public class RecuSMS extends javax.swing.JPanel {
         lblImagen = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtTexto = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 51, 102));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/SMSS (1).png"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         btnRegresosms.setBackground(new java.awt.Color(0, 51, 102));
         btnRegresosms.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/regreso (3).png"))); // NOI18N
@@ -55,10 +52,10 @@ public class RecuSMS extends javax.swing.JPanel {
         label1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label1.setForeground(java.awt.Color.lightGray);
         label1.setText("Ingrese la nueva contraseña:");
-        add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, -1, -1));
+        add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 430, -1, -1));
         label1.getAccessibleContext().setAccessibleName("");
 
-        add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 390, -1));
+        add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, 390, -1));
 
         label2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label2.setForeground(java.awt.Color.lightGray);
@@ -68,13 +65,13 @@ public class RecuSMS extends javax.swing.JPanel {
         btnRestablecer.setBackground(new java.awt.Color(0, 51, 102));
         btnRestablecer.setForeground(new java.awt.Color(255, 255, 255));
         btnRestablecer.setText("Restablecer");
-        add(btnRestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 500, 130, 50));
+        add(btnRestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 540, 130, 50));
 
         label4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label4.setForeground(java.awt.Color.lightGray);
         label4.setText("Ingrese el codigo que se genero");
-        add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, -1));
-        add(txtCambioContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 390, -1));
+        add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, -1, -1));
+        add(txtCambioContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, 390, -1));
 
         btnEnviar.setBackground(new java.awt.Color(0, 51, 102));
         btnEnviar.setForeground(new java.awt.Color(255, 255, 255));
@@ -92,6 +89,10 @@ public class RecuSMS extends javax.swing.JPanel {
         jScrollPane1.setViewportView(txtTexto);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 250, 100));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/QR Code-amico (3).png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 320, 390));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
@@ -105,7 +106,7 @@ public class RecuSMS extends javax.swing.JPanel {
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnRegresosms;
     private javax.swing.JButton btnRestablecer;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
     private java.awt.Label label1;

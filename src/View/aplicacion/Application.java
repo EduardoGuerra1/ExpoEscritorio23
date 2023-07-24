@@ -42,6 +42,7 @@ public class Application extends javax.swing.JFrame {
         app.mainForm.hideMenu();
         SwingUtilities.updateComponentTreeUI(app.mainForm);
         FlatAnimatedLafChange.hideSnapshotWithAnimation();
+        FlatLaf.updateUI();
     }
 
     public static void logout() {
@@ -50,6 +51,7 @@ public class Application extends javax.swing.JFrame {
         app.loginForm.applyComponentOrientation(app.getComponentOrientation());
         SwingUtilities.updateComponentTreeUI(app.loginForm);
         FlatAnimatedLafChange.hideSnapshotWithAnimation();
+        FlatLaf.updateUI();
     }
 
     public static void setSelectedMenu(int index, int subIndex) {
