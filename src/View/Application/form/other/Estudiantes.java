@@ -11,7 +11,9 @@ import View.samplemessage.MessageEditCodigosDisciplinarios;
 import com.formdev.flatlaf.FlatClientProperties;
 import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
+import expoescritorio.Controller.PersonasController;
 import expoescritorio.Models.CodigosConductuales;
+import expoescritorio.Models.Personas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -30,14 +32,14 @@ import org.json.JSONObject;
  *
  * @author gyaci
  */
-public class CodigosDisciplinarios extends javax.swing.JPanel {
+public class Estudiantes extends javax.swing.JPanel {
 
-    CodigosConductualesController controller = new CodigosConductualesController();
+    PersonasController controller = new PersonasController();
 
     /**
      * Creates new form CodigosDisciplinarios
      */
-    public CodigosDisciplinarios() {
+    public Estudiantes() {
         initComponents();
 
         lb.putClientProperty(FlatClientProperties.STYLE, ""
@@ -54,23 +56,18 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
     }
 
     public void cargarDatos() {
-        CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
-        future.thenAccept(codigosConductuales -> {
+        CompletableFuture<List<Personas>> future = PersonasController.getPersonasAsync(2);
+        future.thenAccept(personas -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
             
             
             
-            
-            for (CodigosConductuales codigo : codigosConductuales) {
-                CompletableFuture<String> futureNivelCodigoConductual = CodigosConductualesController.getNivelCodigoConductualAsync(codigo.getIdNivelCodigoConductual());
-                String nivelCodigoConductual = futureNivelCodigoConductual.join();
-                CompletableFuture<String> futureTipoCodigoConductual = CodigosConductualesController.getTipoCodigoConductualAsync(codigo.getIdTipoCodigoConductual());
-                String tipoCodigoConductual = futureTipoCodigoConductual.join();
+            for (Personas persona : personas) {
                 tableModel.addRow(new Object[]{
-                    codigo.getIdCodigoConductual(),
-                    tipoCodigoConductual,
-                    nivelCodigoConductual,
-                    codigo.getCodigoConductual()
+                    persona.getCodigo(),
+                    persona.getNombrePersona()+" "+persona.getApellidoPersona(),
+                    PersonasController.getEspecialidadPersona(persona.getIdPersona()),
+                    PersonasController.getGradoPersona(persona.getIdPersona())
                 });
             }
         });
@@ -198,10 +195,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
             obj.eventOK(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-
-                    String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductuales/delete";
-                    // Código para eliminar el registro de la API
-                    CompletableFuture<Boolean> deleteFuture = ControllerFull.DeleteApiAsync(endpointUrl, (int) id);
+                    CompletableFuture<Boolean> deleteFuture = PersonasController.deleteCodigoPersona(id.toString());
 
                     // Manejar la respuesta de la API
                     deleteFuture.thenAccept(deleted -> {
@@ -209,7 +203,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
                             // Registro eliminado con éxito
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Código eliminado exitosamente");
+                            obj.txtContent.setText("Persona eliminada exitosamente");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
@@ -223,7 +217,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
                             // Ocurrió un error al eliminar el registro
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Error al eliminar el código, intente nuevamente.");
+                            obj.txtContent.setText("Error al eliminar la persona, intente nuevamente.");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
@@ -258,7 +252,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
         // TODO add your handling code here:
-
+/*
         int num = 4;
         int num1 = 1;
         int selectedRow = table1.getSelectedRow();
@@ -322,18 +316,20 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
             GlassPanePopup.showPopup(obj);
 
         }
+*/
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        // TODO add your handling code here:
+ /*       // TODO add your handling code here:
         MessageAddCodigosDisciplinarios obj = new MessageAddCodigosDisciplinarios();
-        obj.txtTitle.setText("Añadir Código Disciplinario");
+        obj.txtTitle.setText("Añadir Estudiante");
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 System.out.println("Click OK");
                 CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
                 future.thenAccept(codigosConductuales -> {
+                    deleteAllTableRows(table1);
                     DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
                     for (CodigosConductuales codigo : codigosConductuales) {
                         tableModel.addRow(new Object[]{
@@ -346,15 +342,22 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
                 });
                 GlassPanePopup.closePopupLast();
                 Timer timer = new Timer(500, (ActionEvent e) -> {
-
-                    cargarDatos();
                     deleteAllTableRows(table1);
+                    cargarDatos();
                 });
                 timer.setRepeats(false);
                 timer.start();
             }
         });
         GlassPanePopup.showPopup(obj);
+
+        Timer timer = new Timer(500, (ActionEvent e) -> {
+            deleteAllTableRows(table1);
+            cargarDatos();
+        });
+        timer.setRepeats(false);
+        timer.start();
+*/
     }//GEN-LAST:event_btnAddMouseClicked
 
 
