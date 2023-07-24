@@ -36,6 +36,10 @@ public class RecuSMS extends javax.swing.JPanel {
         txtCorreosms1 = new javax.swing.JTextField();
         label3 = new java.awt.Label();
         txtTelefono2 = new javax.swing.JTextField();
+        btnRestablecer = new javax.swing.JButton();
+        label4 = new java.awt.Label();
+        txtCambioContraseña = new javax.swing.JTextField();
+        btnEnviar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 51, 102));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -49,33 +53,51 @@ public class RecuSMS extends javax.swing.JPanel {
 
         label1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label1.setForeground(java.awt.Color.lightGray);
-        label1.setText("Ingrese el código que se le envio:");
-        add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, -1, -1));
+        label1.setText("Ingrese la nueva contraseña:");
+        add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, -1));
         label1.getAccessibleContext().setAccessibleName("");
 
-        add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, 190, -1));
+        add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 390, -1));
 
         label2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label2.setForeground(java.awt.Color.lightGray);
         label2.setText("Ingrese el correo electronico con el que esta registrado:");
-        add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, -1));
-        add(txtCorreosms1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 190, -1));
+        add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
+        add(txtCorreosms1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 390, -1));
 
         label3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label3.setForeground(java.awt.Color.lightGray);
         label3.setText("Ingrese el número al que le gustaría que se le envie el codigo:");
-        add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
-        add(txtTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 190, -1));
+        add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, -1, -1));
+        add(txtTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 390, -1));
+
+        btnRestablecer.setBackground(new java.awt.Color(0, 51, 102));
+        btnRestablecer.setText("Restablecer");
+        add(btnRestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, 130, 50));
+
+        label4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        label4.setForeground(java.awt.Color.lightGray);
+        label4.setText("Ingrese el código que se le envio:");
+        add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, -1, -1));
+        add(txtCambioContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 390, -1));
+
+        btnEnviar.setBackground(new java.awt.Color(0, 51, 102));
+        btnEnviar.setText("Enviar");
+        add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 110, 50));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnRegresosms;
+    private javax.swing.JButton btnRestablecer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField2;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
+    private java.awt.Label label4;
+    private javax.swing.JTextField txtCambioContraseña;
     private javax.swing.JTextField txtCorreosms1;
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtTelefono1;
