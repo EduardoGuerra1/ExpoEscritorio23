@@ -4,6 +4,7 @@
  */
 package View.Application.form;
 
+import expoescritorio.Controller.Recuperaciones;
 import java.io.ByteArrayOutputStream;
 import javax.swing.ImageIcon;
 import net.glxn.qrgen.QRCode;
@@ -11,11 +12,11 @@ import net.glxn.qrgen.image.ImageType;
 
 public class RecuSMS extends javax.swing.JPanel {
 
-    /**
-     * Creates new form RecuSMS
-     */
+   Recuperaciones controller = new Recuperaciones ();
+   
     public RecuSMS() {
         initComponents();
+       
     }
 
     /**
@@ -65,6 +66,11 @@ public class RecuSMS extends javax.swing.JPanel {
         btnRestablecer.setBackground(new java.awt.Color(0, 51, 102));
         btnRestablecer.setForeground(new java.awt.Color(255, 255, 255));
         btnRestablecer.setText("Restablecer");
+        btnRestablecer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRestablecerMouseClicked(evt);
+            }
+        });
         add(btnRestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 540, 130, 50));
 
         label4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -100,6 +106,10 @@ public class RecuSMS extends javax.swing.JPanel {
         ImageIcon imageIcon = new ImageIcon(out.toByteArray());
         this.lblImagen.setIcon(imageIcon);
     }//GEN-LAST:event_btnEnviarMouseClicked
+
+    private void btnRestablecerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRestablecerMouseClicked
+        txtTexto.setText( controller.generateRandomCode());
+    }//GEN-LAST:event_btnRestablecerMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
