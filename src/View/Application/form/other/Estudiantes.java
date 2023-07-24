@@ -66,8 +66,8 @@ public class Estudiantes extends javax.swing.JPanel {
                 tableModel.addRow(new Object[]{
                     persona.getCodigo(),
                     persona.getNombrePersona()+" "+persona.getApellidoPersona(),
-                    PersonasController.getEspecialidadPersona(persona.getIdPersona()),
-                    PersonasController.getGradoPersona(persona.getIdPersona())
+                    PersonasController.getEspecialidadPersona(persona.getIdPersona()).join(),
+                    PersonasController.getGradoPersona(persona.getIdPersona()).join()
                 });
             }
         });

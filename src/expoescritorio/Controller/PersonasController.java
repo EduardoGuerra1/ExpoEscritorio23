@@ -164,7 +164,7 @@ public class PersonasController {
                         String nacimiento = jsonObject.getString("nacimientoPersona");
                         int idTipoPersona = jsonObject.getInt("idTipoPersona");
                         String correo = jsonObject.getString("correo");
-                        String claveCredenciales = jsonObject.getString("claveCrendenciales");
+                        String claveCredenciales = jsonObject.getString("claveCredenciales");
                         String foto = jsonObject.getString("foto");
                         
                         modelList.add(new Personas(idPersona, codigo, nombre, apellido, nacimiento, idTipoPersona, correo, claveCredenciales, foto));
