@@ -2,6 +2,12 @@ package View.Application.form;
 
 import View.aplicacion.Application;
 import View.Application.form.Password;
+import View.glasspanepopup.GlassPanePopup;
+import View.samplemessage.Message;
+import expoescritorio.Controller.PersonasController;
+import expoescritorio.Models.Personas;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -94,7 +100,7 @@ public class LoginForm extends javax.swing.JPanel {
             }
         });
         jPanel2.add(btnContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, 190, 20));
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 450, 380));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 450, 380));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(java.awt.Color.darkGray);
@@ -108,17 +114,17 @@ public class LoginForm extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(159, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(14, 14, 14)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -127,8 +133,45 @@ public class LoginForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        // TODO add your handling code here:
-        Application.login();
+       String Correo = this.txtCorreo.getText(); 
+       String Password = this.txtContraseña.getText(); 
+        Personas personas = PersonasController.callApiAndProcessResponse(Correo, Password);
+        int id = personas.getIdTipoPersona(); 
+        if (personas != null ) {  
+            System.out.println(id);
+            if(id == 4){
+            Application.login();
+            }
+            else
+            {
+             Message obj = new Message();
+            obj.txtTitle.setText("Aviso");
+            obj.txtContent.setText("No puede Entrar solo Administrador " );
+            obj.eventOK(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+
+                    System.out.println("Click OK");
+                    GlassPanePopup.closePopupLast();
+                }
+            });
+            GlassPanePopup.showPopup(obj);
+            }
+        } else {
+            Message obj = new Message();
+            obj.txtTitle.setText("Aviso");
+            obj.txtContent.setText("Datos incorrectos" );
+            obj.eventOK(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+
+                    System.out.println("Click OK");
+                    GlassPanePopup.closePopupLast();
+                }
+            });
+            GlassPanePopup.showPopup(obj);
+        }
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContraseñaActionPerformed
