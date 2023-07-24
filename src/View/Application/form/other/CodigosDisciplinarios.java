@@ -11,6 +11,8 @@ import View.samplemessage.MessageEditCodigosDisciplinarios;
 import com.formdev.flatlaf.FlatClientProperties;
 import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
+import expoescritorio.Controller.NivelesCodigosConductualesController;
+import expoescritorio.Controller.TiposCodigosConductualesController;
 import expoescritorio.Models.CodigosConductuales;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,7 +48,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
 
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"Codigo", "Nombre", "Especialidad", "Grado"});
+        tableModel.setColumnIdentifiers(new Object[]{"Id", "Tipo", "Nivel", "Nombre"});
 
         cargarDatos();
 
@@ -270,14 +272,18 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
             Object data2 = table1.getValueAt(selectedRow, 2);
             Object data3 = table1.getValueAt(selectedRow, 3);
             Object id = table1.getValueAt(selectedRow, 0);
-
             MessageEditCodigosDisciplinarios msg = new MessageEditCodigosDisciplinarios();
             msg.txtTitle.setText("Actualización de Código Disciplinario");
-            msg.cbTiposCodigosConductuales.setSelectedIndex((int) data1 - num);
-            msg.cbNivelCodigoConductual.setSelectedIndex((int) data2 - num1);
+            System.out.println("aca");
+            
+            int b = NivelesCodigosConductualesController.getNivelesCodigosConductualesNameAsync(data2.toString()).join();
+            int a = TiposCodigosConductualesController.getTiposCodigosConductualesNameAsync(data1.toString()).join();
+            System.out.println(NivelesCodigosConductualesController.getPosicionNivelCodigoConductual(a));
+            msg.cbTiposCodigosConductuales.setSelectedIndex(0);
+            msg.cbNivelCodigoConductual.setSelectedIndex(0);
             msg.txtCodigoConductual.setText(data3.toString());
             msg.id = (int) id;
-
+            
             msg.eventOK(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
