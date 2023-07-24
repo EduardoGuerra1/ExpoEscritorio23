@@ -2,6 +2,7 @@ package expoescritorio.Controller;
 
 import expoescritorio.Models.CodigosConductualesString;
 import expoescritorio.Models.CodigosString;
+import expoescritorio.Models.ComunicadosModel;
 import expoescritorio.Models.GradosView;
 import expoescritorio.Models.ObservacionesString;
 import expoescritorio.Models.ReservacionesSalonestring;
@@ -20,7 +21,47 @@ import org.json.JSONObject;
 
 
 public class Funciones {
+    
+    public static CompletableFuture<List<ComunicadosModel>> GetComunicados() {
+            return CompletableFuture.supplyAsync(() -> {
+                String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/Comunicados/list";
+                List<ComunicadosModel> modelList = new ArrayList<>();
+                HttpURLConnection connection = null;
+                try {
+                    URL url = new URL(apiUrl);
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        JSONArray jsonArray = new JSONArray(reader.readLine());
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            int idObservacion = jsonObject.getInt("idComunicado");
+                            int idPeriodo= jsonObject.getInt("idGrado");
+                            String fecha= jsonObject.getString("fecha");
+                            String detalle = jsonObject.getString("detalle");
+                            String idEstudiante= jsonObject.getString("archivo");
+                            modelList.add(new ComunicadosModel(idObservacion, idPeriodo,fecha,detalle, idEstudiante));
+                        }
+                    }else {
+                        System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
+                    }
+                }catch (IOException | JSONException e) {
+                    System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
+                }finally {
+                    if (connection != null) {
+                    connection.disconnect(); // Cerrar la conexión
+                }
+            }
+            return modelList;
+        });
+    }
+    
      public static CompletableFuture<List<CodigosString>> getCodigosConductualesStringApiAsync() {
+         
         return CompletableFuture.supplyAsync(() -> {
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductuales/String";
             List<CodigosString> modelList = new ArrayList<>();
@@ -172,6 +213,9 @@ public class Funciones {
             }
             return modelList;
         });
+        
+        
+        
     }
         public static CompletableFuture<List<GradosView>> GetGrados() {
         return CompletableFuture.supplyAsync(() -> {
