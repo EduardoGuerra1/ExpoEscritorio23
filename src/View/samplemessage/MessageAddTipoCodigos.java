@@ -53,7 +53,7 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
         txtTitle.setOpaque(false);
         txtTitle.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h4.font");
-        txtTipoCodigo.setDocument(new PlainDocument() {
+        txtTipoCodigo.setDocument(new PlainDocument() { // desde aca 
             @Override
             public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
                 if (str == null) {
@@ -67,7 +67,7 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
                 }
                 super.insertString(offset, str, attr);
             }
-        });
+        });// hasta aca
 
     }
 

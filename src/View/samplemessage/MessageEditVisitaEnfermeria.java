@@ -79,6 +79,7 @@ public class MessageEditVisitaEnfermeria extends javax.swing.JPanel {
             // Agregar los nombres y apellidos al combobox
             cbPersona.setModel(new DefaultComboBoxModel<>(nombresApellidos));
         });
+        
 
         String selectedText = (String) cbPersona.getSelectedItem();
         txtPersona.setText(selectedText);
@@ -89,6 +90,21 @@ public class MessageEditVisitaEnfermeria extends javax.swing.JPanel {
                 // Obtiene el elemento seleccionado y actualiza el JTextField
                 String selectedText = (String) cbPersona.getSelectedItem();
                 txtPersona.setText(selectedText);
+            }
+        });
+        txtPersona.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                       Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                }
+                super.insertString(offset, str, attr);
             }
         });
 
@@ -108,7 +124,21 @@ public class MessageEditVisitaEnfermeria extends javax.swing.JPanel {
                 super.insertString(offset, str, attr);
             }
         });
-        
+        txtVisita.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                       Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
         populateComboBox();
     }
 
