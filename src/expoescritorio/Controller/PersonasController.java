@@ -226,6 +226,50 @@ public class PersonasController {
 
         return null; // Si hay algún problema, retorna null
     }
+   
+   public static Personas CellApiCorreo(String correo) {
+        String baseUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/validar";
+
+        Map<String, String> queryParams = new HashMap<>();
+        queryParams.put("correo", correo);
+        String url = addQueryParameters(baseUrl, queryParams);
+
+        try {
+            URL urlObject = new URL(url);
+            HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
+            connection.setRequestMethod("GET");
+
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode == 200) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = reader.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                reader.close();
+
+                String responseData = response.toString();
+                if (responseData != null) {
+                    Gson gson = new Gson();
+                    return gson.fromJson(responseData, Personas.class);
+                }
+            } else {
+                System.out.println("No se encontro: " + responseCode);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null; // Si hay algún problema, retorna null
+    }
+   
+   
+   
 public static String encryptPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

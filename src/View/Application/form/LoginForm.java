@@ -105,13 +105,13 @@ public class LoginForm extends javax.swing.JPanel {
                             .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                             .addComponent(lbContraseña)
                             .addComponent(txtContraseña))
-                        .addContainerGap(43, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(loginLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(lbTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(loginLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cmdEntrar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(cmdEntrar1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
         );
         loginLayout.setVerticalGroup(
             loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,9 +138,9 @@ public class LoginForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 216, Short.MAX_VALUE)
+                .addGap(0, 204, Short.MAX_VALUE)
                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 216, Short.MAX_VALUE))
+                .addGap(0, 203, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,6 +157,8 @@ public class LoginForm extends javax.swing.JPanel {
         String Correo = this.txtUsuario.getText(); 
        String Password = this.txtContraseña.getText(); 
         Personas personas = PersonasController.callApiAndProcessResponse(Correo, Password);
+        Personas personas1 = PersonasController.CellApiCorreo(Correo);
+        System.out.println(personas1);
         /* Recuperaciones Recuperaciones2 = new Recuperaciones();
        String Code =  Recuperaciones2.mandarCorreo(Correo);
 
