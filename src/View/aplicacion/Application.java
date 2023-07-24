@@ -56,7 +56,7 @@ public class Application extends javax.swing.JFrame {
         app.mainForm.setSelectedMenu(index, subIndex);
     }
 
-    @SuppressWarnings("unchecked")
+   @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

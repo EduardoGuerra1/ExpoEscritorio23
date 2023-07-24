@@ -4,16 +4,27 @@
  */
 package View.Application.form.other;
 
-/**
- *
- * @author gyaci
- */
-public class PantallaInicio extends javax.swing.JPanel {
+import com.formdev.flatlaf.FlatClientProperties;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
+public class PantallaInicio extends javax.swing.JPanel implements Runnable {
+ int hora,minutos,segundos; 
+    String timestr, yearstr; 
+    int day,month,year;
+    
     /**
      * Creates new form PantallaInicio
      */
     public PantallaInicio() {
+        Thread t= new Thread(this);
+        t.start();
+        initComponents();
+        time.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font");
+        date.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font");
+        
         initComponents();
     }
 
@@ -26,19 +37,80 @@ public class PantallaInicio extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        time = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
+
+        time.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        time.setText("A");
+
+        date.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        date.setText("A");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(285, 285, 285))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel date;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        while(true){
+        try{
+            Calendar c=Calendar.getInstance();
+            hora=c.get(Calendar.HOUR_OF_DAY);
+            if(hora>12)
+                hora = hora-12;
+            minutos=c.get(Calendar.MINUTE);
+            segundos=c.get(Calendar.SECOND);
+            year=c.get(Calendar.YEAR);
+            month=c.get(Calendar.MONTH);
+            day=c.get(Calendar.DAY_OF_MONTH);
+            SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss a");
+            SimpleDateFormat df=new SimpleDateFormat("dd/MM/yyyy");
+            Date dat=c.getTime() ;
+            timestr=sdf.format(dat);
+            yearstr=df.format(dat);
+            time.setText(timestr);
+            date.setText(yearstr);
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
+    }}
 }
