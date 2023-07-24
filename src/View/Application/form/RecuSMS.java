@@ -4,10 +4,11 @@
  */
 package View.Application.form;
 
-/**
- *
- * @author gyaci
- */
+import java.io.ByteArrayOutputStream;
+import javax.swing.ImageIcon;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
+
 public class RecuSMS extends javax.swing.JPanel {
 
     /**
@@ -33,19 +34,19 @@ public class RecuSMS extends javax.swing.JPanel {
         label1 = new java.awt.Label();
         txtTelefono = new javax.swing.JTextField();
         label2 = new java.awt.Label();
-        txtCorreosms1 = new javax.swing.JTextField();
-        label3 = new java.awt.Label();
-        txtTelefono2 = new javax.swing.JTextField();
         btnRestablecer = new javax.swing.JButton();
         label4 = new java.awt.Label();
         txtCambioContraseña = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
+        lblImagen = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtTexto = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(0, 51, 102));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/SMSS (1).png"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 83, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         btnRegresosms.setBackground(new java.awt.Color(0, 51, 102));
         btnRegresosms.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/regreso (3).png"))); // NOI18N
@@ -54,37 +55,50 @@ public class RecuSMS extends javax.swing.JPanel {
         label1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label1.setForeground(java.awt.Color.lightGray);
         label1.setText("Ingrese la nueva contraseña:");
-        add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, -1));
+        add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, -1, -1));
         label1.getAccessibleContext().setAccessibleName("");
 
-        add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 390, -1));
+        add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 390, -1));
 
         label2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label2.setForeground(java.awt.Color.lightGray);
-        label2.setText("Ingrese el correo electronico con el que esta registrado:");
-        add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
-        add(txtCorreosms1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 390, -1));
-
-        label3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        label3.setForeground(java.awt.Color.lightGray);
-        label3.setText("Ingrese el número al que le gustaría que se le envie el codigo:");
-        add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, -1, -1));
-        add(txtTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 390, -1));
+        label2.setText("Genere el cogido y escaneleo para iniciar con el proceso de recuperacion ");
+        add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
 
         btnRestablecer.setBackground(new java.awt.Color(0, 51, 102));
+        btnRestablecer.setForeground(new java.awt.Color(255, 255, 255));
         btnRestablecer.setText("Restablecer");
-        add(btnRestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, 130, 50));
+        add(btnRestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 500, 130, 50));
 
         label4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label4.setForeground(java.awt.Color.lightGray);
-        label4.setText("Ingrese el código que se le envio:");
-        add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, -1, -1));
-        add(txtCambioContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 390, -1));
+        label4.setText("Ingrese el codigo que se genero");
+        add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, -1));
+        add(txtCambioContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 390, -1));
 
         btnEnviar.setBackground(new java.awt.Color(0, 51, 102));
-        btnEnviar.setText("Enviar");
-        add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 110, 50));
+        btnEnviar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEnviar.setText("Generar");
+        btnEnviar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEnviarMouseClicked(evt);
+            }
+        });
+        add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, 110, 50));
+        add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 240, 200));
+
+        txtTexto.setColumns(20);
+        txtTexto.setRows(5);
+        jScrollPane1.setViewportView(txtTexto);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 250, 100));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
+         ByteArrayOutputStream out = QRCode.from(this.txtTexto.getText()).to(ImageType.PNG).stream();
+        ImageIcon imageIcon = new ImageIcon(out.toByteArray());
+        this.lblImagen.setIcon(imageIcon);
+    }//GEN-LAST:event_btnEnviarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -92,15 +106,15 @@ public class RecuSMS extends javax.swing.JPanel {
     private javax.swing.JButton btnRegresosms;
     private javax.swing.JButton btnRestablecer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
     private java.awt.Label label1;
     private java.awt.Label label2;
-    private java.awt.Label label3;
     private java.awt.Label label4;
+    private javax.swing.JLabel lblImagen;
     private javax.swing.JTextField txtCambioContraseña;
-    private javax.swing.JTextField txtCorreosms1;
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtTelefono1;
-    private javax.swing.JTextField txtTelefono2;
+    private javax.swing.JTextArea txtTexto;
     // End of variables declaration//GEN-END:variables
 }
