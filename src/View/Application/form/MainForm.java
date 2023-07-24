@@ -26,6 +26,7 @@ import View.Application.form.other.LlegadasTarde;
 import View.Application.form.other.Observaciones;
 import View.Application.form.other.SolicitudesPermisos;
 import View.Application.form.other.TiposCodigos;
+import View.Application.form.other.VisitasEnfermeria;
 import View.menu.Menu;
 import View.menu.MenuAction;
 
@@ -87,7 +88,7 @@ public class MainForm extends JLayeredPane {
                 }else if (subIndex == 3) {
                     Application.showForm(new Estudiantes());
                 } else if (subIndex == 4) {
-                    Application.showForm(new SolicitudesPermiso());
+                    Application.showForm(new Observaciones());
                 } else if (subIndex == 5) {
                     Application.showForm(new LlegadasTarde());
                 } else if (subIndex == 6) {
@@ -100,6 +101,8 @@ public class MainForm extends JLayeredPane {
                     action.cancel();
                 }
             
+            }else if (index == 4) {
+                Application.showForm(new VisitasEnfermeria());
             } else if (index == 9) {
                 Application.logout();
             } else {

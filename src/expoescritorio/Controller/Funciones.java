@@ -232,18 +232,18 @@ public class Funciones {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         int idVisitaEnfermeria = jsonObject.getInt("idVisitaEnfermeria");
                         String Persona = jsonObject.getString("persona");
-                        String detalleVisitia= jsonObject.getString("detalleVisitia");
-                        int idPeriodo= jsonObject.getInt("idPeriodo");
+                        String detalleVisitia = jsonObject.getString("detalleVisitia");
+                        int idPeriodo = jsonObject.getInt("idPeriodo");
                         String fecha = jsonObject.getString("fecha");
-                        int idPersona= jsonObject.getInt("idPersona");
-                        modelList.add(new VisitasEnfermeriaString(idVisitaEnfermeria, Persona, idPeriodo,fecha,detalleVisitia,idPersona));
+                        int idPersona = jsonObject.getInt("idPersona");
+                        modelList.add(new VisitasEnfermeriaString(idVisitaEnfermeria, Persona, idPeriodo, fecha, detalleVisitia, idPersona));
                     }
-                }else {
+                } else {
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
-            }catch (IOException | JSONException e) {
+            } catch (IOException | JSONException e) {
                 System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
-            }finally {
+            } finally {
                 if (connection != null) {
                     connection.disconnect(); // Cerrar la conexión
                 }

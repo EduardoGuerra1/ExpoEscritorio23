@@ -6,68 +6,52 @@ package View.Application.form.other;
 
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
-import View.samplemessage.MessageAddCodigosDisciplinarios;
-import View.samplemessage.MessageEditCodigosDisciplinarios;
+import View.samplemessage.MessageAddVisitaEnfermeria;
 import com.formdev.flatlaf.FlatClientProperties;
-import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
-import expoescritorio.Controller.PersonasController;
-import expoescritorio.Models.CodigosConductuales;
-import expoescritorio.Models.Personas;
+import expoescritorio.Controller.Funciones;
+import expoescritorio.Models.VisitasEnfermeriaString;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  *
- * @author gyaci
+ * @author educs
  */
-public class Estudiantes extends javax.swing.JPanel {
-
-    PersonasController controller = new PersonasController();
+public class VisitasEnfermeria extends javax.swing.JPanel {
 
     /**
-     * Creates new form CodigosDisciplinarios
+     * Creates new form VisitasEnfermeria
      */
-    public Estudiantes() {
+    public VisitasEnfermeria() {
         initComponents();
 
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
-        // Obtén el modelo de la tabla existente
+
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
 
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"Codigo", "Nombre", "Especialidad", "Grado"});
-
+        tableModel.setColumnIdentifiers(new Object[]{"ID", "Periodo", "Fecha", "Detalle de Visita", "idPersona", "Persona"});
         cargarDatos();
-
-        table1.setDefaultEditor(Object.class, null);
     }
 
     public void cargarDatos() {
-        CompletableFuture<List<Personas>> future = PersonasController.getPersonasAsync(2);
-        future.thenAccept(personas -> {
+        CompletableFuture<List<VisitasEnfermeriaString>> future = Funciones.GetVisitasEnfermeria();
+        future.thenAccept(visitas -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-            
-            
-            
-            for (Personas persona : personas) {
+            for (VisitasEnfermeriaString visita : visitas) {
                 tableModel.addRow(new Object[]{
-                    persona.getCodigo(),
-                    persona.getNombrePersona()+" "+persona.getApellidoPersona(),
-                    PersonasController.getEspecialidadPersona(persona.getIdPersona()).join(),
-                    PersonasController.getGradoPersona(persona.getIdPersona()).join()
+                    visita.getIdVisitaEnfermeria(),
+                    visita.getIdPeriodo(),
+                    visita.getFecha(),
+                    visita.getDetalleVisitia(),
+                    visita.getIdPersona(),
+                    visita.getPersona()
                 });
             }
         });
@@ -153,7 +137,7 @@ public class Estudiantes extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        lb.setText("Gestión de Estudiantes");
+        lb.setText("Gestión de Visitas a Enfermería");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -164,7 +148,7 @@ public class Estudiantes extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(35, 35, 35)
                 .addComponent(lb)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -173,11 +157,53 @@ public class Estudiantes extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(lb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
+        // TODO add your handling code here:
+        MessageAddVisitaEnfermeria msg = new MessageAddVisitaEnfermeria();
+        msg.eventOK(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    System.out.println("Click OK");
+                    GlassPanePopup.closePopupLast();
+                }
+            });
+            GlassPanePopup.showPopup(msg);
+    }//GEN-LAST:event_btnAddMouseClicked
+
+    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+        // TODO add your handling code here:
+
+        int selectedRow = table1.getSelectedRow();
+
+        // Verificar si se ha seleccionado una fila
+        if (selectedRow != -1) {
+            // Obtener los datos de las columnas de la fila seleccionada
+            Object data1 = table1.getValueAt(selectedRow, 1);
+            Object data2 = table1.getValueAt(selectedRow, 2);
+            Object data3 = table1.getValueAt(selectedRow, 3);
+            Object id = table1.getValueAt(selectedRow, 0);
+
+        } else {
+            Message obj = new Message();
+            obj.txtTitle.setText("Aviso");
+            obj.txtContent.setText("Debe seleccionar una fila.");
+            obj.eventOK(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    System.out.println("Click OK");
+                    GlassPanePopup.closePopupLast();
+                }
+            });
+            GlassPanePopup.showPopup(obj);
+
+        }
+    }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         // TODO add your handling code here:
@@ -195,7 +221,10 @@ public class Estudiantes extends javax.swing.JPanel {
             obj.eventOK(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    CompletableFuture<Boolean> deleteFuture = PersonasController.deleteCodigoPersona(id.toString());
+
+                    String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/VisitasEnfermeria/delete";
+                    // Código para eliminar el registro de la API
+                    CompletableFuture<Boolean> deleteFuture = ControllerFull.DeleteApiAsync(endpointUrl, (int) id);
 
                     // Manejar la respuesta de la API
                     deleteFuture.thenAccept(deleted -> {
@@ -203,7 +232,7 @@ public class Estudiantes extends javax.swing.JPanel {
                             // Registro eliminado con éxito
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Persona eliminada exitosamente");
+                            obj.txtContent.setText("Registro eliminado exitosamente");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
@@ -217,7 +246,7 @@ public class Estudiantes extends javax.swing.JPanel {
                             // Ocurrió un error al eliminar el registro
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Error al eliminar la persona, intente nuevamente.");
+                            obj.txtContent.setText("Error al eliminar el registro, intente nuevamente.");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
@@ -249,116 +278,6 @@ public class Estudiantes extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_btnDeleteMouseClicked
-
-    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
-        // TODO add your handling code here:
-/*
-        int num = 4;
-        int num1 = 1;
-        int selectedRow = table1.getSelectedRow();
-
-        // Verificar si se ha seleccionado una fila
-        if (selectedRow != -1) {
-            // Obtener los datos de las columnas de la fila seleccionada
-            Object data1 = table1.getValueAt(selectedRow, 1);
-            Object data2 = table1.getValueAt(selectedRow, 2);
-            Object data3 = table1.getValueAt(selectedRow, 3);
-            Object id = table1.getValueAt(selectedRow, 0);
-
-            MessageEditCodigosDisciplinarios msg = new MessageEditCodigosDisciplinarios();
-            msg.txtTitle.setText("Actualización de Código Disciplinario");
-            msg.cbTiposCodigosConductuales.setSelectedIndex((int) data1 - num);
-            msg.cbNivelCodigoConductual.setSelectedIndex((int) data2 - num1);
-            msg.txtCodigoConductual.setText(data3.toString());
-            msg.id = (int) id;
-
-            msg.eventOK(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    System.out.println("Click OK");
-                    msg.actualizarDatosHaciaApi();
-                    CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
-                    future.thenAccept(codigosConductuales -> {
-                        deleteAllTableRows(table1);
-                        DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-                        for (CodigosConductuales codigo : codigosConductuales) {
-                            tableModel.addRow(new Object[]{
-                                codigo.getIdCodigoConductual(),
-                                codigo.getIdTipoCodigoConductual(),
-                                codigo.getIdNivelCodigoConductual(),
-                                codigo.getCodigoConductual()
-                            });
-                        }
-                    });
-
-                    GlassPanePopup.closePopupLast();
-                    Timer timer = new Timer(500, (ActionEvent e) -> {
-                        deleteAllTableRows(table1);
-                        cargarDatos();
-                    });
-                    timer.setRepeats(false);
-                    timer.start();
-                }
-            });
-            GlassPanePopup.showPopup(msg);
-
-        } else {
-            Message obj = new Message();
-            obj.txtTitle.setText("Aviso");
-            obj.txtContent.setText("Debe seleccionar una fila.");
-            obj.eventOK(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    System.out.println("Click OK");
-                    GlassPanePopup.closePopupLast();
-                }
-            });
-            GlassPanePopup.showPopup(obj);
-
-        }
-*/
-    }//GEN-LAST:event_btnEditMouseClicked
-
-    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
- /*       // TODO add your handling code here:
-        MessageAddCodigosDisciplinarios obj = new MessageAddCodigosDisciplinarios();
-        obj.txtTitle.setText("Añadir Estudiante");
-        obj.eventOK(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                System.out.println("Click OK");
-                CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
-                future.thenAccept(codigosConductuales -> {
-                    deleteAllTableRows(table1);
-                    DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-                    for (CodigosConductuales codigo : codigosConductuales) {
-                        tableModel.addRow(new Object[]{
-                            codigo.getIdCodigoConductual(),
-                            codigo.getIdTipoCodigoConductual(),
-                            codigo.getIdNivelCodigoConductual(),
-                            codigo.getCodigoConductual()
-                        });
-                    }
-                });
-                GlassPanePopup.closePopupLast();
-                Timer timer = new Timer(500, (ActionEvent e) -> {
-                    deleteAllTableRows(table1);
-                    cargarDatos();
-                });
-                timer.setRepeats(false);
-                timer.start();
-            }
-        });
-        GlassPanePopup.showPopup(obj);
-
-        Timer timer = new Timer(500, (ActionEvent e) -> {
-            deleteAllTableRows(table1);
-            cargarDatos();
-        });
-        timer.setRepeats(false);
-        timer.start();
-*/
-    }//GEN-LAST:event_btnAddMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

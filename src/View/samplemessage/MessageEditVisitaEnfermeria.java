@@ -33,14 +33,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import raven.toast.Notifications;
 import Services.Validaciones;
+import expoescritorio.Controller.PeriodosController;
+import expoescritorio.Controller.PersonasController;
+import static expoescritorio.Controller.PersonasController.getPersonasAsync;
+import expoescritorio.Models.Periodos;
+import expoescritorio.Models.Personas;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /**
  *
  * @author educs
  */
-public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
+public class MessageEditVisitaEnfermeria extends javax.swing.JPanel {
 
-    public MessageAddCodigosDisciplinarios() {
+    public MessageEditVisitaEnfermeria() {
 
         initComponents();
         setOpaque(false);
@@ -52,37 +62,54 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         // Obtener los datos de la API y cargarlos en el ComboBox
         List<TiposCodigosConductuales> tiposCodigosConductualesList = TiposCodigosConductualesController.getTiposCodigosConductualesFromApi();
         for (TiposCodigosConductuales tipoCodigoConductual : tiposCodigosConductualesList) {
-            cbTiposCodigosConductuales.addItem(tipoCodigoConductual.getTipoCodigoConductual());
+            cbPeriodo.addItem(tipoCodigoConductual.getTipoCodigoConductual());
         }
 
-        try {
-            // Obtener la lista de niveles de códigos conductuales de manera asíncrona
-            CompletableFuture<List<NivelesCodigosConductuales>> nivelesFuture = NivelesCodigosConductualesController.getNivelesCodigosConductualesAsync();
-            List<NivelesCodigosConductuales> nivelesCodigosConductualesList = nivelesFuture.get();
+        CompletableFuture<List<Personas>> futurePersonas = getPersonasAsync(2);
 
-            // Limpiar el ComboBox antes de agregar los nuevos elementos
-            cbNivelCodigoConductual.removeAllItems();
-
-            // Agregar los niveles de códigos conductuales al ComboBox
-            for (NivelesCodigosConductuales nivelesCodigosConductuales : nivelesCodigosConductualesList) {
-                cbNivelCodigoConductual.addItem(nivelesCodigosConductuales.getNivelCodigoConductual());
+        // Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
+        futurePersonas.thenAccept(personasList -> {
+            // Crear un arreglo de nombres y apellidos para usar en el combobox
+            String[] nombresApellidos = new String[personasList.size()];
+            for (int i = 0; i < personasList.size(); i++) {
+                Personas persona = personasList.get(i);
+                nombresApellidos[i] = persona.getNombrePersona() + " " + persona.getApellidoPersona();
             }
-        } catch (InterruptedException | ExecutionException e) {
-            // Manejar las excepciones aquí
-            System.out.println("Error al obtener la lista de niveles de códigos conductuales: " + e.getMessage());
-        }
-        String selectedText = (String) cbTiposCodigosConductuales.getSelectedItem();
-        txtCodigoConductual.setText(selectedText);
+
+            // Agregar los nombres y apellidos al combobox
+            cbPersona.setModel(new DefaultComboBoxModel<>(nombresApellidos));
+        });
+
+        String selectedText = (String) cbPersona.getSelectedItem();
+        txtPersona.setText(selectedText);
         // Agrega el ActionListener al JComboBox
-        cbTiposCodigosConductuales.addActionListener(new ActionListener() {
+        cbPersona.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Obtiene el elemento seleccionado y actualiza el JTextField
-                String selectedText = (String) cbTiposCodigosConductuales.getSelectedItem();
-                txtCodigoConductual.setText(selectedText);
+                String selectedText = (String) cbPersona.getSelectedItem();
+                txtPersona.setText(selectedText);
             }
         });
 
+        
+        txtVisita.setDocument(new PlainDocument() {
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                       Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
+        
+        populateComboBox();
     }
 
     @Override
@@ -95,6 +122,19 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         super.paintComponent(grphcs);
     }
 
+    private void populateComboBox() {
+        // Obtener los periodos desde la API usando el controlador
+        List<Periodos> periodosList;
+        try {
+            periodosList = PeriodosController.getPeriodosApiAsync().get();
+            for (Periodos periodo : periodosList) {
+                cbPeriodo.addItem(String.valueOf(periodo.getIdPeriodo()));
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -103,11 +143,15 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         btnCancelar = new View.BotonesText.Buttons();
         btnAceptar = new View.BotonesText.Buttons();
         jLabel1 = new javax.swing.JLabel();
-        cbTiposCodigosConductuales = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        cbNivelCodigoConductual = new javax.swing.JComboBox<>();
-        txtCodigoConductual = new View.BotonesText.CustomTextField();
+        cbPeriodo = new javax.swing.JComboBox<>();
+        cbPersona = new javax.swing.JComboBox<>();
+        txtFecha = new View.BotonesText.CustomTextField();
         jLabel3 = new javax.swing.JLabel();
+        txtPersona = new View.BotonesText.CustomTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btnFecha = new javax.swing.JButton();
+        txtVisita = new View.BotonesText.CustomTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -121,7 +165,7 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
                 btnCancelarMouseClicked(evt);
             }
         });
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, 120, -1));
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, 120, -1));
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,21 +173,36 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
                 btnAceptarMouseClicked(evt);
             }
         });
-        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 120, -1));
+        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, 120, -1));
 
-        jLabel1.setText("Tipo de Código:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
-        add(cbTiposCodigosConductuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 160, -1));
+        jLabel1.setText("Detalle de visita");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, -1, -1));
+        add(cbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 160, -1));
+        add(cbPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 160, -1));
 
-        jLabel2.setText("Código Disciplinario:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, -1, -1));
-        add(cbNivelCodigoConductual, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 160, -1));
+        txtFecha.setEnabled(false);
+        add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 230, 50));
 
-        txtCodigoConductual.setEnabled(false);
-        add(txtCodigoConductual, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 230, 50));
-
-        jLabel3.setText("Nivel de Código:");
+        jLabel3.setText("Persona");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
+
+        txtPersona.setEnabled(false);
+        add(txtPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 230, 50));
+
+        jLabel2.setText("Período");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+
+        btnFecha.setText("Hoy");
+        btnFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFechaMouseClicked(evt);
+            }
+        });
+        add(btnFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 70, -1));
+        add(txtVisita, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, 400, 50));
+
+        jLabel4.setText("Fecha");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
@@ -153,9 +212,9 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
 
-        if (txtCodigoConductual.getText().isEmpty()) {
+        if (txtFecha.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
-        }  else {
+        } else {
             enviarDatosHaciaApi();
             Timer timer = new Timer(500, (ActionEvent e) -> {
                 CodigosDisciplinarios cd = new CodigosDisciplinarios();
@@ -170,6 +229,21 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
+    private void btnFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFechaMouseClicked
+        // TODO add your handling code here:
+
+        // Obtener la fecha actual del sistema
+        Date fechaActual = new Date();
+
+        // Crear un objeto SimpleDateFormat con el formato deseado
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        // Formatear la fecha en el formato deseado
+        String fechaFormateada = sdf.format(fechaActual);
+
+        txtFecha.setText(fechaFormateada);
+    }//GEN-LAST:event_btnFechaMouseClicked
+
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);
     }
@@ -179,12 +253,12 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         int num = 4;
         int num1 = 1;
 
-        MessageAddCodigosDisciplinarios msg = new MessageAddCodigosDisciplinarios();
+        MessageEditVisitaEnfermeria msg = new MessageEditVisitaEnfermeria();
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
-        int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbTiposCodigosConductuales) + num;
-        int idNivelCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbNivelCodigoConductual) + num1;
-        String codigoConductual = txtCodigoConductual.getText();
-        
+        int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbPeriodo) + num;
+        int idNivelCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbPersona) + num1;
+        String codigoConductual = txtFecha.getText();
+
         System.out.println(idTipoCodigoConductual);
         System.out.println(idNivelCodigoConductual);
         System.out.println(codigoConductual);
@@ -249,12 +323,16 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.BotonesText.Buttons btnAceptar;
     private View.BotonesText.Buttons btnCancelar;
-    public javax.swing.JComboBox<String> cbNivelCodigoConductual;
-    public javax.swing.JComboBox<String> cbTiposCodigosConductuales;
+    private javax.swing.JButton btnFecha;
+    public javax.swing.JComboBox<String> cbPeriodo;
+    public javax.swing.JComboBox<String> cbPersona;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    public View.BotonesText.CustomTextField txtCodigoConductual;
+    private javax.swing.JLabel jLabel4;
+    public View.BotonesText.CustomTextField txtFecha;
+    public View.BotonesText.CustomTextField txtPersona;
     public javax.swing.JLabel txtTitle;
+    public View.BotonesText.CustomTextField txtVisita;
     // End of variables declaration//GEN-END:variables
 }

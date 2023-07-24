@@ -10,6 +10,7 @@ import View.samplemessage.MessageAddCodigosDisciplinarios;
 import View.samplemessage.MessageAddTipoCodigos;
 import View.samplemessage.MessageEditCodigosDisciplinarios;
 import View.samplemessage.MessageEditTipoCodigos;
+import com.formdev.flatlaf.FlatClientProperties;
 import expoescritorio.Controller.ControllerFull;
 import expoescritorio.Controller.TiposCodigosConductualesController;
 import expoescritorio.Models.TiposCodigosConductuales;
@@ -32,7 +33,8 @@ public class TiposCodigos extends javax.swing.JPanel {
      */
     public TiposCodigos() {
         initComponents();
-
+        lb.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font");
         // Obtén el modelo de la tabla existente
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
@@ -49,12 +51,15 @@ public class TiposCodigos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lb = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new View.ExampleTable.Table();
         btnAdd = new View.BotonesText.Buttons();
         btnEdit = new View.BotonesText.Buttons();
         btnDelete = new View.BotonesText.Buttons();
+
+        lb.setText("Gestión de Tipos de Códigos Disciplinarios");
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,11 +130,17 @@ public class TiposCodigos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(lb)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addComponent(lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -301,6 +312,7 @@ public class TiposCodigos extends javax.swing.JPanel {
     private View.BotonesText.Buttons btnEdit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lb;
     public View.ExampleTable.Table table1;
     // End of variables declaration//GEN-END:variables
 }

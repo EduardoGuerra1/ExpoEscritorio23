@@ -27,7 +27,7 @@ public class Menu extends JPanel {
         {"~Menú Principal~"},
         {"Dashboard"},
         {"~Área Disciplinaria~"},
-        {"Gestion Disciplinaria","Códigos","Tipos de Códigos","Estudiantes","Solicitudes Permisos", "Llegadas Tarde","Observaciones","Asistencias/Inasistencias"},
+        {"Gestion Disciplinaria","Códigos","Tipos de Códigos","Estudiantes","Observaciones","Solicitudes Permisos","Asistencias/Inasistencias"},
         {"Avisos"},
         {"Horarios "},
         {"~Extras~"},
