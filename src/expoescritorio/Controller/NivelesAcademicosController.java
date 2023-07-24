@@ -1,7 +1,9 @@
 package expoescritorio.Controller;
 
 
+import static expoescritorio.Controller.TiposCodigosConductualesController.getTiposCodigosConductualesFromApi;
 import expoescritorio.Models.NivelesAcademicos;
+import expoescritorio.Models.TiposCodigosConductuales;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 public class NivelesAcademicosController {
+    
+    
     public static CompletableFuture<List<NivelesAcademicos>> getNivelesAcademicosApiAsync() {
         return CompletableFuture.supplyAsync(() -> {
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/NivelesAcademicos/list";
