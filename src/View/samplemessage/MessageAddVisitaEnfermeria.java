@@ -274,9 +274,10 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
         try {
             // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
-            jsonData.put("idTipoCodigoConductual", idTipoCodigoConductual);
-            jsonData.put("idNivelCodigoConductual", idPersona);
-            jsonData.put("codigoConductual", codigoConductual);
+            jsonData.put("idPeriodo", idTipoCodigoConductual);
+            jsonData.put("idPersona", idPersona);
+            jsonData.put("fecha", codigoConductual);
+            jsonData.put("detalleVisitia", txtVisita.getText());
 
             // Llamar al método postApiAsync para enviar los datos
             String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductuales/save"; // Reemplaza esto con la URL de tu API
