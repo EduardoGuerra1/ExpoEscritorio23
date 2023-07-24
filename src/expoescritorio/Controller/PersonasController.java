@@ -139,10 +139,53 @@ public class PersonasController {
             return grado;
        });
    }
-    
+   
    public static CompletableFuture<List<Personas>> getPersonasAsync(int tipo){
        return CompletableFuture.supplyAsync(() -> {
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/get/"+tipo;
+            List<Personas> modelList = new ArrayList<>();
+            HttpURLConnection connection = null;
+            try {
+                URL url = new URL(apiUrl);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    JSONArray jsonArray = new JSONArray(reader.readLine());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        int idPersona = jsonObject.getInt("idPersona");
+                        String codigo = jsonObject.getString("codigo");
+                        String nombre = jsonObject.getString("nombrePersona");
+                        String apellido = jsonObject.getString("apellidoPersona");
+                        String nacimiento = jsonObject.getString("nacimientoPersona");
+                        int idTipoPersona = jsonObject.getInt("idTipoPersona");
+                        String correo = jsonObject.getString("correo");
+                        String claveCredenciales = jsonObject.getString("claveCredenciales");
+                        String foto = jsonObject.getString("foto");
+                        
+                        modelList.add(new Personas(idPersona, codigo, nombre, apellido, nacimiento, idTipoPersona, correo, claveCredenciales, foto));
+                    }
+                }else {
+                    System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
+                }
+            }catch (IOException | JSONException e) {
+                System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
+            }finally {
+                if (connection != null) {
+                    connection.disconnect(); // Cerrar la conexión
+                }
+            }
+            return modelList;
+        });
+   }
+    
+   public static CompletableFuture<List<Personas>> getNoPersonasAsync(int tipo){
+       return CompletableFuture.supplyAsync(() -> {
+            String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/getNo/"+tipo;
             List<Personas> modelList = new ArrayList<>();
             HttpURLConnection connection = null;
             try {
