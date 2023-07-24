@@ -13,14 +13,14 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 
 public class Recuperaciones {
-     public String mandarCorreo(String Correo ){
-        String codigoAleatorio = generateRandomCode();
+     public void mandarCorreo(String Correo, String Mns ){
+       
         try{
             String correoEmisor = "alessandromorales0822@gmail.com";
             String contraseñaEmisor = "qckrkkltsnzkcake";     
             String CorreoReceptor = Correo;
             String asunto = "Recuperación de contraseña";
-            String mensaje = codigoAleatorio;
+            String mensaje = Mns;
             
             //Configurar SMTP
             Properties props = new Properties();
@@ -46,11 +46,11 @@ public class Recuperaciones {
             t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
             t.close();
             System.out.println("Se envio");
-           return codigoAleatorio;
+          
         }catch(Exception e){
             System.out.println(e.toString());
             System.out.println("No se envio");
-            return "hubo error";
+           
         }
     }
     public static String generateRandomCode() {

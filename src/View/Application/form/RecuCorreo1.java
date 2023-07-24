@@ -12,12 +12,12 @@ import expoescritorio.Models.Personas;
  *
  * @author gyaci
  */
-public class RecuCorreo extends javax.swing.JPanel {
+public class RecuCorreo1 extends javax.swing.JPanel {
  
   Recuperaciones controller = new Recuperaciones ();
    String Code = controller.generateRandomCode(); 
   String Mensaje;
-    public RecuCorreo() {
+    public RecuCorreo1() {
         initComponents();
     }
 
@@ -40,7 +40,6 @@ public class RecuCorreo extends javax.swing.JPanel {
         btnRestablecer = new javax.swing.JButton();
         label3 = new java.awt.Label();
         txtContraseña = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 51, 102));
 
@@ -84,13 +83,6 @@ public class RecuCorreo extends javax.swing.JPanel {
         label3.setForeground(java.awt.Color.lightGray);
         label3.setText("Ingrese la nueva contraseña:");
 
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,8 +122,6 @@ public class RecuCorreo extends javax.swing.JPanel {
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(55, 55, 55)
                 .addComponent(btnRestablecer, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(178, 178, 178))
         );
@@ -159,9 +149,7 @@ public class RecuCorreo extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRestablecer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                .addComponent(btnRestablecer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -175,13 +163,14 @@ public class RecuCorreo extends javax.swing.JPanel {
         if(id == 4){
          controller.mandarCorreo(txtCorreo.getText(), Code);
             System.out.println(Code);
+            
         }
         
     }//GEN-LAST:event_btnEnviarMouseClicked
 
     private void btnRestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerActionPerformed
-        System.out.println("Click ");
-        if(txtCodigo.getText() == Code)
+        System.out.println();
+        if(txtCodigo.getText() == Code.toString())
         {
             System.out.println("Se solo cambiar faltar ");
         }
@@ -201,23 +190,11 @@ public class RecuCorreo extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRestablecerMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.out.println("Click ");
-        if(txtCodigo.getText() == Code)
-        {
-            System.out.println("Se solo cambiar faltar ");
-        }
-        else{
-            System.out.println(" no se que paso ");
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnRestablecer;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private java.awt.Label label1;
     private java.awt.Label label2;
