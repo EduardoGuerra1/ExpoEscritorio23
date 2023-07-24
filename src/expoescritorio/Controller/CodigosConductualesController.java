@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 public class CodigosConductualesController {
     
+    
     public static CompletableFuture<String> getTipoCodigoConductualAsync(int id){
         return CompletableFuture.supplyAsync(()->{
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/TiposCodigosConductuales/get/"+id;
