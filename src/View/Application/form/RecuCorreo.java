@@ -90,7 +90,7 @@ public class RecuCorreo extends javax.swing.JPanel {
                             .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(62, 62, 62))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
+                        .addGap(144, 144, 144)
                         .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
