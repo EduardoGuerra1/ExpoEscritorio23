@@ -4,9 +4,15 @@
  */
 package View.Application.form;
 
+import static View.Application.form.RecuSMS.encryptPassword;
+import static expoescritorio.Controller.ControllerFull.putApiAsync;
 import expoescritorio.Controller.PersonasController;
 import expoescritorio.Controller.Recuperaciones;
+import static expoescritorio.Controller.TiposPersonasController.getTiposPersonasApiAsync;
 import expoescritorio.Models.Personas;
+import expoescritorio.Models.TiposPersonas;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  *
@@ -16,6 +22,7 @@ public class RecuCorreo1 extends javax.swing.JPanel {
  
   Recuperaciones controller = new Recuperaciones ();
    String Code = controller.generateRandomCode(); 
+      int idPersona; 
   String Mensaje;
     public RecuCorreo1() {
         initComponents();
@@ -155,9 +162,10 @@ public class RecuCorreo1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
-     PersonasController recu = new PersonasController();
+    PersonasController recu = new PersonasController();
      
         Personas person = recu.CellApiCorreo(txtCorreo.getText()); 
+       idPersona = person.getIdPersona();
         
       int id =  person.getIdTipoPersona(); 
         if(id == 4){
@@ -169,10 +177,29 @@ public class RecuCorreo1 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEnviarMouseClicked
 
     private void btnRestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerActionPerformed
-        System.out.println();
-        if(txtCodigo.getText() == Code.toString())
+       if(txtCodigo.getText().equals(Code))
         {
-            System.out.println("Se solo cambiar faltar ");
+            String PASSEN = encryptPassword(txtContraseña.getText());
+        
+
+          String jsonInputString = "{\"idPersona\": " + idPersona + ", \"claveCredenciales\": \"" + PASSEN + "\"}";
+
+
+        String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/Contra";
+
+        CompletableFuture<Boolean> result = putApiAsync(endpointUrl, jsonInputString);
+        
+        result.thenAccept(response -> {
+            if (response) {
+                
+                 System.out.println("La solicitud HTTP Post exitosa.");
+            } else {
+                 
+             System.out.println("La solicitud HTTP put no fue exitosa.");
+            }
+        }).join();
+
+             CompletableFuture<List<TiposPersonas>> encargadosFuture = getTiposPersonasApiAsync();
         }
         else{
             System.out.println(" no se que paso ");
@@ -180,10 +207,29 @@ public class RecuCorreo1 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRestablecerActionPerformed
 
     private void btnRestablecerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRestablecerMouseClicked
- System.out.println("Click ");
-        if(txtCodigo.getText() == Code)
+  if(txtCodigo.getText().equals(Code))
         {
-            System.out.println("Se solo cambiar faltar ");
+            String PASSEN = encryptPassword(txtContraseña.getText());
+        
+
+          String jsonInputString = "{\"idPersona\": " + idPersona + ", \"claveCredenciales\": \"" + PASSEN + "\"}";
+
+
+        String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/Contra";
+
+        CompletableFuture<Boolean> result = putApiAsync(endpointUrl, jsonInputString);
+        
+        result.thenAccept(response -> {
+            if (response) {
+                
+                 System.out.println("La solicitud HTTP Post exitosa.");
+            } else {
+                 
+             System.out.println("La solicitud HTTP put no fue exitosa.");
+            }
+        }).join();
+
+             CompletableFuture<List<TiposPersonas>> encargadosFuture = getTiposPersonasApiAsync();
         }
         else{
             System.out.println(" no se que paso ");
