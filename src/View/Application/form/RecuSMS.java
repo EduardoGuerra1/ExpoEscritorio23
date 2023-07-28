@@ -105,7 +105,6 @@ public class RecuSMS extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtTexto = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
-        txtCorreo = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 51, 102));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -136,7 +135,7 @@ public class RecuSMS extends javax.swing.JPanel {
                 btnRestablecerMouseClicked(evt);
             }
         });
-        add(btnRestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 570, 130, 50));
+        add(btnRestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 520, 130, 50));
 
         label4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label4.setForeground(java.awt.Color.lightGray);
@@ -166,7 +165,6 @@ public class RecuSMS extends javax.swing.JPanel {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/QR Code-amico (3).png"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 320, 390));
-        add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, 390, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
@@ -178,40 +176,19 @@ public class RecuSMS extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEnviarMouseClicked
 
     private void btnRestablecerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRestablecerMouseClicked
-        PersonasController recu = new PersonasController();
-     
-        Personas person = recu.CellApiCorreo(txtCorreo.getText()); 
+       String COD = txtTexto.getText(); 
+       
+      
         
-      int id =  person.getIdTipoPersona();
-      int idPe = person.getIdPersona();
-        if(id == 4){
-        int idEncargado = 27;
-     String PASSEN = encryptPassword(txtCambioContraseña.getText());
-        String nombrePersona = this.txtCambioContraseña.getText();
-        
-
-          String jsonInputString = "{\"idPersona\": " + idPe + ", \"claveCredenciales\": \"" + PASSEN + "\"}";
-
-
-        String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/Contra";
-
-        CompletableFuture<Boolean> result = putApiAsync(endpointUrl, jsonInputString);
-        
-        result.thenAccept(response -> {
-            if (response) {
-                
-                 System.out.println("La solicitud HTTP Post exitosa.");
-            } else {
-                 
-             System.out.println("La solicitud HTTP put no fue exitosa.");
-            }
-        }).join();
-
-             CompletableFuture<List<TiposPersonas>> encargadosFuture = getTiposPersonasApiAsync();
+        if ( txtTelefono.getText().equals(COD))
+        {
+            System.out.println("furulo");
         }
-        else{
-            System.out.println("Hubo error ");
+        else
+        {
+            System.out.println("no furulo");
         }
+               
     }//GEN-LAST:event_btnRestablecerMouseClicked
 
 
@@ -227,7 +204,6 @@ public class RecuSMS extends javax.swing.JPanel {
     private java.awt.Label label4;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JTextField txtCambioContraseña;
-    private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtTelefono1;
     private javax.swing.JTextArea txtTexto;
