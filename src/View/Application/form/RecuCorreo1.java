@@ -20,10 +20,10 @@ import java.util.concurrent.CompletableFuture;
  */
 public class RecuCorreo1 extends javax.swing.JPanel {
  
-  Recuperaciones controller = new Recuperaciones ();
-   String Code = controller.generateRandomCode(); 
-      int idPersona; 
-  String Mensaje;
+    Recuperaciones controller = new Recuperaciones ();
+    String Code = controller.generateRandomCode(); 
+    int idPersona; 
+    String Mensaje;
     public RecuCorreo1() {
         initComponents();
     }
