@@ -1,23 +1,30 @@
 package View.ExampleTable;
+import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
+import com.jgoodies.looks.plastic.theme.SkyBluer;
+import mdlaf.MaterialLookAndFeel;
+import mdlaf.animation.MaterialUIMovement;
+import mdlaf.themes.MaterialLiteTheme;
+import mdlaf.utils.MaterialColors;
 
-import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 
 public class Table extends JTable {
 
-    private static final Color HEADER_BACKGROUND_COLOR = new Color(52, 152, 219);
-    private static final Color SELECTED_ROW_BACKGROUND_COLOR = new Color(52, 152, 219);
-    private static final int ROW_HEIGHT = 50;
-    private static final int FONT_SIZE = 16;
-    private static final int BORDER_RADIUS = 20;
+    private static final int ROW_HEIGHT = 60;
+    private static final int FONT_SIZE = 18;
+    private static final Color HEADER_BACKGROUND_COLOR = MaterialColors.TEAL_500;
+    private static final Color SELECTED_ROW_BACKGROUND_COLOR = MaterialColors.TEAL_700;
+    private static final Color UNSELECTED_ROW_BACKGROUND_COLOR = MaterialColors.GRAY_800;
 
     public Table() {
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
-        } catch (UnsupportedLookAndFeelException e) {
+            // Set the MaterialLookAndFeel
+            UIManager.setLookAndFeel(new MaterialLookAndFeel());
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -25,29 +32,20 @@ public class Table extends JTable {
         setRowHeight(ROW_HEIGHT);
         setFont(new Font("Segoe UI", Font.PLAIN, FONT_SIZE));
 
-        // Establecer el renderizador para el encabezado de la tabla
-        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                JLabel headerLabel = new JLabel(value.toString());
-                headerLabel.setFont(new Font("Segoe UI", Font.BOLD, FONT_SIZE + 2));
-                headerLabel.setForeground(Color.WHITE);
-                headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                headerLabel.setOpaque(true);
-                headerLabel.setBackground(HEADER_BACKGROUND_COLOR);
-                headerLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-                return headerLabel;
-            }
-        };
+        // Set the custom header renderer
+        HeaderTableCellRenderer headerRenderer = new HeaderTableCellRenderer();
         getTableHeader().setDefaultRenderer(headerRenderer);
 
-        // Establecer el renderizador para las celdas de la tabla
-        ModernTableCellRenderer cellRenderer = new ModernTableCellRenderer();
+        // Set the custom cell renderer
+        FuturisticTableCellRenderer cellRenderer = new FuturisticTableCellRenderer();
         setDefaultRenderer(Object.class, cellRenderer);
 
-        // Establecer el color de selección de la tabla
+        // Set the color of the selection
         setSelectionBackground(SELECTED_ROW_BACKGROUND_COLOR);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        // Set the MaterialLiteTheme for MaterialUI
+        MaterialLookAndFeel.changeTheme(new MaterialLiteTheme());
     }
 
     public void addRow(Object[] row) {
@@ -59,55 +57,74 @@ public class Table extends JTable {
         setFillsViewportHeight(true);
         setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         scroll.setViewportView(this);
-        scroll.getViewport().setBackground(Color.WHITE);
+        scroll.getViewport().setBackground(MaterialColors.WHITE);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         JPanel cornerPanel = new JPanel();
-        cornerPanel.setBackground(Color.WHITE);
+        cornerPanel.setBackground(MaterialColors.WHITE);
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, cornerPanel);
 
         scroll.setBorder(BorderFactory.createEmptyBorder());
 
-        ((DefaultTableCellRenderer) getTableHeader().getDefaultRenderer())
-                .setHorizontalAlignment(SwingConstants.CENTER);
+        ((DefaultTableCellRenderer) getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
     }
 
-    public class ModernTableCellRenderer extends DefaultTableCellRenderer {
-
-        private final Color UNSELECTED_COLOR = new Color(245, 245, 245);
-        private final Color SELECTED_COLOR = new Color(75, 172, 198);
-        private final int HIGHLIGHT_HEIGHT = 2;
+    public class HeaderTableCellRenderer extends DefaultTableCellRenderer {
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            JLabel label = new JLabel(value.toString(), SwingConstants.CENTER);
-            label.setFont(new Font("Segoe UI", Font.PLAIN, FONT_SIZE));
-            label.setOpaque(true);
-            label.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+            JLabel headerLabel = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            headerLabel.setFont(new Font("Segoe UI", Font.BOLD, FONT_SIZE + 2));
+            headerLabel.setForeground(Color.WHITE);
+            headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            headerLabel.setBackground(HEADER_BACKGROUND_COLOR);
+            headerLabel.setOpaque(true);
+            headerLabel.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+            return headerLabel;
+        }
+    }
 
-            // Set the background, shadows, and highlights based on the selection state
+    public class FuturisticTableCellRenderer extends DefaultTableCellRenderer {
+
+        private final int BORDER_RADIUS = 30;
+        private final int SHADOW_SIZE = 15;
+        private final int TRANSPARENCY = 200;
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            label.setFont(new Font("Segoe UI", Font.PLAIN, FONT_SIZE));
+            label.setOpaque(false);
+            label.setBorder(BorderFactory.createEmptyBorder(10, 25, 10, 25));
+
+            // Set the background and border based on the selection state
             if (isSelected) {
-                label.setBackground(SELECTED_COLOR);
-                label.setForeground(Color.WHITE);
-                label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+                label.setForeground(MaterialColors.WHITE);
+                label.setBackground(SELECTED_ROW_BACKGROUND_COLOR);
                 label.setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(SELECTED_COLOR, 3),
-                        BorderFactory.createEmptyBorder(5, 10, 5, 10)
+                        BorderFactory.createEmptyBorder(SHADOW_SIZE, SHADOW_SIZE, 0, 0),
+                        BorderFactory.createCompoundBorder(
+                                BorderFactory.createLineBorder(SELECTED_ROW_BACKGROUND_COLOR, BORDER_RADIUS),
+                                BorderFactory.createLineBorder(new Color(0, 0, 0, TRANSPARENCY), 1)
+                        )
                 ));
             } else {
-                label.setBackground(row % 2 == 0 ? UNSELECTED_COLOR : Color.WHITE);
-                label.setForeground(Color.BLACK);
-                label.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
+                label.setForeground(MaterialColors.GRAY_200);
+                label.setBackground(UNSELECTED_ROW_BACKGROUND_COLOR);
                 label.setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(Color.WHITE, BORDER_RADIUS),
-                        BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1)
+                        BorderFactory.createEmptyBorder(SHADOW_SIZE, SHADOW_SIZE, 0, 0),
+                        BorderFactory.createCompoundBorder(
+                                BorderFactory.createLineBorder(UNSELECTED_ROW_BACKGROUND_COLOR, BORDER_RADIUS),
+                                BorderFactory.createLineBorder(new Color(0, 0, 0, TRANSPARENCY), 1)
+                        )
                 ));
             }
 
-            // Add rounded borders
-            label.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
+            // Add the Material UI hover effect to the cells
+            MaterialUIMovement.add(label, MaterialColors.GRAY_400);
 
             return label;
         }
     }
 }
+
