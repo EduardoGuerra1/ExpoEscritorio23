@@ -24,8 +24,6 @@ public class Table extends JTable {
         setShowHorizontalLines(false);
         setRowHeight(ROW_HEIGHT);
         setFont(new Font("Segoe UI", Font.PLAIN, FONT_SIZE));
-
-        // Establecer el renderizador para el encabezado de la tabla
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -41,11 +39,10 @@ public class Table extends JTable {
         };
         getTableHeader().setDefaultRenderer(headerRenderer);
 
-        // Establecer el renderizador para las celdas de la tabla
+
         ModernTableCellRenderer cellRenderer = new ModernTableCellRenderer();
         setDefaultRenderer(Object.class, cellRenderer);
 
-        // Establecer el color de selección de la tabla
         setSelectionBackground(SELECTED_ROW_BACKGROUND_COLOR);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -85,7 +82,7 @@ public class Table extends JTable {
             label.setOpaque(true);
             label.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
 
-            // Set the background, shadows, and highlights based on the selection state
+    
             if (isSelected) {
                 label.setBackground(SELECTED_COLOR);
                 label.setForeground(Color.WHITE);
@@ -104,7 +101,6 @@ public class Table extends JTable {
                 ));
             }
 
-            // Add rounded borders
             label.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
 
             return label;
