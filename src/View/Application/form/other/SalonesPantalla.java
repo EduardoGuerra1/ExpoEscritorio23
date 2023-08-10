@@ -7,12 +7,17 @@ package View.Application.form.other;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import View.samplemessage.MessageAddCodigosDisciplinarios;
+import View.samplemessage.MessageAddSalones;
 import View.samplemessage.MessageAddTipoCodigos;
 import View.samplemessage.MessageEditCodigosDisciplinarios;
+import View.samplemessage.MessageEditSalones;
 import View.samplemessage.MessageEditTipoCodigos;
 import com.formdev.flatlaf.FlatClientProperties;
 import expoescritorio.Controller.ControllerFull;
+import expoescritorio.Controller.SalonesController;
+import static expoescritorio.Controller.SalonesController.getSalonesApiAsync;
 import expoescritorio.Controller.TiposCodigosConductualesController;
+import expoescritorio.Models.Salones;
 import expoescritorio.Models.TiposCodigosConductuales;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,20 +31,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author educs
  */
-public class TiposCodigos extends javax.swing.JPanel {
+public class SalonesPantalla extends javax.swing.JPanel {
 
     /**
      * Creates new form TiposCodigos
      */
-    public TiposCodigos() {
+    public SalonesPantalla() {
         initComponents();
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         // Obtén el modelo de la tabla existente
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"ID", "Tipo de Código",});
-        cargarDatos();
+        tableModel.setColumnIdentifiers(new Object[]{"ID", "Salones Código",});
+        cargarDatosAsync();
     }
 
     /**
@@ -59,7 +64,8 @@ public class TiposCodigos extends javax.swing.JPanel {
         btnEdit = new View.BotonesText.Buttons();
         btnDelete = new View.BotonesText.Buttons();
 
-        lb.setText("Gestión de Tipos de Códigos Disciplinarios");
+        lb.setText("Gestión de los Salones");
+        lb.setToolTipText("");
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,30 +164,35 @@ public class TiposCodigos extends javax.swing.JPanel {
         }
     }
 
-    public void cargarDatos() {
-        CompletableFuture<List<TiposCodigosConductuales>> future = CompletableFuture.supplyAsync(TiposCodigosConductualesController::getTiposCodigosConductualesFromApi);
-        future.thenAccept(tiposCodigos -> {
+public void cargarDatosAsync() {
+    getSalonesApiAsync()
+        .thenAccept(encargadosList -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-            for (TiposCodigosConductuales tipoCodigo : tiposCodigos) {
+            for (Salones tipoCodigo : encargadosList) {
                 tableModel.addRow(new Object[]{
-                    tipoCodigo.getIdTipoCodigoConductual(),
-                    tipoCodigo.getTipoCodigoConductual()
+                    tipoCodigo.getIdSalon(),
+                    tipoCodigo.getCodigoSalon()
                 });
             }
+        })
+        .exceptionally(throwable -> {
+            throwable.printStackTrace();
+            return null;
         });
-    }
+}
+
+
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        // TODO add your handling code here:
-        MessageAddTipoCodigos obj = new MessageAddTipoCodigos();
-        obj.txtTitle.setText("Añadir Tipo de Código Disciplinario");
+
+        MessageAddSalones obj = new MessageAddSalones();
+        obj.txtTitle.setText("Añadir un salon");
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 GlassPanePopup.closePopupLast();
                 Timer timer = new Timer(500, (ActionEvent e) -> {
-
-                    cargarDatos();
+                    cargarDatosAsync();
                     deleteAllTableRows(table1);
                 });
                 timer.setRepeats(false);
@@ -201,8 +212,8 @@ public class TiposCodigos extends javax.swing.JPanel {
 
             Object id = table1.getValueAt(selectedRow, 0);
             Object tipoCodigo = table1.getValueAt(selectedRow, 1);
-            MessageEditTipoCodigos msg = new MessageEditTipoCodigos();
-            msg.txtTitle.setText("Actualización de Código Disciplinario");
+            MessageEditSalones msg = new MessageEditSalones();
+            msg.txtTitle.setText("Actualización de Salon");
             msg.id = (int) id;
             msg.txtTipoCodigo.setText(tipoCodigo.toString());
             msg.eventOK(new ActionListener() {
@@ -210,8 +221,7 @@ public class TiposCodigos extends javax.swing.JPanel {
                 public void actionPerformed(ActionEvent ae) {
                     GlassPanePopup.closePopupLast();
                     Timer timer = new Timer(500, (ActionEvent e) -> {
-
-                        cargarDatos();
+                    cargarDatosAsync();
                         deleteAllTableRows(table1);
                     });
                     timer.setRepeats(false);
@@ -239,12 +249,14 @@ public class TiposCodigos extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         int selectedRow = table1.getSelectedRow();
+        
+        
 
         // Verificar si se ha seleccionado una fila
         if (selectedRow != -1) {
             // Obtener los datos de las columnas de la fila seleccionada
             Object id = table1.getValueAt(selectedRow, 0);
-
+                System.out.println(id);
             Message obj = new Message();
             obj.txtTitle.setText("Aviso");
             obj.txtContent.setText("¿Desea eliminar este registro?");
@@ -252,7 +264,7 @@ public class TiposCodigos extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
 
-                    String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/TiposCodigosConductuales/delete";
+                    String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Salones/delete";
                     // Código para eliminar el registro de la API
                     CompletableFuture<Boolean> deleteFuture = ControllerFull.DeleteApiAsync(endpointUrl, (int) id);
 
@@ -267,7 +279,7 @@ public class TiposCodigos extends javax.swing.JPanel {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
 
-                                    cargarDatos();
+                                    cargarDatosAsync();
                                     deleteAllTableRows(table1);
                                     GlassPanePopup.closePopupLast();
                                 }
