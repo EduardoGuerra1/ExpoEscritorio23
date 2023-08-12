@@ -77,39 +77,43 @@ public class Validaciones {
     }
 
     public static boolean check20(String palabra) {
-        return palabra.length() == 20;
+        return palabra.length() <= 20;
     }
 
     public static boolean check30(String palabra) {
-        return palabra.length() == 30;
+        return palabra.length() <= 30;
     }
 
     public static boolean check50(String palabra) {
-        return palabra.length() == 50;
+        return palabra.length() <= 50;
     }
 
     public static boolean check75(String palabra) {
-        return palabra.length() == 75;
+        return palabra.length() <= 75;
     }
 
     public static boolean check5(String palabra) {
-        return palabra.length() == 5;
+        return palabra.length() <= 5;
     }
 
     public static boolean check6(String palabra) {
-        return palabra.length() == 6;
+        return palabra.length() <= 6;
     }
 
     public static boolean check8(String palabra) {
-        return palabra.length() == 8;
+        return palabra.length() <= 8;
     }
 
     public static boolean check4(String palabra) {
-        return palabra.length() == 4;
+        return palabra.length() <= 4;
     }
 
+
     public static boolean check7(String palabra) {
-        return palabra.length() == 7;
+        return palabra.length() <= 7;
+    }
+        public static boolean check16(String palabra) {
+        return palabra.length() <= 16 ;
     }
 
     public static boolean checkPassword(String pass) {

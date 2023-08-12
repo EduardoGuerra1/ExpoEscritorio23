@@ -6,6 +6,7 @@ package View.samplemessage;
 
 import Services.Validaciones;
 import View.Application.form.other.CodigosDisciplinarios;
+import View.Application.form.other.RangoDeHoras;
 import View.Application.form.other.SalonesPantalla;
 import View.Application.form.other.TiposCodigos;
 import View.glasspanepopup.GlassPanePopup;
@@ -43,11 +44,11 @@ import raven.toast.Notifications;
  *
  * @author educs
  */
-public class MessageEditSalones extends javax.swing.JPanel {
+public class MessageEditRangoHoras extends javax.swing.JPanel {
 
     public int id;
 
-    public MessageEditSalones() {
+    public MessageEditRangoHoras() {
 
         initComponents();
         setOpaque(false);
@@ -93,6 +94,10 @@ public class MessageEditSalones extends javax.swing.JPanel {
         btnAceptar = new View.BotonesText.Buttons();
         jLabel2 = new javax.swing.JLabel();
         txtTipoCodigo = new View.BotonesText.CustomTextField();
+        jLabel3 = new javax.swing.JLabel();
+        Inicio = new View.ExampleTable.Tiempo();
+        Final = new View.ExampleTable.Tiempo();
+        jLabel4 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -116,11 +121,25 @@ public class MessageEditSalones extends javax.swing.JPanel {
         });
         add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 120, -1));
 
-        jLabel2.setText("Codigo De Salon:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        jLabel2.setText("Titulo De Hora:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, 20));
         jLabel2.getAccessibleContext().setAccessibleName("Codigo de Salon:");
 
-        add(txtTipoCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 400, 50));
+        add(txtTipoCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 310, 50));
+
+        jLabel3.setText("Final de hora");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, -1));
+        add(Inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 90, -1));
+
+        Final.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FinalActionPerformed(evt);
+            }
+        });
+        add(Final, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 90, -1));
+
+        jLabel4.setText("Inicio de hora");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
@@ -128,29 +147,46 @@ public class MessageEditSalones extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        // TODO add your handling code here:
+String selectedTime1 = Final.getSelectedTime();
+String selectedTime2 = Inicio.getSelectedTime();
 
-       Validaciones valida = new Validaciones();
-        if (txtTipoCodigo.getText().isEmpty()) {
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
-        } else {
-            if (!valida.check6(txtTipoCodigo.getText()) ) {
-                Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
-            }
-            else{
+String[] timeParts1 = selectedTime1.split(":");
+int hour1 = Integer.parseInt(timeParts1[0]);
+int minute1 = Integer.parseInt(timeParts1[1]);
+
+String[] timeParts2 = selectedTime2.split(":");
+int hour2 = Integer.parseInt(timeParts2[0]);
+int minute2 = Integer.parseInt(timeParts2[1]);
+
+
+if (hour1 > hour2 || (hour1 == hour2 && minute1 > minute2)) {
+    if (txtTipoCodigo.getText().isEmpty()) {
+        Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+    }
+    else {
+        Validaciones valida = new Validaciones();
+    if (!valida.check16( txtTipoCodigo.getText())) {
+        Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+    } else {
             actualizarDatosHaciaApi();
             Timer timer = new Timer(500, (ActionEvent e) -> {
-                SalonesPantalla tc = new SalonesPantalla();
+                RangoDeHoras tc = new RangoDeHoras();
                 tc.cargarDatosAsync();
                 tc.deleteAllTableRows(tc.table1);
             });
             timer.setRepeats(false);
             timer.start();
-            }
         }
-
+}
+} else {
+    Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Revisar La hora final ");
+}
 
     }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void FinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FinalActionPerformed
 
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);
@@ -158,15 +194,19 @@ public class MessageEditSalones extends javax.swing.JPanel {
 
     public void actualizarDatosHaciaApi() {
         String codigoSalon = txtTipoCodigo.getText();
-
+        String selectedInicio = Inicio.getSelectedTime();
+        String selectedFinal = Final.getSelectedTime();
         try {
             // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
-            jsonData.put("idSalon", id);
-            jsonData.put("codigoSalon", codigoSalon);
+            jsonData.put("idRangoHora", id);
+            jsonData.put("titulo", codigoSalon);
+            jsonData.put("inicio", selectedInicio);
+            jsonData.put("finals", selectedFinal);
+            
 
             // Llamar al método putApiAsync para enviar los datos de actualización
-            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Salones/update"; // Reemplaza esto con la URL de tu API
+            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/RangoHoras/update"; // Reemplaza esto con la URL de tu API
             String jsonString = jsonData.toString();
 
             CompletableFuture<Boolean> putFuture = ControllerFull.putApiAsync(endpointUrl, jsonString);
@@ -192,9 +232,13 @@ public class MessageEditSalones extends javax.swing.JPanel {
 // Método para obtener el ID seleccionado de un JComboBox
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public View.ExampleTable.Tiempo Final;
+    public View.ExampleTable.Tiempo Inicio;
     private View.BotonesText.Buttons btnAceptar;
     private View.BotonesText.Buttons btnCancelar;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     public View.BotonesText.CustomTextField txtTipoCodigo;
     public javax.swing.JLabel txtTitle;
     // End of variables declaration//GEN-END:variables

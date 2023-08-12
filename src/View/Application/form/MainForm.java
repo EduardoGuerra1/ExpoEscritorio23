@@ -25,6 +25,7 @@ import View.Application.form.other.Estudiantes;
 import View.Application.form.other.HorariosClases;
 import View.Application.form.other.LlegadasTarde;
 import View.Application.form.other.Observaciones;
+import View.Application.form.other.RangoDeHoras;
 import View.Application.form.other.SalonesPantalla;
 import View.Application.form.other.SolicitudesPermisos;
 import View.Application.form.other.TiposCodigos;

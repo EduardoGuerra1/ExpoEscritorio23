@@ -12,7 +12,16 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 
 public class CustomTextField extends JTextField {
+    private String placeholder;
 
+    public String getPlaceholder() {
+        return placeholder;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        this.placeholder = placeholder;
+        repaint();
+    }
     public int getRound() {
         return round;
     }

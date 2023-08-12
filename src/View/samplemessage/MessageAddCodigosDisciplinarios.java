@@ -140,6 +140,11 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         add(cbNivelCodigoConductual, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 160, -1));
 
         txtCodigoConductual.setEnabled(false);
+        txtCodigoConductual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoConductualActionPerformed(evt);
+            }
+        });
         add(txtCodigoConductual, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 230, 50));
 
         jLabel3.setText("Nivel de Código:");
@@ -169,6 +174,10 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void txtCodigoConductualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoConductualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoConductualActionPerformed
 
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);
