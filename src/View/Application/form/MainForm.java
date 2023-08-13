@@ -82,7 +82,7 @@ public class MainForm extends JLayeredPane {
         menu.addMenuEvent((int index, int subIndex, MenuAction action) -> {
             // Application.mainForm.showForm(new DefaultForm("Form : " + index + " " + subIndex));
             if (index == 0) {
-                Application.showForm(new settings());
+                Application.showForm(new LlegadasTarde());
             } else if (index == 1) {
                 if (subIndex == 1) {
                     Application.showForm(new SalonesPantalla());
@@ -93,7 +93,7 @@ public class MainForm extends JLayeredPane {
                 } else if (subIndex == 4) {
                     Application.showForm(new Observaciones());
                 } else if (subIndex == 5) {
-                    Application.showForm(new LlegadasTarde());
+                    Application.showForm(new settings());
                 } else if (subIndex == 6) {
                     Application.showForm(new Asistencias());
                 } else if (subIndex == 7) {

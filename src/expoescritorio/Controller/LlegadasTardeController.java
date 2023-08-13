@@ -1,6 +1,6 @@
 package expoescritorio.Controller;
 
-import expoescritorio.Models.LlegadasTarde;
+import expoescritorio.Models.LlegadasTardeString;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,10 +14,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LlegadasTardeController {
-    public static CompletableFuture<List<LlegadasTarde>> getLlegadasTardeApiAsync() {
+    public static CompletableFuture<List<LlegadasTardeString>> getLlegadasTardeApiAsync() {
         return CompletableFuture.supplyAsync(() -> {
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/LlegadasTarde/list";
-            List<LlegadasTarde> modelList = new ArrayList<>();
+            List<LlegadasTardeString> modelList = new ArrayList<>();
             HttpURLConnection connection = null;
             try {
                 URL url = new URL(apiUrl);
@@ -32,13 +32,14 @@ public class LlegadasTardeController {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         int idLlegadaTarde = jsonObject.getInt("idLlegadaTarde");
-                        int idTipoLlegadaTarde = jsonObject.getInt ("idTipoLlegadaTarde");
-                        int idEstudiante = jsonObject.getInt ("idEstudiante");
-                        int idDocente = jsonObject.getInt ("idDocente");
-                        int idPeriodo = jsonObject.getInt ("idPeriodo");
-                        String Estado = jsonObject.getString("Estado");
-                        String fecha = jsonObject.getString("Fecha");
-                        modelList.add(new LlegadasTarde(idLlegadaTarde, idTipoLlegadaTarde ,idEstudiante, idPeriodo, idDocente, Estado , fecha));
+                        String TipoLlegadaTarde = jsonObject.getString("TipoLlegadaTarde"); 
+                        String Estudiante = jsonObject.getString("Estudiante"); 
+                        int idPeriodo = jsonObject.getInt("idPeriodo;"); 
+                        String Docente = jsonObject.getString("Docente"); 
+                        int estado = jsonObject.getInt("estado"); 
+                        String fecha = jsonObject.getString("fecha"); 
+                        int idEstudiante = jsonObject.getInt("idEstudiante");
+                        modelList.add(new LlegadasTardeString(idLlegadaTarde,TipoLlegadaTarde, Estudiante, idPeriodo, Docente, estado, fecha, idEstudiante));
                     }
                 } else {
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
