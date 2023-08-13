@@ -257,7 +257,6 @@ public class Funciones {
             return modelList;
         });
     }
-       
         public static CompletableFuture<List<LlegadasTardeString>> GetLLegadasTardes() {
         return CompletableFuture.supplyAsync(() -> {
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/Funciones/LlegadasTardes";
@@ -272,7 +271,6 @@ public class Funciones {
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     JSONArray jsonArray = new JSONArray(reader.readLine());
-
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         int idLlegadaTarde = jsonObject.getInt("idLlegadaTarde");
@@ -285,6 +283,7 @@ public class Funciones {
                         int idEstudiante = jsonObject.getInt("idEstudiante");
                         
                         modelList.add(new LlegadasTardeString(idLlegadaTarde, TipoLlegadaTarde, Estudiante, idPeriodo, Docente, estado,fecha,idEstudiante));
+                    
                     }
                 } else {
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
@@ -299,6 +298,8 @@ public class Funciones {
             return modelList;
         });
     }
+        
+        
         public static CompletableFuture<List<VisitasEnfermeriaString>> GetVisitasEnfermeria() {
         return CompletableFuture.supplyAsync(() -> {
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/VisitasEnfermeria/String";
@@ -313,7 +314,6 @@ public class Funciones {
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     JSONArray jsonArray = new JSONArray(reader.readLine());
-
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         int idVisitaEnfermeria = jsonObject.getInt("idVisitaEnfermeria");
@@ -324,6 +324,7 @@ public class Funciones {
                         int idPersona = jsonObject.getInt("idPersona");
                         modelList.add(new VisitasEnfermeriaString(idVisitaEnfermeria, Persona, idPeriodo, fecha, detalleVisitia, idPersona));
                     }
+                    
                 } else {
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
