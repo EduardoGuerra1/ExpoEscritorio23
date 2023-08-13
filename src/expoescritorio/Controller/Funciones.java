@@ -274,10 +274,10 @@ public class Funciones {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         int idLlegadaTarde = jsonObject.getInt("idLlegadaTarde");
-                        String TipoLlegadaTarde = jsonObject.getString("TipoLlegadaTarde");
-                        String Estudiante = jsonObject.getString("Estudiante");
+                        String TipoLlegadaTarde = jsonObject.getString("tipoLlegadaTarde");
+                        String Estudiante = jsonObject.getString("estudiante");
                         int idPeriodo = jsonObject.getInt("idPeriodo");
-                        String Docente = jsonObject.getString("Docente");
+                        String Docente = jsonObject.getString("docente");
                         int estado = jsonObject.getInt("estado");
                         String fecha = jsonObject.getString("fecha");
                         int idEstudiante = jsonObject.getInt("idEstudiante");
