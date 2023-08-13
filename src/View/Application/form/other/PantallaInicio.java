@@ -40,51 +40,39 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         jPanel1 = new javax.swing.JPanel();
         time = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        time.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        time.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
         time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         time.setText("A");
+        jPanel1.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 644, 50));
 
-        date.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        date.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
         date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         date.setText("A");
+        jPanel1.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 640, 53));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(285, 285, 285))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/pila-libros-tapa-dura-contra-fondo-blanco-removebg-preview.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(507, 43, 410, 640));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel date;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
