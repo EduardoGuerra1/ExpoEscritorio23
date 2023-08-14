@@ -83,10 +83,10 @@ public class MainForm extends JLayeredPane {
         menu.addMenuEvent((int index, int subIndex, MenuAction action) -> {
             // Application.mainForm.showForm(new DefaultForm("Form : " + index + " " + subIndex));
             if (index == 0) {
-                Application.showForm(new LlegadasTarde());
+                Application.showForm(new PantallaInicio());
             } else if (index == 1) {
                 if (subIndex == 1) {
-                    Application.showForm(new Inasistencias());
+                    Application.showForm(new SalonesPantalla());
                 } else if (subIndex == 2) {
                     Application.showForm(new TiposCodigos());
                 }else if (subIndex == 3) {

@@ -97,7 +97,7 @@ public class Validaciones {
     }
 
     public static boolean check6(String palabra) {
-        return palabra.length() <= 6;
+        return palabra.length() <= 32;
     }
 
     public static boolean check8(String palabra) {
