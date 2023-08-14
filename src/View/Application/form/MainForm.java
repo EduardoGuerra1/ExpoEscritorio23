@@ -23,6 +23,7 @@ import View.Application.form.other.CodigosDisciplinarios;
 import View.Application.form.other.Credenciales;
 import View.Application.form.other.Estudiantes;
 import View.Application.form.other.HorariosClases;
+import View.Application.form.other.Inasistencias;
 import View.Application.form.other.LlegadasTarde;
 import View.Application.form.other.Observaciones;
 import View.Application.form.other.RangoDeHoras;
@@ -85,7 +86,7 @@ public class MainForm extends JLayeredPane {
                 Application.showForm(new LlegadasTarde());
             } else if (index == 1) {
                 if (subIndex == 1) {
-                    Application.showForm(new SalonesPantalla());
+                    Application.showForm(new Inasistencias());
                 } else if (subIndex == 2) {
                     Application.showForm(new TiposCodigos());
                 }else if (subIndex == 3) {
