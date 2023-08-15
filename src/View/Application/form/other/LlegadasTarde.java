@@ -20,6 +20,7 @@ import java.util.concurrent.CompletableFuture;
 import javax.swing.table.DefaultTableModel;
 
 
+
 /**
  *
  * @author w0lf3
@@ -35,16 +36,16 @@ public class LlegadasTarde extends javax.swing.JPanel {
          lb1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         // Obtén el modelo de la tabla existente
-        DefaultTableModel tableModel = (DefaultTableModel) table2.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
         tableModel.setColumnIdentifiers(new Object[]{"idLlegadaTarde", "TipoLlegadaTarde", "Estudiante","Docente","estado","fecha"});
         cargarDatosAsync();
-        table2.setDefaultEditor(Object.class, null);
+        table1.setDefaultEditor(Object.class, null);
     }   
     
 public void cargarDatosAsync() {
     GetLLegadasTardes()
         .thenAccept(llegadastardeList -> {
-            DefaultTableModel tableModel = (DefaultTableModel) table2.getModel();
+            DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
             for ( LlegadasTardeString llegadasTarde : llegadastardeList) {
                 String inicioFormatted = llegadasTarde.getFecha().substring(0, 10); // Obtener los primeros 5 caracteres (HH:mm)
                 
@@ -77,7 +78,7 @@ public void cargarDatosAsync() {
         jPanel3 = new javax.swing.JPanel();
         lb1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        table2 = new View.ExampleTable.Table();
+        table1 = new View.ExampleTable.Table();
         btnDelete1 = new View.BotonesText.Buttons();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -116,7 +117,7 @@ public void cargarDatosAsync() {
                 .addContainerGap())
         );
 
-        table2.setModel(new javax.swing.table.DefaultTableModel(
+        table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -124,7 +125,7 @@ public void cargarDatosAsync() {
 
             }
         ));
-        jScrollPane2.setViewportView(table2);
+        jScrollPane2.setViewportView(table1);
 
         btnDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/delete.png"))); // NOI18N
         btnDelete1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -168,78 +169,80 @@ public void cargarDatosAsync() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDelete1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete1MouseClicked
-//     int selectedRow = table2.getSelectedRow();
-//        
-//        
-//
-//        // Verificar si se ha seleccionado una fila
-//        if (selectedRow != -1) {
-//            // Obtener los datos de las columnas de la fila seleccionada
-//            Object id = table2.getValueAt(selectedRow, 0);
-//                System.out.println(id);
-//            Message obj = new Message();
-//            obj.txtTitle.setText("Aviso");
-//            obj.txtContent.setText("¿Desea eliminar este registro?");
-//            obj.eventOK(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent ae) {
-//
-//                    String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/RangoHoras/delete";
-//                    // Código para eliminar el registro de la API
-//                    CompletableFuture<Boolean> deleteFuture = ControllerFull.DeleteApiAsync(endpointUrl, (int) id);
-//
-//                    // Manejar la respuesta de la API
-//                    deleteFuture.thenAccept(deleted -> {
-//                        if (deleted) {
-//                            // Registro eliminado con éxito
-//                            Message obj = new Message();
-//                            obj.txtTitle.setText("Aviso");
-//                            obj.txtContent.setText("Código eliminado exitosamente");
-//                            obj.eventOK(new ActionListener() {
-//                                @Override
-//                                public void actionPerformed(ActionEvent ae) {
-//
-//                                   // cargarDatosAsync();
-//                                    //deleteAllTableRows(table2);
-//                                    //GlassPanePopup.closePopupLast();
-//                                }
-//                            });
-//                            GlassPanePopup.showPopup(obj);
-//                        } else {
-//                            // Ocurrió un error al eliminar el registro
-//                            Message obj = new Message();
-//                            obj.txtTitle.setText("Aviso");
-//                            obj.txtContent.setText("Error al eliminar el código, intente nuevamente.");
-//                            obj.eventOK(new ActionListener() {
-//                                @Override
-//                                public void actionPerformed(ActionEvent ae) {
-//
-//                                    GlassPanePopup.closePopupLast();
-//                                }
-//                            });
-//                            GlassPanePopup.showPopup(obj);
-//                        }
-//                    });
-//
-//                    GlassPanePopup.closePopupLast();
-//                }
-//            });
-//            GlassPanePopup.showPopup(obj);
-//
-//        } else {
-//            Message obj = new Message();
-//            obj.txtTitle.setText("Aviso");
-//            obj.txtContent.setText("Debe seleccionar una fila.");
-//            obj.eventOK(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent ae) {
-//                    System.out.println("Click OK");
-//                    GlassPanePopup.closePopupLast();
-//                }
-//            });
-//            GlassPanePopup.showPopup(obj);
-//
-//        }
+// TODO add your handling code here:
+
+        int selectedRow = table1.getSelectedRow();
+        
+        
+
+        // Verificar si se ha seleccionado una fila
+        if (selectedRow != -1) {
+            // Obtener los datos de las columnas de la fila seleccionada
+            Object id = table1.getValueAt(selectedRow, 0);
+                System.out.println(id);
+            Message obj = new Message();
+            obj.txtTitle.setText("Aviso");
+            obj.txtContent.setText("¿Desea eliminar este registro?");
+            obj.eventOK(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+
+                    String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/LlegadasTarde/delete";
+                    // Código para eliminar el registro de la API
+                    CompletableFuture<Boolean> deleteFuture = ControllerFull.DeleteApiAsync(endpointUrl, (int) id);
+
+                    // Manejar la respuesta de la API
+                    deleteFuture.thenAccept(deleted -> {
+                        if (deleted) {
+                            // Registro eliminado con éxito
+                            Message obj = new Message();
+                            obj.txtTitle.setText("Aviso");
+                            obj.txtContent.setText("Código eliminado exitosamente");
+                            obj.eventOK(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent ae) {
+
+                                    cargarDatosAsync();
+                                   //deleteAllTableRows(table1);
+                                    GlassPanePopup.closePopupLast();
+                                }
+                            });
+                            GlassPanePopup.showPopup(obj);
+                        } else {
+                            // Ocurrió un error al eliminar el registro
+                            Message obj = new Message();
+                            obj.txtTitle.setText("Aviso");
+                            obj.txtContent.setText("Error al eliminar el código, intente nuevamente.");
+                            obj.eventOK(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent ae) {
+
+                                    GlassPanePopup.closePopupLast();
+                                }
+                            });
+                            GlassPanePopup.showPopup(obj);
+                        }
+                    });
+
+                    GlassPanePopup.closePopupLast();
+                }
+            });
+            GlassPanePopup.showPopup(obj);
+
+        } else {
+            Message obj = new Message();
+            obj.txtTitle.setText("Aviso");
+            obj.txtContent.setText("Debe seleccionar una fila.");
+            obj.eventOK(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    System.out.println("Click OK");
+                    GlassPanePopup.closePopupLast();
+                }
+            });
+            GlassPanePopup.showPopup(obj);
+
+        }
     }//GEN-LAST:event_btnDelete1MouseClicked
 
 
@@ -249,6 +252,6 @@ public void cargarDatosAsync() {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lb1;
-    public View.ExampleTable.Table table2;
+    public View.ExampleTable.Table table1;
     // End of variables declaration//GEN-END:variables
 }
