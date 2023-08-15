@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -42,6 +43,13 @@ public class LlegadasTarde extends javax.swing.JPanel {
         table1.setDefaultEditor(Object.class, null);
     }   
     
+     public void deleteAllTableRows(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        while (model.getRowCount() > 0) {
+            model.removeRow(0);
+        }
+    }
+
 public void cargarDatosAsync() {
     GetLLegadasTardes()
         .thenAccept(llegadastardeList -> {
@@ -203,7 +211,7 @@ public void cargarDatosAsync() {
                                 public void actionPerformed(ActionEvent ae) {
 
                                     cargarDatosAsync();
-                                    //deleteAllTableRows();
+                                    deleteAllTableRows(table1);
                                     GlassPanePopup.closePopupLast();
                                 }
                             });

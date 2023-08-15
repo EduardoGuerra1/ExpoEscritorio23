@@ -25,7 +25,6 @@ import View.Application.form.other.Estudiantes;
 import View.Application.form.other.HorariosClases;
 import View.Application.form.other.Inasistencias;
 import View.Application.form.other.LlegadasTarde;
-import View.Application.form.other.LlegadasTarde2;
 import View.Application.form.other.Observaciones;
 import View.Application.form.other.RangoDeHoras;
 import View.Application.form.other.SalonesPantalla;
@@ -84,7 +83,7 @@ public class MainForm extends JLayeredPane {
         menu.addMenuEvent((int index, int subIndex, MenuAction action) -> {
             // Application.mainForm.showForm(new DefaultForm("Form : " + index + " " + subIndex));
             if (index == 0) {
-                Application.showForm(new LlegadasTarde2());
+                Application.showForm(new LlegadasTarde());
             } else if (index == 1) {
                 if (subIndex == 1) {
                     Application.showForm(new SalonesPantalla());
