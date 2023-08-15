@@ -203,7 +203,7 @@ public void cargarDatosAsync() {
                                 public void actionPerformed(ActionEvent ae) {
 
                                     cargarDatosAsync();
-                                   //deleteAllTableRows(table1);
+                                    //deleteAllTableRows();
                                     GlassPanePopup.closePopupLast();
                                 }
                             });
