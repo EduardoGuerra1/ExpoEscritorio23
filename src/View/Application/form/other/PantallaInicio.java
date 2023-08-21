@@ -17,6 +17,7 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
      * Creates new form PantallaInicio
      */
     public PantallaInicio() {
+        
         Thread t= new Thread(this);
         t.start();
         initComponents();

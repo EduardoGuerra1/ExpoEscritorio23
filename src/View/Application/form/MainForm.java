@@ -33,6 +33,9 @@ import View.Application.form.other.TiposCodigos;
 import View.Application.form.other.VisitasEnfermeria;
 import View.menu.Menu;
 import View.menu.MenuAction;
+import View.samplemessage.MessageEditCodigosDisciplinarios;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -109,8 +112,13 @@ public class MainForm extends JLayeredPane {
                 Application.showForm(new VisitasEnfermeria());
             }else if (index == 6) {
                 Application.showForm(new Credenciales());
-            } else if (index == 9) {
-                Application.logout();
+            } else if (index == 7) {
+
+
+    Window window = SwingUtilities.getWindowAncestor(this);
+    window.dispose();
+        Application loginForm = new Application();
+    loginForm.setVisible(true);
             } else {
                 action.cancel();
             }

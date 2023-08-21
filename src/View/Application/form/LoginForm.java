@@ -47,7 +47,10 @@ public class LoginForm extends javax.swing.JPanel {
         cardLayout.show(cardPanel, "loginPanel");*/
 
     }
-
+    private void clearTextFields() {
+        txtCorreo.setText("");
+        txtContraseña.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -227,7 +230,7 @@ public class LoginForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbCorreo;
-    private javax.swing.JTextField txtContraseña;
-    private javax.swing.JTextField txtCorreo;
+    public javax.swing.JTextField txtContraseña;
+    public javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }

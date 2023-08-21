@@ -24,6 +24,8 @@ public class Application extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         mainForm = new MainForm();
         loginForm = new LoginForm();
+        loginForm.txtContraseña.setText("");
+        loginForm.txtCorreo.setText("");
         setContentPane(loginForm);
         Notifications.getInstance().setJFrame(this);
         GlassPanePopup.install(this);
