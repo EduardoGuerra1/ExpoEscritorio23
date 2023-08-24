@@ -4,6 +4,7 @@
  */
 package View.Application.form.other;
 
+import Reportes.ConexionSQL;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import View.samplemessage.MessageAddCodigosDisciplinarios;
@@ -24,7 +25,14 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,6 +63,21 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
         table1.setDefaultEditor(Object.class, null);
     }
 
+    private void mostrarReporte() {
+        try {
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/Reportes/codigosReport.jasper"));
+            JasperPrint jprint = JasperFillManager.fillReport(report, null, ConexionSQL.getConexion());
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setTitle("Nombre Reporte");
+            view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+
+        } catch (JRException ex) {
+            ex.getMessage();
+        }
+    }
+    
     public void cargarDatos() {
         CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
         future.thenAccept(codigosConductuales -> {
@@ -332,35 +355,38 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
-        MessageAddCodigosDisciplinarios obj = new MessageAddCodigosDisciplinarios();
-        obj.txtTitle.setText("Añadir Código Disciplinario");
-        obj.eventOK(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                System.out.println("Click OK");
-                CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
-                future.thenAccept(codigosConductuales -> {
-                    DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-                    for (CodigosConductuales codigo : codigosConductuales) {
-                        tableModel.addRow(new Object[]{
-                            codigo.getIdCodigoConductual(),
-                            codigo.getIdTipoCodigoConductual(),
-                            codigo.getIdNivelCodigoConductual(),
-                            codigo.getCodigoConductual()
-                        });
-                    }
-                });
-                GlassPanePopup.closePopupLast();
-                Timer timer = new Timer(500, (ActionEvent e) -> {
-
-                    cargarDatos();
-                    deleteAllTableRows(table1);
-                });
-                timer.setRepeats(false);
-                timer.start();
-            }
-        });
-        GlassPanePopup.showPopup(obj);
+        
+        mostrarReporte();
+        
+//        MessageAddCodigosDisciplinarios obj = new MessageAddCodigosDisciplinarios();
+//        obj.txtTitle.setText("Añadir Código Disciplinario");
+//        obj.eventOK(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                System.out.println("Click OK");
+//                CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
+//                future.thenAccept(codigosConductuales -> {
+//                    DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
+//                    for (CodigosConductuales codigo : codigosConductuales) {
+//                        tableModel.addRow(new Object[]{
+//                            codigo.getIdCodigoConductual(),
+//                            codigo.getIdTipoCodigoConductual(),
+//                            codigo.getIdNivelCodigoConductual(),
+//                            codigo.getCodigoConductual()
+//                        });
+//                    }
+//                });
+//                GlassPanePopup.closePopupLast();
+//                Timer timer = new Timer(500, (ActionEvent e) -> {
+//
+//                    cargarDatos();
+//                    deleteAllTableRows(table1);
+//                });
+//                timer.setRepeats(false);
+//                timer.start();
+//            }
+//        });
+//        GlassPanePopup.showPopup(obj);
     }//GEN-LAST:event_btnAddMouseClicked
 
 

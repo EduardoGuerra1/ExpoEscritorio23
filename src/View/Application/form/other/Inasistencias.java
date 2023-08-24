@@ -4,6 +4,7 @@
  */
 package View.Application.form.other;
 
+import Reportes.ConexionSQL;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import View.samplemessage.MessageAddCodigosDisciplinarios;
@@ -31,7 +32,14 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javax.swing.JTable;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,6 +62,21 @@ public class Inasistencias extends javax.swing.JPanel {
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Estudiante", "Docente", "Estado","Fecha"});
         cargarDatosAsync();
     }
+    
+    private void mostrarReporte() {
+        try {
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/Reportes/Inasistencias.jasper"));
+            JasperPrint jprint = JasperFillManager.fillReport(report, null, ConexionSQL.getConexion());
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setTitle("Nombre Reporte");
+            view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+
+        } catch (JRException ex) {
+            ex.getMessage();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,8 +91,9 @@ public class Inasistencias extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new View.ExampleTable.Table();
-        btnEdit = new View.BotonesText.Buttons();
         btnDelete = new View.BotonesText.Buttons();
+        btnEdit1 = new View.BotonesText.Buttons();
+        btnReporte = new View.BotonesText.Buttons();
 
         lb.setText("Gestión de las Inasistencias");
         lb.setToolTipText("");
@@ -84,17 +108,24 @@ public class Inasistencias extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(table1);
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/edit.png"))); // NOI18N
-        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEditMouseClicked(evt);
-            }
-        });
-
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/delete.png"))); // NOI18N
         btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDeleteMouseClicked(evt);
+            }
+        });
+
+        btnEdit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/edit.png"))); // NOI18N
+        btnEdit1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEdit1MouseClicked(evt);
+            }
+        });
+
+        btnReporte.setText("buttons2");
+        btnReporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReporteMouseClicked(evt);
             }
         });
 
@@ -104,22 +135,25 @@ public class Inasistencias extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -210,83 +244,6 @@ public int ActualizarDatos(int id ){
 }
 
 
-    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
-    int selectedRow = table1.getSelectedRow();
-    if (selectedRow != -1) {
-        Object id = table1.getValueAt(selectedRow, 0);
-        Object Estado = table1.getValueAt(selectedRow, 3);
-        String Estado1 = Estado.toString(); 
-        if(Estado1 == "Injustificada"){
-        System.out.println(id);
-        Message obj = new Message();
-        obj.txtTitle.setText("Aviso");
-        obj.txtContent.setText("¿Desea Actualizar el estado del registro?");
-        obj.eventOK(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                int updateResult = ActualizarDatos((int) id);
-                GlassPanePopup.closePopupLast();
-                if (updateResult == 1) {                
-                            Message obj = new Message();
-                            obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Inasistencia Actualizada exitosamente");
-                            obj.eventOK(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent ae) {
-
-                                    cargarDatosAsync();
-                                    deleteAllTableRows(table1);
-                                    GlassPanePopup.closePopupLast();
-                                }
-                            });
-                            GlassPanePopup.showPopup(obj);
-                } else {
-                    // Error al actualizar
-                    Message errorMessage = new Message();
-                    errorMessage.txtTitle.setText("Aviso");
-                    errorMessage.txtContent.setText("Error al actualizar el registro, intente nuevamente.");
-                    errorMessage.eventOK(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent ae) {
-
-                            GlassPanePopup.closePopupLast();
-                        }
-                    });
-                    GlassPanePopup.showPopup(errorMessage);
-                }
-            }
-        });
-        GlassPanePopup.showPopup(obj);
-        }
-        else{
-        Message obj = new Message();
-        obj.txtTitle.setText("Aviso");
-        obj.txtContent.setText("La justificación de dicho registro ya se encuentra justificada.");
-        obj.eventOK(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                System.out.println("Click OK");
-                GlassPanePopup.closePopupLast();
-            }
-        });
-        GlassPanePopup.showPopup(obj);
-        }
-    } else {
-        Message obj = new Message();
-        obj.txtTitle.setText("Aviso");
-        obj.txtContent.setText("Debe seleccionar una fila.");
-        obj.eventOK(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                System.out.println("Click OK");
-                GlassPanePopup.closePopupLast();
-            }
-        });
-        GlassPanePopup.showPopup(obj);
-    }
-
-    }//GEN-LAST:event_btnEditMouseClicked
-
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         // TODO add your handling code here:
 
@@ -364,10 +321,24 @@ public int ActualizarDatos(int id ){
         }
     }//GEN-LAST:event_btnDeleteMouseClicked
 
+    private void btnEdit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEdit1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEdit1MouseClicked
+
+    private void btnReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteMouseClicked
+        mostrarReporte();
+    }//GEN-LAST:event_btnReporteMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.BotonesText.Buttons btnAdd;
+    private View.BotonesText.Buttons btnAdd1;
+    private View.BotonesText.Buttons btnAdd2;
+    private View.BotonesText.Buttons btnAdd3;
+    private View.BotonesText.Buttons btnAdd4;
     private View.BotonesText.Buttons btnDelete;
-    private View.BotonesText.Buttons btnEdit;
+    private View.BotonesText.Buttons btnEdit1;
+    private View.BotonesText.Buttons btnReporte;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb;
