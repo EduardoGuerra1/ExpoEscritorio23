@@ -65,7 +65,7 @@ public class Inasistencias extends javax.swing.JPanel {
     
     private void mostrarReporte() {
         try {
-            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/Reportes/Inasistencias.jasper"));
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/Reportes/InasistenciaEXPO.jasper"));
             JasperPrint jprint = JasperFillManager.fillReport(report, null, ConexionSQL.getConexion());
 
             JasperViewer view = new JasperViewer(jprint, false);
