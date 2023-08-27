@@ -162,7 +162,8 @@ public class Funciones {
                         String Reservante= jsonObject.getString("reservante");
                         String motivoReserva = jsonObject.getString("motivoReserva");
                         int idReservante= jsonObject.getInt("idReservante");
-                        modelList.add(new ReservacionesSalonestring(idReservacionSalon, Salon, Inicio,Final,Reservante,motivoReserva, idReservante));
+                        int Estado= jsonObject.getInt("estado");
+                        modelList.add(new ReservacionesSalonestring(idReservacionSalon, Salon, Inicio,Final,Reservante,motivoReserva, idReservante, Estado));
                     }
                 }else {
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);

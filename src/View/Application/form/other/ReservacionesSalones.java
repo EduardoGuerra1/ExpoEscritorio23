@@ -18,12 +18,14 @@ import View.samplemessage.MessageEditTipoCodigos;
 import com.formdev.flatlaf.FlatClientProperties;
 import expoescritorio.Controller.ControllerFull;
 import static expoescritorio.Controller.Funciones.GetInasisitencias;
+import static expoescritorio.Controller.Funciones.GetReservacionesSalones;
 import static expoescritorio.Controller.RangosHorasController.getRangoHorasApiAsync;
 import expoescritorio.Controller.SalonesController;
 import static expoescritorio.Controller.SalonesController.getSalonesApiAsync;
 import expoescritorio.Controller.TiposCodigosConductualesController;
 import expoescritorio.Models.Inasisitenciastring;
 import expoescritorio.Models.RangosHoras;
+import expoescritorio.Models.ReservacionesSalonestring;
 import expoescritorio.Models.Salones;
 import expoescritorio.Models.TiposCodigosConductuales;
 import java.awt.event.ActionEvent;
@@ -47,25 +49,25 @@ import org.json.JSONObject;
  *
  * @author educs
  */
-public class Inasistencias extends javax.swing.JPanel {
+public class ReservacionesSalones extends javax.swing.JPanel {
 
     /**
      * Creates new form TiposCodigos
      */
-    public Inasistencias() {
+    public ReservacionesSalones() {
         initComponents();
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         // Obtén el modelo de la tabla existente
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"ID", "Estudiante", "Docente", "Estado","Fecha"});
+        tableModel.setColumnIdentifiers(new Object[]{"ID", "Motivo","Docente", "Inicio", "Final","Estado"});
         cargarDatosAsync();
     }
     
-    private void mostrarReporte() {
+       private void mostrarReporte() {
         try {
-            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/Reportes/InasistenciaEXPO.jasper"));
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/Reportes/Inasistencias.jasper"));
             JasperPrint jprint = JasperFillManager.fillReport(report, null, ConexionSQL.getConexion());
 
             JasperViewer view = new JasperViewer(jprint, false);
@@ -77,6 +79,7 @@ public class Inasistencias extends javax.swing.JPanel {
             ex.getMessage();
         }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -93,9 +96,8 @@ public class Inasistencias extends javax.swing.JPanel {
         table1 = new View.ExampleTable.Table();
         btnDelete = new View.BotonesText.Buttons();
         btnEdit1 = new View.BotonesText.Buttons();
-        btnReporte = new View.BotonesText.Buttons();
 
-        lb.setText("Gestión de las Inasistencias");
+        lb.setText("Gestión de las Reservaciones de salones");
         lb.setToolTipText("");
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
@@ -122,13 +124,6 @@ public class Inasistencias extends javax.swing.JPanel {
             }
         });
 
-        btnReporte.setText("buttons2");
-        btnReporte.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReporteMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -139,8 +134,6 @@ public class Inasistencias extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,8 +145,7 @@ public class Inasistencias extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -181,6 +173,8 @@ public class Inasistencias extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        lb.getAccessibleContext().setAccessibleName("Gestión Reservaciones de salones");
     }// </editor-fold>//GEN-END:initComponents
 
     public void deleteAllTableRows(JTable table) {
@@ -191,19 +185,22 @@ public class Inasistencias extends javax.swing.JPanel {
     }
 
 public void cargarDatosAsync() {
-    GetInasisitencias()
+    GetReservacionesSalones()
         .thenAccept(encargadosList -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-            for (Inasisitenciastring tipoCodigo : encargadosList) {
-                String Fecha = tipoCodigo.getFecha().substring(0, 11);
-                 String estadoTexto = tipoCodigo.getEstado() == 1 ? "Injustificada" : "Justificada";
+            for (ReservacionesSalonestring tipoCodigo : encargadosList) {
+                String Fecha = tipoCodigo.getInicio().substring(0, 5);
+                String Fecha1 = tipoCodigo.getFinal().substring(0, 5);
+                 String estadoTexto = tipoCodigo.getEstado() == 1 ? "No Aceptada" : "Aceptada";
                 
                 tableModel.addRow(new Object[]{
-                    tipoCodigo.getIdInasistencia(),
-                    tipoCodigo.getEstudiante(),
-                    tipoCodigo.getDocente(),
-                    estadoTexto, 
+                    tipoCodigo.getIdReservacionSalon(),
+                    tipoCodigo.getMotivoReserva(),
+                    tipoCodigo.getReservante(),
                     Fecha,
+                    Fecha1,
+                    estadoTexto, 
+                    
                    
                 });
             }
@@ -217,11 +214,11 @@ public void cargarDatosAsync() {
 public int ActualizarDatos(int id ){
  try {
             JSONObject jsonData = new JSONObject();
-            jsonData.put("idInasistencia", id);
+            jsonData.put("idReservacionSalon", id);
             jsonData.put("estado", 0);
 
             // Llamar al método putApiAsync para enviar los datos de actualización
-            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Inasistencias/Estado"; // Reemplaza esto con la URL de tu API
+            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/ReservacionesSalones/update"; // Reemplaza esto con la URL de tu API
             String jsonString = jsonData.toString();
             CompletableFuture<Boolean> putFuture = ControllerFull.putApiAsync(endpointUrl, jsonString);
             putFuture.thenAccept(success -> {
@@ -263,7 +260,7 @@ public int ActualizarDatos(int id ){
                 @Override
                 public void actionPerformed(ActionEvent ae) {
 
-                    String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Inasistencias/delete";
+                    String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/ReservacionesSalones/delete";
                     // Código para eliminar el registro de la API
                     CompletableFuture<Boolean> deleteFuture = ControllerFull.DeleteApiAsync(endpointUrl, (int) id);
 
@@ -322,12 +319,12 @@ public int ActualizarDatos(int id ){
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnEdit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEdit1MouseClicked
-int selectedRow = table1.getSelectedRow();
+      int selectedRow = table1.getSelectedRow();
     if (selectedRow != -1) {
         Object id = table1.getValueAt(selectedRow, 0);
-        Object Estado = table1.getValueAt(selectedRow, 3);
+        Object Estado = table1.getValueAt(selectedRow, 5);
         String Estado1 = Estado.toString(); 
-        if(Estado1 == "Injustificada"){
+        if(Estado1 == "No Aceptada"){
         System.out.println(id);
         Message obj = new Message();
         obj.txtTitle.setText("Aviso");
@@ -340,7 +337,7 @@ int selectedRow = table1.getSelectedRow();
                 if (updateResult == 1) {                
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Inasistencia Actualizada exitosamente");
+                            obj.txtContent.setText("Reservaciom Actualizada exitosamente");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
@@ -395,22 +392,13 @@ int selectedRow = table1.getSelectedRow();
         });
         GlassPanePopup.showPopup(obj);
     }
-    }//GEN-LAST:event_btnEdit1MouseClicked
 
-    private void btnReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteMouseClicked
-        mostrarReporte();
-    }//GEN-LAST:event_btnReporteMouseClicked
+    }//GEN-LAST:event_btnEdit1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private View.BotonesText.Buttons btnAdd;
-    private View.BotonesText.Buttons btnAdd1;
-    private View.BotonesText.Buttons btnAdd2;
-    private View.BotonesText.Buttons btnAdd3;
-    private View.BotonesText.Buttons btnAdd4;
     private View.BotonesText.Buttons btnDelete;
     private View.BotonesText.Buttons btnEdit1;
-    private View.BotonesText.Buttons btnReporte;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb;
