@@ -67,7 +67,7 @@ public class MainForm extends JLayeredPane {
         add(menu);
         add(panelBody);
     }
-    
+
     @Override
     public void applyComponentOrientation(ComponentOrientation o) {
         super.applyComponentOrientation(o);
@@ -86,44 +86,52 @@ public class MainForm extends JLayeredPane {
         menu.addMenuEvent((int index, int subIndex, MenuAction action) -> {
             // Application.mainForm.showForm(new DefaultForm("Form : " + index + " " + subIndex));
             if (index == 0) {
-                Application.showForm(new LlegadasTarde());
+                Application.showForm(new PantallaInicio());
             } else if (index == 1) {
                 if (subIndex == 1) {
-                    Application.showForm(new SalonesPantalla());
+                    Application.showForm(new CodigosDisciplinarios());
                 } else if (subIndex == 2) {
                     Application.showForm(new TiposCodigos());
-                }else if (subIndex == 3) {
+                } else if (subIndex == 3) {
                     Application.showForm(new Estudiantes());
                 } else if (subIndex == 4) {
                     Application.showForm(new Observaciones());
                 } else if (subIndex == 5) {
-                    Application.showForm(new settings());
+                    Application.showForm(new SolicitudesPermisos());
                 } else if (subIndex == 6) {
-                    Application.showForm(new Asistencias());
-                } else if (subIndex == 7) {
-                    Application.showForm(new Avisos());
-                } else if (subIndex == 8) {
-                    Application.showForm(new HorariosClases());
+                    Application.showForm(new Inasistencias());
                 } else {
                     action.cancel();
                 }
-            
-            }else if (index == 4) {
+
+            } else if (index == 2) {
+                Application.showForm(new Avisos());
+            } else if (index == 3) {
+                Application.showForm(new RangoDeHoras());
+            } else if (index == 4) {
                 Application.showForm(new VisitasEnfermeria());
-            }else if (index == 6) {
+            }else if (index == 5) {
+              if (subIndex == 1) {
+                    Application.showForm(new SalonesPantalla());
+                } else if (subIndex == 2) {
+                  
+                } else {
+                    action.cancel();
+                }
+            } else if (index == 6) {
                 Application.showForm(new Credenciales());
             } else if (index == 7) {
 
-
-    Window window = SwingUtilities.getWindowAncestor(this);
-    window.dispose();
-        Application loginForm = new Application();
-    loginForm.setVisible(true);
+                Window window = SwingUtilities.getWindowAncestor(this);
+                window.dispose();
+                Application loginForm = new Application();
+                loginForm.setVisible(true);
             } else {
                 action.cancel();
             }
         });
     }
+
     private void setMenuFull(boolean full) {
         String icon;
         if (getComponentOrientation().isLeftToRight()) {

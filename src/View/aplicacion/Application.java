@@ -65,6 +65,8 @@ public class Application extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,6 +85,7 @@ public class Application extends javax.swing.JFrame {
     public static void main(String args[]) {
         FlatLaf.registerCustomDefaultsSource("View.theme");
         FlatDarculaLaf.setup();
+        
         java.awt.EventQueue.invokeLater(() -> {
             app = new Application();
             //  app.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);

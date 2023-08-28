@@ -61,7 +61,8 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
                 }
                 for (char c : str.toCharArray()) {
                     if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
-                       Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                       Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                       
                         return; // Ignora el carácter si no es letra, número, espacio o punto
                     }
                 }
