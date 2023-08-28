@@ -121,11 +121,13 @@ public class MainForm extends JLayeredPane {
             } else if (index == 6) {
                 Application.showForm(new Credenciales());
             } else if (index == 7) {
+                        LoginForm loginForm = new LoginForm();
 
-                Window window = SwingUtilities.getWindowAncestor(this);
+               /* Window window = SwingUtilities.getWindowAncestor(this);
                 window.dispose();
                 Application loginForm = new Application();
-                loginForm.setVisible(true);
+                loginForm.setVisible(true);*/
+                Application.logout();
             } else {
                 action.cancel();
             }

@@ -47,7 +47,7 @@ public class LoginForm extends javax.swing.JPanel {
         cardLayout.show(cardPanel, "loginPanel");*/
 
     }
-    private void clearTextFields() {
+    public void clearTextFields() {
         txtCorreo.setText("");
         txtContraseña.setText("");
     }
@@ -174,6 +174,7 @@ public class LoginForm extends javax.swing.JPanel {
         if (personas != null) {
             System.out.println(id);
             if (id == 4) {
+                 clearTextFields();
                 Application.login();
             } else {
                 Message obj = new Message();
