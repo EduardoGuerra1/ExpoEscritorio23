@@ -40,6 +40,7 @@ import expoescritorio.Models.Periodos;
 //import  expoescritorio.Controller.PersonasController.getPersonasAsync;
 import expoescritorio.Models.Personas;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -50,12 +51,12 @@ import javax.swing.text.PlainDocument;
  * @author educs
  */
 public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
-
+       List<Personas> listaIdPersonas = new ArrayList<>();
     public MessageAddVisitaEnfermeria() {
 
         initComponents();
         setOpaque(false);
-
+        txtPersona.setVisible(true);
         txtTitle.setBackground(new Color(0, 0, 0, 0));
         txtTitle.setOpaque(false);
         txtTitle.putClientProperty(FlatClientProperties.STYLE, ""
@@ -82,24 +83,35 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
         futurePersonas.thenAccept(personasList -> {
             // Crear un arreglo de nombres y apellidos para usar en el combobox
             String[] nombresApellidos = new String[personasList.size()];
+            String[] ID = new String[personasList.size()];
             for (int i = 0; i < personasList.size(); i++) {
                 Personas persona = personasList.get(i);
-                nombresApellidos[i] = persona.getNombrePersona() + " " + persona.getApellidoPersona();
+                listaIdPersonas = personasList;
+                
+                nombresApellidos[i] = persona.getCodigo()+ " " +persona.getNombrePersona() + " " + persona.getApellidoPersona();
+                ID[i] = persona.getIdPersona() + " ";
             }
 
             // Agregar los nombres y apellidos al combobox
             cbPersona.setModel(new DefaultComboBoxModel<>(nombresApellidos));
+            //cbPersona.setModel(new DefaultComboBoxModel<>(ID));
+            
         });
 
         String selectedText = (String) cbPersona.getSelectedItem();
         txtPersona.setText(selectedText);
+        
         // Agrega el ActionListener al JComboBox
         cbPersona.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Obtiene el elemento seleccionado y actualiza el JTextField
                 String selectedText = (String) cbPersona.getSelectedItem();
-                txtPersona.setText(selectedText);
+               int index = selectedText.indexOf(" ");
+        if (index != -1) {
+        String nombre = selectedText.substring(0, index);
+        txtPersona.setText(nombre);
+}
             }
         });
         populateComboBox();
@@ -120,7 +132,24 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
         });
 
     }
-
+private int compararNombreApellido(String nombre, String apellido, List<Personas> personasList) {
+    int nombreEncontrado = 0;
+    
+    for (Personas persona : personasList) {
+        if (persona.getNombrePersona().equals(nombre) && persona.getApellidoPersona().equals(apellido)) {
+         nombreEncontrado = persona.getIdPersona();
+        }
+    }
+    
+    if (nombreEncontrado != 0) {
+        // Realizar la acción deseada con el nombre encontrado
+        System.out.println("Nombre encontrado: " + nombreEncontrado);
+    } else {
+        // Realizar la acción deseada si no se encuentra ninguna coincidencia
+        System.out.println("Nombre no encontrado");
+    }
+    return  nombreEncontrado ;
+}
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
@@ -196,7 +225,7 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
 
         txtPersona.setEnabled(false);
-        add(txtPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 230, 50));
+        add(txtPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 230, 50));
 
         jLabel2.setText("Período");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
@@ -258,29 +287,26 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
     }
 
     private void enviarDatosHaciaApi() {
-
         int num = 4;
         int num1 = 1;
 
         MessageAddVisitaEnfermeria msg = new MessageAddVisitaEnfermeria();
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
         int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbPeriodo);
-        int idPersona = obtenerIdSeleccionadoComboBox(msg.cbPersona);
-        String codigoConductual = txtFecha.getText();
+        String fecha = txtFecha.getText();
 
         System.out.println(idTipoCodigoConductual);
-        System.out.println(idPersona);
-        System.out.println(codigoConductual);
+ 
         try {
             // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
-            jsonData.put("idPeriodo", idTipoCodigoConductual);
-            jsonData.put("idPersona", idPersona);
-            jsonData.put("fecha", codigoConductual);
+            jsonData.put("idPeriodo", 1);
+            jsonData.put("idPersona",  txtPersona.getText());
+            jsonData.put("fecha", fecha);
             jsonData.put("detalleVisitia", txtVisita.getText());
 
             // Llamar al método postApiAsync para enviar los datos
-            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductuales/save"; // Reemplaza esto con la URL de tu API
+            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/VisitasEnfermeria/save"; // Reemplaza esto con la URL de tu API
             String jsonString = jsonData.toString();
 
             CompletableFuture<Boolean> postFuture = ControllerFull.postApiAsync(endpointUrl, jsonString);
@@ -311,12 +337,13 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
     }
 
     private int obtenerIdSeleccionadoComboBox(JComboBox<String> comboBox) {
+        
         int selectedIndex = (int) comboBox.getSelectedIndex();
-        // Aquí deberías obtener el ID correspondiente al valor seleccionado en el ComboBox
-        // Puedes tener una lista de objetos con ID y valor asociado y buscar el ID basado en el valor seleccionado.
-        // Por simplicidad, aquí asumiremos que el valor seleccionado es el ID directamente.
+    
+    
 
-        return selectedIndex;
+    
+    return selectedIndex;
     }
 
     public boolean panelClosing() {
