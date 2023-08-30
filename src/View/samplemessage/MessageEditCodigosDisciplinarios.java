@@ -4,6 +4,7 @@
  */
 package View.samplemessage;
 
+import Services.Validaciones;
 import View.Application.form.other.CodigosDisciplinarios;
 import View.Application.form.other.TiposCodigos;
 import View.glasspanepopup.GlassPanePopup;
@@ -32,6 +33,7 @@ import javax.swing.JComboBox;
 import javax.swing.Timer;
 import org.json.JSONException;
 import org.json.JSONObject;
+import raven.toast.Notifications;
 
 /**
  *
@@ -151,15 +153,24 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
         
-        actualizarDatosHaciaApi();
-        Timer timer = new Timer(500, (ActionEvent e) -> {
-            TiposCodigos tc = new TiposCodigos();
-
+        Validaciones valida = new Validaciones();
+        if (txtCodigoConductual.getText().isEmpty() ) {
+            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+        }else {
+            if (!valida.check50(txtCodigoConductual.getText()) ) {
+                Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
+            }
+            else{
+            actualizarDatosHaciaApi();
+            Timer timer = new Timer(500, (ActionEvent e) -> {
+                TiposCodigos tc = new TiposCodigos();
             tc.cargarDatos();
             tc.deleteAllTableRows(tc.table1);
-        });
-        timer.setRepeats(false);
-        timer.start();
+            });
+            timer.setRepeats(false);
+            timer.start();
+            }
+        }
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 

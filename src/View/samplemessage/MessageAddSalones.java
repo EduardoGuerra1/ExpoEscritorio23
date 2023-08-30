@@ -129,7 +129,7 @@ public class MessageAddSalones extends javax.swing.JPanel {
         if (txtTipoCodigo.getText().isEmpty() ) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
         }else {
-            if (!valida.check100(txtTipoCodigo.getText()) ) {
+            if (!valida.check6(txtTipoCodigo.getText()) ) {
                 Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
             }
             else{
