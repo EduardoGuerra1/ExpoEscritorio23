@@ -5,9 +5,13 @@
 package expoescritorio.Controller;
 
 
+import View.glasspanepopup.GlassPanePopup;
+import View.samplemessage.Message;
 import com.google.gson.Gson;
 import expoescritorio.Models.CodigosConductuales;
 import expoescritorio.Models.Personas;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -260,7 +264,18 @@ public class PersonasController {
                     return gson.fromJson(responseData, Personas.class);
                 }
             } else {
-                System.out.println("No se encontro: " + responseCode);
+               Message obj = new Message();
+            obj.txtTitle.setText("Aviso");
+            obj.txtContent.setText("Datos incorrectos");
+            obj.eventOK(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+
+                    System.out.println("Click OK");
+                    GlassPanePopup.closePopupLast();
+                }
+            });
+            GlassPanePopup.showPopup(obj);
             }
 
         } catch (IOException e) {

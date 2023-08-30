@@ -6,6 +6,7 @@ package View.Application.form.other;
 
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
+import View.samplemessage.MessageAddRangoHoras;
 import View.samplemessage.MessageAddVisitaEnfermeria;
 import com.formdev.flatlaf.FlatClientProperties;
 import expoescritorio.Controller.ControllerFull;
@@ -16,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javax.swing.JTable;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,7 +38,7 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
 
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"ID", "Periodo", "Fecha", "Detalle de Visita", "idPersona", "Persona"});
+        tableModel.setColumnIdentifiers(new Object[]{"ID", "Fecha", "Detalle de Visita", "Persona"});
         cargarDatos();
     }
 
@@ -45,12 +47,11 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
         future.thenAccept(visitas -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
             for (VisitasEnfermeriaString visita : visitas) {
+                String inicioFormatted = visita.getFecha().substring(0, 10); 
                 tableModel.addRow(new Object[]{
                     visita.getIdVisitaEnfermeria(),
-                    visita.getIdPeriodo(),
-                    visita.getFecha(),
+                    inicioFormatted,
                     visita.getDetalleVisitia(),
-                    visita.getIdPersona(),
                     visita.getPersona()
                 });
             }
@@ -72,7 +73,6 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new View.ExampleTable.Table();
         btnAdd = new View.BotonesText.Buttons();
-        btnEdit = new View.BotonesText.Buttons();
         btnDelete = new View.BotonesText.Buttons();
         lb = new javax.swing.JLabel();
 
@@ -90,13 +90,6 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
         btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAddMouseClicked(evt);
-            }
-        });
-
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/edit.png"))); // NOI18N
-        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEditMouseClicked(evt);
             }
         });
 
@@ -119,8 +112,6 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
@@ -130,7 +121,6 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,45 +155,22 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
-        MessageAddVisitaEnfermeria msg = new MessageAddVisitaEnfermeria();
-        msg.eventOK(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    System.out.println("Click OK");
-                    GlassPanePopup.closePopupLast();
-                }
-            });
-            GlassPanePopup.showPopup(msg);
+        MessageAddVisitaEnfermeria obj = new MessageAddVisitaEnfermeria();
+        obj.txtTitle.setText("Agregar na visita de enfermeria al estudiante");
+        obj.eventOK(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                GlassPanePopup.closePopupLast();
+                Timer timer = new Timer(500, (ActionEvent e) -> {
+                    cargarDatos();
+                    deleteAllTableRows(table1);
+                });
+                timer.setRepeats(false);
+                timer.start();
+            }
+        });
+        GlassPanePopup.showPopup(obj);
     }//GEN-LAST:event_btnAddMouseClicked
-
-    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
-        // TODO add your handling code here:
-
-        int selectedRow = table1.getSelectedRow();
-
-        // Verificar si se ha seleccionado una fila
-        if (selectedRow != -1) {
-            // Obtener los datos de las columnas de la fila seleccionada
-            Object data1 = table1.getValueAt(selectedRow, 1);
-            Object data2 = table1.getValueAt(selectedRow, 2);
-            Object data3 = table1.getValueAt(selectedRow, 3);
-            Object id = table1.getValueAt(selectedRow, 0);
-
-        } else {
-            Message obj = new Message();
-            obj.txtTitle.setText("Aviso");
-            obj.txtContent.setText("Debe seleccionar una fila.");
-            obj.eventOK(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    System.out.println("Click OK");
-                    GlassPanePopup.closePopupLast();
-                }
-            });
-            GlassPanePopup.showPopup(obj);
-
-        }
-    }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         // TODO add your handling code here:
@@ -283,7 +250,6 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.BotonesText.Buttons btnAdd;
     private View.BotonesText.Buttons btnDelete;
-    private View.BotonesText.Buttons btnEdit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb;

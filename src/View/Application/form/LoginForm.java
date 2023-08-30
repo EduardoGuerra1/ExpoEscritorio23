@@ -179,7 +179,7 @@ public class LoginForm extends javax.swing.JPanel {
             } else {
                 Message obj = new Message();
                 obj.txtTitle.setText("Aviso");
-                obj.txtContent.setText("No puede Entrar solo Administrador ");
+                obj.txtContent.setText("No puede Entrar solo Administradores ");
                 obj.eventOK(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
