@@ -158,18 +158,23 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
 
-        if (txtCodigoConductual.getText().isEmpty()) {
+        Validaciones valida = new Validaciones();
+        if (txtCodigoConductual.getText().isEmpty() ) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
-        }  else {
+        }else {
+            if (!valida.check50(txtCodigoConductual.getText()) ) {
+                Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
+            }
+            else{
             enviarDatosHaciaApi();
             Timer timer = new Timer(500, (ActionEvent e) -> {
                 CodigosDisciplinarios cd = new CodigosDisciplinarios();
-
                 cd.cargarDatos();
                 cd.deleteAllTableRows(cd.table1);
             });
             timer.setRepeats(false);
             timer.start();
+            }
         }
 
 

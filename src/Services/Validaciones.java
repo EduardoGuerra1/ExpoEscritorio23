@@ -83,7 +83,9 @@ public class Validaciones {
     public static boolean check30(String palabra) {
         return palabra.length() <= 30;
     }
-
+    public static boolean check100(String palabra) {
+        return palabra.length() <= 100;
+    }
     public static boolean check50(String palabra) {
         return palabra.length() <= 50;
     }

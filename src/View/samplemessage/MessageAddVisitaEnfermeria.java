@@ -234,18 +234,23 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
 
-        if (txtPersona.getText().isEmpty()) {
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El estudiante se debe seleccionar");
-        } else {
+       Validaciones valida = new Validaciones();
+        if (txtVisita.getText().isEmpty() ) {
+            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+        }else {
+            if (!valida.check6(txtVisita.getText()) ) {
+                Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
+            }
+            else{
             enviarDatosHaciaApi();
             Timer timer = new Timer(500, (ActionEvent e) -> {
-                VisitasEnfermeria cd = new VisitasEnfermeria();
-
+                 VisitasEnfermeria cd = new VisitasEnfermeria();
                 cd.cargarDatos();
                 cd.deleteAllTableRows(cd.table1);
             });
             timer.setRepeats(false);
             timer.start();
+            }
         }
 
 

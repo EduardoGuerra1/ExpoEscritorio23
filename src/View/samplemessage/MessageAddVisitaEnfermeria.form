@@ -25,9 +25,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Agregar una visita de enfermeria al estudiante"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Agregar una visita de enfermeria al estudiante"/>
-      </AccessibilityProperties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>

@@ -126,9 +126,14 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
 
-        if (txtTipoCodigo.getText().isEmpty()) {
+     Validaciones valida = new Validaciones();
+        if (txtTipoCodigo.getText().isEmpty() ) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
         }else {
+            if (!valida.check16(txtTipoCodigo.getText()) ) {
+                Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
+            }
+            else{
             enviarDatosHaciaApi();
             Timer timer = new Timer(500, (ActionEvent e) -> {
                 TiposCodigos tc = new TiposCodigos();
@@ -138,7 +143,9 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
             });
             timer.setRepeats(false);
             timer.start();
+            }
         }
+
 
 
     }//GEN-LAST:event_btnAceptarMouseClicked
