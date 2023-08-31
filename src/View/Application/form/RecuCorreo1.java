@@ -273,7 +273,6 @@ public class RecuCorreo1 extends javax.swing.JPanel {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // TODO add your handling code here:
-        Application.recuperaciones();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
 
