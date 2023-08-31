@@ -9,11 +9,14 @@ import View.samplemessage.Message;
 import View.samplemessage.MessageAddCodigosDisciplinarios;
 import View.samplemessage.MessageEditCodigosDisciplinarios;
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
 import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
 import expoescritorio.Controller.PersonasController;
 import expoescritorio.Models.CodigosConductuales;
 import expoescritorio.Models.Personas;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -41,6 +44,20 @@ public class Estudiantes extends javax.swing.JPanel {
      */
     public Estudiantes() {
         initComponents();
+        String bg = getBackground().toString();
+        
+       
+        if(bg.contains("r=49")){
+            System.out.println("Modo oscuro");
+        }else{
+            System.out.println("Modo claro");
+             EventQueue.invokeLater(() -> {
+                   // FlatAnimatedLafChange.showSnapshot();
+                    FlatIntelliJLaf.setup();
+                    FlatLaf.updateUI();
+                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+        }
 
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");

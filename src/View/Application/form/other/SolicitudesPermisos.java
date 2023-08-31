@@ -4,6 +4,10 @@
  */
 package View.Application.form.other;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
+import java.awt.EventQueue;
+
 /**
  *
  * @author gyaci
@@ -14,7 +18,22 @@ public class SolicitudesPermisos extends javax.swing.JPanel {
      * Creates new form SolicitudesPermisos
      */
     public SolicitudesPermisos() {
+        
         initComponents();
+        String bg = getBackground().toString();
+        
+       
+        if(bg.contains("r=49")){
+            System.out.println("Modo oscuro");
+        }else{
+            System.out.println("Modo claro");
+             EventQueue.invokeLater(() -> {
+                   // FlatAnimatedLafChange.showSnapshot();
+                    FlatIntelliJLaf.setup();
+                    FlatLaf.updateUI();
+                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+        }
     }
 
     /**

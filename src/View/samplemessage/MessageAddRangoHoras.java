@@ -46,6 +46,8 @@ import raven.toast.Notifications;
  */
 public class MessageAddRangoHoras extends javax.swing.JPanel {
 
+    
+    private Boolean noti;
     public MessageAddRangoHoras() {
 
         initComponents();
@@ -63,8 +65,9 @@ public class MessageAddRangoHoras extends javax.swing.JPanel {
                 }
                 for (char c : str.toCharArray()) {
                     if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
-                       Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
-                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                      // Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                      noti=true;  
+                      return; // Ignora el carácter si no es letra, número, espacio o punto
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -121,6 +124,12 @@ public class MessageAddRangoHoras extends javax.swing.JPanel {
 
         jLabel2.setText("Final de hora");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, -1, -1));
+
+        txtTipoCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTipoCodigoKeyReleased(evt);
+            }
+        });
         add(txtTipoCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 350, 50));
         add(Inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 90, -1));
 
@@ -184,6 +193,13 @@ if (hour1 > hour2 || (hour1 == hour2 && minute1 > minute2)) {
     private void FinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FinalActionPerformed
+
+    private void txtTipoCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoCodigoKeyReleased
+        // TODO add your handling code here:
+         if(noti==true){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+        }
+    }//GEN-LAST:event_txtTipoCodigoKeyReleased
 
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);

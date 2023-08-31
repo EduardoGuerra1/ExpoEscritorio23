@@ -7,12 +7,15 @@ package View.Application.form.other;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
 import expoescritorio.Controller.ControllerFull;
 import static expoescritorio.Controller.Funciones.GetLLegadasTardes;
 import expoescritorio.Controller.LlegadasTardeController;
 import static expoescritorio.Controller.LlegadasTardeController.getLlegadasTardeApiAsync;
 import expoescritorio.Controller.PersonasController;
 import expoescritorio.Models.LlegadasTardeString; 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -34,6 +37,21 @@ public class LlegadasTarde extends javax.swing.JPanel {
     
     public LlegadasTarde() {
         initComponents();
+        
+        String bg = getBackground().toString();
+        
+       
+        if(bg.contains("r=49")){
+            System.out.println("Modo oscuro");
+        }else{
+            System.out.println("Modo claro");
+             EventQueue.invokeLater(() -> {
+                   // FlatAnimatedLafChange.showSnapshot();
+                    FlatIntelliJLaf.setup();
+                    FlatLaf.updateUI();
+                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+        }
          lb1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         // Obtén el modelo de la tabla existente

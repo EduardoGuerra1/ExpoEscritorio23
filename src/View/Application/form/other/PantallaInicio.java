@@ -12,6 +12,8 @@ import java.awt.Graphics2D;
 import java.awt.geom.RoundRectangle2D;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class PantallaInicio extends javax.swing.JPanel implements Runnable {
@@ -27,6 +29,10 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         Thread t= new Thread(this);
         t.start();
         initComponents();
+        
+        String bg = getBackground().toString();
+        System.out.println("El color de fondo de Pantalla Inicio es: "+bg);
+        
         time.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         date.putClientProperty(FlatClientProperties.STYLE, ""
@@ -112,15 +118,21 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
        panel1.putClientProperty(FlatClientProperties.STYLE, ""
                + "arc:50;"
                + "background:lighten($Menu.background,1%);");
-       panel2.putClientProperty(FlatClientProperties.STYLE, ""
+      /* panel2.putClientProperty(FlatClientProperties.STYLE, ""
                + "arc:50;"
                + "background:lighten($Menu.background,7%);");
+       
         panel3.putClientProperty(FlatClientProperties.STYLE, ""
                + "arc:50;"
-               + "background:lighten($Menu.background,3%);");
+               + "background:lighten(@background,8%);");*/
         panel4.putClientProperty(FlatClientProperties.STYLE, ""
                + "arc:50;"
-               + "background:lighten($Menu.background,7%);");
+               + "background:lighten(@background,10%);");
+        
+        
+        
+      // jLabel1.setIcon(new ImageIcon(""));
+       
     }
 
     
@@ -164,25 +176,19 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         lbSolidaridad1 = new javax.swing.JLabel();
         lbSolidaridad = new javax.swing.JLabel();
         lbSolidaridad4 = new javax.swing.JLabel();
-        pSolidaridad1 = new javax.swing.JPanel();
-        lbSolidaridad5 = new javax.swing.JLabel();
-        lbSolidaridad6 = new javax.swing.JLabel();
-        lbSolidaridad7 = new javax.swing.JLabel();
-        lbSolidaridad8 = new javax.swing.JLabel();
-        lbSolidaridad9 = new javax.swing.JLabel();
         pFe = new javax.swing.JPanel();
         lbFe4 = new javax.swing.JLabel();
         lbFe3 = new javax.swing.JLabel();
         lbFe2 = new javax.swing.JLabel();
         lbFe1 = new javax.swing.JLabel();
         lbFe = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        pCalendar = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         date.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
-        date.setForeground(new java.awt.Color(255, 255, 255));
         date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
@@ -228,7 +234,6 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         new BordeRedondeado(10);
 
         time.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
-        time.setForeground(new java.awt.Color(255, 255, 255));
         time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
@@ -250,19 +255,19 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
         jPanel1.add(panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 210, 70));
 
-        lbContenido.setForeground(new java.awt.Color(255, 255, 255));
+        lbContenido.setForeground(new java.awt.Color(153, 153, 153));
         lbContenido.setText("lbContenido");
 
-        lbContenido1.setForeground(new java.awt.Color(255, 255, 255));
+        lbContenido1.setForeground(new java.awt.Color(153, 153, 153));
         lbContenido1.setText("lbContenido1");
 
-        lbContenido2.setForeground(new java.awt.Color(255, 255, 255));
+        lbContenido2.setForeground(new java.awt.Color(153, 153, 153));
         lbContenido2.setText("lbContenido2");
 
-        lbContenido3.setForeground(new java.awt.Color(255, 255, 255));
+        lbContenido3.setForeground(new java.awt.Color(153, 153, 153));
         lbContenido3.setText("lbContenido3");
 
-        lbContenido4.setForeground(new java.awt.Color(255, 255, 255));
+        lbContenido4.setForeground(new java.awt.Color(153, 153, 153));
         lbContenido4.setText("lbContenido4");
 
         javax.swing.GroupLayout panel4Layout = new javax.swing.GroupLayout(panel4);
@@ -391,53 +396,6 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
         jPanel1.add(pSolidaridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, 260, 180));
 
-        lbSolidaridad5.setForeground(new java.awt.Color(255, 255, 255));
-        lbSolidaridad5.setText("de estar a la búsqueda de");
-
-        lbSolidaridad6.setForeground(new java.awt.Color(255, 255, 255));
-        lbSolidaridad6.setText("soluciones ante las necesidades");
-
-        lbSolidaridad7.setForeground(new java.awt.Color(255, 255, 255));
-        lbSolidaridad7.setText("\"Manifestar la disposición");
-
-        lbSolidaridad8.setForeground(new java.awt.Color(255, 255, 255));
-        lbSolidaridad8.setText("Solidaridad");
-
-        lbSolidaridad9.setForeground(new java.awt.Color(255, 255, 255));
-        lbSolidaridad9.setText("y problemas de los demás\"");
-
-        javax.swing.GroupLayout pSolidaridad1Layout = new javax.swing.GroupLayout(pSolidaridad1);
-        pSolidaridad1.setLayout(pSolidaridad1Layout);
-        pSolidaridad1Layout.setHorizontalGroup(
-            pSolidaridad1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pSolidaridad1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(pSolidaridad1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbSolidaridad6)
-                    .addComponent(lbSolidaridad5)
-                    .addComponent(lbSolidaridad7)
-                    .addComponent(lbSolidaridad9)
-                    .addComponent(lbSolidaridad8))
-                .addContainerGap(72, Short.MAX_VALUE))
-        );
-        pSolidaridad1Layout.setVerticalGroup(
-            pSolidaridad1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pSolidaridad1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(lbSolidaridad8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbSolidaridad7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbSolidaridad5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbSolidaridad6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbSolidaridad9)
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(pSolidaridad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, 260, 180));
-
         lbFe4.setForeground(new java.awt.Color(255, 255, 255));
         lbFe4.setText("que motiva nuestro existir\"");
 
@@ -485,11 +443,33 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
         jPanel1.add(pFe, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 470, 290, 180));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/calendario_1.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/reloj_1.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
+
+        pCalendar.setBackground(new java.awt.Color(255, 255, 255));
+        pCalendar.setMaximumSize(new java.awt.Dimension(50, 50));
+        pCalendar.setMinimumSize(new java.awt.Dimension(50, 50));
+        pCalendar.setPreferredSize(new java.awt.Dimension(50, 50));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/calendario_1.png"))); // NOI18N
+
+        javax.swing.GroupLayout pCalendarLayout = new javax.swing.GroupLayout(pCalendar);
+        pCalendar.setLayout(pCalendarLayout);
+        pCalendarLayout.setHorizontalGroup(
+            pCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pCalendarLayout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jLabel1))
+        );
+        pCalendarLayout.setVerticalGroup(
+            pCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pCalendarLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 1, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(pCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -531,17 +511,12 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
     private javax.swing.JLabel lbSolidaridad2;
     private javax.swing.JLabel lbSolidaridad3;
     private javax.swing.JLabel lbSolidaridad4;
-    private javax.swing.JLabel lbSolidaridad5;
-    private javax.swing.JLabel lbSolidaridad6;
-    private javax.swing.JLabel lbSolidaridad7;
-    private javax.swing.JLabel lbSolidaridad8;
-    private javax.swing.JLabel lbSolidaridad9;
     private javax.swing.JLabel lbTitulo;
     private javax.swing.JLabel lbTitulo2;
+    private javax.swing.JPanel pCalendar;
     private javax.swing.JPanel pFe;
     private javax.swing.JPanel pIntegridad;
     private javax.swing.JPanel pSolidaridad;
-    private javax.swing.JPanel pSolidaridad1;
     private javax.swing.JPanel panel1;
     private javax.swing.JPanel panel2;
     private javax.swing.JPanel panel3;

@@ -49,7 +49,7 @@ import javax.swing.text.PlainDocument;
  * @author educs
  */
 public class MessageEditVisitaEnfermeria extends javax.swing.JPanel {
-
+    private Boolean noti;
     public MessageEditVisitaEnfermeria() {
 
         initComponents();
@@ -100,8 +100,9 @@ public class MessageEditVisitaEnfermeria extends javax.swing.JPanel {
                 }
                 for (char c : str.toCharArray()) {
                     if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
-                       Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
-                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                       //Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                        noti=true;
+                       return; // Ignora el carácter si no es letra, número, espacio o punto
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -229,6 +230,12 @@ public class MessageEditVisitaEnfermeria extends javax.swing.JPanel {
             }
         });
         add(btnFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 70, -1));
+
+        txtVisita.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtVisitaKeyReleased(evt);
+            }
+        });
         add(txtVisita, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, 400, 50));
 
         jLabel4.setText("Fecha");
@@ -273,6 +280,13 @@ public class MessageEditVisitaEnfermeria extends javax.swing.JPanel {
 
         txtFecha.setText(fechaFormateada);
     }//GEN-LAST:event_btnFechaMouseClicked
+
+    private void txtVisitaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVisitaKeyReleased
+        // TODO add your handling code here:
+         if(noti==true){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+        }
+    }//GEN-LAST:event_txtVisitaKeyReleased
 
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);

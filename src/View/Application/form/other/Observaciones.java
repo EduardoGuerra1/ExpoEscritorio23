@@ -7,8 +7,11 @@ package View.Application.form.other;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
 import static expoescritorio.Controller.Funciones.GetObservaciones;
 import expoescritorio.Models.ObservacionesString;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -26,6 +29,21 @@ public class Observaciones extends javax.swing.JPanel {
      */
     public Observaciones() {
         initComponents();
+        
+        String bg = getBackground().toString();
+        
+       
+        if(bg.contains("r=49")){
+            System.out.println("Modo oscuro");
+        }else{
+            System.out.println("Modo claro");
+             EventQueue.invokeLater(() -> {
+                   // FlatAnimatedLafChange.showSnapshot();
+                    FlatIntelliJLaf.setup();
+                    FlatLaf.updateUI();
+                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+        }
         
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");

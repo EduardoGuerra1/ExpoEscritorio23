@@ -53,6 +53,8 @@ import javax.swing.text.PlainDocument;
  */
 public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
        List<Personas> listaIdPersonas = new ArrayList<>();
+       
+       private Boolean noti;
     public MessageAddVisitaEnfermeria() {
 
         initComponents();
@@ -124,8 +126,9 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
                 }
                 for (char c : str.toCharArray()) {
                     if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
-                       Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
-                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                      // Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                       noti=true;
+                      return; // Ignora el carácter si no es letra, número, espacio o punto
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -194,7 +197,6 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         txtTitle.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         txtTitle.setText("Agregar una visita de enfermeria al estudiante");
         add(txtTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 430, -1));
-        txtTitle.getAccessibleContext().setAccessibleName("Agregar una visita de enfermeria al estudiante");
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -225,6 +227,12 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
 
         jLabel2.setText("Período");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+
+        txtVisita.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtVisitaKeyReleased(evt);
+            }
+        });
         add(txtVisita, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 400, 50));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -255,6 +263,14 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
 
 
     }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void txtVisitaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVisitaKeyReleased
+        // TODO add your handling code here:
+        
+         if(noti==true){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+        }
+    }//GEN-LAST:event_txtVisitaKeyReleased
 
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);

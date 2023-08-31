@@ -45,6 +45,8 @@ import raven.toast.Notifications;
  */
 public class MessageAddSalones extends javax.swing.JPanel {
 
+    
+    private Boolean noti;
     public MessageAddSalones() {
 
         initComponents();
@@ -62,8 +64,9 @@ public class MessageAddSalones extends javax.swing.JPanel {
                 }
                 for (char c : str.toCharArray()) {
                     if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
-                       Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
-                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                      // Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                        noti=true;
+                      return; // Ignora el carácter si no es letra, número, espacio o punto
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -116,6 +119,12 @@ public class MessageAddSalones extends javax.swing.JPanel {
 
         jLabel2.setText("Codigo de Salon");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+
+        txtTipoCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTipoCodigoKeyReleased(evt);
+            }
+        });
         add(txtTipoCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 400, 50));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -146,6 +155,13 @@ public class MessageAddSalones extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void txtTipoCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoCodigoKeyReleased
+        // TODO add your handling code here:
+         if(noti==true){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+        }
+    }//GEN-LAST:event_txtTipoCodigoKeyReleased
 
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);

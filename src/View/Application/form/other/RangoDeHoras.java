@@ -15,6 +15,8 @@ import View.samplemessage.MessageEditRangoHoras;
 import View.samplemessage.MessageEditSalones;
 import View.samplemessage.MessageEditTipoCodigos;
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
 import expoescritorio.Controller.ControllerFull;
 import static expoescritorio.Controller.RangosHorasController.getRangoHorasApiAsync;
 import expoescritorio.Controller.SalonesController;
@@ -23,6 +25,7 @@ import expoescritorio.Controller.TiposCodigosConductualesController;
 import expoescritorio.Models.RangosHoras;
 import expoescritorio.Models.Salones;
 import expoescritorio.Models.TiposCodigosConductuales;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -42,6 +45,21 @@ public class RangoDeHoras extends javax.swing.JPanel {
      */
     public RangoDeHoras() {
         initComponents();
+        
+        String bg = getBackground().toString();
+        
+       
+        if(bg.contains("r=49")){
+            System.out.println("Modo oscuro");
+        }else{
+            System.out.println("Modo claro");
+             EventQueue.invokeLater(() -> {
+                   // FlatAnimatedLafChange.showSnapshot();
+                    FlatIntelliJLaf.setup();
+                    FlatLaf.updateUI();
+                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+        }
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         // Obtén el modelo de la tabla existente

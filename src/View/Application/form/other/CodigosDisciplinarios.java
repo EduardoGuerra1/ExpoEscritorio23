@@ -6,15 +6,20 @@ package View.Application.form.other;
 
 import Reportes.ConexionSQL;
 import View.glasspanepopup.GlassPanePopup;
+import View.menu.mode.LightDarkMode;
 import View.samplemessage.Message;
 import View.samplemessage.MessageAddCodigosDisciplinarios;
 import View.samplemessage.MessageEditCodigosDisciplinarios;
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
 import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
 import expoescritorio.Controller.NivelesCodigosConductualesController;
 import expoescritorio.Controller.TiposCodigosConductualesController;
 import expoescritorio.Models.CodigosConductuales;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -40,7 +45,8 @@ import org.json.JSONObject;
  *
  * @author gyaci
  */
-public class CodigosDisciplinarios extends javax.swing.JPanel {
+public class CodigosDisciplinarios extends javax.swing.JPanel 
+{
 
     CodigosConductualesController controller = new CodigosConductualesController();
 
@@ -49,7 +55,23 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
      */
     public CodigosDisciplinarios() {
         initComponents();
-
+        
+        
+        
+        String bg = getBackground().toString();
+        
+       
+        if(bg.contains("r=49")){
+            System.out.println("Modo oscuro");
+        }else{
+            System.out.println("Modo claro");
+             EventQueue.invokeLater(() -> {
+                   // FlatAnimatedLafChange.showSnapshot();
+                    FlatIntelliJLaf.setup();
+                    FlatLaf.updateUI();
+                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+        }
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         
@@ -422,4 +444,6 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
     private javax.swing.JLabel lb;
     public View.ExampleTable.Table table1;
     // End of variables declaration//GEN-END:variables
+
+   
 }

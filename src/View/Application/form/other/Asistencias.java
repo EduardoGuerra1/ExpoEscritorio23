@@ -5,7 +5,10 @@
 package View.Application.form.other;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -21,7 +24,20 @@ public class Asistencias extends javax.swing.JPanel {
      */
     public Asistencias() {
         initComponents();
+        String bg = getBackground().toString();
         
+       
+        if(bg.contains("r=49")){
+            System.out.println("Modo oscuro");
+        }else{
+            System.out.println("Modo claro");
+             EventQueue.invokeLater(() -> {
+                   // FlatAnimatedLafChange.showSnapshot();
+                    FlatIntelliJLaf.setup();
+                    FlatLaf.updateUI();
+                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+        }
     }
 
     /**

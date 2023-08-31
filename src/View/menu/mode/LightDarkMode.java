@@ -1,4 +1,5 @@
 package View.menu.mode;
+
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
@@ -78,16 +79,16 @@ public class LightDarkMode extends JPanel {
                     FlatAnimatedLafChange.showSnapshot();
                     FlatDarculaLaf.setup();
                     FlatLaf.updateUI();
-                    FlatAnimatedLafChange.hideSnapshotWithAnimation();
                     checkStyle();
+                    FlatAnimatedLafChange.hideSnapshotWithAnimation();
                 });
             } else {
                 EventQueue.invokeLater(() -> {
                     FlatAnimatedLafChange.showSnapshot();
                     FlatIntelliJLaf.setup();
                     FlatLaf.updateUI();
-                    FlatAnimatedLafChange.hideSnapshotWithAnimation();
                     checkStyle();
+                    FlatAnimatedLafChange.hideSnapshotWithAnimation();
                 });
             }
         }
