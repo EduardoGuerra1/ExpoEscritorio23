@@ -17,7 +17,7 @@ public class Recuperaciones {
        
         try{
             String correoEmisor = "alessandromorales0822@gmail.com";
-            String contraseñaEmisor = "qckrkkltsnzkcake";     
+            String contraseñaEmisor = "vwxipuzmxzqahkqd";     
             String CorreoReceptor = Correo;
             String asunto = "Recuperación de contraseña";
             String mensaje = Mns;
