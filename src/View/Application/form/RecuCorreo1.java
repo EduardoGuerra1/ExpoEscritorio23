@@ -6,6 +6,7 @@ package View.Application.form;
 
 import static View.Application.form.RecuQR.encryptPassword;
 import View.aplicacion.Application;
+import expoescritorio.Controller.ControllerFull;
 import static expoescritorio.Controller.ControllerFull.putApiAsync;
 import expoescritorio.Controller.PersonasController;
 import expoescritorio.Controller.Recuperaciones;
@@ -14,6 +15,9 @@ import expoescritorio.Models.Personas;
 import expoescritorio.Models.TiposPersonas;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import org.json.JSONException;
+import org.json.JSONObject;
+import raven.toast.Notifications;
 
 /**
  *
@@ -198,41 +202,41 @@ public class RecuCorreo1 extends javax.swing.JPanel {
         
       int id =  person.getIdTipoPersona(); 
         if(id == 4){
-         controller.mandarCorreo(txtCorreo.getText(), Code);
+enviarDatosHaciaApi();
             System.out.println(Code);
             
         }
         
     }//GEN-LAST:event_btnEnviarMouseClicked
+private void enviarDatosHaciaApi() {
+         String Correo = txtCorreo.getText();
+        try {
+            // Crear un objeto JSON con los datos recopilados
+            JSONObject jsonData = new JSONObject();
+            jsonData.put("correo",Correo );
+            jsonData.put("code", Code);
 
+            // Llamar al método postApiAsync para enviar los datos
+            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/MandarCorreo/enviarCodigo"; // Reemplaza esto con la URL de tu API
+            String jsonString = jsonData.toString();
+
+            CompletableFuture<Boolean> postFuture = ControllerFull.postApiAsync(endpointUrl, jsonString);
+
+            // Manejar la respuesta de la API
+            postFuture.thenAccept(success -> {
+                if (success) {
+                    Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Se Envio el Codigo ");
+                } else {
+                    Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "hubo error enviar el codigo");
+                }
+            });
+        } catch (JSONException e) {
+            // Manejar la excepción JSONException aquí
+            System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+        }
+    }
     private void btnRestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerActionPerformed
-       if(txtCodigo.getText().equals(Code))
-        {
-            String PASSEN = encryptPassword(txtContraseña.getText());
-        
-
-          String jsonInputString = "{\"idPersona\": " + idPersona + ", \"claveCredenciales\": \"" + PASSEN + "\"}";
-
-
-        String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/Contra";
-
-        CompletableFuture<Boolean> result = putApiAsync(endpointUrl, jsonInputString);
-        
-        result.thenAccept(response -> {
-            if (response) {
-                
-                 System.out.println("La solicitud HTTP Post exitosa.");
-            } else {
-                 
-             System.out.println("La solicitud HTTP put no fue exitosa.");
-            }
-        }).join();
-
-             CompletableFuture<List<TiposPersonas>> encargadosFuture = getTiposPersonasApiAsync();
-        }
-        else{
-            System.out.println(" no se que paso ");
-        }
+       
     }//GEN-LAST:event_btnRestablecerActionPerformed
 
     private void btnRestablecerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRestablecerMouseClicked
@@ -250,10 +254,10 @@ public class RecuCorreo1 extends javax.swing.JPanel {
         
         result.thenAccept(response -> {
             if (response) {
-                
-                 System.out.println("La solicitud HTTP Post exitosa.");
+                 System.out.println("La solicitud HTTP put  fue exitosa.");
+                 Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Se cambio correctamente la contraseña");
             } else {
-                 
+                  Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Hubo un problema inténtelo mas tarde");
              System.out.println("La solicitud HTTP put no fue exitosa.");
             }
         }).join();
