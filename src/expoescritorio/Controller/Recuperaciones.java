@@ -54,17 +54,21 @@ public class Recuperaciones {
         }
     }
     public static String generateRandomCode() {
+        // Definir la longitud de la cadena
         int length = 10;
+        // Definir los caracteres permitidos que se utilizarán para generar la cadena aleatoria
         String allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         int charsLength = allowedChars.length();
+        // Crear una instancia de la clase Random para generar números aleatorios
         Random random = new Random();
         StringBuilder codeBuilder = new StringBuilder(length);
+        // Generar la cadena aleatoria
         for (int i = 0; i < length; i++) {
             int randomIndex = random.nextInt(charsLength);
             char randomChar = allowedChars.charAt(randomIndex);
             codeBuilder.append(randomChar);
         }
-        return codeBuilder.toString();
+        return codeBuilder.toString();// Devolver la cadena aleatoria generada
     }
 
 

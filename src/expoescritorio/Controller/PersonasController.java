@@ -39,22 +39,28 @@ public class PersonasController {
     
     public static CompletableFuture<Boolean> deleteCodigoPersona(String codigo){
         return CompletableFuture.supplyAsync(() -> {
+            // URL de la API para eliminar el recurso
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/deleteCodigo/"+codigo;
 
             HttpURLConnection connection = null;
 
             try {
+                // Se crea una URL a partir de la apiUrl.
                 URL url = new URL(apiUrl);
                 connection = (HttpURLConnection) url.openConnection();
+                // Se establece el método de solicitud como DELETE.
                 connection.setRequestMethod("DELETE");
 
                 int responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
+                    // La solicitud de eliminación fue exitosa
                     return true;
                 } else {
+                    // Imprimir un mensaje de error si la solicitud HTTP no fue exitosa
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
             } catch (IOException e) {
+                // Capturar y manejar errores en caso de una excepción
                 System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
             } finally {
                 if (connection != null) {
@@ -68,15 +74,19 @@ public class PersonasController {
     
     public static CompletableFuture<String> getEspecialidadPersona(int idPersona){
        return CompletableFuture.supplyAsync(()->{
+           // URL de la API
           String apiUrl =  "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/getEspecialidad/"+idPersona;
           String grado = "";
           HttpURLConnection connection = null;
           try {
+              // Se crea una URL a partir de la apiUrl.
                 URL url = new URL(apiUrl);
                 connection = (HttpURLConnection) url.openConnection();
+                 // Se establece el método de solicitud como GET.
                 connection.setRequestMethod("GET");
 
                 int responseCode = connection.getResponseCode();
+                // Verificar si la solicitud fue exitosa
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     
                     BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -92,9 +102,11 @@ public class PersonasController {
                         grado = response.toString();
                     }
                 }else {
+                     // Imprimir un mensaje de error si la solicitud HTTP no fue exitosa
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
             }catch (Exception e) {
+                // Capturar y manejar errores en caso de una excepción
                 System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
             }finally {
                 if (connection != null) {
@@ -107,15 +119,19 @@ public class PersonasController {
     
    public static CompletableFuture<String> getGradoPersona(int idPersona){
        return CompletableFuture.supplyAsync(()->{
+           // URL de la API
           String apiUrl =  "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/getGrado/"+idPersona;
           String grado = "";
           HttpURLConnection connection = null;
           try {
+              // Se crea una URL a partir de la apiUrl.
                 URL url = new URL(apiUrl);
                 connection = (HttpURLConnection) url.openConnection();
+                // Se establece el método de solicitud como GET.
                 connection.setRequestMethod("GET");
 
                 int responseCode = connection.getResponseCode();
+                // Verificar si la solicitud fue exitosa
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     
                     BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -131,9 +147,11 @@ public class PersonasController {
                         grado = response.toString();
                     }
                 }else {
+                    // Imprimir un mensaje de error si la solicitud HTTP no fue exitosa
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
             }catch (Exception e) {
+                 // Capturar y manejar errores en caso de una excepción
                 System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
             }finally {
                 if (connection != null) {
@@ -146,15 +164,19 @@ public class PersonasController {
    
    public static CompletableFuture<List<Personas>> getPersonasAsync(int tipo){
        return CompletableFuture.supplyAsync(() -> {
+            // URL de la API
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/get/"+tipo;
             List<Personas> modelList = new ArrayList<>();
             HttpURLConnection connection = null;
             try {
+                // Se crea una URL a partir de la apiUrl.
                 URL url = new URL(apiUrl);
                 connection = (HttpURLConnection) url.openConnection();
+                // Se establece el método de solicitud como GET.
                 connection.setRequestMethod("GET");
 
                 int responseCode = connection.getResponseCode();
+                 // Verificar si la solicitud fue exitosa
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -174,9 +196,11 @@ public class PersonasController {
                         modelList.add(new Personas(idPersona, codigo, nombre, apellido, nacimiento, idTipoPersona, correo, claveCredenciales, foto));
                     }
                 }else {
+                    // Imprimir un mensaje de error si la solicitud HTTP no fue exitosa
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
             }catch (IOException | JSONException e) {
+                // Capturar y manejar errores en caso de una excepción
                 System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
             }finally {
                 if (connection != null) {
@@ -189,15 +213,19 @@ public class PersonasController {
     
    public static CompletableFuture<List<Personas>> getNoPersonasAsync(int tipo){
        return CompletableFuture.supplyAsync(() -> {
+           // URL de la API
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/getNo/"+tipo;
             List<Personas> modelList = new ArrayList<>();
             HttpURLConnection connection = null;
             try {
+                // Se crea una URL a partir de la apiUrl.
                 URL url = new URL(apiUrl);
                 connection = (HttpURLConnection) url.openConnection();
+                // Se establece el método de solicitud como GET.
                 connection.setRequestMethod("GET");
 
                 int responseCode = connection.getResponseCode();
+                 // Verificar si la solicitud fue exitosa
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -217,9 +245,11 @@ public class PersonasController {
                         modelList.add(new Personas(idPersona, codigo, nombre, apellido, nacimiento, idTipoPersona, correo, claveCredenciales, foto));
                     }
                 }else {
+                    // Imprimir un mensaje de error si la solicitud HTTP no fue exitosa
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
             }catch (IOException | JSONException e) {
+                 // Capturar y manejar errores en caso de una excepción
                 System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
             }finally {
                 if (connection != null) {
@@ -231,9 +261,10 @@ public class PersonasController {
    }
     
    public static Personas callApiAndProcessResponse(String correo, String claveCredenciales) {
+       // Encriptar la contraseña antes de enviarla
         String encryptedPassword = encryptPassword(claveCredenciales);
         String baseUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/user";
-
+        // Parámetros de consulta
         Map<String, String> queryParams = new HashMap<>();
         queryParams.put("correo", correo);
         queryParams.put("claveCredenciales", encryptedPassword);
@@ -264,6 +295,7 @@ public class PersonasController {
                     return gson.fromJson(responseData, Personas.class);
                 }
             } else {
+                // Mostrar un mensaje de error en caso de autenticación fallida
                Message obj = new Message();
             obj.txtTitle.setText("Aviso");
             obj.txtContent.setText("Datos incorrectos");
@@ -287,7 +319,7 @@ public class PersonasController {
    
    public static Personas CellApiCorreo(String correo) {
         String baseUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/validar";
-
+        // Parámetros de consulta: Envía el correo electrónico a verificar
         Map<String, String> queryParams = new HashMap<>();
         queryParams.put("correo", correo);
         String url = addQueryParameters(baseUrl, queryParams);
@@ -330,9 +362,10 @@ public class PersonasController {
    
 public static String encryptPassword(String password) {
         try {
+            // Obtener una instancia del algoritmo de hash SHA-256
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-
+            // Convertir el hash a una representación hexadecimal
             StringBuilder hexString = new StringBuilder();
             for (byte b : hash) {
                 String hex = Integer.toHexString(0xff & b);
@@ -343,13 +376,14 @@ public static String encryptPassword(String password) {
 
             return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
+             // Manejar una excepción si el algoritmo SHA-256 no está disponible
             e.printStackTrace();
             return null;
         }
     }
     private static String addQueryParameters(String baseUrl, Map<String, String> params) {
         StringBuilder builder = new StringBuilder(baseUrl);
-
+        // Verificar si hay parámetros que agregar
         if (!params.isEmpty()) {
             builder.append("?");
             for (Map.Entry<String, String> entry : params.entrySet()) {

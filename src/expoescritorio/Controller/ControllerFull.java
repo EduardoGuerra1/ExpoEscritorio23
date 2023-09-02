@@ -11,8 +11,10 @@ public class ControllerFull {
             String apiUrl = endpointUrl;
             HttpURLConnection connection = null;
             try {
+                // Crear una URL a partir de la URL de la API
                 URL url = new URL(apiUrl);
                 connection = (HttpURLConnection) url.openConnection();
+                 // Establecer el método de solicitud como POST
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setDoOutput(true);
@@ -58,8 +60,10 @@ public class ControllerFull {
             HttpURLConnection connection = null;
 
             try {
+                 // Crear una URL a partir de la URL de la API
                 URL url = new URL(endpointUrl);
                 connection = (HttpURLConnection) url.openConnection();
+                // Establecer el método de solicitud como PUT
                 connection.setRequestMethod("PUT");
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setDoOutput(true);
@@ -72,6 +76,7 @@ public class ControllerFull {
 
                 int responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
+                     // Leer la respuesta de la API si la solicitud fue exitosa
                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                         StringBuilder responseBuilder = new StringBuilder();
                         String response;
@@ -82,9 +87,11 @@ public class ControllerFull {
                     }
                     return true;
                 } else {
+                    // Manejar errores si la respuesta del servidor no es exitosa
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
             } catch (IOException e) {
+                // Manejar excepciones en caso de errores durante la solicitud
                 System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
             } finally {
                 if (connection != null) {
@@ -103,17 +110,21 @@ public class ControllerFull {
             HttpURLConnection connection = null;
 
             try {
+                // Crear una URL a partir de la URL de la API y el ID
                 URL url = new URL(apiUrl);
                 connection = (HttpURLConnection) url.openConnection();
+                // Establecer el método de solicitud como DELETE
                 connection.setRequestMethod("DELETE");
-
+                // Comprobar el código de estado de la respuesta HTTP
                 int responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
-                    return true;
+                    return true;// Si la solicitud fue exitosa, retorna true
                 } else {
+                    // Manejar errores si la respuesta del servidor no es exitosa
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
             } catch (IOException e) {
+                // Manejar excepciones en caso de errores durante la solicitud
                 System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
             } finally {
                 if (connection != null) {

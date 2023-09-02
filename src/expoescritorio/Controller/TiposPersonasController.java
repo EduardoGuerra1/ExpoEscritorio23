@@ -18,14 +18,18 @@ public class TiposPersonasController {
     
     public static CompletableFuture<String> getTipoPersonaAsync(int id){
         return CompletableFuture.supplyAsync(() ->{
+            // URL de la API
            String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/TiposPersonas/get/"+id;
            String modelList = "";
             HttpURLConnection connection = null;
             try {
+                 // Se crea una URL a partir de la apiUrl.
                 URL url = new URL(apiUrl);
                 connection = (HttpURLConnection) url.openConnection();
+                // Se establece el método de solicitud como GET.
                 connection.setRequestMethod("GET");
                 int responseCode = connection.getResponseCode();
+                // Verificar si la solicitud fue exitosa
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     String inputLine;
@@ -40,9 +44,11 @@ public class TiposPersonasController {
                         modelList = response.toString();
                     }
                 } else {
+                    // Imprimir un mensaje de error si la solicitud HTTP no fue exitosa
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
             } catch (Exception e) {
+                // Capturar y manejar errores en caso de una excepción
                 System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
             } finally {
                 if (connection != null) {
@@ -57,14 +63,18 @@ public class TiposPersonasController {
     
     public static CompletableFuture<List<TiposPersonas>> getTiposPersonasApiAsync() {
         return CompletableFuture.supplyAsync(() -> {
+            // URL de la API
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/TiposPersonas/list";
             List<TiposPersonas> modelList = new ArrayList<>();
             HttpURLConnection connection = null;
             try {
+                // Se crea una URL a partir de la apiUrl.
                 URL url = new URL(apiUrl);
                 connection = (HttpURLConnection) url.openConnection();
+                // Se establece el método de solicitud como GET.
                 connection.setRequestMethod("GET");
                 int responseCode = connection.getResponseCode();
+                // Verificar si la solicitud fue exitosa
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     JSONArray jsonArray = new JSONArray(reader.readLine());
@@ -76,9 +86,11 @@ public class TiposPersonasController {
                         modelList.add(new TiposPersonas(idTipoPersona, tipoPersona));
                     }
                 } else {
+                    // Imprimir un mensaje de error si la solicitud HTTP no fue exitosa
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
             } catch (IOException | JSONException e) {
+                // Capturar y manejar errores en caso de una excepción
                 System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
             } finally {
                 if (connection != null) {

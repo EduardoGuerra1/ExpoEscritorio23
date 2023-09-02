@@ -16,14 +16,18 @@ import java.util.concurrent.CompletableFuture;
 public class TiposLlegadasTardeController {
     public static CompletableFuture<List<TiposLlegadasTarde>> getTiposLlegadasTardeApiAsync() {
         return CompletableFuture.supplyAsync(() -> {
+            // URL de la API
             String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/TiposLlegadasTarde/list";
             List<TiposLlegadasTarde> modelList = new ArrayList<>();
             HttpURLConnection connection = null;
             try {
+                // Se crea una URL a partir de la apiUrl.
                 URL url = new URL(apiUrl);
                 connection = (HttpURLConnection) url.openConnection();
+                // Se establece el método de solicitud como GET.
                 connection.setRequestMethod("GET");
                 int responseCode = connection.getResponseCode();
+                // Verificar si la solicitud fue exitosa
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     JSONArray jsonArray = new JSONArray(reader.readLine());
@@ -35,9 +39,11 @@ public class TiposLlegadasTardeController {
                         modelList.add(new TiposLlegadasTarde(idTipoLlegadaTarde, TipoLlegadaTarde));
                     }
                 } else {
+                    // Imprimir un mensaje de error si la solicitud HTTP no fue exitosa
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
                 }
             } catch (IOException | JSONException e) {
+                // Capturar y manejar errores en caso de una excepción
                 System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
             } finally {
                 if (connection != null) {
