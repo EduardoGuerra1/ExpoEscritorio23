@@ -176,8 +176,12 @@ public class RecuQR extends javax.swing.JPanel {
 
         txtCorreo.setForeground(new java.awt.Color(204, 204, 204));
 
-        txtCambioContraseña.setText("contraseña1");
         txtCambioContraseña.setHint("Nueva Contraseña");
+        txtCambioContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCambioContraseñaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -308,6 +312,10 @@ public class RecuQR extends javax.swing.JPanel {
         // TODO add your handling code here:
         Application.recuperaciones();
     }//GEN-LAST:event_btnRegresoMouseClicked
+
+    private void txtCambioContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambioContraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCambioContraseñaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

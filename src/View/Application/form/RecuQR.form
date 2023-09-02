@@ -245,9 +245,11 @@
     </Component>
     <Component class="View.SWING.Contrase&#xf1;a" name="txtCambioContrase&#xf1;a">
       <Properties>
-        <Property name="text" type="java.lang.String" value="contrase&#xf1;a1"/>
         <Property name="hint" type="java.lang.String" value="Nueva Contrase&#xf1;a"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCambioContrase&#xf1;aActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
