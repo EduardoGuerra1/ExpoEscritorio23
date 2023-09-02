@@ -4,6 +4,7 @@
  */
 package View.Application.form.other;
 
+import Reportes.ConexionSQL;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import View.samplemessage.MessageAddRangoHoras;
@@ -21,7 +22,14 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javax.swing.JTable;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -74,6 +82,21 @@ String bg = getBackground().toString();
         });
     }
 
+    private void mostrarReporte() {
+        try {
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/Reportes/VisitasEnfermeria.jasper"));
+            JasperPrint jprint = JasperFillManager.fillReport(report, null, ConexionSQL.getConexion());
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setTitle("Nombre Reporte");
+            view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+
+        } catch (JRException ex) {
+            ex.getMessage();
+        }
+    }
+    
     public void deleteAllTableRows(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         while (model.getRowCount() > 0) {
@@ -90,6 +113,7 @@ String bg = getBackground().toString();
         table1 = new View.ExampleTable.Table();
         btnAdd = new View.BotonesText.Buttons();
         btnDelete = new View.BotonesText.Buttons();
+        btnReport = new View.BotonesText.Buttons();
         lb = new javax.swing.JLabel();
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
@@ -116,6 +140,13 @@ String bg = getBackground().toString();
             }
         });
 
+        btnReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/add1.png"))); // NOI18N
+        btnReport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -126,6 +157,8 @@ String bg = getBackground().toString();
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,7 +170,8 @@ String bg = getBackground().toString();
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -262,10 +296,15 @@ String bg = getBackground().toString();
         }
     }//GEN-LAST:event_btnDeleteMouseClicked
 
+    private void btnReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportMouseClicked
+        mostrarReporte();
+    }//GEN-LAST:event_btnReportMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.BotonesText.Buttons btnAdd;
     private View.BotonesText.Buttons btnDelete;
+    private View.BotonesText.Buttons btnReport;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb;
