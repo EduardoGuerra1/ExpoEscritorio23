@@ -27,6 +27,7 @@ import View.Application.form.other.Inasistencias;
 import View.Application.form.other.LlegadasTarde;
 import View.Application.form.other.Observaciones;
 import View.Application.form.other.RangoDeHoras;
+import View.Application.form.other.ReservacionesSalones;
 import View.Application.form.other.SalonesPantalla;
 import View.Application.form.other.SolicitudesPermisos;
 import View.Application.form.other.TiposCodigos;
@@ -114,7 +115,7 @@ public class MainForm extends JLayeredPane {
               if (subIndex == 1) {
                     Application.showForm(new SalonesPantalla());
                 } else if (subIndex == 2) {
-                  
+                  Application.showForm(new ReservacionesSalones());
                 } else {
                     action.cancel();
                 }

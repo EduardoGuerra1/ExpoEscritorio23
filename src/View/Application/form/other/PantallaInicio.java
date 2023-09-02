@@ -117,7 +117,7 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         
        panel1.putClientProperty(FlatClientProperties.STYLE, ""
                + "arc:50;"
-               + "background:lighten($Menu.background,1%);");
+               + "background:lighten(@background,5%);");
       /* panel2.putClientProperty(FlatClientProperties.STYLE, ""
                + "arc:50;"
                + "background:lighten($Menu.background,7%);");
@@ -131,7 +131,7 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         
         
         
-      // jLabel1.setIcon(new ImageIcon(""));
+    
        
     }
 
@@ -151,6 +151,8 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         panel2 = new javax.swing.JPanel();
         date = new javax.swing.JLabel();
         panel1 = new javax.swing.JPanel();
@@ -182,11 +184,15 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         lbFe2 = new javax.swing.JLabel();
         lbFe1 = new javax.swing.JLabel();
         lbFe = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        pCalendar = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/calendar1.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/clock.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, -1, -1));
 
         date.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
         date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -210,7 +216,6 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
         jPanel1.add(panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 210, 70));
 
-        lbBienvenido.setForeground(new java.awt.Color(255, 255, 255));
         lbBienvenido.setText("Bienvenido a SAE");
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
@@ -443,34 +448,6 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
         jPanel1.add(pFe, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 470, 290, 180));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/reloj_1.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
-
-        pCalendar.setBackground(new java.awt.Color(255, 255, 255));
-        pCalendar.setMaximumSize(new java.awt.Dimension(50, 50));
-        pCalendar.setMinimumSize(new java.awt.Dimension(50, 50));
-        pCalendar.setPreferredSize(new java.awt.Dimension(50, 50));
-
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/calendario_1.png"))); // NOI18N
-
-        javax.swing.GroupLayout pCalendarLayout = new javax.swing.GroupLayout(pCalendar);
-        pCalendar.setLayout(pCalendarLayout);
-        pCalendarLayout.setHorizontalGroup(
-            pCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pCalendarLayout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(jLabel1))
-        );
-        pCalendarLayout.setVerticalGroup(
-            pCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pCalendarLayout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 1, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(pCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 51, 51));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -513,7 +490,6 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
     private javax.swing.JLabel lbSolidaridad4;
     private javax.swing.JLabel lbTitulo;
     private javax.swing.JLabel lbTitulo2;
-    private javax.swing.JPanel pCalendar;
     private javax.swing.JPanel pFe;
     private javax.swing.JPanel pIntegridad;
     private javax.swing.JPanel pSolidaridad;
