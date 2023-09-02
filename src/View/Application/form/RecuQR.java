@@ -110,7 +110,7 @@ public class RecuQR extends javax.swing.JPanel {
         btnRegreso = new View.SWING.boton();
         txtTelefono = new View.SWING.textField();
         txtCorreo = new View.SWING.textField();
-        txtCambioContraseña = new View.SWING.textField();
+        txtCambioContraseña = new View.SWING.Contraseña();
 
         txtTexto.setEditable(false);
         txtTexto.setBackground(new java.awt.Color(0, 51, 102));
@@ -176,12 +176,8 @@ public class RecuQR extends javax.swing.JPanel {
 
         txtCorreo.setForeground(new java.awt.Color(204, 204, 204));
 
-        txtCambioContraseña.setForeground(new java.awt.Color(204, 204, 204));
-        txtCambioContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCambioContraseñaActionPerformed(evt);
-            }
-        });
+        txtCambioContraseña.setText("contraseña1");
+        txtCambioContraseña.setHint("Nueva Contraseña");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -202,12 +198,13 @@ public class RecuQR extends javax.swing.JPanel {
                         .addGap(149, 149, 149)
                         .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtCambioContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(112, 112, 112)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCambioContraseña, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addComponent(btnRestablecer, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -230,8 +227,8 @@ public class RecuQR extends javax.swing.JPanel {
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCambioContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRestablecer, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRestablecer, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCambioContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(102, 102, 102))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -307,10 +304,6 @@ public class RecuQR extends javax.swing.JPanel {
         Application.recuperaciones();
     }//GEN-LAST:event_btnRegresoQRMouseClicked
 
-    private void txtCambioContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambioContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCambioContraseñaActionPerformed
-
     private void btnRegresoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresoMouseClicked
         // TODO add your handling code here:
         Application.recuperaciones();
@@ -329,7 +322,7 @@ public class RecuQR extends javax.swing.JPanel {
     private java.awt.Label label2;
     private java.awt.Label label4;
     private javax.swing.JLabel lblImagen;
-    private View.SWING.textField txtCambioContraseña;
+    private View.SWING.Contraseña txtCambioContraseña;
     private View.SWING.textField txtCorreo;
     private View.SWING.textField txtTelefono;
     private javax.swing.JTextField txtTelefono1;

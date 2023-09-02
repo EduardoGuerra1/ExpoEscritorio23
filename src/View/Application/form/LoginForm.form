@@ -27,18 +27,11 @@
                   </Group>
                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="490" max="32767" attributes="0"/>
+              <EmptySpace pref="490" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txtCorreo" min="-2" pref="262" max="-2" attributes="0"/>
-                          <Component id="txtContraseña" min="-2" pref="269" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="429" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btnRecuperaciones" min="-2" pref="197" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="454" max="-2" attributes="0"/>
@@ -46,6 +39,13 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btnIngresar" min="-2" pref="142" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="486" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="txtContraseña" alignment="1" min="-2" pref="261" max="-2" attributes="0"/>
+                          <Component id="txtCorreo" min="-2" pref="262" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="429" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -70,13 +70,13 @@
               <Component id="txtCorreo" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="txtContraseña" min="-2" pref="45" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="txtContraseña" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="btnIngresar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="btnRecuperaciones" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="125" max="32767" attributes="0"/>
+              <EmptySpace pref="129" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -124,8 +124,6 @@
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
       </Properties>
     </Component>
-    <Component class="View.SWING.textField" name="txtContrase&#xf1;a">
-    </Component>
     <Component class="View.SWING.boton" name="btnIngresar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Iniciar Sesion"/>
@@ -141,6 +139,12 @@
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRecuperacionesMouseClicked"/>
       </Events>
+    </Component>
+    <Component class="View.SWING.Contrase&#xf1;a" name="txtContrase&#xf1;a">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="contrase&#xf1;a1"/>
+        <Property name="hint" type="java.lang.String" value="CONTRASE&#xd1;A"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

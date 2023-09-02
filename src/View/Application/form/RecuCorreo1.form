@@ -36,10 +36,10 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtCorreo" alignment="1" min="-2" pref="355" max="-2" attributes="0"/>
                           <Component id="txtCodigo" alignment="1" min="-2" pref="363" max="-2" attributes="0"/>
-                          <Component id="txtContraseña" alignment="1" min="-2" pref="364" max="-2" attributes="0"/>
+                          <Component id="txtContraseña" alignment="1" min="-2" pref="355" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -77,8 +77,8 @@
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnRestablecer" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="txtContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="214" max="32767" attributes="0"/>
           </Group>
@@ -224,11 +224,9 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="View.SWING.textField" name="txtContrase&#xf1;a">
+    <Component class="View.SWING.Contrase&#xf1;a" name="txtContrase&#xf1;a">
       <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="contrase&#xf1;a1"/>
       </Properties>
     </Component>
   </SubComponents>
