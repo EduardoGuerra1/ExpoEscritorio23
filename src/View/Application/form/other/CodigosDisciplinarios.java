@@ -394,35 +394,33 @@ public class CodigosDisciplinarios extends javax.swing.JPanel
         // TODO add your handling code here:
         
         
-//        MessageAddCodigosDisciplinarios obj = new MessageAddCodigosDisciplinarios();
-//        obj.txtTitle.setText("Añadir Código Disciplinario");
-//        obj.eventOK(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent ae) {
-//                System.out.println("Click OK");
-//                CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
-//                future.thenAccept(codigosConductuales -> {
-//                    DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-//                    for (CodigosConductuales codigo : codigosConductuales) {
-//                        tableModel.addRow(new Object[]{
-//                            codigo.getIdCodigoConductual(),
-//                            codigo.getIdTipoCodigoConductual(),
-//                            codigo.getIdNivelCodigoConductual(),
-//                            codigo.getCodigoConductual()
-//                        });
-//                    }
-//                });
-//                GlassPanePopup.closePopupLast();
-//                Timer timer = new Timer(500, (ActionEvent e) -> {
-//
-//                    cargarDatos();
-//                    deleteAllTableRows(table1);
-//                });
-//                timer.setRepeats(false);
-//                timer.start();
-//            }
-//        });
-//        GlassPanePopup.showPopup(obj);
+    MessageAddCodigosDisciplinarios obj = new MessageAddCodigosDisciplinarios();
+       obj.txtTitle.setText("Añadir Código Disciplinario");
+      obj.eventOK(new ActionListener() {
+           @Override
+         public void actionPerformed(ActionEvent ae) {
+                System.out.println("Click OK");
+               CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();                future.thenAccept(codigosConductuales -> {
+                   DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
+                   for (CodigosConductuales codigo : codigosConductuales) {
+                       tableModel.addRow(new Object[]{
+                          codigo.getIdCodigoConductual(),
+                           codigo.getIdTipoCodigoConductual(),
+                           codigo.getIdNivelCodigoConductual(),
+                            codigo.getCodigoConductual()
+                       });
+                   }
+          });
+              GlassPanePopup.closePopupLast();
+            Timer timer = new Timer(500, (ActionEvent e) -> {
+
+                   cargarDatos();
+                   deleteAllTableRows(table1);
+              });
+            timer.setRepeats(false);
+               timer.start();
+           }       });
+       GlassPanePopup.showPopup(obj);
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void buttons1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons1MouseClicked
