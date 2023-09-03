@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package View.BotonesText;
 
 import java.awt.AlphaComposite;
@@ -36,10 +32,12 @@ public class RippleEffect {
 
     private void init() {
         effects = new ArrayList<>();
+        /*Agrega un MouseListener para detectar clics en el componente*/
         component.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
+                    /*Agrega un nuevo efecto de ondulación al hacer clic*/
                     addEffect(e.getPoint());
                 }
             }
@@ -47,12 +45,14 @@ public class RippleEffect {
     }
 
     public void addEffect(Point location) {
+        /*Agrega un nuevo efecto a la lista para ser representado*/
         effects.add(new Effect(component, location));
     }
 
     public void reder(Graphics g, Shape contain) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        /*Renderiza todos los efectos activos en el componente*/
         for (int i = 0; i < effects.size(); i++) {
             Effect effect = effects.get(i);
             if (effect != null) {
@@ -75,15 +75,18 @@ public class RippleEffect {
         }
 
         private void init() {
+            /*Inicializa un animador para crear una animación de desvanecimiento*/
             animator = new Animator(500, new TimingTargetAdapter() {
                 @Override
                 public void timingEvent(float fraction) {
                     animate = fraction;
+                    /*Vuelve a pintar el componente cuando cambia la animación*/
                     component.repaint();
                 }
 
                 @Override
                 public void end() {
+                    /*Cuando la animación termina, elimina este efecto de la lista*/
                     effects.remove(Effect.this);
                 }
             });
@@ -93,6 +96,7 @@ public class RippleEffect {
         }
 
         public void render(Graphics2D g2, Shape contain) {
+            /*Calcula el área de intersección entre el efecto y el componente*/
             Area area = new Area(contain);
             area.intersect(new Area(getShape(getSize(contain.getBounds2D()))));
             g2.setColor(rippleColor);
@@ -101,11 +105,13 @@ public class RippleEffect {
                 double t = animate - 0.7f;
                 alpha = (float) (alpha - (alpha * (t / 0.3f)));
             }
+            /*Aplica un efecto de transparencia y pinta el área de intersección*/
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
             g2.fill(area);
         }
 
         private Shape getShape(double size) {
+            /*Calcula la forma de la onda en función del tamaño y la posición*/
             double s = size * animate;
             double x = location.getX();
             double y = location.getY();
@@ -114,6 +120,7 @@ public class RippleEffect {
         }
 
         private double getSize(Rectangle2D rec) {
+            /*Calcula el tamaño de la onda en función del componente y la posición*/
             double size;
             if (rec.getWidth() > rec.getHeight()) {
                 if (location.getX() < rec.getWidth() / 2) {

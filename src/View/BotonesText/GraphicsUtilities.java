@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package View.BotonesText;
 
 import java.awt.image.BufferedImage;
@@ -19,16 +15,17 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 public class GraphicsUtilities {
+    
 
     private GraphicsUtilities() {
     }
-
-    // Returns the graphics configuration for the primary screen
+    /*Este constructor privado garantiza que no se puedan crear instancias de la clase GraphicsUtilities*/ 
     private static GraphicsConfiguration getGraphicsConfiguration() {
         return GraphicsEnvironment.getLocalGraphicsEnvironment().
                 getDefaultScreenDevice().getDefaultConfiguration();
     }
 
+    /*Este método privado estático getGraphicsConfiguration devuelve la configuración gráfica para la pantalla principal*/
     public static BufferedImage createColorModelCompatibleImage(BufferedImage image) {
         ColorModel cm = image.getColorModel();
         return new BufferedImage(cm,
@@ -37,6 +34,7 @@ public class GraphicsUtilities {
                 cm.isAlphaPremultiplied(), null);
     }
 
+    /*Este método toma una imagen BufferedImage existente y crea una nueva imagen que es compatible con su modelo de color */
     public static BufferedImage createCompatibleImage(BufferedImage image) {
         return createCompatibleImage(image, image.getWidth(), image.getHeight());
     }
@@ -51,12 +49,14 @@ public class GraphicsUtilities {
         return getGraphicsConfiguration().createCompatibleImage(width, height);
     }
 
+    /*Este método crea nuevas imágenes BufferedImage compatibles con la configuración gráfica actual*/
     public static BufferedImage createCompatibleTranslucentImage(int width,
             int height) {
         return getGraphicsConfiguration().createCompatibleImage(width, height,
                 Transparency.TRANSLUCENT);
     }
 
+    /*Este método crea una nueva imagen BufferedImage compatible con transparencia*/
     public static BufferedImage loadCompatibleImage(URL resource)
             throws IOException {
         BufferedImage image = ImageIO.read(resource);
@@ -78,6 +78,7 @@ public class GraphicsUtilities {
         return compatibleImage;
     }
 
+    /*Estos métodos se utilizan para cargar imágenes desde una URL*/
     public static BufferedImage createThumbnailFast(BufferedImage image,
             int newSize) {
         float ratio;
@@ -115,6 +116,7 @@ public class GraphicsUtilities {
         return temp;
     }
 
+    /*método crea miniaturas de imágenes de forma rápida*/
     public static BufferedImage createThumbnailFast(BufferedImage image,
             int newWidth, int newHeight) {
         if (newWidth >= image.getWidth()
@@ -218,7 +220,9 @@ public class GraphicsUtilities {
         } while (width != newWidth || height != newHeight);
         return thumb;
     }
+    
 
+    /*método crea miniaturas de imágenes de forma más precisa, manteniendo una buena calidad visual*/
     public static int[] getPixels(BufferedImage img,
             int x, int y, int w, int h, int[] pixels) {
         if (w == 0 || h == 0) {

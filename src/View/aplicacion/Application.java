@@ -25,14 +25,19 @@ public class Application extends javax.swing.JFrame {
     private final RecuCorreo1 recuCorreo;
 
     public Application() {
-        initComponents();
-        setSize(new Dimension(1200, 768));
-        setLocationRelativeTo(null);
-        mainForm = new MainForm();
-        loginForm = new LoginForm();
-        recuperaciones = new Recus();
-        recuSMS = new RecuQR();
-        recuCorreo = new RecuCorreo1();
+        /*Constructor de la clase*/
+        initComponents();/*Inicializa los componentes de la interfaz*/
+        setSize(new Dimension(1200, 768));/*Establece el tamaño de la ventana*/
+        setLocationRelativeTo(null);/*Centra la ventana en la pantalla*/
+        mainForm = new MainForm();/*Crea una instancia de la clase MainForm*/
+        loginForm = new LoginForm();/*Crea una instancia de la clase LoginForm*/
+        recuperaciones = new Recus();/*Crea una instancia de la clase Recus*/
+        recuSMS = new RecuQR();/*Crea una instancia de la clase RecuQR*/
+        recuCorreo = new RecuCorreo1();/* Crea una instancia de la clase RecuCorreo1*/
+        setContentPane(loginForm);/*Establece el contenido de la ventana como LoginForm*/
+        Notifications.getInstance().setJFrame(this);/*Configura notificaciones*/
+        GlassPanePopup.install(this);/*Instala un GlassPanePopup en la ventana*/
+
         setContentPane(loginForm);
         Notifications.getInstance().setJFrame(this);
         GlassPanePopup.install(this);
@@ -43,6 +48,7 @@ public class Application extends javax.swing.JFrame {
         app.mainForm.showForm(component);
     }
 
+    /*Métodos estáticos para cambiar la vista y la apariencia de la aplicación*/
     public static void login() {
         FlatAnimatedLafChange.showSnapshot();
         app.setContentPane(app.mainForm);
@@ -119,6 +125,7 @@ public class Application extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*Método main para ejecutar la aplicación*/
     public static void main(String args[]) {
         FlatLaf.registerCustomDefaultsSource("View.theme");
         FlatDarculaLaf.setup();

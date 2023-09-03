@@ -17,10 +17,22 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
+// Definición de la clase LightDarkMode que extiende JPanel
 public class LightDarkMode extends JPanel {
+    private boolean menuFull = true; // Indicador del modo de menú (completo o colapsado)
+    private JButton buttonLight; // Botón para cambiar al modo claro
+    private JButton buttonDark; // Botón para cambiar al modo oscuro
+    private JButton buttonLighDark; // Botón para alternar entre modos claro y oscuro
+
+    // Constructor de la clase LightDarkMode
+    public LightDarkMode() {
+        init(); // Inicialización de la interfaz de usuario
+    }
+
+    // Método para establecer el modo de menú (completo o colapsado)
     public void setMenuFull(boolean menuFull) {
         this.menuFull = menuFull;
+        // Configuración de la visibilidad de los botones en función del modo
         if (menuFull) {
             buttonLight.setVisible(true);
             buttonDark.setVisible(true);
@@ -31,19 +43,17 @@ public class LightDarkMode extends JPanel {
             buttonLighDark.setVisible(true);
         }
     }
-    
-    private boolean menuFull = true;
 
-    public LightDarkMode() {
-        init();
-    }
-
+    // Método de inicialización de la interfaz de usuario
     private void init() {
+        // Configuración del borde y del diseño del panel
         setBorder(new EmptyBorder(2, 2, 2, 2));
         setLayout(new LightDarkModeLayout());
         putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:999;"
                 + "background:$Menu.lightdark.background");
+
+        // Creación de los botones y asignación de iconos
         buttonLight = new JButton("Claro", new FlatSVGIcon("View/menu/mode/light.svg"));
         buttonDark = new JButton("Oscuro", new FlatSVGIcon("View/menu/mode/dark.svg"));
         buttonLighDark = new JButton();
@@ -53,10 +63,16 @@ public class LightDarkMode extends JPanel {
                 + "foreground:$Menu.foreground;"
                 + "focusWidth:0;"
                 + "borderWidth:0");
+        
+        // Configuración del botón para alternar entre modos claro y oscuro
         buttonLighDark.addActionListener((ActionEvent e) -> {
             changeMode(!FlatLaf.isLafDark());
         });
+        
+        // Comprobación del estilo actual (claro u oscuro)
         checkStyle();
+        
+        // Configuración de los botones para cambiar al modo claro y oscuro
         buttonDark.addActionListener((ActionEvent e) -> {
             changeMode(true);
         });
@@ -64,15 +80,18 @@ public class LightDarkMode extends JPanel {
             changeMode(false);
         });
 
+        // Agregar los botones al panel
         add(buttonLight);
         add(buttonDark);
         add(buttonLighDark);
     }
     
+    // Método para cambiar entre modos claro y oscuro
     private void changeMode(boolean dark) {
         if (FlatLaf.isLafDark() != dark) {
             if (dark) {
                 EventQueue.invokeLater(() -> {
+                    // Cambiar al modo oscuro con una animación
                     FlatAnimatedLafChange.showSnapshot();
                     FlatDarculaLaf.setup();
                     FlatLaf.updateUI();
@@ -81,6 +100,7 @@ public class LightDarkMode extends JPanel {
                 });
             } else {
                 EventQueue.invokeLater(() -> {
+                    // Cambiar al modo claro con una animación
                     FlatAnimatedLafChange.showSnapshot();
                     FlatIntelliJLaf.setup();
                     FlatLaf.updateUI();
@@ -91,6 +111,7 @@ public class LightDarkMode extends JPanel {
         }
     }
 
+    // Método para comprobar y configurar el estilo de los botones en función del modo
     private void checkStyle() {
         boolean isDark = FlatLaf.isLafDark();
         addStyle(buttonLight, !isDark);
@@ -102,6 +123,7 @@ public class LightDarkMode extends JPanel {
         }
     }
 
+    // Método para agregar un estilo a un botón (botón claro u oscuro)
     private void addStyle(JButton button, boolean style) {
         if (style) {
             button.putClientProperty(FlatClientProperties.STYLE, ""
@@ -121,22 +143,22 @@ public class LightDarkMode extends JPanel {
         }
     }
 
-    private JButton buttonLight;
-    private JButton buttonDark;
-    private JButton buttonLighDark;
-
+    // Clase interna LightDarkModeLayout que implementa el diseño personalizado para el panel
     private class LightDarkModeLayout implements LayoutManager {
 
         @Override
         public void addLayoutComponent(String name, Component comp) {
+            // No se implementa, pero se requiere por la interfaz LayoutManager
         }
 
         @Override
         public void removeLayoutComponent(Component comp) {
+            // No se implementa, pero se requiere por la interfaz LayoutManager
         }
 
         @Override
         public Dimension preferredLayoutSize(Container parent) {
+            // Método para calcular el tamaño preferido del panel
             synchronized (parent.getTreeLock()) {
                 return new Dimension(5, buttonDark.getPreferredSize().height + (menuFull ? 0 : 5));
             }
@@ -144,6 +166,7 @@ public class LightDarkMode extends JPanel {
 
         @Override
         public Dimension minimumLayoutSize(Container parent) {
+            // Método para calcular el tamaño mínimo del panel
             synchronized (parent.getTreeLock()) {
                 return new Dimension(0, 0);
             }

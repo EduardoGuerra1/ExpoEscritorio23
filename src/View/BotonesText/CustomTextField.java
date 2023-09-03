@@ -1,4 +1,5 @@
 package View.BotonesText;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -22,31 +23,37 @@ public class CustomTextField extends JTextField {
         this.placeholder = placeholder;
         repaint();
     }
+    /*Este método permite establecer un texto de marcador de posición en el campo de texto*/
     public int getRound() {
         return round;
     }
 
+    /*getter devuelve el valor de la variable round*/
     public void setRound(int round) {
         this.round = round;
         createImageShadow();
         repaint();
     }
 
+    /*setter establece el valor de la variable round*/
     public Color getShadowColor() {
         return shadowColor;
     }
 
+    /*getter devuelve el valor de la variable shadowColor*/
     public void setShadowColor(Color shadowColor) {
         this.shadowColor = shadowColor;
         createImageShadow();
         repaint();
     }
 
+    /* setter establece el color de la sombra del campo de texto*/
     private int round = 10;
     private Color shadowColor = new Color(170, 170, 170);
     private BufferedImage imageShadow;
     private final Insets shadowSize = new Insets(2, 5, 8, 5);
 
+    /* Configuración inicial del campo de texto */
     public CustomTextField() {
         setUI(new TextUI());
         setOpaque(false);
@@ -57,6 +64,7 @@ public class CustomTextField extends JTextField {
         setBackground(new Color(255, 255, 255));
     }
 
+    /*Método para dibujar la apariencia del campo de texto*/
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
@@ -75,12 +83,14 @@ public class CustomTextField extends JTextField {
         super.paintComponent(grphcs);
     }
 
+    /*método se sobrescribe para personalizar la apariencia del campo de texto.*/
     @Override
     public void setBounds(int x, int y, int width, int height) {
         super.setBounds(x, y, width, height);
         createImageShadow();
     }
 
+    /*Método para crear la imagen de la sombra*/
     private void createImageShadow() {
         int height = getHeight();
         int width = getWidth();
@@ -95,6 +105,7 @@ public class CustomTextField extends JTextField {
         }
     }
 
+    /*Método para crear la sombra*/
     private BufferedImage createShadow() {
         int width = getWidth() - (shadowSize.left + shadowSize.right);
         int height = getHeight() - (shadowSize.top + shadowSize.bottom);
@@ -110,12 +121,13 @@ public class CustomTextField extends JTextField {
         }
     }
 
+    /* Clase interna para personalizar la interfaz de usuario del campo de texto*/
     private class TextUI extends BasicTextFieldUI {
 
-        //  Override this method to remove background or not paint background
         @Override
         protected void paintBackground(Graphics grphcs) {
 
         }
     }
 }
+

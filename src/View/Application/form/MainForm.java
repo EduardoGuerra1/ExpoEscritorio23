@@ -50,11 +50,13 @@ public class MainForm extends JLayeredPane {
     }
 
     private void init() {
+        /*Configura el borde y el diseño del formulario*/
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setLayout(new MainFormLayout());
+        /*Inicializa el menú y el panel principal*/
         menu = new Menu();
-        panelBody = new JPanel(new BorderLayout());
-        initMenuArrowIcon();
+        panelBody = new JPanel(new BorderLayout());/*Inicializa y configura el ícono del botón del menú*/
+        initMenuArrowIcon();/*Configura el botón del menú y su acción*/
         menuButton.putClientProperty(FlatClientProperties.STYLE, ""
                 + "background:$Menu.button.background;"
                 + "arc:999;"
@@ -63,7 +65,9 @@ public class MainForm extends JLayeredPane {
         menuButton.addActionListener((ActionEvent e) -> {
             setMenuFull(!menu.isMenuFull());
         });
+        /*Inicializa y configura eventos del menú*/
         initMenuEvent();
+        /*Establece la capa del botón del menú y agrega los componentes al formulario*/
         setLayer(menuButton, JLayeredPane.POPUP_LAYER);
         add(menuButton);
         add(menu);
@@ -73,17 +77,21 @@ public class MainForm extends JLayeredPane {
     @Override
     public void applyComponentOrientation(ComponentOrientation o) {
         super.applyComponentOrientation(o);
+        /*Actualiza el ícono del botón del menú en función de la orientación*/
         initMenuArrowIcon();
     }
 
+    /*Inicializa y configura el ícono del botón del menú*/
     private void initMenuArrowIcon() {
         if (menuButton == null) {
             menuButton = new JButton();
         }
+        /*Determina el ícono del botón del menú según la orientación del componente*/
         String icon = (getComponentOrientation().isLeftToRight()) ? "menu_left.svg" : "menu_right.svg";
         menuButton.setIcon(new FlatSVGIcon("View/icon/svg/" + icon, 0.8f));
     }
 
+    /*Configura los eventos del menú y cómo deben manejarse las acciones al seleccionar elementos*/
     private void initMenuEvent() {
         menu.addMenuEvent((int index, int subIndex, MenuAction action) -> {
             // Application.mainForm.showForm(new DefaultForm("Form : " + index + " " + subIndex));
@@ -130,33 +138,39 @@ public class MainForm extends JLayeredPane {
         });
     }
 
+    // Este método establece el estado del menú y actualiza la apariencia
     private void setMenuFull(boolean full) {
+         // Determina el ícono del menú en función de la orientación del componente
         String icon;
         if (getComponentOrientation().isLeftToRight()) {
             icon = (full) ? "menu_left.svg" : "menu_right.svg";
         } else {
             icon = (full) ? "menu_right.svg" : "menu_left.svg";
         }
+        // Establece el ícono del botón del menú.
         menuButton.setIcon(new FlatSVGIcon("View/icon/svg/" + icon, 0.8f));
-        menu.setMenuFull(full);
-        revalidate();
+        menu.setMenuFull(full);// Establece el estado del menú
+        revalidate();// Actualiza el diseño del contenedor
     }
 
-    public void hideMenu() {
+    public void hideMenu() {// Este método oculta el menú.
         menu.hideMenuItem();
     }
 
+   // Este método muestra un formulario en el panel principal.
     public void showForm(Component component) {
-        panelBody.removeAll();
-        panelBody.add(component);
-        panelBody.repaint();
+        panelBody.removeAll();// Elimina todos los componentes del panel principal.
+        panelBody.add(component);//Agrega el nuevo componente al panel principa
+        panelBody.repaint();// Repinta y vuelve a validar el panel principal para mostrar el nuevo component
         panelBody.revalidate();
     }
 
+    // Este método establece la selección en el menú
     public void setSelectedMenu(int index, int subIndex) {
         menu.setSelectedMenu(index, subIndex);
     }
 
+    // Declaración de variables miembro
     private Menu menu;
     private JPanel panelBody;
     private JButton menuButton;
@@ -173,6 +187,7 @@ public class MainForm extends JLayeredPane {
         }
     }
 
+    // Clase que implementa un administrador de diseño personalizado para el formulario principal
     private class MainFormLayout implements LayoutManager {
 
         @Override
@@ -185,6 +200,7 @@ public class MainForm extends JLayeredPane {
 
         @Override
         public Dimension preferredLayoutSize(Container parent) {
+            // Devuelve las dimensiones preferidas para el contenedor principal
             synchronized (parent.getTreeLock()) {
                 return new Dimension(5, 5);
             }
@@ -192,6 +208,7 @@ public class MainForm extends JLayeredPane {
 
         @Override
         public Dimension minimumLayoutSize(Container parent) {
+            // Devuelve las dimensiones mínimas para el contenedor principal
             synchronized (parent.getTreeLock()) {
                 return new Dimension(0, 0);
             }
@@ -199,6 +216,7 @@ public class MainForm extends JLayeredPane {
 
         @Override
         public void layoutContainer(Container parent) {
+            // Realiza el diseño de los componentes en el contenedor principal
             synchronized (parent.getTreeLock()) {
                 boolean ltr = parent.getComponentOrientation().isLeftToRight();
                 Insets insets = UIScale.scale(parent.getInsets());
@@ -208,6 +226,7 @@ public class MainForm extends JLayeredPane {
                 int height = parent.getHeight() - (insets.top + insets.bottom);
                 int menuWidth = UIScale.scale(menu.isMenuFull() ? menu.getMenuMaxWidth() : menu.getMenuMinWidth());
                 int menuX = ltr ? x : x + width - menuWidth;
+                // Establece el tamaño y la posición del menú
                 menu.setBounds(menuX, y, menuWidth, height);
                 int menuButtonWidth = menuButton.getPreferredSize().width;
                 int menuButtonHeight = menuButton.getPreferredSize().height;
@@ -217,6 +236,7 @@ public class MainForm extends JLayeredPane {
                 } else {
                     menubX = (int) (menuX - (menuButtonWidth * (menu.isMenuFull() ? 0.5f : 0.7f)));
                 }
+                // Establece el tamaño y la posición del botón del menú
                 menuButton.setBounds(menubX, UIScale.scale(30), menuButtonWidth, menuButtonHeight);
                 int gap = UIScale.scale(5);
                 int bodyWidth = width - menuWidth - gap;

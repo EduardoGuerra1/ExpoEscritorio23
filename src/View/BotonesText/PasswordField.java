@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package View.BotonesText;
 
 import java.awt.Color;
@@ -28,6 +24,7 @@ public class PasswordField extends JPasswordField {
         repaint();
     }
 
+    /*getters y setters para la propiedad round, que determina el radio de las esquinas redondeadas del componente*/
     public Color getShadowColor() {
         return shadowColor;
     }
@@ -38,11 +35,13 @@ public class PasswordField extends JPasswordField {
         repaint();
     }
 
+    /*getters y setters para la propiedad shadowColor, que establece el color de la sombra del componente*/
     private int round = 10;
     private Color shadowColor = new Color(170, 170, 170);
     private BufferedImage imageShadow;
     private final Insets shadowSize = new Insets(2, 5, 8, 5);
 
+    /*propiedades iniciales del componente. round establece el radio de las esquinas redondeadas*/
     public PasswordField() {
         setUI(new TextUI());
         setOpaque(false);
@@ -53,6 +52,7 @@ public class PasswordField extends JPasswordField {
         setBackground(new Color(255, 255, 255));
     }
 
+    /* Establece la apariencia, los colores y el borde del componente*/
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
@@ -71,6 +71,7 @@ public class PasswordField extends JPasswordField {
         super.paintComponent(grphcs);
     }
 
+    /*Dibuja la sombra y el fondo redondeado del componente*/
     @Override
     public void setBounds(int x, int y, int width, int height) {
         super.setBounds(x, y, width, height);
@@ -90,7 +91,8 @@ public class PasswordField extends JPasswordField {
             g2.dispose();
         }
     }
-
+    
+    /*método crea la imagen de la sombra del componente utilizando el color y el radio especificados*/
     private BufferedImage createShadow() {
         int width = getWidth() - (shadowSize.left + shadowSize.right);
         int height = getHeight() - (shadowSize.top + shadowSize.bottom);
@@ -105,10 +107,10 @@ public class PasswordField extends JPasswordField {
             return null;
         }
     }
-
+    
+    /*Este método crea la sombra utilizando una imagen con las dimensiones especificadas*/
     private class TextUI extends BasicPasswordFieldUI {
 
-        //  Override this method to remove background or not paint background
         @Override
         protected void paintBackground(Graphics grphcs) {
 

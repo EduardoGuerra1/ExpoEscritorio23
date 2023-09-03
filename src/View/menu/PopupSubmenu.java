@@ -29,6 +29,7 @@ public class PopupSubmenu extends JPanel{
     private final String menus[];
     private JPopupMenu popup;
 
+     // Constructor que toma la orientación del componente, una instancia de Menu, un índice de menú y un arreglo de menús
     public PopupSubmenu(ComponentOrientation orientation, Menu menu, int menuIndex, String menus[]) {
         this.menu = menu;
         this.menuIndex = menuIndex;
@@ -37,9 +38,11 @@ public class PopupSubmenu extends JPanel{
         init();
     }
 
+    // Método de inicialización
     private void init() {
         setLayout(new MenuLayout());
         popup = new JPopupMenu();
+        // Configuración de propiedades de estilo para el popup y el panel actual
         popup.putClientProperty(FlatClientProperties.STYLE, ""
                 + "background:$Menu.background;"
                 + "borderColor:$Menu.background;");
@@ -50,6 +53,7 @@ public class PopupSubmenu extends JPanel{
         for (int i = 1; i < menus.length; i++) {
             JButton button = createButtonItem(menus[i]);
             final int subIndex = i;
+            // ActionListener para los botones del submenú
             button.addActionListener((ActionEvent e) -> {
                 menu.runEvent(menuIndex, subIndex);
                 popup.setVisible(false);
@@ -59,6 +63,7 @@ public class PopupSubmenu extends JPanel{
         popup.add(this);
     }
 
+    // Método para crear un botón de elemento de menú
     private JButton createButtonItem(String text) {
         JButton button = new JButton(text);
         button.putClientProperty(FlatClientProperties.STYLE, ""
@@ -74,6 +79,7 @@ public class PopupSubmenu extends JPanel{
         return button;
     }
 
+    // Método para mostrar el submenú en una posición específica
     public void show(Component com, int x, int y) {
         if (menu.getComponentOrientation().isLeftToRight()) {
             popup.show(com, x, y);
@@ -85,6 +91,7 @@ public class PopupSubmenu extends JPanel{
         SwingUtilities.updateComponentTreeUI(popup);
     }
 
+    // Método para aplicar la alineación de los componentes del submenú según la orientación del menú
     private void applyAlignment() {
         setComponentOrientation((ComponentOrientation) menu.getComponentOrientation());
         for (Component c : getComponents()) {
@@ -94,6 +101,7 @@ public class PopupSubmenu extends JPanel{
         }
     }
 
+    // Método para establecer el índice seleccionado en el submenú
     protected void setSelectedIndex(int index) {
         int size = getComponentCount();
         for (int i = 0; i < size; i++) {
@@ -104,6 +112,7 @@ public class PopupSubmenu extends JPanel{
         }
     }
 
+    // Método para pintar el componente del submenú
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -129,6 +138,7 @@ public class PopupSubmenu extends JPanel{
         g2.dispose();
     }
 
+    // Método para crear una curva utilizada en la línea de separación del submenú
     private Shape createCurve(int round, int x, int y, boolean ltr) {
         Path2D p2 = new Path2D.Double();
         p2.moveTo(x, y - round);
@@ -136,6 +146,7 @@ public class PopupSubmenu extends JPanel{
         return p2;
     }
 
+    // Clase interna para el diseño del submenú
     private class MenuLayout implements LayoutManager {
 
         @Override
@@ -148,6 +159,7 @@ public class PopupSubmenu extends JPanel{
 
         @Override
         public Dimension preferredLayoutSize(Container parent) {
+            // Método para calcular el tamaño preferido del contenedor de elementos de menú
             synchronized (parent.getTreeLock()) {
                 Insets insets = parent.getInsets();
                 int maxWidth = UIScale.scale(150);
@@ -155,6 +167,7 @@ public class PopupSubmenu extends JPanel{
                 int width = getMaxWidth(parent) + ssubMenuLeftGap;
                 int height = (insets.top + insets.bottom);
                 int size = parent.getComponentCount();
+                 // Iterar sobre los componentes hijos del contenedor
                 for (int i = 0; i < size; i++) {
                     Component com = parent.getComponent(i);
                     if (com.isVisible()) {

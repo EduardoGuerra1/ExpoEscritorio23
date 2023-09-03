@@ -9,7 +9,10 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
+/**
+ *
+ * @author gyaci
+ */
 public class textField extends JTextField{
     
     public String getHint() {
@@ -22,6 +25,7 @@ public class textField extends JTextField{
     
     private String hint="";
     public textField(){
+        /*  Constructor*/     
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setBackground(new Color(0,0,0,0));
         setHorizontalAlignment(JTextField.CENTER); 
@@ -29,6 +33,7 @@ public class textField extends JTextField{
     
     @Override
     protected void paintComponent(Graphics grphcs) {
+        /*Método para pintar el componente de texto*/
         Graphics2D g2 = (Graphics2D) grphcs.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(getForeground());
@@ -43,6 +48,7 @@ public class textField extends JTextField{
     }
     
     private void createHintText(Graphics2D g){
+        /*Método para crear y mostrar el texto de sugerencia si no hay entrada de texto*/
         FontMetrics fm = g.getFontMetrics();
             int c0 = getBackground().getRGB();
             int c1 = getForeground().getRGB();

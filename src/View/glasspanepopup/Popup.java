@@ -17,7 +17,6 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-
 public class Popup extends JComponent {
 
     private final DecimalFormat df = new DecimalFormat("#.###", DecimalFormatSymbols.getInstance(Locale.US));
@@ -30,6 +29,7 @@ public class Popup extends JComponent {
     private boolean show;
     private boolean mouseHover;
 
+    // Constructor que recibe una instancia de GlassPanePopup, un componente y una opción.
     public Popup(GlassPanePopup parent, Component component, Option option) {
         this.parent = parent;
         this.component = component;
@@ -38,6 +38,7 @@ public class Popup extends JComponent {
         initAnimator();
     }
 
+    // Inicializa la ventana emergente y su diseño.
     private void init() {
         layout = new MigLayout();
         initOption();
@@ -45,6 +46,7 @@ public class Popup extends JComponent {
         add(component, option.getLayout(parent.getLayerPane(), 0));
     }
 
+    // Inicializa las opciones de la ventana emergente.
     private void initOption() {
         LayoutCallback callBack = option.getLayoutCallBack(parent.getLayerPane());
         if (callBack != null) {
@@ -75,6 +77,7 @@ public class Popup extends JComponent {
         }
     }
 
+    // Inicializa el objeto Animator para gestionar la animación de la ventana emergente.
     private void initAnimator() {
         animator = new Animator(option.duration(), new TimingTargetAdapter() {
             @Override
@@ -106,6 +109,7 @@ public class Popup extends JComponent {
         animator.setResolution(5);
     }
 
+    // Establece si la ventana emergente debe mostrarse o no.
     public void setShowPopup(boolean show) {
         if (this.show != show) {
             if (animator.isRunning()) {

@@ -17,9 +17,13 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import View.menu.mode.ToolBarAccentColor;
 
-
+/**
+ *
+ * @author gyaci
+ */
 
 public class Menu extends JPanel {
+    // Definición de elementos del menú
     private final String menuItems[][] = {
         {"~Menú Principal~"},
         {"Dashboard"},
@@ -35,6 +39,7 @@ public class Menu extends JPanel {
         {"Cerrar Sesión"}
     };
 
+    // Definición de elementos del menú
     public boolean isMenuFull() {
         return menuFull;
     }
@@ -57,10 +62,12 @@ public class Menu extends JPanel {
         toolBarAccentColor.setMenuFull(menuFull);
     }
 
+    // Eventos del menú
     private final List<MenuEvent> events = new ArrayList<>();
     private boolean menuFull = true;
     private final String headerName = "SAE";
 
+    // Configuración de diseño del menú
     protected final boolean hideMenuTitleOnMinimum = true;
     protected final int menuTitleLeftInset = 5;
     protected final int menuTitleVgap = 5;

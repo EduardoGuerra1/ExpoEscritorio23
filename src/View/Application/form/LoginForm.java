@@ -21,6 +21,7 @@ import raven.toast.Notifications;
  */
 public class LoginForm extends javax.swing.JPanel {
 
+    /*Declaración de variables de componentes y paneles*/
     private CardLayout cardLayout;
     private JPanel cardPanel;
     private LoginForm loginPanel;
@@ -157,20 +158,25 @@ public class LoginForm extends javax.swing.JPanel {
 
     private void btnIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseClicked
         // TODO add your handling code here:
+        /*Método que se ejecuta al hacer clic en el botón "Iniciar Sesión"*/
         String Correo = this.txtCorreo.getText();
         String Contraseña = this.txtContraseña.getText();
         
         if(Correo.isBlank() == true || Contraseña.isBlank() == true){
+            /*Validación de campos vacíos*/
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Los campos no pueden estar vacios");
         }else{
+            /*Llamada a un controlador para procesar la autenticación*/
             Personas personas = PersonasController.callApiAndProcessResponse(Correo, Contraseña);
             int id = personas.getIdTipoPersona();
         if (personas != null) {
+            /*Verificación de acceso correcto*/
             System.out.println(id);
             if (id == 4) {
                  clearTextFields();
                 Application.login();
             }else{
+                /*Mostrar mensaje de acceso denegado si no es administrador*/
                 Message obj = new Message();
                 obj.txtTitle.setText("Aviso");
                 obj.txtContent.setText("Acceso denegado, no es administrador.");
@@ -184,6 +190,7 @@ public class LoginForm extends javax.swing.JPanel {
                 GlassPanePopup.showPopup(obj);
             }
         }else{
+            /*Mostrar mensaje de datos incorrectos*/
              Message obj = new Message();
             obj.txtTitle.setText("Aviso");
             obj.txtContent.setText("Datos incorrectos");
@@ -202,7 +209,7 @@ public class LoginForm extends javax.swing.JPanel {
 
     private void btnRecuperacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecuperacionesMouseClicked
         // TODO add your handling code here:
-        Application.recuperaciones();
+        Application.recuperaciones();/*Método que se ejecuta al hacer clic en el botón "¿Olvidó su contraseña?"*/
 
     }//GEN-LAST:event_btnRecuperacionesMouseClicked
 

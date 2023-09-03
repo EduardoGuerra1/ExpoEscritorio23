@@ -22,12 +22,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import View.menu.Menu;
 
+// Definición de la clase ToolBarAccentColor que extiende JPanel
+public class ToolBarAccentColor extends JPanel {
+    private final Menu menu; // Referencia al menú principal
+    private final JPopupMenu popup = new JPopupMenu(); // Menú emergente para seleccionar colores de acento
 
-public class ToolBarAccentColor extends JPanel{
-    
-    private final Menu menu;
-    private final JPopupMenu popup = new JPopupMenu();
-
+    // Métodos getter y setter para el modo de menú (completo o colapsado)
     public boolean isMenuFull() {
         return menuFull;
     }
@@ -35,6 +35,7 @@ public class ToolBarAccentColor extends JPanel{
     public void setMenuFull(boolean menuFull) {
         this.menuFull = menuFull;
         removeAll();
+        // Configuración de los componentes en función del modo
         if (menuFull) {
             add(toolbar);
             popup.remove(toolbar);
@@ -53,11 +54,13 @@ public class ToolBarAccentColor extends JPanel{
         "Default", "Blue", "Purple", "Red", "Orange", "Yellow", "Green",};
     private boolean menuFull = true;
 
+    // Constructor de la clase ToolBarAccentColor
     public ToolBarAccentColor(Menu menu) {
         this.menu = menu;
-        init();
+        init(); // Inicialización de la interfaz de usuario
     }
 
+    // Método para mostrar el menú emergente
     public void show(Component com, int x, int y) {
         if (menu.getComponentOrientation().isLeftToRight()) {
             popup.show(com, x, y);
@@ -68,6 +71,7 @@ public class ToolBarAccentColor extends JPanel{
         SwingUtilities.updateComponentTreeUI(popup);
     }
 
+    // Método de inicialización de la interfaz de usuario
     private void init() {
         setLayout(new BorderLayout());
         toolbar = new JToolBar();
@@ -97,6 +101,7 @@ public class ToolBarAccentColor extends JPanel{
         }
     }
 
+    // Método para manejar el cambio de color de acento
     private void colorAccentChanged(String colorKey) {
         if (popup.isVisible()) {
             popup.setVisible(false);
@@ -113,6 +118,7 @@ public class ToolBarAccentColor extends JPanel{
         }
     }
 
+    // Método para convertir un color en su representación hexadecimal
     private String toHexCode(Color color) {
         return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
     }
@@ -120,8 +126,8 @@ public class ToolBarAccentColor extends JPanel{
     private JToolBar toolbar;
     private JToggleButton selectedButton;
 
+    // Clase interna AccentColorIcon que representa un icono de color de acento
     private class AccentColorIcon extends FlatAbstractIcon {
-
         private final String colorKey;
 
         public AccentColorIcon(String colorKey) {

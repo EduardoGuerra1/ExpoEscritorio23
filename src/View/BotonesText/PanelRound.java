@@ -20,6 +20,7 @@ public class PanelRound extends JPanel {
         repaint();
     }
 
+    /* métodos permiten obtener y establecer el radio de la esquina superior izquierda del panel*/
     public int getRoundTopRight() {
         return roundTopRight;
     }
@@ -47,15 +48,18 @@ public class PanelRound extends JPanel {
         repaint();
     }
 
+    
     private int roundTopLeft = 0;
     private int roundTopRight = 0;
     private int roundBottomLeft = 0;
     private int roundBottomRight = 0;
 
+    /*variables privadas que almacenan los radios de las cuatro esquinas del panel*/
     public PanelRound() {
         setOpaque(false);
     }
 
+    /* constructor de la clase PanelRound*/
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
@@ -76,6 +80,7 @@ public class PanelRound extends JPanel {
         super.paintComponent(grphcs);
     }
 
+    /*Este método paintComponent se sobrescribe para personalizar la apariencia del panel*/
     private Shape createRoundTopLeft() {
         int width = getWidth();
         int height = getHeight();

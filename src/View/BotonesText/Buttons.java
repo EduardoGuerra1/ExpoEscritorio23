@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package View.BotonesText;
 
 import java.awt.Color;
@@ -15,42 +11,50 @@ import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
+
 public class Buttons extends JButton {
 
     public int getRound() {
         return round;
     }
-
+    /*getter que devuelve el valor de la variable round*/
     public void setRound(int round) {
         this.round = round;
         createImageShadow();
         repaint();
     }
 
+    /*setter que establece el valor de la variable round*/
     public Color getShadowColor() {
         return shadowColor;
     }
 
+    /*getter que devuelve el valor de la variable shadowColor*/
     public void setShadowColor(Color shadowColor) {
         this.shadowColor = shadowColor;
         createImageShadow();
         repaint();
     }
 
+    /*setter que establece el color de la sombra del botón*/
     public void setRippleColor(Color color) {
         rippleEffect.setRippleColor(color);
     }
 
+    /*establece el color del efecto de ondulación del botón*/
     public Color getRippleColor() {
         return rippleEffect.getRippleColor();
     }
 
+    /*getter que devuelve el color del efecto de ondulación del botón.*/
     private int round = 10;
     private Color shadowColor = new Color(170, 170, 170);
+    /*Se inicializan las variables round y shadowColor con valores predeterminados*/
     private BufferedImage imageShadow;
     private final Insets shadowSize = new Insets(2, 5, 8, 5);
     private final RippleEffect rippleEffect = new RippleEffect(this);
 
+    /*Configuración inicial del botón*/
     public Buttons() {
         setBorder(new EmptyBorder(10, 12, 15, 12));
         setContentAreaFilled(false);
@@ -59,6 +63,7 @@ public class Buttons extends JButton {
         rippleEffect.setRippleColor(new Color(220, 220, 220));
     }
 
+    /*Método para dibujar la apariencia del botón*/
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
@@ -67,9 +72,7 @@ public class Buttons extends JButton {
         double height = getHeight() - (shadowSize.top + shadowSize.bottom);
         double x = shadowSize.left;
         double y = shadowSize.top;
-        //  Create Shadow Image
         g2.drawImage(imageShadow, 0, 0, null);
-        //  Create Background Color
         g2.setColor(getBackground());
         Area area = new Area(new RoundRectangle2D.Double(x, y, width, height, round, round));
         g2.fill(area);
@@ -78,12 +81,14 @@ public class Buttons extends JButton {
         super.paintComponent(grphcs);
     }
 
+    /*El método se sobrescribe para personalizar la apariencia del botón*/
     @Override
     public void setBounds(int x, int y, int width, int height) {
         super.setBounds(x, y, width, height);
         createImageShadow();
     }
 
+    /*El método se sobrescribe para manejar cambios en las dimensiones del botón.*/
     private void createImageShadow() {
         int height = getHeight();
         int width = getWidth();
@@ -97,7 +102,8 @@ public class Buttons extends JButton {
             g2.dispose();
         }
     }
-
+    
+    /*El método se utiliza para crear la imagen de la sombra del botón.*/
     private BufferedImage createShadow() {
         int width = getWidth() - (shadowSize.left + shadowSize.right);
         int height = getHeight() - (shadowSize.top + shadowSize.bottom);
