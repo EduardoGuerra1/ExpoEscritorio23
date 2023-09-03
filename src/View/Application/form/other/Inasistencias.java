@@ -79,6 +79,7 @@ public class Inasistencias extends javax.swing.JPanel {
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Estudiante", "Docente", "Estado","Fecha"});
         cargarDatosAsync();
+        table1.setDefaultEditor(Object.class, null);
     }
     
     private void mostrarReporte() {

@@ -67,6 +67,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Estudiante", "Docente", "CodigoConductual","Fecha"});
         cargarDatosAsync();
+        table1.setDefaultEditor(Object.class, null);
         
     }
     public void deleteAllTableRows(JTable table) {

@@ -52,6 +52,7 @@ public class Comunicados extends javax.swing.JPanel {
                 + "font:$h1.font");
         
         cargarDatos();
+        table1.setDefaultEditor(Object.class, null);
         
     }
 

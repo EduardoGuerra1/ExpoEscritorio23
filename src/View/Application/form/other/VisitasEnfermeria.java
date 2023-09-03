@@ -64,6 +64,7 @@ String bg = getBackground().toString();
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Fecha", "Detalle de Visita", "Persona"});
         cargarDatos();
+        table1.setDefaultEditor(Object.class, null);
     }
 
     public void cargarDatos() {

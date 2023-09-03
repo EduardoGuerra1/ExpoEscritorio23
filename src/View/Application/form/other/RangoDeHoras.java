@@ -67,6 +67,7 @@ public class RangoDeHoras extends javax.swing.JPanel {
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Titulo", "Inicio", "Final",});
         cargarDatosAsync();
+        table1.setDefaultEditor(Object.class, null);
     }
 
     /**

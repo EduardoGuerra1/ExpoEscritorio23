@@ -57,6 +57,7 @@ public class TiposCodigos extends javax.swing.JPanel {
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Tipo de Código",});
         cargarDatos();
+        table1.setDefaultEditor(Object.class, null);
     }
 
     /**

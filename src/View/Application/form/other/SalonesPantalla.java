@@ -64,6 +64,7 @@ public class SalonesPantalla extends javax.swing.JPanel {
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Salones Código",});
         cargarDatosAsync();
+        table1.setDefaultEditor(Object.class, null);
     }
 
     /**
