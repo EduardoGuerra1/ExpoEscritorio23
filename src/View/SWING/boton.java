@@ -9,10 +9,7 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author gyaci
- */
+
 public class boton extends JButton{
     
     private Color buttonColor = new Color(69,88,105);

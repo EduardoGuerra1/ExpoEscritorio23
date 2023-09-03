@@ -10,10 +10,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author gyaci
- */
+
 public class Contraseña extends JPasswordField{
     
     public String getHint() {

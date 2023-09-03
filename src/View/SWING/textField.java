@@ -9,10 +9,7 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author gyaci
- */
+
 public class textField extends JTextField{
     
     public String getHint() {

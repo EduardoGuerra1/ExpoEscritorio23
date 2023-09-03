@@ -1,9 +1,6 @@
 package View.menu;
 
-/**
- *
- * @author gyaci
- */
+
 public class MenuAction {
 
     protected boolean isCancel() {

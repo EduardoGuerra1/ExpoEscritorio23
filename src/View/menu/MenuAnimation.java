@@ -3,10 +3,7 @@ package View.menu;
 import com.formdev.flatlaf.util.Animator;
 import java.util.HashMap;
 
-/**
- *
- * @author gyaci
- */
+
 public class MenuAnimation {
     private static final HashMap<MenuItem, Animator> hash = new HashMap<>();
 

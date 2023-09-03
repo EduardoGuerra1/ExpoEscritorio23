@@ -22,10 +22,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import View.menu.Menu;
 
-/**
- *
- * @author gyaci
- */
+
 public class ToolBarAccentColor extends JPanel{
     
     private final Menu menu;

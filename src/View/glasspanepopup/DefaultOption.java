@@ -4,10 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import net.miginfocom.layout.LayoutCallback;
 
-/**
- *
- * @author Raven
- */
+
 public class DefaultOption implements Option {
 
     private float animate;
