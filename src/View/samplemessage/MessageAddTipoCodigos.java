@@ -37,6 +37,10 @@ import javax.swing.text.PlainDocument;
 import org.json.JSONException;
 import org.json.JSONObject;
 import raven.toast.Notifications;
+import javax.swing.*;
+import java.awt.event.*;
+import java.io.File;
+import javax.sound.sampled.*;
 
 /**
  *
@@ -44,8 +48,8 @@ import raven.toast.Notifications;
  */
 public class MessageAddTipoCodigos extends javax.swing.JPanel {
 
-    
     private Boolean noti;
+
     public MessageAddTipoCodigos() {
 
         initComponents();
@@ -63,9 +67,9 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
                 }
                 for (char c : str.toCharArray()) {
                     if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
-                      // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
-                      
-                       noti = true;
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+
+                        noti = true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
                     }
                 }
@@ -135,35 +139,60 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
 
-     Validaciones valida = new Validaciones();
-        if (txtTipoCodigo.getText().isEmpty() ) {
+        Validaciones valida = new Validaciones();
+        if (txtTipoCodigo.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
-        }else {
-            if (!valida.check16(txtTipoCodigo.getText()) ) {
+        } else {
+            if (!valida.check16(txtTipoCodigo.getText())) {
                 Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
-            }
-            else{
-            enviarDatosHaciaApi();
-            Timer timer = new Timer(500, (ActionEvent e) -> {
-                TiposCodigos tc = new TiposCodigos();
-                
-                tc.cargarDatos();
-                tc.deleteAllTableRows(tc.table1);
-            });
-            timer.setRepeats(false);
-            timer.start();
+            } else {
+                enviarDatosHaciaApi();
+                Timer timer = new Timer(500, (ActionEvent e) -> {
+                    TiposCodigos tc = new TiposCodigos();
+
+                    tc.cargarDatos();
+                    tc.deleteAllTableRows(tc.table1);
+                });
+                timer.setRepeats(false);
+                timer.start();
             }
         }
 
 
-
     }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void playAudio() {
+        try {
+            File audioFile = new File("src/View/sounds/validacion.wav");
+
+            // Crea un objeto Clip para reproducir el audio
+            Clip clip = AudioSystem.getClip();
+
+            // Abre el archivo de audio y lo carga en el Clip
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            clip.open(audioStream);
+
+            // Inicia la reproducción del audio
+            clip.start();
+
+            // Espera hasta que el audio termine de reproducirse
+            while (clip.isRunning()) {
+                Thread.sleep(10);
+            }
+
+            // Cierra el Clip después de reproducir el audio
+            clip.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void txtTipoCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoCodigoKeyReleased
         // TODO add your handling code here:
-        
-        if(noti==true){
+
+        if (noti == true) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+            playAudio();
         }
     }//GEN-LAST:event_txtTipoCodigoKeyReleased
 
@@ -173,18 +202,16 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
 
     private void enviarDatosHaciaApi() {
 
-       
         MessageAddTipoCodigos msg = new MessageAddTipoCodigos();
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
-        
+
         String codigoConductual = txtTipoCodigo.getText();
 
-        
         System.out.println(codigoConductual);
         try {
             // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
-            
+
             jsonData.put("tipoCodigoConductual", codigoConductual);
 
             // Llamar al método postApiAsync para enviar los datos

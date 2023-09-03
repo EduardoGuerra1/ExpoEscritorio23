@@ -313,16 +313,15 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         lbTitulo2.setText("Valores del Instituto Técnico Ricaldone:");
         jPanel1.add(lbTitulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
 
-        lbIntegridad.setForeground(new java.awt.Color(255, 255, 255));
         lbIntegridad.setText("Integridad");
 
-        lbIntegridad1.setForeground(new java.awt.Color(255, 255, 255));
+        lbIntegridad1.setForeground(new java.awt.Color(153, 153, 153));
         lbIntegridad1.setText("\"Actuar con transparencia y");
 
-        lbIntegridad2.setForeground(new java.awt.Color(255, 255, 255));
+        lbIntegridad2.setForeground(new java.awt.Color(153, 153, 153));
         lbIntegridad2.setText("honestidad en todas las ");
 
-        lbIntegridad3.setForeground(new java.awt.Color(255, 255, 255));
+        lbIntegridad3.setForeground(new java.awt.Color(153, 153, 153));
         lbIntegridad3.setText("dimensiones de nuestra vida\"");
 
         javax.swing.GroupLayout pIntegridadLayout = new javax.swing.GroupLayout(pIntegridad);
@@ -354,19 +353,18 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
         jPanel1.add(pIntegridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 260, 180));
 
-        lbSolidaridad2.setForeground(new java.awt.Color(255, 255, 255));
+        lbSolidaridad2.setForeground(new java.awt.Color(153, 153, 153));
         lbSolidaridad2.setText("de estar a la búsqueda de");
 
-        lbSolidaridad3.setForeground(new java.awt.Color(255, 255, 255));
+        lbSolidaridad3.setForeground(new java.awt.Color(153, 153, 153));
         lbSolidaridad3.setText("soluciones ante las necesidades");
 
-        lbSolidaridad1.setForeground(new java.awt.Color(255, 255, 255));
+        lbSolidaridad1.setForeground(new java.awt.Color(153, 153, 153));
         lbSolidaridad1.setText("\"Manifestar la disposición");
 
-        lbSolidaridad.setForeground(new java.awt.Color(255, 255, 255));
         lbSolidaridad.setText("Solidaridad");
 
-        lbSolidaridad4.setForeground(new java.awt.Color(255, 255, 255));
+        lbSolidaridad4.setForeground(new java.awt.Color(153, 153, 153));
         lbSolidaridad4.setText("y problemas de los demás\"");
 
         javax.swing.GroupLayout pSolidaridadLayout = new javax.swing.GroupLayout(pSolidaridad);
@@ -401,19 +399,18 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
         jPanel1.add(pSolidaridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, 260, 180));
 
-        lbFe4.setForeground(new java.awt.Color(255, 255, 255));
+        lbFe4.setForeground(new java.awt.Color(153, 153, 153));
         lbFe4.setText("que motiva nuestro existir\"");
 
-        lbFe3.setForeground(new java.awt.Color(255, 255, 255));
+        lbFe3.setForeground(new java.awt.Color(153, 153, 153));
         lbFe3.setText("experimentarla como vida y amor,");
 
-        lbFe2.setForeground(new java.awt.Color(255, 255, 255));
+        lbFe2.setForeground(new java.awt.Color(153, 153, 153));
         lbFe2.setText("de Dios en nuestro quehacer y");
 
-        lbFe1.setForeground(new java.awt.Color(255, 255, 255));
+        lbFe1.setForeground(new java.awt.Color(153, 153, 153));
         lbFe1.setText("\"Reconocer la presencia operante");
 
-        lbFe.setForeground(new java.awt.Color(255, 255, 255));
         lbFe.setText("Fe");
 
         javax.swing.GroupLayout pFeLayout = new javax.swing.GroupLayout(pFe);

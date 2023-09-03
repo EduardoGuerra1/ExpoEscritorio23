@@ -9,12 +9,9 @@ import View.Application.form.other.CodigosDisciplinarios;
 import View.Application.form.other.TiposCodigos;
 import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
-import com.kitfox.svg.A;
-import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
 import expoescritorio.Controller.NivelesCodigosConductualesController;
 import expoescritorio.Controller.TiposCodigosConductualesController;
-import expoescritorio.Models.CodigosConductuales;
 import expoescritorio.Models.NivelesCodigosConductuales;
 import expoescritorio.Models.TiposCodigosConductuales;
 import java.awt.Color;
@@ -24,10 +21,8 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.Timer;
@@ -44,7 +39,6 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
     public int id;
 
     public MessageEditCodigosDisciplinarios() {
-
         initComponents();
         setOpaque(false);
 
@@ -52,7 +46,7 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
         txtTitle.setOpaque(false);
         txtTitle.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h4.font");
-        // Obtener los datos de la API y cargarlos en el ComboBox
+        /*// Obtener los datos de la API y cargarlos en el ComboBox
         List<TiposCodigosConductuales> tiposCodigosConductualesList = TiposCodigosConductualesController.getTiposCodigosConductualesFromApi();
         for (TiposCodigosConductuales tipoCodigoConductual : tiposCodigosConductualesList) {
             cbTiposCodigosConductuales.addItem(tipoCodigoConductual.getTipoCodigoConductual());
@@ -74,6 +68,46 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
             // Manejar las excepciones aquí
             System.out.println("Error al obtener la lista de niveles de códigos conductuales: " + e.getMessage());
         }
+        
+         */
+
+        CompletableFuture<List<NivelesCodigosConductuales>> futureNivelesCodigos = NivelesCodigosConductualesController.getNivelesCodigosConductualesAsyn();
+
+// Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
+        futureNivelesCodigos.thenAccept(nivelesCodigosList -> {
+            // Crear un arreglo de niveles de códigos conductuales para usar en el combobox
+            String[] nivelesCodigos = new String[nivelesCodigosList.size()];
+
+            for (int i = 0; i < nivelesCodigosList.size(); i++) {
+                NivelesCodigosConductuales nivelCodigo = nivelesCodigosList.get(i);
+                nivelesCodigos[i] = nivelCodigo.getNivelCodigoConductual();
+            }
+
+            // Agregar los niveles de códigos conductuales al combobox
+            cbNivelCodigoConductual.setModel(new DefaultComboBoxModel<>(nivelesCodigos));
+        });
+
+        
+        
+        
+        CompletableFuture<List<TiposCodigosConductuales>> futureTiposCodigos = TiposCodigosConductualesController.getTiposCodigosConductualesAsync();
+
+// Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
+        futureTiposCodigos.thenAccept(tiposCodigosList -> {
+            // Crear un arreglo de tipos de códigos conductuales para usar en el combobox
+            String[] tiposCodigos = new String[tiposCodigosList.size()];
+
+            for (int i = 0; i < tiposCodigosList.size(); i++) {
+                TiposCodigosConductuales tipoCodigo = tiposCodigosList.get(i);
+                tiposCodigos[i] = tipoCodigo.getTipoCodigoConductual();
+            }
+
+            // Agregar los tipos de códigos conductuales al combobox
+            cbTiposCodigosConductuales.setModel(new DefaultComboBoxModel<>(tiposCodigos));
+        });
+
+        String selectedText = (String) cbTiposCodigosConductuales.getSelectedItem();
+        txtCodigoConductual.setText(selectedText);
         // Agrega el ActionListener al JComboBox
         cbTiposCodigosConductuales.addActionListener(new ActionListener() {
             @Override
@@ -152,23 +186,22 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
-        
+
         Validaciones valida = new Validaciones();
-        if (txtCodigoConductual.getText().isEmpty() ) {
+        if (txtCodigoConductual.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
-        }else {
-            if (!valida.check50(txtCodigoConductual.getText()) ) {
+        } else {
+            if (!valida.check50(txtCodigoConductual.getText())) {
                 Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
-            }
-            else{
-            actualizarDatosHaciaApi();
-            Timer timer = new Timer(500, (ActionEvent e) -> {
-                TiposCodigos tc = new TiposCodigos();
-            tc.cargarDatos();
-            tc.deleteAllTableRows(tc.table1);
-            });
-            timer.setRepeats(false);
-            timer.start();
+            } else {
+                actualizarDatosHaciaApi();
+                Timer timer = new Timer(500, (ActionEvent e) -> {
+                    TiposCodigos tc = new TiposCodigos();
+                    tc.cargarDatos();
+                    tc.deleteAllTableRows(tc.table1);
+                });
+                timer.setRepeats(false);
+                timer.start();
             }
         }
 
@@ -184,8 +217,8 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
 
         MessageEditCodigosDisciplinarios msg = new MessageEditCodigosDisciplinarios();
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
-        int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbTiposCodigosConductuales,false) ;
-        int idNivelCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbNivelCodigoConductual,true);
+        int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbTiposCodigosConductuales, false);
+        int idNivelCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbNivelCodigoConductual, true);
         String codigoConductual = txtCodigoConductual.getText();
 
         System.out.println(idTipoCodigoConductual);
@@ -201,7 +234,7 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
             jsonData.put("codigoConductual", codigoConductual);
 
             // Llamar al método putApiAsync para enviar los datos de actualización
-            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductuales/update"; // Reemplaza esto con la URL de tu API
+            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductuales/update";
             String jsonString = jsonData.toString();
 
             CompletableFuture<Boolean> putFuture = ControllerFull.putApiAsync(endpointUrl, jsonString);
@@ -227,10 +260,9 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
     private int obtenerIdSeleccionadoComboBox(JComboBox<String> comboBox, Boolean band) {
         int selectedIndex = (int) comboBox.getSelectedIndex();
         String txt = comboBox.getItemAt(selectedIndex);
-        if(band){
+        if (band) {
             return NivelesCodigosConductualesController.getNivelesCodigosConductualesNameAsync(txt).join();
-        }
-        else{
+        } else {
             return TiposCodigosConductualesController.getTiposCodigosConductualesNameAsync(txt).join();
         }
         // Aquí deberías obtener el ID correspondiente al valor seleccionado en el ComboBox

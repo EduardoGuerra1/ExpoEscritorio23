@@ -34,6 +34,48 @@ public class NivelesCodigosConductualesController {
         return cnt;
     }
     
+    public static CompletableFuture<List<NivelesCodigosConductuales>> getNivelesCodigosConductualesAsyn() {
+        return CompletableFuture.supplyAsync(() -> {
+            // URL de la API
+            String apiUrl = "https://expo2023-6f28ab340676.herokuapp.com/NivelesCodigosConductuales/list";
+            List<NivelesCodigosConductuales> modelList = new ArrayList<>();
+            HttpURLConnection connection = null;
+            try {
+                // Se crea una URL a partir de la apiUrl.
+                URL url = new URL(apiUrl);
+                connection = (HttpURLConnection) url.openConnection();
+                // Se establece el método de solicitud como GET.
+                connection.setRequestMethod("GET");
+
+                int responseCode = connection.getResponseCode();
+                // Verificar si la solicitud fue exitosa
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    JSONArray jsonArray = new JSONArray(reader.readLine());
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        int idNivelCodigoConductual = jsonObject.getInt("idNivelCodigoConductual");
+                        String nivelCodigoConductual = jsonObject.getString("nivelCodigoConductual");
+                        modelList.add(new NivelesCodigosConductuales(idNivelCodigoConductual, nivelCodigoConductual));
+                    }
+                } else {
+                    // Imprimir un mensaje de error si la solicitud HTTP no fue exitosa
+                    System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);
+                }
+            } catch (IOException | JSONException e) {
+                // Capturar y manejar errores en caso de una excepción
+                System.out.println("Error al realizar la solicitud HTTP: " + e.getMessage());
+            } finally {
+                if (connection != null) {
+                    connection.disconnect(); // Cerrar la conexión
+                }
+            }
+
+            return modelList;
+        });
+    }
+    
     public static CompletableFuture<Integer> getNivelesCodigosConductualesNameAsync(String name) {
         return CompletableFuture.supplyAsync(() -> {
             // URL de la API

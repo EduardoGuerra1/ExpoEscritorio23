@@ -321,16 +321,13 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lbIntegridad">
               <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Integridad"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbIntegridad1">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&quot;Actuar con transparencia y"/>
               </Properties>
@@ -338,7 +335,7 @@
             <Component class="javax.swing.JLabel" name="lbIntegridad2">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="honestidad en todas las "/>
               </Properties>
@@ -346,7 +343,7 @@
             <Component class="javax.swing.JLabel" name="lbIntegridad3">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="dimensiones de nuestra vida&quot;"/>
               </Properties>
@@ -398,7 +395,7 @@
             <Component class="javax.swing.JLabel" name="lbSolidaridad2">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="de estar a la b&#xfa;squeda de"/>
               </Properties>
@@ -406,7 +403,7 @@
             <Component class="javax.swing.JLabel" name="lbSolidaridad3">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="soluciones ante las necesidades"/>
               </Properties>
@@ -414,23 +411,20 @@
             <Component class="javax.swing.JLabel" name="lbSolidaridad1">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&quot;Manifestar la disposici&#xf3;n"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbSolidaridad">
               <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Solidaridad"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbSolidaridad4">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="y problemas de los dem&#xe1;s&quot;"/>
               </Properties>
@@ -482,7 +476,7 @@
             <Component class="javax.swing.JLabel" name="lbFe4">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="que motiva nuestro existir&quot;"/>
               </Properties>
@@ -490,7 +484,7 @@
             <Component class="javax.swing.JLabel" name="lbFe3">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="experimentarla como vida y amor,"/>
               </Properties>
@@ -498,7 +492,7 @@
             <Component class="javax.swing.JLabel" name="lbFe2">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="de Dios en nuestro quehacer y"/>
               </Properties>
@@ -506,16 +500,13 @@
             <Component class="javax.swing.JLabel" name="lbFe1">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&quot;Reconocer la presencia operante"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbFe">
               <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Fe"/>
               </Properties>
             </Component>

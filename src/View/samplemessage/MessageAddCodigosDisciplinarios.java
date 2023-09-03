@@ -49,7 +49,7 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         txtTitle.setOpaque(false);
         txtTitle.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h4.font");
-        // Obtener los datos de la API y cargarlos en el ComboBox
+        /*// Obtener los datos de la API y cargarlos en el ComboBox
         List<TiposCodigosConductuales> tiposCodigosConductualesList = TiposCodigosConductualesController.getTiposCodigosConductualesFromApi();
         for (TiposCodigosConductuales tipoCodigoConductual : tiposCodigosConductualesList) {
             cbTiposCodigosConductuales.addItem(tipoCodigoConductual.getTipoCodigoConductual());
@@ -70,7 +70,40 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         } catch (InterruptedException | ExecutionException e) {
             // Manejar las excepciones aquí
             System.out.println("Error al obtener la lista de niveles de códigos conductuales: " + e.getMessage());
-        }
+        }*/
+
+        CompletableFuture<List<NivelesCodigosConductuales>> futureNivelesCodigos = NivelesCodigosConductualesController.getNivelesCodigosConductualesAsyn();
+
+// Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
+        futureNivelesCodigos.thenAccept(nivelesCodigosList -> {
+            // Crear un arreglo de niveles de códigos conductuales para usar en el combobox
+            String[] nivelesCodigos = new String[nivelesCodigosList.size()];
+
+            for (int i = 0; i < nivelesCodigosList.size(); i++) {
+                NivelesCodigosConductuales nivelCodigo = nivelesCodigosList.get(i);
+                nivelesCodigos[i] = nivelCodigo.getNivelCodigoConductual();
+            }
+
+            // Agregar los niveles de códigos conductuales al combobox
+            cbNivelCodigoConductual.setModel(new DefaultComboBoxModel<>(nivelesCodigos));
+        });
+
+        CompletableFuture<List<TiposCodigosConductuales>> futureTiposCodigos = TiposCodigosConductualesController.getTiposCodigosConductualesAsync();
+
+// Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
+        futureTiposCodigos.thenAccept(tiposCodigosList -> {
+            // Crear un arreglo de tipos de códigos conductuales para usar en el combobox
+            String[] tiposCodigos = new String[tiposCodigosList.size()];
+
+            for (int i = 0; i < tiposCodigosList.size(); i++) {
+                TiposCodigosConductuales tipoCodigo = tiposCodigosList.get(i);
+                tiposCodigos[i] = tipoCodigo.getTipoCodigoConductual();
+            }
+
+            // Agregar los tipos de códigos conductuales al combobox
+            cbTiposCodigosConductuales.setModel(new DefaultComboBoxModel<>(tiposCodigos));
+        });
+
         String selectedText = (String) cbTiposCodigosConductuales.getSelectedItem();
         txtCodigoConductual.setText(selectedText);
         // Agrega el ActionListener al JComboBox
@@ -159,21 +192,21 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         Validaciones valida = new Validaciones();
-        if (txtCodigoConductual.getText().isEmpty() ) {
+        if (txtCodigoConductual.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
-        }else {
-            if (!valida.check50(txtCodigoConductual.getText()) ) {
+        } else {
+            if (!valida.check50(txtCodigoConductual.getText())) {
                 Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
-            }
-            else{
-            enviarDatosHaciaApi();
-            Timer timer = new Timer(500, (ActionEvent e) -> {
-                CodigosDisciplinarios cd = new CodigosDisciplinarios();
-                cd.cargarDatos();
-                cd.deleteAllTableRows(cd.table1);
-            });
-            timer.setRepeats(false);
-            timer.start();
+            } else {
+                enviarDatosHaciaApi();
+                GlassPanePopup.closePopupLast();
+                Timer timer = new Timer(500, (ActionEvent e) -> {
+                    CodigosDisciplinarios cd = new CodigosDisciplinarios();
+                    cd.cargarDatos();
+                    cd.deleteAllTableRows(cd.table1);
+                });
+                timer.setRepeats(false);
+                timer.start();
             }
         }
 
@@ -198,7 +231,7 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbTiposCodigosConductuales) + num;
         int idNivelCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbNivelCodigoConductual) + num1;
         String codigoConductual = txtCodigoConductual.getText();
-        
+
         System.out.println(idTipoCodigoConductual);
         System.out.println(idNivelCodigoConductual);
         System.out.println(codigoConductual);
