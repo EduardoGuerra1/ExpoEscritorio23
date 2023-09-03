@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
  */
 public class boton extends JButton{
     
-    private Color buttonColor = new Color(69,88,105);
+    private Color buttonColor = new Color( 69,88,105);
     
     public boton() {
         /*Constructor*/
