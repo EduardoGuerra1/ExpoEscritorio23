@@ -71,17 +71,14 @@ public class LoginForm extends javax.swing.JPanel {
         txtContraseña = new View.SWING.Contraseña();
 
         lbCorreo.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        lbCorreo.setForeground(new java.awt.Color(204, 204, 204));
         lbCorreo.setText("Correo");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/SAE (1).png"))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Bienvenido a SAE");
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("Contraseña");
 
         btnIngresar.setText("Iniciar Sesion");
