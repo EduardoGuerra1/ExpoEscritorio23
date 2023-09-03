@@ -137,8 +137,6 @@ public class RecuCorreo1 extends javax.swing.JPanel {
 
         txtCodigo.setForeground(new java.awt.Color(204, 204, 204));
 
-        txtContraseña.setText("contraseña1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(

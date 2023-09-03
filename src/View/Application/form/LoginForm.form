@@ -142,7 +142,6 @@
     </Component>
     <Component class="View.SWING.Contrase&#xf1;a" name="txtContrase&#xf1;a">
       <Properties>
-        <Property name="text" type="java.lang.String" value="contrase&#xf1;a1"/>
         <Property name="hint" type="java.lang.String" value="CONTRASE&#xd1;A"/>
       </Properties>
     </Component>

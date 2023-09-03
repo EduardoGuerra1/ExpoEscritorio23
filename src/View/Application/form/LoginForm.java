@@ -98,7 +98,6 @@ public class LoginForm extends javax.swing.JPanel {
             }
         });
 
-        txtContraseña.setText("contraseña1");
         txtContraseña.setHint("CONTRASEÑA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
