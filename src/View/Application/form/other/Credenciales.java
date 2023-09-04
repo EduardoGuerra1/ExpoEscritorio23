@@ -7,21 +7,22 @@ package View.Application.form.other;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import View.samplemessage.MessageAddCodigosDisciplinarios;
+import View.samplemessage.MessageAddPersonas;
 import View.samplemessage.MessageEditCodigosDisciplinarios;
+
+import View.samplemessage.MessageEditPersonas;
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLaf;
 import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
 import expoescritorio.Controller.PersonasController;
 import expoescritorio.Controller.TiposPersonasController;
 import expoescritorio.Models.CodigosConductuales;
 import expoescritorio.Models.Personas;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javax.swing.JComboBox;
@@ -37,29 +38,17 @@ import org.json.JSONObject;
  * @author gyaci
  */
 public class Credenciales extends javax.swing.JPanel {
-
+    
+    
+    
     PersonasController controller = new PersonasController();
+    List<Personas> myPersonas = new ArrayList<Personas>();
 
     /**
      * Creates new form CodigosDisciplinarios
      */
     public Credenciales() {
         initComponents();
-        
-        String bg = getBackground().toString();
-        
-       
-        if(bg.contains("r=49")){
-            System.out.println("Modo oscuro");
-        }else{
-            System.out.println("Modo claro");
-             EventQueue.invokeLater(() -> {
-                   // FlatAnimatedLafChange.showSnapshot();
-                    FlatIntelliJLaf.setup();
-                    FlatLaf.updateUI();
-                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
-                });
-        }
 
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
@@ -75,19 +64,20 @@ public class Credenciales extends javax.swing.JPanel {
     }
 
     public void cargarDatos() {
-        CompletableFuture<List<Personas>> future = PersonasController.getNoPersonasAsync(2);
+        CompletableFuture<List<Personas>> future = PersonasController.getPersonasAsyncs();
         future.thenAccept(personas -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
             
-            
+            myPersonas.clear();
             
             for (Personas persona : personas) {
                 tableModel.addRow(new Object[]{
                     persona.getCodigo(),
                     persona.getNombrePersona()+" "+persona.getApellidoPersona(),
-                    TiposPersonasController.getTipoPersonaAsync(persona.getIdTipoPersona()),
+                    TiposPersonasController.getTipoPersonaAsync(persona.getIdTipoPersona()).join(),
                     persona.getCorreo()
                 });
+                myPersonas.add(persona);
             }
         });
     }
@@ -127,11 +117,21 @@ public class Credenciales extends javax.swing.JPanel {
                 btnAddMouseClicked(evt);
             }
         });
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/edit.png"))); // NOI18N
         btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEditMouseClicked(evt);
+            }
+        });
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
             }
         });
 
@@ -271,7 +271,7 @@ public class Credenciales extends javax.swing.JPanel {
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
         // TODO add your handling code here:
-/*
+        /*
         int num = 4;
         int num1 = 1;
         int selectedRow = table1.getSelectedRow();
@@ -335,49 +335,58 @@ public class Credenciales extends javax.swing.JPanel {
             GlassPanePopup.showPopup(obj);
 
         }
-*/
+        */
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
- /*       // TODO add your handling code here:
-        MessageAddCodigosDisciplinarios obj = new MessageAddCodigosDisciplinarios();
-        obj.txtTitle.setText("Añadir Estudiante");
-        obj.eventOK(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                System.out.println("Click OK");
-                CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
-                future.thenAccept(codigosConductuales -> {
-                    deleteAllTableRows(table1);
-                    DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-                    for (CodigosConductuales codigo : codigosConductuales) {
-                        tableModel.addRow(new Object[]{
-                            codigo.getIdCodigoConductual(),
-                            codigo.getIdTipoCodigoConductual(),
-                            codigo.getIdNivelCodigoConductual(),
-                            codigo.getCodigoConductual()
-                        });
-                    }
-                });
-                GlassPanePopup.closePopupLast();
-                Timer timer = new Timer(500, (ActionEvent e) -> {
-                    deleteAllTableRows(table1);
-                    cargarDatos();
-                });
-                timer.setRepeats(false);
-                timer.start();
-            }
-        });
+
+    }//GEN-LAST:event_btnAddMouseClicked
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        
+        MessageAddPersonas obj = new MessageAddPersonas(this);
+        obj.txtTitle.setText("Añadir Credencial");
+
         GlassPanePopup.showPopup(obj);
 
-        Timer timer = new Timer(500, (ActionEvent e) -> {
-            deleteAllTableRows(table1);
-            cargarDatos();
-        });
-        timer.setRepeats(false);
-        timer.start();
-*/
-    }//GEN-LAST:event_btnAddMouseClicked
+       
+        
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        
+        int indx = table1.getSelectedRow();
+        if(indx==-1){
+            Message obj = new Message();
+            obj.txtTitle.setText("Aviso");
+            obj.txtContent.setText("Debe seleccionar una fila.");
+            obj.eventOK(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    System.out.println("Click OK");
+                    GlassPanePopup.closePopupLast();
+                }
+            });
+            GlassPanePopup.showPopup(obj);
+        }
+        else{
+            try{
+                MessageEditPersonas obj = new MessageEditPersonas(myPersonas.get(indx),this);
+                
+                obj.txtTitle.setText("Actualizar Estudiante");
+                
+                GlassPanePopup.showPopup(obj);
+
+                
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+        
+    }//GEN-LAST:event_btnEditActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

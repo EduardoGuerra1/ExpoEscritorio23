@@ -38,6 +38,7 @@ import expoescritorio.Controller.PersonasController;
 import static expoescritorio.Controller.PersonasController.getPersonasAsync;
 import expoescritorio.Models.Periodos;
 import expoescritorio.Models.Personas;
+import expoescritorio.Models.PersonasLo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.text.AttributeSet;
@@ -65,14 +66,14 @@ public class MessageEditVisitaEnfermeria extends javax.swing.JPanel {
             cbPeriodo.addItem(tipoCodigoConductual.getTipoCodigoConductual());
         }
 
-        CompletableFuture<List<Personas>> futurePersonas = getPersonasAsync(2);
+        CompletableFuture<List<PersonasLo>> futurePersonas = getPersonasAsync(2);
 
         // Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
         futurePersonas.thenAccept(personasList -> {
             // Crear un arreglo de nombres y apellidos para usar en el combobox
             String[] nombresApellidos = new String[personasList.size()];
             for (int i = 0; i < personasList.size(); i++) {
-                Personas persona = personasList.get(i);
+                PersonasLo persona = personasList.get(i);
                 nombresApellidos[i] = persona.getNombrePersona() + " " + persona.getApellidoPersona();
             }
 

@@ -73,7 +73,7 @@ public class Estudiantes extends javax.swing.JPanel {
     }
 
     public void cargarDatos() {
-        CompletableFuture<List<Personas>> future = PersonasController.getPersonasAsync(2);
+        CompletableFuture<List<Personas>> future = PersonasController.getNoPersonasAsync(WIDTH);
         future.thenAccept(personas -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
             

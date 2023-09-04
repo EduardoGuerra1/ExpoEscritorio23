@@ -40,6 +40,7 @@ import static expoescritorio.Controller.PersonasController.getPersonasAsync;
 import expoescritorio.Models.Periodos;
 //import  expoescritorio.Controller.PersonasController.getPersonasAsync;
 import expoescritorio.Models.Personas;
+import expoescritorio.Models.PersonasLo;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -52,7 +53,7 @@ import javax.swing.text.PlainDocument;
  * @author educs
  */
 public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
-       List<Personas> listaIdPersonas = new ArrayList<>();
+       List<PersonasLo> listaIdPersonas = new ArrayList<>();
        
        private Boolean noti;
     public MessageAddVisitaEnfermeria() {
@@ -80,7 +81,7 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
         });
         */
 
-        CompletableFuture<List<Personas>> futurePersonas = getPersonasAsync(2);
+        CompletableFuture<List<PersonasLo>> futurePersonas = getPersonasAsync(2);
 
         // Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
         futurePersonas.thenAccept(personasList -> {
@@ -88,7 +89,7 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
             String[] nombresApellidos = new String[personasList.size()];
             String[] ID = new String[personasList.size()];
             for (int i = 0; i < personasList.size(); i++) {
-                Personas persona = personasList.get(i);
+                PersonasLo persona = personasList.get(i);
                 listaIdPersonas = personasList;
                 
                 nombresApellidos[i] = persona.getCodigo()+ " " +persona.getNombrePersona() + " " + persona.getApellidoPersona();

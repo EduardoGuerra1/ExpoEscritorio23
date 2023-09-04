@@ -9,6 +9,7 @@ import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import expoescritorio.Controller.PersonasController;
 import expoescritorio.Models.Personas;
+import expoescritorio.Models.PersonasLo;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -163,7 +164,7 @@ public class LoginForm extends javax.swing.JPanel {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Los campos no pueden estar vacios");
         }else{
             /*Llamada a un controlador para procesar la autenticación*/
-            Personas personas = PersonasController.callApiAndProcessResponse(Correo, Contraseña);
+            PersonasLo personas = PersonasController.callApiAndProcessResponse(Correo, Contraseña);
             int id = personas.getIdTipoPersona();
         if (personas != null) {
             /*Verificación de acceso correcto*/
