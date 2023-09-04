@@ -235,6 +235,9 @@ public class RecuCorreo1 extends javax.swing.JPanel {
 enviarDatosHaciaApi();
             System.out.println(Code);
             
+        }else{
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Debe ingresar un correo de administrador");
+                    playError();
         }
         
     }//GEN-LAST:event_btnEnviarMouseClicked
@@ -288,7 +291,8 @@ private void enviarDatosHaciaApi() {
                  Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Se cambio correctamente la contraseña");
                  Application.logout();
             } else {
-                  Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Hubo un problema inténtelo mas tarde");
+                  Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
+                  playError();
              System.out.println("La solicitud HTTP put no fue exitosa.");
             }
         }).join();
@@ -297,6 +301,8 @@ private void enviarDatosHaciaApi() {
         }
         else{
             System.out.println(" no se que paso ");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
+                    playError();
         }
     }//GEN-LAST:event_btnRestablecerMouseClicked
 

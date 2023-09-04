@@ -74,7 +74,8 @@ public class MessageAddComunicados extends javax.swing.JPanel {
 
     String rute = "";
     Comunicados frm = null;
-private Boolean noti;
+    private Boolean noti;
+
     public MessageAddComunicados(Comunicados frmComunicados) {
 
         initComponents();
@@ -89,7 +90,7 @@ private Boolean noti;
         grados = Funciones.GetGrados().join();
 
         this.frm = frmComunicados;
-        
+
         txtTitulo.setDocument(new PlainDocument() { // desde aca 
             @Override
             public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
@@ -102,8 +103,7 @@ private Boolean noti;
 
                         noti = true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
-                    }
-                else{
+                    } else {
                         noti = false;
                     }
                 }
@@ -243,13 +243,13 @@ private Boolean noti;
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El comunicado debe tener un título");
             playError();
         } else {
-
+            GlassPanePopup.closePopupLast();
             enviarDatosHaciaApi();
-             GlassPanePopup.closePopupLast();
+
             Timer timer = new Timer(500, (ActionEvent e) -> {
                 CodigosDisciplinarios cd = new CodigosDisciplinarios();
                 cd.cargarDatos();
-                cd.deleteAllTableRows(cd.table1);
+                //  cd.deleteAllTableRows(cd.table1);
             });
             timer.setRepeats(false);
             timer.start();
@@ -304,7 +304,7 @@ private Boolean noti;
 
     private void txtTituloKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloKeyReleased
         // TODO add your handling code here:
-        
+
         if (noti == true) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
             playValidacion();

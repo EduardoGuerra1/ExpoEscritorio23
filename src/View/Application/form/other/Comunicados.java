@@ -219,10 +219,8 @@ public class Comunicados extends javax.swing.JPanel {
                 public void actionPerformed(ActionEvent ae) {
                     System.out.println("Click OK");
                     Timer timer = new Timer(500, (ActionEvent e) -> {
-                    if(!obj.isVisible()){
-                         cargarDatos();
+                     cargarDatos();
                         deleteAllTableRows(table1);
-                    }
                        
                         
                     });

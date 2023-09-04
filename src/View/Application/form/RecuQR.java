@@ -322,6 +322,8 @@ public class RecuQR extends javax.swing.JPanel {
                 } else {
 
                     System.out.println("La solicitud HTTP put no fue exitosa.");
+                    Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
+                    playError();
                 }
             }).join();
 
@@ -329,6 +331,8 @@ public class RecuQR extends javax.swing.JPanel {
             System.out.println("furulo");
         } else {
             System.out.println("no furulo");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
+                    playError();
         }
     }//GEN-LAST:event_btnRestablecerMouseClicked
 

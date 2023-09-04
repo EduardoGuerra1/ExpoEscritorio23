@@ -150,7 +150,8 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
             playError();
         } else {
             if (!valida.check16(txtTipoCodigo.getText())) {
-                Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
+                playError();
             } else {
                 enviarDatosHaciaApi();
                 GlassPanePopup.closePopupLast();

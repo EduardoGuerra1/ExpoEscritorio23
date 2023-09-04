@@ -213,10 +213,8 @@ String bg = getBackground().toString();
             public void actionPerformed(ActionEvent ae) {
                 
                 Timer timer = new Timer(500, (ActionEvent e) -> {
-                    if(!obj.isVisible()){
-                        cargarDatos();
+                    cargarDatos();
                     deleteAllTableRows(table1);
-                    }
                     
                 });
                 timer.setRepeats(false);

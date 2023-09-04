@@ -190,14 +190,14 @@ public class MessageEditComunicados extends javax.swing.JPanel {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El comunicado debe tener un título"); 
             playError();
         }else {
-            
+            GlassPanePopup.closePopupLast();
             enviarDatosHaciaApi();
             Timer timer = new Timer(500, (ActionEvent e) -> {
                 Comunicados cd = new Comunicados();
                 cd.cargarDatos();
                 cd.deleteAllTableRows(cd.table1);
                     boolean pC = panelClosing() == true;
-                    GlassPanePopup.closePopupLast();
+                    
             });
             timer.setRepeats(false);
             timer.start();

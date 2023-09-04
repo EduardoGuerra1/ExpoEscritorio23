@@ -45,20 +45,19 @@ public class RangoDeHoras extends javax.swing.JPanel {
      */
     public RangoDeHoras() {
         initComponents();
-        
+
         String bg = getBackground().toString();
-        
-       
-        if(bg.contains("r=49")){
+
+        if (bg.contains("r=49")) {
             System.out.println("Modo oscuro");
-        }else{
+        } else {
             System.out.println("Modo claro");
-             EventQueue.invokeLater(() -> {
-                   // FlatAnimatedLafChange.showSnapshot();
-                    FlatIntelliJLaf.setup();
-                    FlatLaf.updateUI();
-                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
-                });
+            EventQueue.invokeLater(() -> {
+                // FlatAnimatedLafChange.showSnapshot();
+                FlatIntelliJLaf.setup();
+                FlatLaf.updateUI();
+                //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+            });
         }
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
@@ -187,29 +186,27 @@ public class RangoDeHoras extends javax.swing.JPanel {
         }
     }
 
-public void cargarDatosAsync() {
-    getRangoHorasApiAsync()
-        .thenAccept(encargadosList -> {
-            DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-            for (RangosHoras tipoCodigo : encargadosList) {
-                String inicioFormatted = tipoCodigo.getInicio().substring(0, 5); // Obtener los primeros 5 caracteres (HH:mm)
-                String finalsFormatted = tipoCodigo.getFinals().substring(0, 5); // Obtener los primeros 5 caracteres (HH:mm)
-                
-                tableModel.addRow(new Object[]{
-                    tipoCodigo.getIdRangoHora(),
-                    tipoCodigo.getTitulo(),
-                    inicioFormatted,
-                    finalsFormatted
+    public void cargarDatosAsync() {
+        getRangoHorasApiAsync()
+                .thenAccept(encargadosList -> {
+                    DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
+                    for (RangosHoras tipoCodigo : encargadosList) {
+                        String inicioFormatted = tipoCodigo.getInicio().substring(0, 5); // Obtener los primeros 5 caracteres (HH:mm)
+                        String finalsFormatted = tipoCodigo.getFinals().substring(0, 5); // Obtener los primeros 5 caracteres (HH:mm)
+
+                        tableModel.addRow(new Object[]{
+                            tipoCodigo.getIdRangoHora(),
+                            tipoCodigo.getTitulo(),
+                            inicioFormatted,
+                            finalsFormatted
+                        });
+                    }
+                })
+                .exceptionally(throwable -> {
+                    throwable.printStackTrace();
+                    return null;
                 });
-            }
-        })
-        .exceptionally(throwable -> {
-            throwable.printStackTrace();
-            return null;
-        });
-}
-
-
+    }
 
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
@@ -219,13 +216,11 @@ public void cargarDatosAsync() {
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
+
                 Timer timer = new Timer(500, (ActionEvent e) -> {
-                    if(!obj.isVisible()){
-                        cargarDatosAsync();
-                    deleteAllTableRows(table1);
-                    }
-                    
+                   cargarDatosAsync();
+                        deleteAllTableRows(table1);
+
                 });
                 timer.setRepeats(false);
                 timer.start();
@@ -243,8 +238,8 @@ public void cargarDatosAsync() {
             // Obtener los datos de las columnas de la fila seleccionada
 
             Object id = table1.getValueAt(selectedRow, 0);
-             Object Inicio = table1.getValueAt(selectedRow, 2);
-             Object Final = table1.getValueAt(selectedRow, 3);
+            Object Inicio = table1.getValueAt(selectedRow, 2);
+            Object Final = table1.getValueAt(selectedRow, 3);
             Object tipoCodigo = table1.getValueAt(selectedRow, 1);
             MessageEditRangoHoras msg = new MessageEditRangoHoras();
             msg.txtTitle.setText("Actualización de Rango de Hora");
@@ -257,7 +252,7 @@ public void cargarDatosAsync() {
                 public void actionPerformed(ActionEvent ae) {
                     GlassPanePopup.closePopupLast();
                     Timer timer = new Timer(500, (ActionEvent e) -> {
-                    cargarDatosAsync();
+                        cargarDatosAsync();
                         deleteAllTableRows(table1);
                     });
                     timer.setRepeats(false);
@@ -285,14 +280,12 @@ public void cargarDatosAsync() {
         // TODO add your handling code here:
 
         int selectedRow = table1.getSelectedRow();
-        
-        
 
         // Verificar si se ha seleccionado una fila
         if (selectedRow != -1) {
             // Obtener los datos de las columnas de la fila seleccionada
             Object id = table1.getValueAt(selectedRow, 0);
-                System.out.println(id);
+            System.out.println(id);
             Message obj = new Message();
             obj.txtTitle.setText("Aviso");
             obj.txtContent.setText("¿Desea eliminar este registro?");
