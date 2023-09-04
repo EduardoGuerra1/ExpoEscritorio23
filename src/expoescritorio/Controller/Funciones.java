@@ -15,11 +15,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+
 
 
 public class Funciones {
@@ -49,7 +52,7 @@ public class Funciones {
                             int idPeriodo= jsonObject.getInt("idGrado");
                             String fecha= jsonObject.getString("fecha");
                             String detalle = jsonObject.getString("detalle");
-                            String idEstudiante= jsonObject.getString("archivo");
+byte[] idEstudiante= Base64.getDecoder().decode(jsonObject.getString("archivo")); 
                             modelList.add(new ComunicadosModel(idObservacion, idPeriodo,fecha,detalle, idEstudiante));
                         }
                     }else {

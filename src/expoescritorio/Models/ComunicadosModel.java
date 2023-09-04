@@ -16,10 +16,10 @@ public class ComunicadosModel {
     int idGrado;        // Identificador del grado al que está dirigido el comunicado.
     String detalle;     // Detalle o contenido del comunicado.
     String fecha;       // Fecha del comunicado.
-    String archivo;     // Nombre del archivo adjunto al comunicado.
+    byte[] archivo;     // Nombre del archivo adjunto al comunicado.
 
     // Constructor de la clase que toma varios parámetros para inicializar los campos.
-    public ComunicadosModel(int idComunicado, int idGrado, String detalle, String fecha, String archivo) {
+    public ComunicadosModel(int idComunicado, int idGrado, String detalle, String fecha, byte[] archivo) {
         this.idComunicado = idComunicado;
         this.idGrado = idGrado;
         this.detalle = detalle;
