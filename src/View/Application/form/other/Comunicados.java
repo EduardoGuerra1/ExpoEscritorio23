@@ -218,6 +218,7 @@ public class Comunicados extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     System.out.println("Click OK");
+                    GlassPanePopup.closePopupLast();
                     Timer timer = new Timer(500, (ActionEvent e) -> {
                      cargarDatos();
                         deleteAllTableRows(table1);

@@ -146,6 +146,9 @@ public class MessageEditPersonas extends javax.swing.JPanel {
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
+                    Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "No se pueden editar los datos de los administradores, intente nuevamente");
+            playError();
+                    
                 }
             });
             
