@@ -5,20 +5,10 @@
 package View.samplemessage;
 
 import Services.Validaciones;
-import View.Application.form.other.CodigosDisciplinarios;
 import View.Application.form.other.RangoDeHoras;
-import View.Application.form.other.SalonesPantalla;
-import View.Application.form.other.TiposCodigos;
 import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
-import com.kitfox.svg.A;
-import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
-import expoescritorio.Controller.NivelesCodigosConductualesController;
-import expoescritorio.Controller.TiposCodigosConductualesController;
-import expoescritorio.Models.CodigosConductuales;
-import expoescritorio.Models.NivelesCodigosConductuales;
-import expoescritorio.Models.TiposCodigosConductuales;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -26,12 +16,11 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.Timer;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -46,8 +35,8 @@ import raven.toast.Notifications;
  */
 public class MessageAddRangoHoras extends javax.swing.JPanel {
 
-    
     private Boolean noti;
+
     public MessageAddRangoHoras() {
 
         initComponents();
@@ -65,9 +54,11 @@ public class MessageAddRangoHoras extends javax.swing.JPanel {
                 }
                 for (char c : str.toCharArray()) {
                     if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
-                      // Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
-                      noti=true;  
-                      return; // Ignora el carácter si no es letra, número, espacio o punto
+                        // Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                        noti = true;
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    } else {
+                        noti = false;
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -152,43 +143,75 @@ public class MessageAddRangoHoras extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-String selectedTime1 = Final.getSelectedTime();
-String selectedTime2 = Inicio.getSelectedTime();
+        String selectedTime1 = Final.getSelectedTime();
+        String selectedTime2 = Inicio.getSelectedTime();
 
-String[] timeParts1 = selectedTime1.split(":");
-int hour1 = Integer.parseInt(timeParts1[0]);
-int minute1 = Integer.parseInt(timeParts1[1]);
+        String[] timeParts1 = selectedTime1.split(":");
+        int hour1 = Integer.parseInt(timeParts1[0]);
+        int minute1 = Integer.parseInt(timeParts1[1]);
 
-String[] timeParts2 = selectedTime2.split(":");
-int hour2 = Integer.parseInt(timeParts2[0]);
-int minute2 = Integer.parseInt(timeParts2[1]);
+        String[] timeParts2 = selectedTime2.split(":");
+        int hour2 = Integer.parseInt(timeParts2[0]);
+        int minute2 = Integer.parseInt(timeParts2[1]);
 
-
-if (hour1 > hour2 || (hour1 == hour2 && minute1 > minute2)) {
-    if (txtTipoCodigo.getText().isEmpty()) {
-        Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
-    }
-    else {
-        Validaciones valida = new Validaciones();
-    if (!valida.check16( txtTipoCodigo.getText())) {
-        Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Titulo Es Muy Largo");
-    }
-    else{
-        enviarDatosHaciaApi();
-        Timer timer = new Timer(500, (ActionEvent e) -> {
-            RangoDeHoras tc = new RangoDeHoras();
-            tc.cargarDatosAsync();
-            tc.deleteAllTableRows(tc.table1);
-        });
-        timer.setRepeats(false);
-        timer.start();
-    }
-   }
-} else {
-    Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Revisar La hora final ");
-}
+        if (hour1 > hour2 || (hour1 == hour2 && minute1 > minute2)) {
+            if (txtTipoCodigo.getText().isBlank()) {
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+                playError();
+            } else {
+                Validaciones valida = new Validaciones();
+                if (!valida.check16(txtTipoCodigo.getText())) {
+                    Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Titulo Es Muy Largo");
+                    playError();
+                } else {
+                    enviarDatosHaciaApi();
+                     GlassPanePopup.closePopupLast();
+                    Timer timer = new Timer(500, (ActionEvent e) -> {
+                        RangoDeHoras tc = new RangoDeHoras();
+                        tc.cargarDatosAsync();
+                        tc.deleteAllTableRows(tc.table1);
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
+                }
+            }
+        } else {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Revisar la hora final ");
+            playError();
+        }
 
     }//GEN-LAST:event_btnAceptarMouseClicked
+private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
 
     private void FinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalActionPerformed
         // TODO add your handling code here:
@@ -196,9 +219,11 @@ if (hour1 > hour2 || (hour1 == hour2 && minute1 > minute2)) {
 
     private void txtTipoCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoCodigoKeyReleased
         // TODO add your handling code here:
-         if(noti==true){
+        if(noti==true){
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+            playValidacion();
         }
+
     }//GEN-LAST:event_txtTipoCodigoKeyReleased
 
     public void eventOK(ActionListener event) {
@@ -207,20 +232,18 @@ if (hour1 > hour2 || (hour1 == hour2 && minute1 > minute2)) {
 
     private void enviarDatosHaciaApi() {
 
-       
         MessageAddRangoHoras msg = new MessageAddRangoHoras();
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
-        
+
         String codigoConductual = txtTipoCodigo.getText();
         String selectedInicio = Inicio.getSelectedTime();
         String selectedFinal = Final.getSelectedTime();
-        
-        
+
         System.out.println(codigoConductual);
         try {
             // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
-            
+
             jsonData.put("titulo", codigoConductual);
             jsonData.put("inicio", selectedInicio);
             jsonData.put("finals", selectedFinal);

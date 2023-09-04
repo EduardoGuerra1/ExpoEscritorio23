@@ -214,6 +214,22 @@ public class Comunicados extends javax.swing.JPanel {
             Object id = table1.getValueAt(selectedRow, 0);
             obj.txtTitulo.setText(Titulo.toString());
             obj.id = Integer.parseInt(id.toString()); 
+            obj.eventOK(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    System.out.println("Click OK");
+                    Timer timer = new Timer(500, (ActionEvent e) -> {
+                    if(!obj.isVisible()){
+                         cargarDatos();
+                        deleteAllTableRows(table1);
+                    }
+                       
+                        
+                    });
+                    timer.setRepeats(false);
+                timer.start();
+                }
+            });
             GlassPanePopup.showPopup(obj);
            
         } else {
@@ -224,10 +240,13 @@ public class Comunicados extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     System.out.println("Click OK");
+                     GlassPanePopup.closePopupLast();
                     Timer timer = new Timer(500, (ActionEvent e) -> {
-                    cargarDatos();
-                        deleteAllTableRows(table1);
+                    
+                        
                     });
+                    timer.setRepeats(false);
+                timer.start();
                 }
             });
             GlassPanePopup.showPopup(obj);

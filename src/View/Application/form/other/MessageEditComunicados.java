@@ -4,17 +4,9 @@
  */
 package View.Application.form.other;
 
-import View.Application.form.other.CodigosDisciplinarios;
 import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
-import com.kitfox.svg.A;
-import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
-import expoescritorio.Controller.NivelesCodigosConductualesController;
-import expoescritorio.Controller.TiposCodigosConductualesController;
-import expoescritorio.Models.CodigosConductuales;
-import expoescritorio.Models.NivelesCodigosConductuales;
-import expoescritorio.Models.TiposCodigosConductuales;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -25,39 +17,28 @@ import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.Timer;
-import org.json.JSONException;
 import org.json.JSONObject;
 import raven.toast.Notifications;
 import Services.Validaciones;
-import View.Application.form.other.Comunicados;
-import View.Application.form.other.SalonesPantalla;
-import expoescritorio.Controller.EspecialidadesController;
 import expoescritorio.Controller.Funciones;
-import expoescritorio.Controller.GruposTecnicosController;
-import expoescritorio.Controller.NivelesAcademicosController;
-import expoescritorio.Controller.PersonasController;
-import expoescritorio.Controller.SeccionesBachilleratoController;
-import expoescritorio.Models.ComunicadosModel;
-import expoescritorio.Models.Especialidades;
 import expoescritorio.Models.GradosView;
-import expoescritorio.Models.GruposTecnicos;
-import expoescritorio.Models.NivelesAcademicos;
-import expoescritorio.Models.Personas;
-import expoescritorio.Models.SeccionesBachillerato;
-import java.awt.Image;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
-import javax.swing.ImageIcon;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -69,8 +50,7 @@ public class MessageEditComunicados extends javax.swing.JPanel {
     public int id ; 
     String rute = "";
 
-    
-    
+    private  Boolean noti;
     
     public MessageEditComunicados() {
 
@@ -90,7 +70,25 @@ public class MessageEditComunicados extends javax.swing.JPanel {
         int cnt = 0;
         
 
-        
+        txtTitulo.setDocument(new PlainDocument() {
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                     
+                        noti = true;
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                        noti = false;
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
       
 
     }
@@ -172,6 +170,11 @@ public class MessageEditComunicados extends javax.swing.JPanel {
                 txtTituloActionPerformed(evt);
             }
         });
+        txtTitulo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTituloKeyReleased(evt);
+            }
+        });
         add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 260, 30));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,8 +186,9 @@ public class MessageEditComunicados extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         Validaciones valida = new Validaciones();
-        if (txtTitulo.getText().isEmpty()){
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El comunicado debe tener un título"); 
+        if (txtTitulo.getText().isBlank()){
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El comunicado debe tener un título"); 
+            playError();
         }else {
             
             enviarDatosHaciaApi();
@@ -246,6 +250,48 @@ public class MessageEditComunicados extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTituloActionPerformed
 
+    private void txtTituloKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloKeyReleased
+        // TODO add your handling code here:
+        if(noti==true){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+            playValidacion();
+        }
+        
+    }//GEN-LAST:event_txtTituloKeyReleased
+
+    private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
+
+    
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);
     }

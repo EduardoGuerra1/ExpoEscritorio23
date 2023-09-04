@@ -231,6 +231,9 @@
           <Color blue="66" green="66" red="66" type="rgb"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTelefonoKeyReleased"/>
+      </Events>
     </Component>
     <Component class="View.SWING.textField" name="txtCorreo">
       <Properties>

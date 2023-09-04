@@ -5,18 +5,10 @@
 package View.samplemessage;
 
 import Services.Validaciones;
-import View.Application.form.other.CodigosDisciplinarios;
 import View.Application.form.other.TiposCodigos;
 import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
-import com.kitfox.svg.A;
-import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
-import expoescritorio.Controller.NivelesCodigosConductualesController;
-import expoescritorio.Controller.TiposCodigosConductualesController;
-import expoescritorio.Models.CodigosConductuales;
-import expoescritorio.Models.NivelesCodigosConductuales;
-import expoescritorio.Models.TiposCodigosConductuales;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -24,12 +16,11 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.Timer;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -67,6 +58,9 @@ public class MessageEditTipoCodigos extends javax.swing.JPanel {
                         //Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
                         noti = true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                        noti = false;
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -135,13 +129,16 @@ public class MessageEditTipoCodigos extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         Validaciones valida = new Validaciones();
-        if (txtTipoCodigo.getText().isEmpty()) {
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+        if (txtTipoCodigo.getText().isBlank()) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+            playError();
         } else {
             if (!valida.check16(txtTipoCodigo.getText())) {
-                Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
+                playError();
             } else {
                 actualizarDatosHaciaApi();
+                 GlassPanePopup.closePopupLast();
                 Timer timer = new Timer(500, (ActionEvent e) -> {
                     TiposCodigos tc = new TiposCodigos();
                     tc.cargarDatos();
@@ -154,10 +151,43 @@ public class MessageEditTipoCodigos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
+    private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
+    
     private void txtTipoCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoCodigoKeyReleased
         // TODO add your handling code here:
         if (noti == true) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+            playValidacion();
         }
     }//GEN-LAST:event_txtTipoCodigoKeyReleased
 

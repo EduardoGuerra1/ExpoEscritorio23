@@ -13,8 +13,15 @@ import expoescritorio.Controller.Recuperaciones;
 import static expoescritorio.Controller.TiposPersonasController.getTiposPersonasApiAsync;
 import expoescritorio.Models.Personas;
 import expoescritorio.Models.TiposPersonas;
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import org.json.JSONException;
 import org.json.JSONObject;
 import raven.toast.Notifications;
@@ -28,9 +35,28 @@ public class RecuCorreo1 extends javax.swing.JPanel {
     Recuperaciones controller = new Recuperaciones ();
     String Code = controller.generateRandomCode(); 
     int idPersona; 
+    private Boolean noti;
     String Mensaje;
     public RecuCorreo1() {
         initComponents();
+         txtCodigo.setDocument(new PlainDocument() {
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        //Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                        noti = true;
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    } else {
+                        noti = false;
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
     }
 
     /**
@@ -122,6 +148,11 @@ public class RecuCorreo1 extends javax.swing.JPanel {
         txtCorreo.setForeground(new java.awt.Color(102, 102, 102));
 
         txtCodigo.setForeground(new java.awt.Color(102, 102, 102));
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyReleased(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel3.setText("Ingrese el correo con el que esta registrado:");
@@ -255,6 +286,7 @@ private void enviarDatosHaciaApi() {
             if (response) {
                  System.out.println("La solicitud HTTP put  fue exitosa.");
                  Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Se cambio correctamente la contraseña");
+                 Application.logout();
             } else {
                   Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Hubo un problema inténtelo mas tarde");
              System.out.println("La solicitud HTTP put no fue exitosa.");
@@ -278,6 +310,46 @@ private void enviarDatosHaciaApi() {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEnviarActionPerformed
 
+    private void txtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyReleased
+        // TODO add your handling code here:
+        
+        if(noti==true){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+            playValidacion();
+        }
+    }//GEN-LAST:event_txtCodigoKeyReleased
+
+private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;

@@ -5,17 +5,9 @@
 package View.samplemessage;
 
 import Services.Encriptacion;
-import View.Application.form.other.CodigosDisciplinarios;
 import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
-import com.kitfox.svg.A;
-import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
-import expoescritorio.Controller.NivelesCodigosConductualesController;
-import expoescritorio.Controller.TiposCodigosConductualesController;
-import expoescritorio.Models.CodigosConductuales;
-import expoescritorio.Models.NivelesCodigosConductuales;
-import expoescritorio.Models.TiposCodigosConductuales;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -26,35 +18,18 @@ import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.Timer;
-import org.json.JSONException;
 import org.json.JSONObject;
 import raven.toast.Notifications;
 import Services.Validaciones;
 import View.Application.form.other.Credenciales;
 import View.Application.form.other.Estudiantes;
-import expoescritorio.Controller.EspecialidadesController;
-import expoescritorio.Controller.GradosController;
-import expoescritorio.Controller.NivelesAcademicosController;
-import static expoescritorio.Controller.PersonasController.getPersonasAsync;
-import expoescritorio.Controller.SeccionesBachilleratoController;
-import expoescritorio.Controller.SeccionesController;
-import expoescritorio.Controller.TiposPersonasController;
 import static expoescritorio.Controller.TiposPersonasController.getTiposPersonasApiAsync;
-import expoescritorio.Models.Especialidades;
-import expoescritorio.Models.Grados;
-import expoescritorio.Models.GradosView;
-import expoescritorio.Models.NivelesAcademicos;
-import expoescritorio.Models.Personas;
-import expoescritorio.Models.Secciones;
-import expoescritorio.Models.SeccionesBachillerato;
 import expoescritorio.Models.TiposPersonas;
 import java.awt.Image;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -69,6 +44,9 @@ import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.time.ZoneOffset;
 import java.util.Date;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -121,7 +99,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
             
         });
 
-            
+            Tipos.setVisible(false);
     }
 
     @Override
@@ -293,6 +271,8 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         });
         add(txtNombres5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 260, 30));
 
+        Tipos.setEditable(false);
+        Tipos.setEnabled(false);
         Tipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TiposActionPerformed(evt);
@@ -307,20 +287,25 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         Boolean band1 = true, band2 = true;
         
         
-        if (txtNombres1.getText().isEmpty() || txtApellidos.getText().isEmpty() || txtCodigo.getText().isEmpty()) {
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Los campos no puede estar vacío");
+        if (txtNombres1.getText().isBlank() || txtApellidos.getText().isEmpty() || txtCodigo.getText().isEmpty()) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Los campos no pueden estar vacíos");
+            playError();
         }  
         else if(!Validaciones.checkName(txtNombres1.getText()) || !Validaciones.checkName(txtApellidos.getText())){
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El nombre o apellido es invalido");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El nombre o apellido es inválido");
+            playError();
         }
         else if(!Validaciones.checkDateDown(dpNacimiento.getDate().toInstant().atOffset(ZoneOffset.UTC))){
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "La fecha de nacimiento no es válida");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "La fecha de nacimiento no es válida");
+            playError();
         }
         else if(!Validaciones.onlyInts(txtCodigo.getText())){
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El codigo solo debe tener números");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El codigo solo debe tener números");
+            playValidacion();
         }
         else if(!txtClave.getText().isEmpty() && txtClave.getText().length()<6){
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "La contraseña debe ser de al menos 6 caracteres");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "La contraseña debe ser de al menos 6 carácteres");
+            playValidacion();
         }
         else {
             try {
@@ -341,6 +326,38 @@ public class MessageAddPersonas extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
+    private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
+    
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed

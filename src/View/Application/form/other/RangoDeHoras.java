@@ -219,10 +219,13 @@ public void cargarDatosAsync() {
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                GlassPanePopup.closePopupLast();
+                
                 Timer timer = new Timer(500, (ActionEvent e) -> {
-                    cargarDatosAsync();
+                    if(!obj.isVisible()){
+                        cargarDatosAsync();
                     deleteAllTableRows(table1);
+                    }
+                    
                 });
                 timer.setRepeats(false);
                 timer.start();

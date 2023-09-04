@@ -37,18 +37,17 @@ public class TiposCodigos extends javax.swing.JPanel {
     public TiposCodigos() {
         initComponents();
         String bg = getBackground().toString();
-        
-       
-        if(bg.contains("r=49")){
+
+        if (bg.contains("r=49")) {
             System.out.println("Modo oscuro");
-        }else{
+        } else {
             System.out.println("Modo claro");
-             EventQueue.invokeLater(() -> {
-                   // FlatAnimatedLafChange.showSnapshot();
-                    FlatIntelliJLaf.setup();
-                    FlatLaf.updateUI();
-                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
-                });
+            EventQueue.invokeLater(() -> {
+                // FlatAnimatedLafChange.showSnapshot();
+                FlatIntelliJLaf.setup();
+                FlatLaf.updateUI();
+                //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+            });
         }
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
@@ -196,14 +195,18 @@ public class TiposCodigos extends javax.swing.JPanel {
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                GlassPanePopup.closePopupLast();
-                Timer timer = new Timer(500, (ActionEvent e) -> {
 
-                    cargarDatos();
-                    deleteAllTableRows(table1);
+                Timer timer = new Timer(500, (ActionEvent e) -> {
+                    if (!obj.isShowing()) {
+                        System.out.println("Se actualizaorn los datos de la tabla");
+                        cargarDatos();
+                        deleteAllTableRows(table1);
+                    }
+
                 });
                 timer.setRepeats(false);
                 timer.start();
+
             }
         });
         GlassPanePopup.showPopup(obj);
@@ -226,11 +229,14 @@ public class TiposCodigos extends javax.swing.JPanel {
             msg.eventOK(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    GlassPanePopup.closePopupLast();
+
                     Timer timer = new Timer(500, (ActionEvent e) -> {
 
-                        cargarDatos();
-                        deleteAllTableRows(table1);
+                        if (!msg.isShowing()) {
+                            System.out.println("Se actualizaorn los datos de la tabla");
+                            cargarDatos();
+                            deleteAllTableRows(table1);
+                        }
                     });
                     timer.setRepeats(false);
                     timer.start();

@@ -40,7 +40,9 @@ import raven.toast.Notifications;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -71,6 +73,9 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
 
                         noti = true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                        noti = false;
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -140,18 +145,21 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         Validaciones valida = new Validaciones();
-        if (txtTipoCodigo.getText().isEmpty()) {
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+        if (txtTipoCodigo.getText().isBlank()) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+            playError();
         } else {
             if (!valida.check16(txtTipoCodigo.getText())) {
                 Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
             } else {
                 enviarDatosHaciaApi();
+                GlassPanePopup.closePopupLast();
                 Timer timer = new Timer(500, (ActionEvent e) -> {
                     TiposCodigos tc = new TiposCodigos();
-
+                    System.out.println("se actualizaron los datos desde el mensaje");
                     tc.cargarDatos();
                     tc.deleteAllTableRows(tc.table1);
+                    
                 });
                 timer.setRepeats(false);
                 timer.start();
@@ -161,30 +169,36 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
-    private void playAudio() {
+    private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    private static void PlayMusic(String location) {
         try {
-            File audioFile = new File("src/View/sounds/validacion.wav");
-
-            // Crea un objeto Clip para reproducir el audio
-            Clip clip = AudioSystem.getClip();
-
-            // Abre el archivo de audio y lo carga en el Clip
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-            clip.open(audioStream);
-
-            // Inicia la reproducción del audio
-            clip.start();
-
-            // Espera hasta que el audio termine de reproducirse
-            while (clip.isRunning()) {
-                Thread.sleep(10);
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
             }
-
-            // Cierra el Clip después de reproducir el audio
-            clip.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
+   
     }
 
     private void txtTipoCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoCodigoKeyReleased
@@ -192,7 +206,7 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
 
         if (noti == true) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
-            playAudio();
+            playValidacion();
         }
     }//GEN-LAST:event_txtTipoCodigoKeyReleased
 

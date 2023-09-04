@@ -211,10 +211,13 @@ String bg = getBackground().toString();
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                GlassPanePopup.closePopupLast();
+                
                 Timer timer = new Timer(500, (ActionEvent e) -> {
-                    cargarDatos();
+                    if(!obj.isVisible()){
+                        cargarDatos();
                     deleteAllTableRows(table1);
+                    }
+                    
                 });
                 timer.setRepeats(false);
                 timer.start();

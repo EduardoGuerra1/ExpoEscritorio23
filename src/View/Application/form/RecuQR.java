@@ -5,7 +5,6 @@
 package View.Application.form;
 
 import View.aplicacion.Application;
-import static expoescritorio.Controller.ControllerFull.postApiAsync;
 import static expoescritorio.Controller.ControllerFull.putApiAsync;
 import expoescritorio.Controller.PersonasController;
 import expoescritorio.Controller.Recuperaciones;
@@ -13,26 +12,54 @@ import static expoescritorio.Controller.TiposPersonasController.getTiposPersonas
 import expoescritorio.Models.Personas;
 import expoescritorio.Models.TiposPersonas;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
+import raven.toast.Notifications;
 
 public class RecuQR extends javax.swing.JPanel {
 
-   Recuperaciones controller = new Recuperaciones ();
-   int idPersona; 
+    Recuperaciones controller = new Recuperaciones();
+    private Boolean noti;
+    int idPersona;
+
     public RecuQR() {
-        
-         
+
         initComponents();
         txtTexto.setVisible(true);
         jScrollPane1.setVisible(true);
-       
+
+        txtTelefono.setDocument(new PlainDocument() {
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        //Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                        noti = true;
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    } else {
+                        noti = false;
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
+
     }
 
     /**
@@ -49,8 +76,9 @@ public class RecuQR extends javax.swing.JPanel {
             StringBuilder hexString = new StringBuilder();
             for (byte b : hash) {
                 String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1)
+                if (hex.length() == 1) {
                     hexString.append('0');
+                }
                 hexString.append(hex);
             }
 
@@ -60,38 +88,34 @@ public class RecuQR extends javax.swing.JPanel {
             return null;
         }
     }
-    
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-     int idEncargado = 27;
-     String PASSEN = encryptPassword(txtCambioContraseña.getText());
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        int idEncargado = 27;
+        String PASSEN = encryptPassword(txtCambioContraseña.getText());
         String nombrePersona = this.txtCambioContraseña.getText();
-        
 
-          String jsonInputString = "{\"idPersona\": " + idEncargado + ", \"claveCredenciales\": \"" + PASSEN + "\"}";
-
+        String jsonInputString = "{\"idPersona\": " + idEncargado + ", \"claveCredenciales\": \"" + PASSEN + "\"}";
 
         String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/Contra";
 
         CompletableFuture<Boolean> result = putApiAsync(endpointUrl, jsonInputString);
-        
+
         result.thenAccept(response -> {
             if (response) {
-                
-                 System.out.println("La solicitud HTTP Post exitosa.");
+
+                System.out.println("La solicitud HTTP Post exitosa.");
             } else {
-                 
-             System.out.println("La solicitud HTTP put no fue exitosa.");
+
+                System.out.println("La solicitud HTTP put no fue exitosa.");
             }
         }).join();
 
-             CompletableFuture<List<TiposPersonas>> encargadosFuture = getTiposPersonasApiAsync();
+        CompletableFuture<List<TiposPersonas>> encargadosFuture = getTiposPersonasApiAsync();
 
-    // Esperar a que la operación asincrónica se complete y obtener el resultado de la lista de encargados
-  
+        // Esperar a que la operación asincrónica se complete y obtener el resultado de la lista de encargados
     }
-    
-    
+
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -165,6 +189,11 @@ public class RecuQR extends javax.swing.JPanel {
         jPanel1.add(btnRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         txtTelefono.setForeground(new java.awt.Color(102, 102, 102));
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyReleased(evt);
+            }
+        });
 
         txtCorreo.setForeground(new java.awt.Color(102, 102, 102));
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
@@ -271,12 +300,11 @@ public class RecuQR extends javax.swing.JPanel {
         Personas person = recu.CellApiCorreo(txtCorreo.getText());
         int idPersona = person.getIdPersona();
 
-        int id =  person.getIdTipoPersona();
+        int id = person.getIdTipoPersona();
 
         String COD = txtTexto.getText();
 
-        if ( txtTelefono.getText().equals(COD))
-        {
+        if (txtTelefono.getText().equals(COD)) {
             String PASSEN = encryptPassword(txtCambioContraseña.getText());
 
             String jsonInputString = "{\"idPersona\": " + idPersona + ", \"claveCredenciales\": \"" + PASSEN + "\"}";
@@ -289,6 +317,8 @@ public class RecuQR extends javax.swing.JPanel {
                 if (response) {
 
                     System.out.println("La solicitud HTTP Post exitosa.");
+                    Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Se cambio correctamente la contraseña");
+                 Application.logout();
                 } else {
 
                     System.out.println("La solicitud HTTP put no fue exitosa.");
@@ -297,9 +327,7 @@ public class RecuQR extends javax.swing.JPanel {
 
             CompletableFuture<List<TiposPersonas>> encargadosFuture = getTiposPersonasApiAsync();
             System.out.println("furulo");
-        }
-        else
-        {
+        } else {
             System.out.println("no furulo");
         }
     }//GEN-LAST:event_btnRestablecerMouseClicked
@@ -310,7 +338,7 @@ public class RecuQR extends javax.swing.JPanel {
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
 
-        txtTexto.setText( controller.generateRandomCode());
+        txtTexto.setText(controller.generateRandomCode());
         ByteArrayOutputStream out = QRCode.from(this.txtTexto.getText()).to(ImageType.PNG).stream();
         ImageIcon imageIcon = new ImageIcon(out.toByteArray());
         this.lblImagen.setIcon(imageIcon);
@@ -338,6 +366,46 @@ public class RecuQR extends javax.swing.JPanel {
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
+    private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+
+            if (musicPath.exists()) {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            } else {
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+
+    private void txtTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyReleased
+        // TODO add your handling code here:
+        if (noti == true) {
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+            playValidacion();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

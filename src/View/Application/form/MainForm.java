@@ -106,12 +106,10 @@ public class MainForm extends JLayeredPane {
                 } else if (subIndex == 3) {
                     Application.showForm(new TiposCodigos());
                 } else if (subIndex == 4) {
-                    Application.showForm(new Estudiantes());
-                } else if (subIndex == 5) {
                     Application.showForm(new Observaciones());
-                } else if (subIndex == 6) {
+                } else if (subIndex == 5) {
                     Application.showForm(new SolicitudesPermisos());
-                } else if (subIndex == 7) {
+                } else if (subIndex == 6) {
                     Application.showForm(new Inasistencias());
                 } else {
                     action.cancel();

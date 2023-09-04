@@ -47,15 +47,22 @@ import expoescritorio.Models.NivelesAcademicos;
 import expoescritorio.Models.Personas;
 import expoescritorio.Models.SeccionesBachillerato;
 import java.awt.Image;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -64,12 +71,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class MessageAddComunicados extends javax.swing.JPanel {
 
     List<GradosView> grados = new ArrayList<GradosView>();
-    
+
     String rute = "";
     Comunicados frm = null;
-    
-    
-    
+private Boolean noti;
     public MessageAddComunicados(Comunicados frmComunicados) {
 
         initComponents();
@@ -80,15 +85,31 @@ public class MessageAddComunicados extends javax.swing.JPanel {
         txtTitle.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h4.font");
         // Obtener los datos de la API y cargarlos en el ComboBox
-        
+
         grados = Funciones.GetGrados().join();
-        
+
         this.frm = frmComunicados;
+        
+        txtTitulo.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
 
-        
-
-        
-        
+                        noti = true;
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                        noti = false;
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });// hasta aca
 
     }
 
@@ -169,25 +190,62 @@ public class MessageAddComunicados extends javax.swing.JPanel {
                 txtTituloActionPerformed(evt);
             }
         });
+        txtTitulo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTituloKeyReleased(evt);
+            }
+        });
         add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 260, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         GlassPanePopup.closePopupLast();
     }//GEN-LAST:event_btnCancelarMouseClicked
+    private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
 
+        PlayMusic(filepath);
+
+    }
+
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+
+            if (musicPath.exists()) {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            } else {
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
 
         Validaciones valida = new Validaciones();
         if (rute.isEmpty()) {
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Seleccione un archivo");
-        }
-        else if (txtTitulo.getText().isEmpty()){
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El comunicado debe tener un título"); 
-        }else {
-            
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Seleccione un archivo");
+            playError();
+        } else if (txtTitulo.getText().isEmpty()) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El comunicado debe tener un título");
+            playError();
+        } else {
+
             enviarDatosHaciaApi();
+             GlassPanePopup.closePopupLast();
             Timer timer = new Timer(500, (ActionEvent e) -> {
                 CodigosDisciplinarios cd = new CodigosDisciplinarios();
                 cd.cargarDatos();
@@ -195,25 +253,25 @@ public class MessageAddComunicados extends javax.swing.JPanel {
             });
             timer.setRepeats(false);
             timer.start();
-            
+
         }
-        
+
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void btnImagen1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImagen1MouseClicked
         rute = "";
         JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("PFD","pdf");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("PFD", "pdf");
         chooser.setFileFilter(filter);
-        
+
         int res = chooser.showOpenDialog(this);
-        
-        if(res == JFileChooser.APPROVE_OPTION){
+
+        if (res == JFileChooser.APPROVE_OPTION) {
             rute = chooser.getSelectedFile().getPath();
-            
+
             lbArchivo.setText(rute);
-            
+
         }
     }//GEN-LAST:event_btnImagen1MouseClicked
 
@@ -244,41 +302,53 @@ public class MessageAddComunicados extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTituloActionPerformed
 
+    private void txtTituloKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloKeyReleased
+        // TODO add your handling code here:
+        
+        if (noti == true) {
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+            playValidacion();
+        }
+    }//GEN-LAST:event_txtTituloKeyReleased
+
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);
     }
 
     private void enviarDatosHaciaApi() {
-        try{
+        try {
             JSONObject jsonData = new JSONObject();
-            
+
             Path fotoPath;
             byte[] imageBytes;
-            String base64Image="";
-            
-            if(!rute.isEmpty()){
+            String base64Image = "";
+
+            if (!rute.isEmpty()) {
                 fotoPath = Paths.get(rute);
                 // Read the image file and encode it to Base64
                 imageBytes = Files.readAllBytes(fotoPath);
                 base64Image = Base64.getEncoder().encodeToString(imageBytes);
             }
-            
+
             Date currentDate = new Date();
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String formattedDateTime = dateFormat.format(currentDate);
 
             System.out.println(formattedDateTime);
-            
+
             jsonData.put("idGrado", 2);
             jsonData.put("detalle", txtTitulo.getText());
             jsonData.put("fecha", formattedDateTime);
-            if(rute == "") jsonData.put("archivo", JSONObject.NULL);
-            else jsonData.put("archivo", base64Image);
-            
+            if (rute == "") {
+                jsonData.put("archivo", JSONObject.NULL);
+            } else {
+                jsonData.put("archivo", base64Image);
+            }
+
             String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Comunicados/save"; // Reemplaza esto con la URL de tu API
             String jsonString = jsonData.toString();
-            
+
             CompletableFuture<Boolean> postFuture = ControllerFull.postApiAsync(endpointUrl, jsonString);
 
             // Manejar la respuesta de la API
@@ -290,7 +360,6 @@ public class MessageAddComunicados extends javax.swing.JPanel {
                     frm.deleteAllTableRows(frm.table1);
                     frm.cargarDatos();
 
-                    
                     boolean pC = panelClosing() == true;
                     GlassPanePopup.closePopupLast();
 
@@ -299,9 +368,8 @@ public class MessageAddComunicados extends javax.swing.JPanel {
                     System.out.println("Error al enviar los datos a la API");
                 }
             });
-            
-        }
-        catch (Exception e) {
+
+        } catch (Exception e) {
             // Manejar la excepción JSONException aquí
             e.printStackTrace();
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());

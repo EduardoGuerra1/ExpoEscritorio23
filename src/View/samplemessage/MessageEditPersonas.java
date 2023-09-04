@@ -11,40 +11,24 @@ import View.Application.form.other.Estudiantes;
 import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
 import expoescritorio.Controller.ControllerFull;
-import expoescritorio.Controller.EspecialidadesController;
-import expoescritorio.Controller.NivelesAcademicosController;
-import expoescritorio.Controller.PersonasController;
-import expoescritorio.Controller.SeccionesBachilleratoController;
-import expoescritorio.Controller.SeccionesController;
 import expoescritorio.Controller.TiposPersonasController;
-import expoescritorio.Models.Especialidades;
-import expoescritorio.Models.NivelesAcademicos;
 import expoescritorio.Models.Personas;
-import expoescritorio.Models.Secciones;
-import expoescritorio.Models.SeccionesBachillerato;
 import expoescritorio.Models.TiposPersonas;
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -53,7 +37,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.sql.rowset.serial.SerialBlob;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.Timer;
@@ -630,12 +616,44 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
 
     }//GEN-LAST:event_btnImagenActionPerformed
 
+    private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
     
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
+
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
 
-        if (txtNombres.getText().isEmpty() || txtApellidos.getText().isEmpty() || txtCodigo.getText().isEmpty()) {
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Los campos no puede estar vacíos");
+        if (txtNombres.getText().isBlank() || txtApellidos.getText().isBlank() || txtCodigo.getText().isEmpty()) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Los campos no puede estar vacíos");
+            playError();
         }  else {
             try {
                 enviarDatosHaciaApi();

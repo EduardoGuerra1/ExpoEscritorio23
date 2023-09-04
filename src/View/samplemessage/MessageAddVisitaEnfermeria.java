@@ -7,14 +7,7 @@ package View.samplemessage;
 import View.Application.form.other.CodigosDisciplinarios;
 import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
-import com.kitfox.svg.A;
-import expoescritorio.Controller.CodigosConductualesController;
 import expoescritorio.Controller.ControllerFull;
-import expoescritorio.Controller.NivelesCodigosConductualesController;
-import expoescritorio.Controller.TiposCodigosConductualesController;
-import expoescritorio.Models.CodigosConductuales;
-import expoescritorio.Models.NivelesCodigosConductuales;
-import expoescritorio.Models.TiposCodigosConductuales;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -35,15 +28,17 @@ import raven.toast.Notifications;
 import Services.Validaciones;
 import View.Application.form.other.VisitasEnfermeria;
 import expoescritorio.Controller.PeriodosController;
-import expoescritorio.Controller.PersonasController;
 import static expoescritorio.Controller.PersonasController.getPersonasAsync;
 import expoescritorio.Models.Periodos;
 //import  expoescritorio.Controller.PersonasController.getPersonasAsync;
 import expoescritorio.Models.Personas;
 import expoescritorio.Models.PersonasLo;
+import java.io.File;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -130,6 +125,9 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
                       // Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
                        noti=true;
                       return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                    else{
+                        noti=false;
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -241,16 +239,52 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         GlassPanePopup.closePopupLast();
     }//GEN-LAST:event_btnCancelarMouseClicked
 
+    
+    private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
+
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
 
        Validaciones valida = new Validaciones();
-        if (txtVisita.getText().isEmpty() ) {
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+        if (txtVisita.getText().isBlank() ) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
+            playError();
         }else {
             if (!valida.check6(txtVisita.getText()) ) {
-                Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
+                playError();
             }
             else{
+                GlassPanePopup.closePopupLast();
             enviarDatosHaciaApi();
             Timer timer = new Timer(500, (ActionEvent e) -> {
                  VisitasEnfermeria cd = new VisitasEnfermeria();
@@ -270,6 +304,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         
          if(noti==true){
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+            playValidacion();
         }
     }//GEN-LAST:event_txtVisitaKeyReleased
 
