@@ -144,7 +144,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTitle.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        txtTitle.setText("Your Message Title Dialog Custom");
+        txtTitle.setText("Gestión de Usuarios");
         add(txtTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         btnImagen.setText("Escoger foto");
@@ -312,6 +312,8 @@ public class MessageAddPersonas extends javax.swing.JPanel {
                 enviarDatosHaciaApi();
             } catch (IOException ex) {
                 Logger.getLogger(MessageAddPersonas.class.getName()).log(Level.SEVERE, null, ex);
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
+            playError();
             }
             Timer timer = new Timer(500, (ActionEvent e) -> {
                 Estudiantes cd = new Estudiantes();

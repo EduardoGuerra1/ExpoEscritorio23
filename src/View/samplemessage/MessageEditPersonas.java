@@ -659,6 +659,8 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
                 enviarDatosHaciaApi();
             } catch (IOException ex) {
                 Logger.getLogger(MessageAddEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
+            playError();
             }
             Timer timer = new Timer(500, (ActionEvent e) -> {
                 Estudiantes cd = new Estudiantes();
