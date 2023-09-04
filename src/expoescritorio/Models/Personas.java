@@ -1,22 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package expoescritorio.Models;
 
+// Importar la anotación Lombok para generar automáticamente métodos getter, setter, equals, hashCode y toString.
 import lombok.Data;
 
+// Declarar la clase Personas
 @Data
 public class Personas {
-     private int idPersona;
-    private String codigo;
-    private String nombrePersona;
-    private String apellidoPersona;
-    private String nacimientoPersona;
-    private int idTipoPersona;
-    private String correo;
-    private String claveCredenciales;
-    private String foto;
+    // Declarar campos de instancia para almacenar información relacionada con las personas.
+    private int idPersona;             // Identificador único de la persona.
+    private String codigo;             // Código asociado a la persona.
+    private String nombrePersona;      // Nombre de la persona.
+    private String apellidoPersona;    // Apellido de la persona.
+    private String nacimientoPersona;  // Fecha de nacimiento de la persona en formato de texto.
+    private int idTipoPersona;         // Identificador del tipo de persona.
+    private String correo;             // Dirección de correo electrónico de la persona.
+    private String claveCredenciales;  // Clave o contraseña de credenciales de la persona.
+    private String foto;               // URL o ubicación de la foto de la persona.
+
+    // Constructor de la clase que toma varios parámetros para inicializar los campos.
     public Personas(int idPersona, String codigo, String nombrePersona, String apellidoPersona, String nacimientoPersona, int idTipoPersona, String correo, String claveCredenciales, String foto) {
         this.idPersona = idPersona;
         this.codigo = codigo;
@@ -28,7 +29,5 @@ public class Personas {
         this.claveCredenciales = claveCredenciales;
         this.foto = foto;
     }
-    
-    
-    
 }
+

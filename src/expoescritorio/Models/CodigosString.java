@@ -1,17 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package expoescritorio.Models;
 
+// Importar la anotación Lombok para generar automáticamente métodos getter, setter, equals, hashCode y toString.
 import lombok.Data;
 
+// Declarar la clase CodigosString
 @Data
 public class CodigosString {
-    int idCodigoConductual;
-    String nivelCodigoConductual;
-    String codigoConductual;
+    // Declarar campos de instancia para almacenar información relacionada con los códigos en formato String.
+    int idCodigoConductual;          // Identificador único del código conductual.
+    String nivelCodigoConductual;    // Nivel del código conductual en formato String.
+    String codigoConductual;         // Código conductual en formato String.
 
+    // Constructor de la clase que toma varios parámetros para inicializar los campos.
     public CodigosString(int idCodigoConductual, String nivelCodigoConductual, String codigoConductual) {
         this.idCodigoConductual = idCodigoConductual;
         this.nivelCodigoConductual = nivelCodigoConductual;
