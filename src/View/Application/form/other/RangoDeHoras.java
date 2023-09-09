@@ -86,7 +86,7 @@ public class RangoDeHoras extends javax.swing.JPanel {
         btnEdit = new View.BotonesText.Buttons();
         btnDelete = new View.BotonesText.Buttons();
 
-        lb.setText("Gestión de los Rangos de Horas");
+        lb.setText("Gestión de Rangos de Horas");
         lb.setToolTipText("");
 
         table1.setModel(new javax.swing.table.DefaultTableModel(

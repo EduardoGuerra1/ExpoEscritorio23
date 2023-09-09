@@ -17,108 +17,104 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class PantallaInicio extends javax.swing.JPanel implements Runnable {
- int hora,minutos,segundos; 
-    String timestr, yearstr; 
-    int day,month,year;
-    
+
+    int hora, minutos, segundos;
+    String timestr, yearstr;
+    int day, month, year;
+
     /**
      * Creates new form PantallaInicio
      */
     public PantallaInicio() {
-        
-        Thread t= new Thread(this);
+
+        Thread t = new Thread(this);
         t.start();
         initComponents();
-        
+
         String bg = getBackground().toString();
-        System.out.println("El color de fondo de Pantalla Inicio es: "+bg);
-        
+        System.out.println("El color de fondo de Pantalla Inicio es: " + bg);
+
         time.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         date.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
-        lbBienvenido.putClientProperty(FlatClientProperties.STYLE,""
+        lbBienvenido.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
-        lbTitulo.putClientProperty(FlatClientProperties.STYLE,""
+        lbTitulo.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
-        lbTitulo2.putClientProperty(FlatClientProperties.STYLE,""
+        lbTitulo2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
-        lbContenido.putClientProperty(FlatClientProperties.STYLE,""
+        lbContenido.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbContenido1.putClientProperty(FlatClientProperties.STYLE,""
+        lbContenido1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbContenido2.putClientProperty(FlatClientProperties.STYLE,""
+        lbContenido2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbContenido3.putClientProperty(FlatClientProperties.STYLE,""
+        lbContenido3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbContenido4.putClientProperty(FlatClientProperties.STYLE,""
+        lbContenido4.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        
+
         lbContenido.setText("El Sistema de Administración ");
-                //+ "(SAE), es una herramienta que facilita la gestión disciplinaria y administrativa de los estudiantes del Instituto Técnico Ricaldone.");
+        //+ "(SAE), es una herramienta que facilita la gestión disciplinaria y administrativa de los estudiantes del Instituto Técnico Ricaldone.");
         lbContenido1.setText("Estudiantil (SAE), es una herramienta");
         lbContenido2.setText("que facilita la gestión disciplinaria");
         lbContenido3.setText("y administrativa para los estudiantes");
         lbContenido4.setText("del Instituto Técnico Ricaldone.");
-      // panel1.setBackground(Color.getHSBColor(209, 34, 29));
-      
+        // panel1.setBackground(Color.getHSBColor(209, 34, 29));
+
         //cambiarColorRGB(44, 55, 66);
-        
-        
         //Asignacion de diseño a la parte inferior de la pantalla (Valores)
         //Integridad
-        lbIntegridad.putClientProperty(FlatClientProperties.STYLE,""
+        lbIntegridad.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
-        lbIntegridad1.putClientProperty(FlatClientProperties.STYLE,""
+        lbIntegridad1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbIntegridad2.putClientProperty(FlatClientProperties.STYLE,""
+        lbIntegridad2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbIntegridad3.putClientProperty(FlatClientProperties.STYLE,""
+        lbIntegridad3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        
+
         pIntegridad.putClientProperty(FlatClientProperties.STYLE, ""
-               + "arc:50;"
-               + "background:lighten($Menu.background,7%);");
-        
-        
+                + "arc:50;"
+                + "background:lighten($Menu.background,7%);");
+
         //Solidaridad
-        lbSolidaridad.putClientProperty(FlatClientProperties.STYLE,""
+        lbSolidaridad.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
-        lbSolidaridad1.putClientProperty(FlatClientProperties.STYLE,""
+        lbSolidaridad1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbSolidaridad2.putClientProperty(FlatClientProperties.STYLE,""
+        lbSolidaridad2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbSolidaridad3.putClientProperty(FlatClientProperties.STYLE,""
+        lbSolidaridad3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbSolidaridad4.putClientProperty(FlatClientProperties.STYLE,""
+        lbSolidaridad4.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        
+
         pSolidaridad.putClientProperty(FlatClientProperties.STYLE, ""
-               + "arc:50;"
-               + "background:lighten($Menu.background,3%);");
-        
-        
+                + "arc:50;"
+                + "background:lighten($Menu.background,3%);");
+
         //FE
-        lbFe.putClientProperty(FlatClientProperties.STYLE,""
+        lbFe.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
-        lbFe1.putClientProperty(FlatClientProperties.STYLE,""
+        lbFe1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbFe2.putClientProperty(FlatClientProperties.STYLE,""
+        lbFe2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbFe3.putClientProperty(FlatClientProperties.STYLE,""
+        lbFe3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbFe4.putClientProperty(FlatClientProperties.STYLE,""
+        lbFe4.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        
+
         pFe.putClientProperty(FlatClientProperties.STYLE, ""
-               + "arc:50;"
-               + "background:lighten($Menu.background,7%);");
-        
-        
-       panel1.putClientProperty(FlatClientProperties.STYLE, ""
-               + "arc:50;"
-               + "background:lighten(@background,5%);");
-      /* panel2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:lighten($Menu.background,7%);");
+
+        panel1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:lighten(@background,5%);");
+        /* panel2.putClientProperty(FlatClientProperties.STYLE, ""
                + "arc:50;"
                + "background:lighten($Menu.background,7%);");
        
@@ -126,21 +122,17 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
                + "arc:50;"
                + "background:lighten(@background,8%);");*/
         panel4.putClientProperty(FlatClientProperties.STYLE, ""
-               + "arc:50;"
-               + "background:lighten(@background,10%);");
-        
-        
-        
-    
-       
+                + "arc:50;"
+                + "background:lighten(@background,10%);");
+
     }
 
-    
     private void cambiarColorRGB(int red, int green, int blue) {
         Color nuevoColor = new Color(red, green, blue);
         panel1.setBackground(nuevoColor);
         panel1.repaint(); // Refresca la interfaz de usuario para mostrar el cambio
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -499,26 +491,28 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
     @Override
     public void run() {
-        while(true){
-        try{
-            Calendar c=Calendar.getInstance();
-            hora=c.get(Calendar.HOUR_OF_DAY);
-            if(hora>12)
-                hora = hora-12;
-            minutos=c.get(Calendar.MINUTE);
-            segundos=c.get(Calendar.SECOND);
-            year=c.get(Calendar.YEAR);
-            month=c.get(Calendar.MONTH);
-            day=c.get(Calendar.DAY_OF_MONTH);
-            SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss a");
-            SimpleDateFormat df=new SimpleDateFormat("dd/MM/yyyy");
-            Date dat=c.getTime() ;
-            timestr=sdf.format(dat);
-            yearstr=df.format(dat);
-            time.setText(timestr);
-            date.setText(yearstr);
-        }catch (Exception e ){
-            e.printStackTrace();
+        while (true) {
+            try {
+                Calendar c = Calendar.getInstance();
+                hora = c.get(Calendar.HOUR_OF_DAY);
+                if (hora > 12) {
+                    hora = hora - 12;
+                }
+                minutos = c.get(Calendar.MINUTE);
+                segundos = c.get(Calendar.SECOND);
+                year = c.get(Calendar.YEAR);
+                month = c.get(Calendar.MONTH);
+                day = c.get(Calendar.DAY_OF_MONTH);
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                Date dat = c.getTime();
+                timestr = sdf.format(dat);
+                yearstr = df.format(dat);
+                time.setText(timestr);
+                date.setText(yearstr);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-    }}
+    }
 }

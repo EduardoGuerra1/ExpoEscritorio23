@@ -110,7 +110,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         btnDelete = new View.BotonesText.Buttons();
         buttons1 = new View.BotonesText.Buttons();
 
-        lb.setText("Gestión de Código Conductuales Estudiantes ");
+        lb.setText("Gestión de códigos asignados");
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

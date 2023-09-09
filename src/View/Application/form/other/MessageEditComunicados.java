@@ -192,7 +192,6 @@ public class MessageEditComunicados extends javax.swing.JPanel {
         }else {
             
             enviarDatosHaciaApi();
-            GlassPanePopup.closePopupLast();
             Timer timer = new Timer(500, (ActionEvent e) -> {
                 Comunicados cd = new Comunicados();
                 cd.cargarDatos();

@@ -31,15 +31,16 @@ import raven.toast.Notifications;
  * @author gyaci
  */
 public class RecuCorreo1 extends javax.swing.JPanel {
- 
-    Recuperaciones controller = new Recuperaciones ();
-    String Code = controller.generateRandomCode(); 
-    int idPersona; 
+
+    Recuperaciones controller = new Recuperaciones();
+    String Code = controller.generateRandomCode();
+    int idPersona;
     private Boolean noti;
     String Mensaje;
+
     public RecuCorreo1() {
         initComponents();
-         txtCodigo.setDocument(new PlainDocument() {
+        txtCodigo.setDocument(new PlainDocument() {
             @Override
             public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
                 if (str == null) {
@@ -57,6 +58,16 @@ public class RecuCorreo1 extends javax.swing.JPanel {
                 super.insertString(offset, str, attr);
             }
         });
+        lb1.setVisible(false);
+        lb2.setVisible(false);
+        txtCodigo.setVisible(false);
+        txtContraseña.setVisible(false);
+        btnRestablecer.setVisible(false);
+        
+        
+        txtCorreo.setText("");
+        txtCodigo.setText("");
+        txtContraseña.setText("");
     }
 
     /**
@@ -76,10 +87,10 @@ public class RecuCorreo1 extends javax.swing.JPanel {
         btnRegresar = new View.SWING.boton();
         txtCorreo = new View.SWING.textField();
         txtCodigo = new View.SWING.textField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lb0 = new javax.swing.JLabel();
+        lb1 = new javax.swing.JLabel();
         txtContraseña = new View.SWING.Contraseña();
-        jLabel5 = new javax.swing.JLabel();
+        lb2 = new javax.swing.JLabel();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/correooo.png"))); // NOI18N
 
@@ -115,7 +126,7 @@ public class RecuCorreo1 extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel2.setText("Ingrese su correo electrónico para comenzar el proceso de recuperacion de contraseña");
+        jLabel2.setText("Ingrese su correo electrónico para comenzar el proceso de recuperación de contraseña");
 
         btnRegresar.setText("Regresar a Opciones");
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,16 +165,16 @@ public class RecuCorreo1 extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel3.setText("Ingrese el correo con el que esta registrado:");
+        lb0.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lb0.setText("Ingrese el correo con el que está registrado:");
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel4.setText("Ingrese el código que se le envio al correo:  ");
+        lb1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lb1.setText("Ingrese el código que se le envió al correo:  ");
 
         txtContraseña.setForeground(new java.awt.Color(102, 102, 102));
 
-        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel5.setText("Ingrese su nueva contraseña:");
+        lb2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lb2.setText("Ingrese su nueva contraseña:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -172,29 +183,24 @@ public class RecuCorreo1 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(jLabel1)
+                .addGap(118, 118, 118)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(lb0)
+                            .addComponent(lb1)
+                            .addComponent(lb2))
                         .addContainerGap(391, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(85, 85, 85))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRestablecer, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(69, 69, 69))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRestablecer, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(213, 213, 213))))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -202,51 +208,52 @@ public class RecuCorreo1 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72)
-                .addComponent(jLabel3)
-                .addGap(22, 22, 22)
+                .addComponent(lb0)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(71, 71, 71)
-                        .addComponent(jLabel4)
-                        .addGap(27, 27, 27)
+                        .addComponent(lb1)
+                        .addGap(18, 18, 18)
                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)))
-                .addGap(20, 20, 20)
+                        .addComponent(lb2)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRestablecer, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRestablecer, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
-    PersonasController recu = new PersonasController();
-     
-        Personas person = recu.CellApiCorreo(txtCorreo.getText()); 
-       idPersona = person.getIdPersona();
-        
-      int id =  person.getIdTipoPersona(); 
-        if(id == 4){
-enviarDatosHaciaApi();
+        PersonasController recu = new PersonasController();
+
+        Personas person = recu.CellApiCorreo(txtCorreo.getText());
+        idPersona = person.getIdPersona();
+
+        int id = person.getIdTipoPersona();
+        if (id == 4) {
+            enviarDatosHaciaApi();
+
             System.out.println(Code);
-            
-        }else{
+
+        } else {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Debe ingresar un correo de administrador");
-                    playError();
+            playError();
         }
-        
+
     }//GEN-LAST:event_btnEnviarMouseClicked
-private void enviarDatosHaciaApi() {
-         String Correo = txtCorreo.getText();
+    private void enviarDatosHaciaApi() {
+        String Correo = txtCorreo.getText();
         try {
             // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
-            jsonData.put("correo",Correo );
+            jsonData.put("correo", Correo);
             jsonData.put("code", Code);
 
             // Llamar al método postApiAsync para enviar los datos
@@ -258,59 +265,86 @@ private void enviarDatosHaciaApi() {
             // Manejar la respuesta de la API
             postFuture.thenAccept(success -> {
                 if (success) {
-                    Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Se Envio el Codigo ");
+                    Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Se envió correctamente el código");
+                    lb1.setVisible(true);
+                    lb2.setVisible(true);
+                    txtCodigo.setVisible(true);
+                    txtContraseña.setVisible(true);
+                    btnRestablecer.setVisible(true);
+
+                    lb0.setVisible(false);
+                    txtCorreo.setVisible(false);
+                    btnEnviar.setVisible(false);
                 } else {
-                    Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "hubo error enviar el codigo");
+                    Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Hubo un error al enviar el código, intente nuevamente");
                 }
             });
         } catch (JSONException e) {
             // Manejar la excepción JSONException aquí
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
-             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
-                playError();
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
+            playError();
         }
     }
     private void btnRestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerActionPerformed
-       
+
     }//GEN-LAST:event_btnRestablecerActionPerformed
 
     private void btnRestablecerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRestablecerMouseClicked
-  if(txtCodigo.getText().equals(Code))
-        {
+        if (txtCodigo.getText().equals(Code)) {
             String PASSEN = encryptPassword(txtContraseña.getText());
-        
 
-          String jsonInputString = "{\"idPersona\": " + idPersona + ", \"claveCredenciales\": \"" + PASSEN + "\"}";
+            String jsonInputString = "{\"idPersona\": " + idPersona + ", \"claveCredenciales\": \"" + PASSEN + "\"}";
 
+            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/Contra";
 
-        String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/Contra";
+            CompletableFuture<Boolean> result = putApiAsync(endpointUrl, jsonInputString);
 
-        CompletableFuture<Boolean> result = putApiAsync(endpointUrl, jsonInputString);
-        
-        result.thenAccept(response -> {
-            if (response) {
-                 System.out.println("La solicitud HTTP put  fue exitosa.");
-                 Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Se cambio correctamente la contraseña");
-                 Application.logout();
-            } else {
-                  Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
-                  playError();
-             System.out.println("La solicitud HTTP put no fue exitosa.");
-            }
-        }).join();
+            result.thenAccept(response -> {
+                if (response) {
+                    System.out.println("La solicitud HTTP put  fue exitosa.");
+                    Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Se cambió correctamente la contraseña");
+                    Application.logout();
+                    lb1.setVisible(false);
+                    lb2.setVisible(false);
+                    txtCodigo.setVisible(false);
+                    txtContraseña.setVisible(false);
+                    btnRestablecer.setVisible(false);
 
-             CompletableFuture<List<TiposPersonas>> encargadosFuture = getTiposPersonasApiAsync();
-        }
-        else{
+                    lb0.setVisible(true);
+                    txtCorreo.setVisible(true);
+                    btnEnviar.setVisible(true);
+                } else {
+                    Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
+                    playError();
+                    System.out.println("La solicitud HTTP put no fue exitosa.");
+                }
+            }).join();
+
+            CompletableFuture<List<TiposPersonas>> encargadosFuture = getTiposPersonasApiAsync();
+        } else {
             System.out.println(" no se que paso ");
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
-                    playError();
+            playError();
         }
     }//GEN-LAST:event_btnRestablecerMouseClicked
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         // TODO add your handling code here:
         Application.recuperaciones();
+        lb1.setVisible(false);
+        lb2.setVisible(false);
+        txtCodigo.setVisible(false);
+        txtContraseña.setVisible(false);
+        btnRestablecer.setVisible(false);
+
+        lb0.setVisible(true);
+        txtCorreo.setVisible(true);
+        btnEnviar.setVisible(true);
+        
+        txtCorreo.setText("");
+        txtCodigo.setText("");
+        txtContraseña.setText("");
 
     }//GEN-LAST:event_btnRegresarMouseClicked
 
@@ -320,14 +354,14 @@ private void enviarDatosHaciaApi() {
 
     private void txtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyReleased
         // TODO add your handling code here:
-        
-        if(noti==true){
+
+        if (noti == true) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
             playValidacion();
         }
     }//GEN-LAST:event_txtCodigoKeyReleased
 
-private void playValidacion() {
+    private void playValidacion() {
         String filepath = "src/View/sounds/validacion.wav";
 
         PlayMusic(filepath);
@@ -340,23 +374,23 @@ private void playValidacion() {
         PlayMusic(filepath);
 
     }
-    
+
     private static void PlayMusic(String location) {
         try {
             File musicPath = new File(location);
-            
-            if(musicPath.exists()){
+
+            if (musicPath.exists()) {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-            }else{
+            } else {
                 System.out.println("No se encuentra el archivo de sonido");
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-   
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -365,10 +399,10 @@ private void playValidacion() {
     private javax.swing.JButton btnRestablecer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lb0;
+    private javax.swing.JLabel lb1;
+    private javax.swing.JLabel lb2;
     private View.SWING.textField txtCodigo;
     private View.SWING.Contraseña txtContraseña;
     private View.SWING.textField txtCorreo;
