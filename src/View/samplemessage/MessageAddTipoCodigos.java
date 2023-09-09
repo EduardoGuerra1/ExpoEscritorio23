@@ -183,7 +183,7 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
         PlayMusic(filepath);
 
     }
-    
+    //metodo para reproducir sonidos
     private static void PlayMusic(String location) {
         try {
             File musicPath = new File(location);
@@ -192,7 +192,7 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
-                clip.start();
+                clip.start();//Codigo para que el audio se reproduzca
             }else{
                 System.out.println("No se encuentra el archivo de sonido");
             }

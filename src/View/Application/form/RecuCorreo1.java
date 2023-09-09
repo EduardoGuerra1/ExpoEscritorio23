@@ -266,6 +266,8 @@ private void enviarDatosHaciaApi() {
         } catch (JSONException e) {
             // Manejar la excepción JSONException aquí
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
+                playError();
         }
     }
     private void btnRestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerActionPerformed

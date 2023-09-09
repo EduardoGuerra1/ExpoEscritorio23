@@ -297,6 +297,14 @@ public class RecuQR extends javax.swing.JPanel {
     private void btnRestablecerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRestablecerMouseClicked
         PersonasController recu = new PersonasController();
 
+        
+        if(txtTelefono.getText().isBlank() || txtCorreo.getText().isBlank() || txtCambioContraseña.getText().isBlank()){
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Los campos no pueden estar vacíos");
+                    playError();
+        }
+        else{
+            
+        
         Personas person = recu.CellApiCorreo(txtCorreo.getText());
         int idPersona = person.getIdPersona();
 
@@ -333,7 +341,7 @@ public class RecuQR extends javax.swing.JPanel {
             System.out.println("no furulo");
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
                     playError();
-        }
+        }}
     }//GEN-LAST:event_btnRestablecerMouseClicked
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed

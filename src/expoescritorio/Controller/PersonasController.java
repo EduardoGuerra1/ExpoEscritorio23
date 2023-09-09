@@ -14,6 +14,7 @@ import expoescritorio.Models.PersonasLo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -28,9 +29,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import raven.toast.Notifications;
 
 /**
  *
@@ -392,7 +397,37 @@ byte[] foto = jsonObject.getString("foto").getBytes();
 
         return null; // Si hay algún problema, retorna null
     }
+   private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private static void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    //Metodo para reproducir sonidos
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();//Codigo para reproducir el clip de audio
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
    
+    }
    public static Personas CellApiCorreo(String correo) {
         String baseUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/validar";
         // Parámetros de consulta: Envía el correo electrónico a verificar
@@ -425,10 +460,15 @@ byte[] foto = jsonObject.getString("foto").getBytes();
                 }
             } else {
                 System.out.println("No se encontro: " + responseCode);
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El correo no está registrado");
+                playError();
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+            
+             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
+                playError();
         }
 
         return null; // Si hay algún problema, retorna null

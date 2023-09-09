@@ -253,7 +253,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         PlayMusic(filepath);
 
     }
-    
+    //Metodo para reproducir sonidos
     private static void PlayMusic(String location) {
         try {
             File musicPath = new File(location);
@@ -262,7 +262,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
-                clip.start();
+                clip.start();//Codigo para reproducir el clip de audio
             }else{
                 System.out.println("No se encuentra el archivo de sonido");
             }
@@ -280,6 +280,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
             playError();
         }else {
             if (!valida.check6(txtVisita.getText()) ) {
+                //Muestra la notificacion y el sonido de error
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
             }

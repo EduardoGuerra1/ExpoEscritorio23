@@ -295,7 +295,7 @@ public int ActualizarDatos(int id ){
                             // Registro eliminado con éxito
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Código eliminado exitosamente");
+                            obj.txtContent.setText("Registro eliminado exitosamente");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
