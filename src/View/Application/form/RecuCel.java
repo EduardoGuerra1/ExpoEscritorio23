@@ -261,7 +261,7 @@ public class RecuCel extends javax.swing.JPanel {
             // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
             jsonData.put("numero", Tele);
-            jsonData.put("code", Code);
+            jsonData.put("code", "su código de recuperación es: " +Code);
 
             // Llamar al método postApiAsync para enviar los datos
             String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/mensajes/enviar-sms"; // Reemplaza esto con la URL de tu API
