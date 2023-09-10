@@ -10,6 +10,7 @@ import expoescritorio.Controller.PersonasController;
 import expoescritorio.Controller.Recuperaciones;
 import static expoescritorio.Controller.TiposPersonasController.getTiposPersonasApiAsync;
 import expoescritorio.Models.Personas;
+import expoescritorio.Models.Recu;
 import expoescritorio.Models.TiposPersonas;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -306,7 +307,7 @@ public class RecuQR extends javax.swing.JPanel {
         else{
             
         
-        Personas person = recu.CellApiCorreo(txtCorreo.getText());
+        Recu person = recu.CellApiCorreo(txtCorreo.getText());
         int idPersona = person.getIdPersona();
 
         int id = person.getIdTipoPersona();

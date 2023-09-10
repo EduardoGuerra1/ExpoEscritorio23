@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import expoescritorio.Models.CodigosConductuales;
 import expoescritorio.Models.Personas;
 import expoescritorio.Models.PersonasLo;
+import expoescritorio.Models.Recu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -428,7 +429,7 @@ byte[] foto = jsonObject.getString("foto").getBytes();
         }
    
     }
-   public static Personas CellApiCorreo(String correo) {
+   public static Recu CellApiCorreo(String correo) {
         String baseUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/validar";
         // Parámetros de consulta: Envía el correo electrónico a verificar
         Map<String, String> queryParams = new HashMap<>();
@@ -456,7 +457,7 @@ byte[] foto = jsonObject.getString("foto").getBytes();
                 String responseData = response.toString();
                 if (responseData != null) {
                     Gson gson = new Gson();
-                    return gson.fromJson(responseData, Personas.class);
+                    return gson.fromJson(responseData, Recu.class);
                 }
             } else {
                 System.out.println("No se encontro: " + responseCode);

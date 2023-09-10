@@ -10,11 +10,12 @@ public class Recu {
     int idPersona;         // Identificador único de la persona.
     int idTipoPersona;     // Identificador del tipo de persona.
     String correo;         // Dirección de correo electrónico de la persona.
-
+    String telefono; 
     // Constructor de la clase que toma varios parámetros para inicializar los campos.
-    public Recu(int idPersona, int idTipoPersona, String correo) {
+    public Recu(int idPersona, int idTipoPersona, String correo, String telefono) {
         this.idPersona = idPersona;
         this.idTipoPersona = idTipoPersona;
         this.correo = correo;
+        this.telefono = telefono; 
     }
 }

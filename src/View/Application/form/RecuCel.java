@@ -31,15 +31,16 @@ import raven.toast.Notifications;
  *
  * @author gyaci
  */
-public class RecuCorreo1 extends javax.swing.JPanel {
+public class RecuCel extends javax.swing.JPanel {
 
     Recuperaciones controller = new Recuperaciones();
     String Code = controller.generateRandomCode();
+    String Tele = ""; 
     int idPersona;
     private Boolean noti;
     String Mensaje;
 
-    public RecuCorreo1() {
+    public RecuCel() {
         initComponents();
         txtCodigo.setDocument(new PlainDocument() {
             @Override
@@ -171,7 +172,7 @@ public class RecuCorreo1 extends javax.swing.JPanel {
         lb0.setText("Ingrese el correo con el que está registrado:");
 
         lb1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        lb1.setText("Ingrese el código que se le envió al correo:  ");
+        lb1.setText("Ingrese el código que se le envió al telefono:  ");
 
         txtContraseña.setForeground(new java.awt.Color(102, 102, 102));
 
@@ -192,7 +193,7 @@ public class RecuCorreo1 extends javax.swing.JPanel {
                             .addComponent(lb0)
                             .addComponent(lb1)
                             .addComponent(lb2))
-                        .addContainerGap(391, Short.MAX_VALUE))
+                        .addContainerGap(381, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -230,6 +231,8 @@ public class RecuCorreo1 extends javax.swing.JPanel {
                     .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(218, Short.MAX_VALUE))
         );
+
+        lb1.getAccessibleContext().setAccessibleName("Ingrese el código que se le envio al telefono:  ");
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
@@ -237,9 +240,11 @@ public class RecuCorreo1 extends javax.swing.JPanel {
 
         Recu person = recu.CellApiCorreo(txtCorreo.getText());
         idPersona = person.getIdPersona();
-
+        Tele = person.getTelefono(); 
+        System.out.println(person.getTelefono());
         int id = person.getIdTipoPersona();
         if (id == 4) {
+            
             enviarDatosHaciaApi();
 
             System.out.println(Code);
@@ -255,11 +260,11 @@ public class RecuCorreo1 extends javax.swing.JPanel {
         try {
             // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
-            jsonData.put("correo", Correo);
+            jsonData.put("numero", Tele);
             jsonData.put("code", Code);
 
             // Llamar al método postApiAsync para enviar los datos
-            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/MandarCorreo/enviarCodigo"; // Reemplaza esto con la URL de tu API
+            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/mensajes/enviar-sms"; // Reemplaza esto con la URL de tu API
             String jsonString = jsonData.toString();
 
             CompletableFuture<Boolean> postFuture = ControllerFull.postApiAsync(endpointUrl, jsonString);
