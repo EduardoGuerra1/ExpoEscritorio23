@@ -153,7 +153,7 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
                 btnCancelarMouseClicked(evt);
             }
         });
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, 120, -1));
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 120, -1));
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,7 +161,7 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
                 btnAceptarMouseClicked(evt);
             }
         });
-        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 120, -1));
+        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, 120, -1));
 
         jLabel1.setText("Tipo de Código:");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));

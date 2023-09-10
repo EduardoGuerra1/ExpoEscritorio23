@@ -153,7 +153,7 @@ public class MessageAddComunicados extends javax.swing.JPanel {
                 btnCancelarActionPerformed(evt);
             }
         });
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, 120, -1));
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 120, -1));
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,7 +161,7 @@ public class MessageAddComunicados extends javax.swing.JPanel {
                 btnAceptarMouseClicked(evt);
             }
         });
-        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 390, 120, -1));
+        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 400, 120, -1));
 
         jLabel4.setText("Título:");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
@@ -177,13 +177,13 @@ public class MessageAddComunicados extends javax.swing.JPanel {
                 btnImagen1ActionPerformed(evt);
             }
         });
-        add(btnImagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, 120, -1));
+        add(btnImagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, 120, -1));
 
         jLabel13.setText("Archivo:");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, -1, -1));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, -1, -1));
 
         lbArchivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(lbArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 220, 190));
+        add(lbArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 220, 190));
 
         txtTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -133,7 +133,7 @@ public class MessageEditComunicados extends javax.swing.JPanel {
                 btnCancelarActionPerformed(evt);
             }
         });
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, 120, -1));
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, 120, -1));
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,7 +141,7 @@ public class MessageEditComunicados extends javax.swing.JPanel {
                 btnAceptarMouseClicked(evt);
             }
         });
-        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 390, 120, -1));
+        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 380, 120, -1));
 
         jLabel4.setText("Título:");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));

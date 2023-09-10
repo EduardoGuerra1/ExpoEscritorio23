@@ -129,6 +129,7 @@ public class RecuCorreo1 extends javax.swing.JPanel {
         jLabel2.setText("Ingrese su correo electrónico para comenzar el proceso de recuperación de contraseña");
 
         btnRegresar.setText("Regresar a Opciones");
+        btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);
@@ -144,7 +145,7 @@ public class RecuCorreo1 extends javax.swing.JPanel {
                 .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(jLabel2)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

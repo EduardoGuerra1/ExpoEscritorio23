@@ -181,6 +181,7 @@ public class RecuQR extends javax.swing.JPanel {
         jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, -1, -1));
 
         btnRegreso.setText("Regresar a Opciones");
+        btnRegreso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegreso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresoMouseClicked(evt);
