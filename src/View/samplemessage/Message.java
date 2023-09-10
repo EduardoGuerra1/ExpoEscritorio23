@@ -65,7 +65,7 @@ public class Message extends javax.swing.JPanel {
         txtContent.setText("This is part of a series of short tutorials about specific elements, components, or interactions. We’ll cover the UX, the UI, and the construction inside of Sketch. Plus, there’s a freebie for you at the end!");
         txtContent.setEnabled(false);
         txtContent.setFocusable(false);
-        add(txtContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 75, 651, -1));
+        add(txtContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 470, -1));
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -73,10 +73,10 @@ public class Message extends javax.swing.JPanel {
                 btnCancelarMouseClicked(evt);
             }
         });
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 120, -1));
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 120, -1));
 
         btnAceptar.setText("Aceptar");
-        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 120, -1));
+        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 120, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
