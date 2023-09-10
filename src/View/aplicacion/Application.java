@@ -9,7 +9,7 @@ import javax.swing.SwingUtilities;
 import View.Application.form.LoginForm;
 import View.Application.form.MainForm;
 import View.Application.form.RecuCorreo1;
-import View.Application.form.RecuQR;
+import View.Application.form.RecuCel;
 import View.Application.form.Recus;
 import View.glasspanepopup.GlassPanePopup;
 import raven.toast.Notifications;
@@ -21,7 +21,7 @@ public class Application extends javax.swing.JFrame {
     private final MainForm mainForm;
     private final LoginForm loginForm;
     private final Recus recuperaciones;
-    private final RecuQR recuSMS;
+    private final RecuCel recuSMS;
     private final RecuCorreo1 recuCorreo;
 
     public Application() {
@@ -32,7 +32,7 @@ public class Application extends javax.swing.JFrame {
         mainForm = new MainForm();/*Crea una instancia de la clase MainForm*/
         loginForm = new LoginForm();/*Crea una instancia de la clase LoginForm*/
         recuperaciones = new Recus();/*Crea una instancia de la clase Recus*/
-        recuSMS = new RecuQR();/*Crea una instancia de la clase RecuQR*/
+        recuSMS = new RecuCel();/*Crea una instancia de la clase RecuQR*/
         recuCorreo = new RecuCorreo1();/* Crea una instancia de la clase RecuCorreo1*/
         setContentPane(loginForm);/*Establece el contenido de la ventana como LoginForm*/
         Notifications.getInstance().setJFrame(this);/*Configura notificaciones*/

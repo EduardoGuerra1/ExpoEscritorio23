@@ -120,7 +120,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/View/icon/png/QR Code-amico (3).png"/>
+          <Image iconType="3" name="/View/icon/png/Chatting-amicoga.png"/>
         </Property>
       </Properties>
     </Component>
@@ -133,7 +133,7 @@
     </Component>
     <Component class="View.SWING.boton" name="btnRecuQR">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Recuperacion de contrase&#xf1;a por QR"/>
+        <Property name="text" type="java.lang.String" value="Recuperacion de contrase&#xf1;a por MSM"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SansSerif" size="14" style="1"/>
         </Property>

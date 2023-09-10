@@ -94,7 +94,7 @@ public class RecuCel extends javax.swing.JPanel {
         txtContraseña = new View.SWING.Contraseña();
         lb2 = new javax.swing.JLabel();
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/correooo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/Chatting-amico pe.png"))); // NOI18N
 
         btnEnviar.setBackground(new java.awt.Color(49, 61, 73));
         btnEnviar.setForeground(new java.awt.Color(255, 255, 255));
@@ -193,7 +193,7 @@ public class RecuCel extends javax.swing.JPanel {
                             .addComponent(lb0)
                             .addComponent(lb1)
                             .addComponent(lb2))
-                        .addContainerGap(381, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -229,7 +229,7 @@ public class RecuCel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRestablecer, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lb1.getAccessibleContext().setAccessibleName("Ingrese el código que se le envio al telefono:  ");

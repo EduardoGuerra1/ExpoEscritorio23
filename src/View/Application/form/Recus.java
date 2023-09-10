@@ -71,11 +71,11 @@ public class Recus extends javax.swing.JPanel {
                 .addGap(26, 26, 26))
         );
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/QR Code-amico (3).png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/Chatting-amicoga.png"))); // NOI18N
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/correooo.png"))); // NOI18N
 
-        btnRecuQR.setText("Recuperacion de contraseña por QR");
+        btnRecuQR.setText("Recuperacion de contraseña por MSM");
         btnRecuQR.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btnRecuQR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
