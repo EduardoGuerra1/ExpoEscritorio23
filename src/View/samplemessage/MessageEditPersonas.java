@@ -122,7 +122,8 @@ public class MessageEditPersonas extends javax.swing.JPanel {
             jsonData.put("telefonoPersona", TxTelefono.getText());
             if(!txtClave.getText().isEmpty()) jsonData.put("claveCredenciales", Encriptacion.encryptPassword(txtClave1.getText()));
             else jsonData.put("claveCredenciales", modelEstudiante.getClaveCredenciales());
-            jsonData.put("foto", base64Image);
+            if(rute == "") jsonData.put("foto", JSONObject.NULL);
+            else jsonData.put("foto", base64Image);
             
             String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/update"; // Reemplaza esto con la URL de tu API
             String jsonString = jsonData.toString();
