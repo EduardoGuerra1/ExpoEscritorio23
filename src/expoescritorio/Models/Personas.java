@@ -16,6 +16,7 @@ public class Personas {
     private String correo;             // Dirección de correo electrónico de la persona.
     private String claveCredenciales;  // Clave o contraseña de credenciales de la persona.
     private byte[] foto;               // URL o ubicación de la foto de la persona.
+    private String telefonoPersona;
 
     // Constructor de la clase que toma varios parámetros para inicializar los campos.
     public Personas(int idPersona, String codigo, String nombrePersona, String apellidoPersona, String nacimientoPersona, int idTipoPersona, String correo, String claveCredenciales, byte[] foto) {
@@ -29,5 +30,19 @@ public class Personas {
         this.claveCredenciales = claveCredenciales;
         this.foto = foto;
     }
+
+    public Personas(int idPersona, String codigo, String nombrePersona, String apellidoPersona, String nacimientoPersona, int idTipoPersona, String correo, String claveCredenciales, byte[] foto, String telefonoPersona) {
+        this.idPersona = idPersona;
+        this.codigo = codigo;
+        this.nombrePersona = nombrePersona;
+        this.apellidoPersona = apellidoPersona;
+        this.nacimientoPersona = nacimientoPersona;
+        this.idTipoPersona = idTipoPersona;
+        this.correo = correo;
+        this.claveCredenciales = claveCredenciales;
+        this.foto = foto;
+        this.telefonoPersona = telefonoPersona;
+    }
+    
 }
 

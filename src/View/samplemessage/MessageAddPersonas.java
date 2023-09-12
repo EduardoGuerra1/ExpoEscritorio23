@@ -140,6 +140,8 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         txtNombres2 = new javax.swing.JTextField();
         txtNombres5 = new javax.swing.JTextField();
         Tipos = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        TxTelefono = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -279,6 +281,16 @@ public class MessageAddPersonas extends javax.swing.JPanel {
             }
         });
         add(Tipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 150, 20));
+
+        jLabel7.setText("Telefono:");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, -1));
+
+        TxTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxTelefonoActionPerformed(evt);
+            }
+        });
+        add(TxTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, 260, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
@@ -433,6 +445,10 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_TiposActionPerformed
 
+    private void TxTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxTelefonoActionPerformed
+
     public void eventOK(ActionListener event) {
     }
 
@@ -465,6 +481,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
             jsonData.put("idTipoPersona", Tipos.getText());
             jsonData.put("correo",txtCodigo.getText()+"@ricaldone.edu.sv");
             jsonData.put("claveCredenciales", Encriptacion.encryptPassword(txtClave.getText()));
+             jsonData.put("telefonoPersona", "+503"+TxTelefono.getText());
             if(rute == "") jsonData.put("foto", JSONObject.NULL);
             else jsonData.put("foto", base64Image);
             
@@ -572,6 +589,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Tipos;
+    private javax.swing.JTextField TxTelefono;
     private View.BotonesText.Buttons btnAceptar;
     private View.BotonesText.Buttons btnCancelar;
     private View.BotonesText.Buttons btnImagen;
@@ -584,6 +602,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lbImagen;
     private javax.swing.JTextField txtApellidos;

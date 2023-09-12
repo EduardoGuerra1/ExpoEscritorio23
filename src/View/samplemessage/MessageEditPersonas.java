@@ -119,6 +119,7 @@ public class MessageEditPersonas extends javax.swing.JPanel {
             jsonData.put("nacimientoPersona", formattedDate);
             jsonData.put("idTipoPersona", "Estudiante");
             jsonData.put("correo",txtCodigo1.getText()+"@ricaldone.edu.sv");
+            jsonData.put("telefonoPersona", TxTelefono.getText());
             if(!txtClave.getText().isEmpty()) jsonData.put("claveCredenciales", Encriptacion.encryptPassword(txtClave1.getText()));
             else jsonData.put("claveCredenciales", modelEstudiante.getClaveCredenciales());
             jsonData.put("foto", base64Image);
@@ -220,6 +221,8 @@ public class MessageEditPersonas extends javax.swing.JPanel {
         txtApellidos1.setText(estudiante.getApellidoPersona());
         txtCodigo1.setText(estudiante.getCodigo());
         dpNacimiento1.setDate(nacimiento);
+        TxTelefono.setText(estudiante.getTelefonoPersona());
+        
         
 
             // Limpiar el ComboBox antes de agregar los nuevos elementos
@@ -304,6 +307,8 @@ public class MessageEditPersonas extends javax.swing.JPanel {
         jLabel22 = new javax.swing.JLabel();
         dpNacimiento1 = new com.toedter.calendar.JDateChooser();
         cbTipoUsuario = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
+        TxTelefono = new javax.swing.JTextField();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -453,7 +458,7 @@ public class MessageEditPersonas extends javax.swing.JPanel {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTitle1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        txtTitle1.setText("Your Message Title Dialog Custom");
+        txtTitle1.setText("Actualizar Credenciales");
         jPanel2.add(txtTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         btnImagen1.setText("Escoger foto");
@@ -571,6 +576,16 @@ public class MessageEditPersonas extends javax.swing.JPanel {
 
         cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel2.add(cbTipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, 190, -1));
+
+        jLabel17.setText("Telefono:");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
+
+        TxTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxTelefonoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(TxTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 260, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -821,8 +836,13 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
         GlassPanePopup.closePopupLast();
     }//GEN-LAST:event_btnCancelar1ActionPerformed
 
+    private void TxTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxTelefonoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TxTelefono;
     private View.BotonesText.Buttons btnAceptar;
     private View.BotonesText.Buttons btnAceptar1;
     private View.BotonesText.Buttons btnCancelar;
@@ -844,6 +864,7 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
