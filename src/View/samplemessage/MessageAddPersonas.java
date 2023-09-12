@@ -280,17 +280,17 @@ public class MessageAddPersonas extends javax.swing.JPanel {
                 TiposActionPerformed(evt);
             }
         });
-        add(Tipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 150, 20));
+        add(Tipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 150, 20));
 
         jLabel7.setText("Telefono:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
         TxTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxTelefonoActionPerformed(evt);
             }
         });
-        add(TxTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, 260, 30));
+        add(TxTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 260, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
