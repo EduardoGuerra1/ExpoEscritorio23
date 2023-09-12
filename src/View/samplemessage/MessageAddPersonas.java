@@ -327,14 +327,14 @@ public class MessageAddPersonas extends javax.swing.JPanel {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
             playError();
             }
-            Timer timer = new Timer(500, (ActionEvent e) -> {
+           /* Timer timer = new Timer(500, (ActionEvent e) -> {
                 Estudiantes cd = new Estudiantes();
 
                 cd.cargarDatos();
                 cd.deleteAllTableRows(cd.table1);
             });
             timer.setRepeats(false);
-            timer.start();
+            timer.start();*/
         }
 
 
@@ -500,7 +500,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
                     frm.cargarDatos();
 
                     
-                    boolean pC = panelClosing() == true;
+                   // boolean pC = panelClosing() == true;
                     GlassPanePopup.closePopupLast();
 
                 } else {

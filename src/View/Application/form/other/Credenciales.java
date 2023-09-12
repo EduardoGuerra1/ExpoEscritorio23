@@ -38,9 +38,7 @@ import org.json.JSONObject;
  * @author gyaci
  */
 public class Credenciales extends javax.swing.JPanel {
-    
-    
-    
+
     PersonasController controller = new PersonasController();
     List<Personas> myPersonas = new ArrayList<Personas>();
 
@@ -67,13 +65,13 @@ public class Credenciales extends javax.swing.JPanel {
         CompletableFuture<List<Personas>> future = PersonasController.getPersonasAsyncs();
         future.thenAccept(personas -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-            
+
             myPersonas.clear();
-            
+
             for (Personas persona : personas) {
                 tableModel.addRow(new Object[]{
                     persona.getCodigo(),
-                    persona.getNombrePersona()+" "+persona.getApellidoPersona(),
+                    persona.getNombrePersona() + " " + persona.getApellidoPersona(),
                     TiposPersonasController.getTipoPersonaAsync(persona.getIdTipoPersona()).join(),
                     persona.getCorreo()
                 });
@@ -334,7 +332,7 @@ public class Credenciales extends javax.swing.JPanel {
             GlassPanePopup.showPopup(obj);
 
         }
-        */
+         */
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
@@ -343,21 +341,28 @@ public class Credenciales extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        
+
         MessageAddPersonas obj = new MessageAddPersonas(this);
         obj.txtTitle.setText("Añadir Credencial");
-
+        obj.eventOK(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.out.println("Click OK");
+                deleteAllTableRows(table1);
+                cargarDatos();
+                GlassPanePopup.closePopupLast();
+            }
+        });
         GlassPanePopup.showPopup(obj);
 
-       
-        
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-        
+
         int indx = table1.getSelectedRow();
-        if(indx==-1){
+        if (indx == -1) {
             Message obj = new Message();
             obj.txtTitle.setText("Aviso");
             obj.txtContent.setText("Debe seleccionar una fila.");
@@ -369,22 +374,19 @@ public class Credenciales extends javax.swing.JPanel {
                 }
             });
             GlassPanePopup.showPopup(obj);
-        }
-        else{
-            try{
-                MessageEditPersonas obj = new MessageEditPersonas(myPersonas.get(indx),this);
-                
+        } else {
+            try {
+                MessageEditPersonas obj = new MessageEditPersonas(myPersonas.get(indx), this);
+
                 obj.txtTitle.setText("Actualizar Estudiante");
-                
+
                 GlassPanePopup.showPopup(obj);
 
-                
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-        
+
     }//GEN-LAST:event_btnEditActionPerformed
 
 
