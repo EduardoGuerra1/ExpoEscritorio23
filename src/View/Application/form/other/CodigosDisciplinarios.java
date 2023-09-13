@@ -75,7 +75,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
 
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"Id", "Tipo", "Nivel", "Nombre"});
+        tableModel.setColumnIdentifiers(new Object[]{"Id", "Tipo", "Nivel"});
 
         cargarDatos();
 
@@ -103,15 +103,20 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
 
             for (CodigosConductuales codigo : codigosConductuales) {
-                CompletableFuture<String> futureNivelCodigoConductual = CodigosConductualesController.getNivelCodigoConductualAsync(codigo.getIdNivelCodigoConductual());
-                String nivelCodigoConductual = futureNivelCodigoConductual.join();
-                CompletableFuture<String> futureTipoCodigoConductual = CodigosConductualesController.getTipoCodigoConductualAsync(codigo.getIdTipoCodigoConductual());
-                String tipoCodigoConductual = futureTipoCodigoConductual.join();
+                        String nivelCodigoConductual = "";
+
+        int idNivelCodigoConductual = codigo.getIdNivelCodigoConductual();
+        if (idNivelCodigoConductual == 1) {
+            nivelCodigoConductual = "Leve";
+        } else if (idNivelCodigoConductual == 2) {
+            nivelCodigoConductual = "Grave";
+        } else if (idNivelCodigoConductual == 3) {
+            nivelCodigoConductual = "Muy Grave";
+        }
                 tableModel.addRow(new Object[]{
                     codigo.getIdCodigoConductual(),
-                    tipoCodigoConductual,
-                    nivelCodigoConductual,
-                    codigo.getCodigoConductual()
+                    codigo.getCodigoConductual(),
+                   nivelCodigoConductual
                 });
             }
         });
@@ -132,9 +137,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new View.ExampleTable.Table();
         btnAdd = new View.BotonesText.Buttons();
-        btnEdit = new View.BotonesText.Buttons();
         btnDelete = new View.BotonesText.Buttons();
-        buttons1 = new View.BotonesText.Buttons();
         lb = new javax.swing.JLabel();
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
@@ -154,24 +157,10 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
             }
         });
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/edit.png"))); // NOI18N
-        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEditMouseClicked(evt);
-            }
-        });
-
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/delete.png"))); // NOI18N
         btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDeleteMouseClicked(evt);
-            }
-        });
-
-        buttons1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/disquete.png"))); // NOI18N
-        buttons1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttons1MouseClicked(evt);
             }
         });
 
@@ -185,11 +174,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttons1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
@@ -198,9 +183,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttons1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,78 +290,6 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteMouseClicked
 
-    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
-        // TODO add your handling code here:
-
-        int num = 4;
-        int num1 = 1;
-        int selectedRow = table1.getSelectedRow();
-
-        // Verificar si se ha seleccionado una fila
-        if (selectedRow != -1) {
-            // Obtener los datos de las columnas de la fila seleccionada
-            Object data1 = table1.getValueAt(selectedRow, 1);
-            Object data2 = table1.getValueAt(selectedRow, 2);
-            Object data3 = table1.getValueAt(selectedRow, 3);
-            Object id = table1.getValueAt(selectedRow, 0);
-            MessageEditCodigosDisciplinarios msg = new MessageEditCodigosDisciplinarios();
-            msg.txtTitle.setText("Actualización de Código Disciplinario");
-            System.out.println("aca");
-
-            int b = NivelesCodigosConductualesController.getNivelesCodigosConductualesNameAsync(data2.toString()).join();
-           /* int a = TiposCodigosConductualesController.getTiposCodigosConductualesNameAsync(data1.toString()).join();
-            System.out.println(NivelesCodigosConductualesController.getPosicionNivelCodigoConductual(a));
-            msg.cbTiposCodigosConductuales.setSelectedIndex(0);
-            msg.cbNivelCodigoConductual.setSelectedIndex(0);
-            msg.txtCodigoConductual.setText(data3.toString());*/
-            msg.id = (int) id;
-
-            msg.eventOK(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    System.out.println("Click OK");
-                    msg.actualizarDatosHaciaApi();
-                    CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
-                    future.thenAccept(codigosConductuales -> {
-                        deleteAllTableRows(table1);
-                        DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-                        for (CodigosConductuales codigo : codigosConductuales) {
-                            tableModel.addRow(new Object[]{
-                                codigo.getIdCodigoConductual(),
-                                codigo.getIdTipoCodigoConductual(),
-                                codigo.getIdNivelCodigoConductual(),
-                                codigo.getCodigoConductual()
-                            });
-                        }
-                    });
-
-                    GlassPanePopup.closePopupLast();
-                    Timer timer = new Timer(500, (ActionEvent e) -> {
-                        deleteAllTableRows(table1);
-                        cargarDatos();
-                    });
-                    timer.setRepeats(false);
-                    timer.start();
-                }
-            });
-            GlassPanePopup.showPopup(msg);
-
-        } else {
-            Message obj = new Message();
-            obj.txtTitle.setText("Aviso");
-            obj.txtContent.setText("Debe seleccionar una fila.");
-            obj.eventOK(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    System.out.println("Click OK");
-                    GlassPanePopup.closePopupLast();
-                }
-            });
-            GlassPanePopup.showPopup(obj);
-
-        }
-    }//GEN-LAST:event_btnEditMouseClicked
-
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
 
@@ -387,22 +298,8 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("Click OK");
-                CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
-                future.thenAccept(codigosConductuales -> {
-                    DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-                    for (CodigosConductuales codigo : codigosConductuales) {
-                        tableModel.addRow(new Object[]{
-                            codigo.getIdCodigoConductual(),
-                            codigo.getIdTipoCodigoConductual(),
-                            codigo.getIdNivelCodigoConductual(),
-                            codigo.getCodigoConductual()
-                        });
-                    }
-                });
-               
+                               GlassPanePopup.closePopupLast();
                 Timer timer = new Timer(500, (ActionEvent e) -> {
-
                     cargarDatos();
                     deleteAllTableRows(table1);
                 });
@@ -413,16 +310,10 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
         GlassPanePopup.showPopup(obj);
     }//GEN-LAST:event_btnAddMouseClicked
 
-    private void buttons1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons1MouseClicked
-        mostrarReporte();
-    }//GEN-LAST:event_buttons1MouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.BotonesText.Buttons btnAdd;
     private View.BotonesText.Buttons btnDelete;
-    private View.BotonesText.Buttons btnEdit;
-    private View.BotonesText.Buttons buttons1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb;
