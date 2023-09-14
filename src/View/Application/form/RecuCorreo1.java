@@ -142,6 +142,7 @@ public class RecuCorreo1 extends javax.swing.JPanel {
         lb2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         lb2.setText("Ingrese su nueva contraseña:");
 
+        btnRegresar.setForeground(new java.awt.Color(204, 204, 204));
         btnRegresar.setText("Regresar a Opciones");
         btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {

@@ -11,7 +11,7 @@ import View.Application.form.MainForm;
 import View.Application.form.RecuCorreo1;
 import View.Application.form.RecuCel;
 import View.Application.form.Recus;
-import View.Application.form.Nosotros;
+import View.Application.form.nosotross;
 import View.glasspanepopup.GlassPanePopup;
 import raven.toast.Notifications;
 
@@ -24,7 +24,7 @@ public class Application extends javax.swing.JFrame {
     private final Recus recuperaciones;
     private final RecuCel recuSMS;
     private final RecuCorreo1 recuCorreo;
-    private final Nosotros sobrenosotros;
+    private final nosotross nosotross;
 
     public Application() {
         /*Constructor de la clase*/
@@ -36,7 +36,7 @@ public class Application extends javax.swing.JFrame {
         recuperaciones = new Recus();/*Crea una instancia de la clase Recus*/
         recuSMS = new RecuCel();/*Crea una instancia de la clase RecuQR*/
         recuCorreo = new RecuCorreo1();/* Crea una instancia de la clase RecuCorreo1*/
-        sobrenosotros = new Nosotros();
+        nosotross = new nosotross();
         setContentPane(loginForm);/*Establece el contenido de la ventana como LoginForm*/
         Notifications.getInstance().setJFrame(this);/*Configura notificaciones*/
         GlassPanePopup.install(this);/*Instala un GlassPanePopup en la ventana*/
@@ -102,12 +102,12 @@ public class Application extends javax.swing.JFrame {
         FlatLaf.updateUI();
     }
     
-    public static void SobreNosotros(){
+    public static void nosotross(){
         FlatAnimatedLafChange.showSnapshot();
-        app.setContentPane(app.sobrenosotros);
-        app.sobrenosotros.applyComponentOrientation(app.getComponentOrientation());
+        app.setContentPane(app.nosotross);
+        app.nosotross.applyComponentOrientation(app.getComponentOrientation());
         setSelectedMenu(0, 0);
-        SwingUtilities.updateComponentTreeUI(app.sobrenosotros);
+        SwingUtilities.updateComponentTreeUI(app.nosotross);
         FlatAnimatedLafChange.hideSnapshotWithAnimation();
         FlatLaf.updateUI();
     }

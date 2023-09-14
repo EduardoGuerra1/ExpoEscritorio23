@@ -5,6 +5,8 @@
 package View.Application.form;
 
 import View.aplicacion.Application;
+import com.formdev.flatlaf.FlatClientProperties;
+import java.awt.Color;
 
 /**
  *
@@ -17,7 +19,7 @@ public class Nosotros extends javax.swing.JPanel {
      */
     public Nosotros() {
         initComponents();
-    }
+         }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,12 +32,12 @@ public class Nosotros extends javax.swing.JPanel {
 
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbFe = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        lbFe1 = new javax.swing.JLabel();
+        lbFe2 = new javax.swing.JLabel();
+        lbFe3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -49,8 +51,8 @@ public class Nosotros extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel12.setText("Compromiso y Responsabilidad");
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel2.setText("Nuestra Misión");
+        lbFe.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        lbFe.setText("Nuestra Misión");
 
         jLabel13.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel13.setText("comunidades consagradas.");
@@ -58,14 +60,14 @@ public class Nosotros extends javax.swing.JPanel {
         jLabel14.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel14.setText("Nuestra Visión");
 
-        jLabel15.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel15.setText("Somos una comunidad de salesianos consagrados ");
+        lbFe1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        lbFe1.setText("Somos una comunidad de salesianos consagrados ");
 
-        jLabel16.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel16.setText("que, corresponsablemente con laicos, nos");
+        lbFe2.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        lbFe2.setText("que, corresponsablemente con laicos, nos");
 
-        jLabel17.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel17.setText("dedicamos a educar y evangelizar.");
+        lbFe3.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        lbFe3.setText("dedicamos a educar y evangelizar.");
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel8.setText("Para el año 2023 ser reconocidos por nuestra ");
@@ -102,11 +104,11 @@ public class Nosotros extends javax.swing.JPanel {
                                     .addComponent(jLabel14)
                                     .addComponent(jLabel8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)
+                            .addComponent(lbFe)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel17)
+                            .addComponent(lbFe1)
+                            .addComponent(lbFe2)
+                            .addComponent(lbFe3)
                             .addComponent(jLabel9)
                             .addComponent(jLabel13)
                             .addComponent(jLabel12)
@@ -137,13 +139,13 @@ public class Nosotros extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel13)
                         .addGap(23, 23, 23)
-                        .addComponent(jLabel2)
+                        .addComponent(lbFe)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel15)
+                        .addComponent(lbFe1)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel16)
+                        .addComponent(lbFe2)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel17)
+                        .addComponent(lbFe3)
                         .addGap(27, 27, 27)
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
@@ -172,12 +174,12 @@ public class Nosotros extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lbFe;
+    private javax.swing.JLabel lbFe1;
+    private javax.swing.JLabel lbFe2;
+    private javax.swing.JLabel lbFe3;
     // End of variables declaration//GEN-END:variables
 }

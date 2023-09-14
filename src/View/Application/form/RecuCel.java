@@ -147,6 +147,7 @@ public class RecuCel extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Recuperacion por SMS");
 
+        btnRegresar.setForeground(new java.awt.Color(204, 204, 204));
         btnRegresar.setText("Regresar a Opciones");
         btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {

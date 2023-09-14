@@ -89,6 +89,7 @@ public class LoginForm extends javax.swing.JPanel {
         jLabel7.setText("Contraseña");
 
         btnIngresar.setBackground(new java.awt.Color(78, 62, 108));
+        btnIngresar.setForeground(new java.awt.Color(204, 204, 204));
         btnIngresar.setText("Iniciar Sesion");
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -102,6 +103,7 @@ public class LoginForm extends javax.swing.JPanel {
             }
         });
 
+        btnRecuperaciones.setForeground(new java.awt.Color(204, 204, 204));
         btnRecuperaciones.setText("¿Olvidó su contraseña?");
         btnRecuperaciones.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRecuperaciones.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -117,8 +119,10 @@ public class LoginForm extends javax.swing.JPanel {
             }
         });
 
+        btnLogin.setForeground(new java.awt.Color(204, 204, 204));
         btnLogin.setText("Inicio Sesión");
 
+        btnNosotros.setForeground(new java.awt.Color(204, 204, 204));
         btnNosotros.setText("Sobre Nosotros");
         btnNosotros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -256,7 +260,8 @@ public class LoginForm extends javax.swing.JPanel {
 
     private void btnNosotrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNosotrosMouseClicked
         // TODO add your handling code here:
-        Application.SobreNosotros();
+        Application.nosotross
+        ();
     }//GEN-LAST:event_btnNosotrosMouseClicked
 
     

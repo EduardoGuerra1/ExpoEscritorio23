@@ -39,6 +39,7 @@ public class Recus extends javax.swing.JPanel {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/correooo.png"))); // NOI18N
 
+        btnRecuQR.setForeground(new java.awt.Color(204, 204, 204));
         btnRecuQR.setText("Recuperación de contraseña por SMS");
         btnRecuQR.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btnRecuQR.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -52,6 +53,7 @@ public class Recus extends javax.swing.JPanel {
             }
         });
 
+        btnCorreo.setForeground(new java.awt.Color(204, 204, 204));
         btnCorreo.setText("Recuperación de contraseña por Correo");
         btnCorreo.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btnCorreo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -64,6 +66,7 @@ public class Recus extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Recuperación de Contraseña");
 
+        btnRegresar.setForeground(new java.awt.Color(204, 204, 204));
         btnRegresar.setText("Regresar");
         btnRegresar.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
