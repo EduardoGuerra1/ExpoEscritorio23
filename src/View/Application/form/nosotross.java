@@ -6,7 +6,6 @@ package View.Application.form;
 
 import View.aplicacion.Application;
 import com.formdev.flatlaf.FlatClientProperties;
-import java.awt.Color;
 
 /**
  *
@@ -20,26 +19,26 @@ public class nosotross extends javax.swing.JPanel {
     public nosotross() {
         initComponents();
         
-        lbSobreNosotros.putClientProperty(FlatClientProperties.STYLE, ""
+        lbNosotros.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
         
-        //MISIÓN
+        //MISION
         lbMision.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
-        lbContenido.putClientProperty(FlatClientProperties.STYLE, ""
+        lbMision1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbContenido2.putClientProperty(FlatClientProperties.STYLE, ""
+        lbMision2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
-        lbContenido3.putClientProperty(FlatClientProperties.STYLE, ""
+        lbMision3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
         
-        lbMision.setText("MISIÓN");
+        lbMision.setText("Nuestra Misión");
         
-        panel1.putClientProperty(FlatClientProperties.STYLE, ""
+        Panel1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:50;"
                 + "background:lighten(@background,5%);");
         
-        //VISIÓN
+        //VISION
         lbVision.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
         lbVision1.putClientProperty(FlatClientProperties.STYLE, ""
@@ -49,19 +48,12 @@ public class nosotross extends javax.swing.JPanel {
         lbVision3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;");
         
-        lbVision.setText("VISIÓN");
+        lbVision.setText("Nuestra Visión");
         
-        panel2.putClientProperty(FlatClientProperties.STYLE, ""
+        Panel2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:50;"
                 + "background:lighten(@background,5%);");
         
-        
-    }
-    
-    private void cambiarColorRGB(int red, int green, int blue) {
-        Color nuevoColor = new Color(red, green, blue);
-        panel1.setBackground(nuevoColor);
-        panel1.repaint(); // Refresca la interfaz de usuario para mostrar el cambio
     }
 
     /**
@@ -73,94 +65,22 @@ public class nosotross extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel1 = new javax.swing.JPanel();
-        lbContenido = new javax.swing.JLabel();
-        lbContenido2 = new javax.swing.JLabel();
-        lbContenido3 = new javax.swing.JLabel();
-        lbMision = new javax.swing.JLabel();
-        lbSobreNosotros = new javax.swing.JLabel();
+        lbNosotros = new javax.swing.JLabel();
+        btnLogin = new View.BotonLogin.boton3();
+        btnNosotros = new View.BotonLogin.boton3();
         jLabel1 = new javax.swing.JLabel();
-        panel2 = new javax.swing.JPanel();
+        Panel1 = new javax.swing.JPanel();
+        lbMision = new javax.swing.JLabel();
+        lbMision1 = new javax.swing.JLabel();
+        lbMision2 = new javax.swing.JLabel();
+        lbMision3 = new javax.swing.JLabel();
+        Panel2 = new javax.swing.JPanel();
+        lbVision = new javax.swing.JLabel();
         lbVision1 = new javax.swing.JLabel();
         lbVision2 = new javax.swing.JLabel();
         lbVision3 = new javax.swing.JLabel();
-        lbVision = new javax.swing.JLabel();
-        btnLogin = new View.BotonLogin.boton3();
-        btnNosotros = new View.BotonLogin.boton3();
 
-        lbContenido.setText("\"Somos una comunidad de salesianos consagrados");
-
-        lbContenido2.setText("que, corresponsablemente con laicos, nos dedicamos");
-
-        lbContenido3.setText("a educar y evangelizar a los niños, adolescentes");
-
-        lbMision.setText("jLabel1");
-
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbMision)
-                    .addComponent(lbContenido3)
-                    .addComponent(lbContenido)
-                    .addComponent(lbContenido2))
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(lbMision)
-                .addGap(18, 18, 18)
-                .addComponent(lbContenido)
-                .addGap(18, 18, 18)
-                .addComponent(lbContenido2)
-                .addGap(18, 18, 18)
-                .addComponent(lbContenido3)
-                .addGap(29, 29, 29))
-        );
-
-        lbSobreNosotros.setText("SOBRE NOSOTROS");
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/nosotros.gif.gif"))); // NOI18N
-
-        lbVision1.setText("Al año 2022 ser identificados en Centroamérica por:");
-
-        lbVision2.setText("La corresponsabilidad entre salesianos y laicos.");
-
-        lbVision3.setText("Una oferta de servicios educativo-pastorales ");
-
-        lbVision.setText("jLabel1");
-
-        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
-        panel2.setLayout(panel2Layout);
-        panel2Layout.setHorizontalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbVision)
-                    .addComponent(lbVision3)
-                    .addComponent(lbVision1)
-                    .addComponent(lbVision2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panel2Layout.setVerticalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(lbVision)
-                .addGap(18, 18, 18)
-                .addComponent(lbVision1)
-                .addGap(18, 18, 18)
-                .addComponent(lbVision2)
-                .addGap(18, 18, 18)
-                .addComponent(lbVision3)
-                .addGap(29, 29, 29))
-        );
+        lbNosotros.setText("SOBRE NOSOTROS");
 
         btnLogin.setForeground(new java.awt.Color(204, 204, 204));
         btnLogin.setText("Inicio Sesión");
@@ -178,56 +98,126 @@ public class nosotross extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/nosotros.gif.gif"))); // NOI18N
+
+        lbMision.setText("jLabel2");
+
+        lbMision1.setText("Somos una comunidad de salesianos consagrados");
+
+        lbMision2.setText("que, corresponsablemente con laicos,");
+
+        lbMision3.setText("nos dedicamos a educar y evangelizar ");
+
+        javax.swing.GroupLayout Panel1Layout = new javax.swing.GroupLayout(Panel1);
+        Panel1.setLayout(Panel1Layout);
+        Panel1Layout.setHorizontalGroup(
+            Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbMision3)
+                    .addComponent(lbMision2)
+                    .addComponent(lbMision1)
+                    .addComponent(lbMision))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        Panel1Layout.setVerticalGroup(
+            Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(lbMision)
+                .addGap(18, 18, 18)
+                .addComponent(lbMision1)
+                .addGap(18, 18, 18)
+                .addComponent(lbMision2)
+                .addGap(18, 18, 18)
+                .addComponent(lbMision3)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        lbVision.setText("jLabel2");
+
+        lbVision1.setText("Al año 2022 ser identificados en Centroamérica por:");
+
+        lbVision2.setText("La corresponsabilidad entre salesianos y laicos");
+
+        lbVision3.setText("La significatividad de sus obras.");
+
+        javax.swing.GroupLayout Panel2Layout = new javax.swing.GroupLayout(Panel2);
+        Panel2.setLayout(Panel2Layout);
+        Panel2Layout.setHorizontalGroup(
+            Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbVision3)
+                    .addComponent(lbVision2)
+                    .addComponent(lbVision1)
+                    .addComponent(lbVision))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        Panel2Layout.setVerticalGroup(
+            Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(lbVision)
+                .addGap(18, 18, 18)
+                .addComponent(lbVision1)
+                .addGap(18, 18, 18)
+                .addComponent(lbVision2)
+                .addGap(18, 18, 18)
+                .addComponent(lbVision3)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(lbSobreNosotros)))
-                .addContainerGap(171, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbNosotros)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnNosotros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(lbSobreNosotros)
+                .addGap(48, 48, 48)
+                .addComponent(lbNosotros)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addComponent(Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(Panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 152, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNosotros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNosotros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNosotrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNosotrosMouseClicked
         // TODO add your handling code here:
-        Application.nosotross
-        ();
+        Application.nosotross();
     }//GEN-LAST:event_btnNosotrosMouseClicked
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
@@ -237,19 +227,19 @@ public class nosotross extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Panel1;
+    private javax.swing.JPanel Panel2;
     private View.BotonLogin.boton3 btnLogin;
     private View.BotonLogin.boton3 btnNosotros;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lbContenido;
-    private javax.swing.JLabel lbContenido2;
-    private javax.swing.JLabel lbContenido3;
     private javax.swing.JLabel lbMision;
-    private javax.swing.JLabel lbSobreNosotros;
+    private javax.swing.JLabel lbMision1;
+    private javax.swing.JLabel lbMision2;
+    private javax.swing.JLabel lbMision3;
+    private javax.swing.JLabel lbNosotros;
     private javax.swing.JLabel lbVision;
     private javax.swing.JLabel lbVision1;
     private javax.swing.JLabel lbVision2;
     private javax.swing.JLabel lbVision3;
-    private javax.swing.JPanel panel1;
-    private javax.swing.JPanel panel2;
     // End of variables declaration//GEN-END:variables
 }
