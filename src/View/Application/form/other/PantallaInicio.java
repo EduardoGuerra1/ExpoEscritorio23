@@ -492,7 +492,7 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
     @Override
     public void run() {
-            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
     while (true) {
