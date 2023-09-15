@@ -15,6 +15,7 @@ import java.util.*;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
@@ -491,28 +492,26 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
-            try {
-                Calendar c = Calendar.getInstance();
-                hora = c.get(Calendar.HOUR_OF_DAY);
-                if (hora > 12) {
-                    hora = hora - 12;
-                }
-                minutos = c.get(Calendar.MINUTE);
-                segundos = c.get(Calendar.SECOND);
-                year = c.get(Calendar.YEAR);
-                month = c.get(Calendar.MONTH);
-                day = c.get(Calendar.DAY_OF_MONTH);
-                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
-                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                Date dat = c.getTime();
-                timestr = sdf.format(dat);
-                yearstr = df.format(dat);
-                time.setText(timestr);
-                date.setText(yearstr);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+    while (true) {
+        Calendar c = Calendar.getInstance();
+        Date now = c.getTime();
+        timestr = sdf.format(now);
+        yearstr = df.format(now);
+
+        SwingUtilities.invokeLater(() -> {
+            time.setText(timestr);
+            date.setText(yearstr);
+        });
+
+        try {
+            // Espera 1 segundo antes de actualizar nuevamente
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+    }
     }
 }
