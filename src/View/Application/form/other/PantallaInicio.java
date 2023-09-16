@@ -11,7 +11,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.RoundRectangle2D;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -492,26 +495,25 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
     @Override
     public void run() {
-    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
-    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+       DateTimeFormatter formateadorHora = DateTimeFormatter.ofPattern("hh:mm:ss a");
+       DateTimeFormatter formateadorFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     while (true) {
-        Calendar c = Calendar.getInstance();
-        Date now = c.getTime();
-        timestr = sdf.format(now);
-        yearstr = df.format(now);
+    LocalDateTime ahora = LocalDateTime.now();
+    String horaStr = ahora.format(formateadorHora);
+    String fechaStr = ahora.format(formateadorFecha);
 
-        SwingUtilities.invokeLater(() -> {
-            time.setText(timestr);
-            date.setText(yearstr);
-        });
+    SwingUtilities.invokeLater(() -> {
+        time.setText(horaStr);
+        date.setText(fechaStr);
+    });
 
-        try {
-            // Espera 1 segundo antes de actualizar nuevamente
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-    }
+    try {
+        // Esperamos 1 segundo antes de actualizar nuevamente
+        TimeUnit.SECONDS.sleep(1);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }    
+  }
+ }
 }
