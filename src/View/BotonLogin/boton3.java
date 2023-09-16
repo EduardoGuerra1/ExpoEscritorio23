@@ -16,13 +16,13 @@ import javax.swing.border.EmptyBorder;
  */
 public class boton3 extends JButton{
     
-    private Color buttonColor = new Color( 86,88,105);
+    private Color buttonColor = new Color( 86,88,105, 0);
     
     public boton3() {
         /*Constructor*/
         setBorder(new EmptyBorder(8, 15, 8, 15));
         setContentAreaFilled(false);
-        setForeground(Color.GRAY);
+        setForeground(Color.BLACK);
         setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
     @Override

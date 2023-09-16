@@ -82,16 +82,18 @@ public class nosotross extends javax.swing.JPanel {
 
         lbNosotros.setText("SOBRE NOSOTROS");
 
-        btnLogin.setForeground(new java.awt.Color(204, 204, 204));
+        btnLogin.setForeground(new java.awt.Color(102, 102, 102));
         btnLogin.setText("Inicio Sesión");
+        btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLoginMouseClicked(evt);
             }
         });
 
-        btnNosotros.setForeground(new java.awt.Color(204, 204, 204));
+        btnNosotros.setForeground(new java.awt.Color(102, 102, 102));
         btnNosotros.setText("Sobre Nosotros");
+        btnNosotros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNosotros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnNosotrosMouseClicked(evt);
