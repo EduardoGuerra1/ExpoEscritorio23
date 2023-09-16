@@ -31,6 +31,7 @@ public class Application extends javax.swing.JFrame {
         initComponents();/*Inicializa los componentes de la interfaz*/
         setSize(new Dimension(1200, 768));/*Establece el tamaño de la ventana*/
         setLocationRelativeTo(null);/*Centra la ventana en la pantalla*/
+        
         mainForm = new MainForm();/*Crea una instancia de la clase MainForm*/
         loginForm = new LoginForm();/*Crea una instancia de la clase LoginForm*/
         recuperaciones = new Recus();/*Crea una instancia de la clase Recus*/

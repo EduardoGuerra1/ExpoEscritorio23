@@ -123,9 +123,6 @@ public class RecuCel extends javax.swing.JPanel {
             }
         });
 
-        txtCorreo.setForeground(new java.awt.Color(102, 102, 102));
-
-        txtCodigo.setForeground(new java.awt.Color(102, 102, 102));
         txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCodigoKeyReleased(evt);
@@ -137,8 +134,6 @@ public class RecuCel extends javax.swing.JPanel {
 
         lb1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         lb1.setText("Ingrese el código que se le envió al telefono:  ");
-
-        txtContraseña.setForeground(new java.awt.Color(102, 102, 102));
 
         lb2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         lb2.setText("Ingrese su nueva contraseña:");
