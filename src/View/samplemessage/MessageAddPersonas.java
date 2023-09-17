@@ -127,9 +127,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         txtNombres1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtApellidos = new javax.swing.JTextField();
-        txtNombres3 = new javax.swing.JTextField();
         txtClave = new javax.swing.JTextField();
-        txtNombres4 = new javax.swing.JTextField();
         btnCancelar = new View.BotonesText.Buttons();
         lbImagen = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -137,8 +135,6 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         dpNacimiento = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         cbTipoUsuario = new javax.swing.JComboBox<>();
-        txtNombres2 = new javax.swing.JTextField();
-        txtNombres5 = new javax.swing.JTextField();
         Tipos = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         TxTelefono = new javax.swing.JTextField();
@@ -189,7 +185,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
                 txtCodigoActionPerformed(evt);
             }
         });
-        add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 150, 20));
+        add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 160, 30));
 
         jLabel5.setText("Nombres:");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
@@ -211,26 +207,12 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         });
         add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 260, 30));
 
-        txtNombres3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombres3ActionPerformed(evt);
-            }
-        });
-        add(txtNombres3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 260, 20));
-
         txtClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtClaveActionPerformed(evt);
             }
         });
         add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 260, 30));
-
-        txtNombres4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombres4ActionPerformed(evt);
-            }
-        });
-        add(txtNombres4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 260, 20));
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -258,20 +240,6 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         jLabel3.setText("Tipo de Usuario:");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, -1, -1));
         add(cbTipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, 160, -1));
-
-        txtNombres2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombres2ActionPerformed(evt);
-            }
-        });
-        add(txtNombres2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 260, 20));
-
-        txtNombres5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombres5ActionPerformed(evt);
-            }
-        });
-        add(txtNombres5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 260, 30));
 
         Tipos.setEditable(false);
         Tipos.setEnabled(false);
@@ -384,17 +352,9 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidosActionPerformed
 
-    private void txtNombres3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombres3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombres3ActionPerformed
-
     private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClaveActionPerformed
-
-    private void txtNombres4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombres4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombres4ActionPerformed
 
     private void btnImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImagenMouseClicked
         
@@ -432,14 +392,6 @@ public class MessageAddPersonas extends javax.swing.JPanel {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAceptarActionPerformed
-
-    private void txtNombres2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombres2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombres2ActionPerformed
-
-    private void txtNombres5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombres5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombres5ActionPerformed
 
     private void TiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TiposActionPerformed
         // TODO add your handling code here:
@@ -609,10 +561,6 @@ public class MessageAddPersonas extends javax.swing.JPanel {
     private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNombres1;
-    private javax.swing.JTextField txtNombres2;
-    private javax.swing.JTextField txtNombres3;
-    private javax.swing.JTextField txtNombres4;
-    private javax.swing.JTextField txtNombres5;
     public javax.swing.JLabel txtTitle;
     // End of variables declaration//GEN-END:variables
 }

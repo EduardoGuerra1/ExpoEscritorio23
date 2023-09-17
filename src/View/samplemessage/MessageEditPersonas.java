@@ -277,12 +277,9 @@ public class MessageEditPersonas extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         txtCodigo1 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        txtNombres5 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txtApellidos1 = new javax.swing.JTextField();
-        txtNombres6 = new javax.swing.JTextField();
         txtClave1 = new javax.swing.JTextField();
-        txtNombres7 = new javax.swing.JTextField();
         btnCancelar1 = new View.BotonesText.Buttons();
         lbImagen1 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -480,7 +477,7 @@ public class MessageEditPersonas extends javax.swing.JPanel {
                 txtNombres2ActionPerformed(evt);
             }
         });
-        jPanel2.add(txtNombres2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 260, 20));
+        jPanel2.add(txtNombres2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 260, 30));
 
         jLabel14.setText("Fecha de nacimiento:");
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, -1, -1));
@@ -490,17 +487,10 @@ public class MessageEditPersonas extends javax.swing.JPanel {
                 txtCodigo1ActionPerformed(evt);
             }
         });
-        jPanel2.add(txtCodigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 150, 20));
+        jPanel2.add(txtCodigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 150, 30));
 
         jLabel15.setText("Nombres:");
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
-
-        txtNombres5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombres5ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtNombres5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 260, 20));
 
         jLabel16.setText("Apellidos:");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, -1));
@@ -510,28 +500,14 @@ public class MessageEditPersonas extends javax.swing.JPanel {
                 txtApellidos1ActionPerformed(evt);
             }
         });
-        jPanel2.add(txtApellidos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 260, 20));
-
-        txtNombres6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombres6ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtNombres6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 260, 20));
+        jPanel2.add(txtApellidos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 260, 30));
 
         txtClave1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtClave1ActionPerformed(evt);
             }
         });
-        jPanel2.add(txtClave1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 260, 20));
-
-        txtNombres7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombres7ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtNombres7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 260, 20));
+        jPanel2.add(txtClave1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 260, 30));
 
         btnCancelar1.setText("Cancelar");
         btnCancelar1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -788,25 +764,13 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigo1ActionPerformed
 
-    private void txtNombres5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombres5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombres5ActionPerformed
-
     private void txtApellidos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidos1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidos1ActionPerformed
 
-    private void txtNombres6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombres6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombres6ActionPerformed
-
     private void txtClave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClave1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClave1ActionPerformed
-
-    private void txtNombres7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombres7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombres7ActionPerformed
 
     private void btnCancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelar1MouseClicked
         // TODO add your handling code here:
@@ -872,9 +836,6 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
     private javax.swing.JTextField txtNombres2;
     private javax.swing.JTextField txtNombres3;
     private javax.swing.JTextField txtNombres4;
-    private javax.swing.JTextField txtNombres5;
-    private javax.swing.JTextField txtNombres6;
-    private javax.swing.JTextField txtNombres7;
     public javax.swing.JLabel txtTitle;
     public javax.swing.JLabel txtTitle1;
     // End of variables declaration//GEN-END:variables
