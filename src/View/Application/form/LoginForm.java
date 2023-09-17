@@ -40,6 +40,11 @@ public class LoginForm extends javax.swing.JPanel {
                 + "arc:50;"
                 + "background:lighten(@background,7%);");
         
+        txtContraseña.putClientProperty(FlatClientProperties.STYLE, ""
+                + "showRevealButton:true");
+        txtCorreo.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Correo");
+        txtContraseña.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Contraseña");
+        
         /*// Crear el CardLayout y el panel que contendrá los paneles a alternar
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
@@ -74,9 +79,7 @@ public class LoginForm extends javax.swing.JPanel {
         btnLogin = new View.BotonLogin.boton3();
         btnNosotros = new View.BotonLogin.boton3();
         circulo = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         txtContraseña = new View.SWING.Contraseña();
-        lbCorreo = new javax.swing.JLabel();
         txtCorreo = new View.SWING.textField();
         btnIngresar = new View.SWING.boton();
         btnRecuperaciones = new View.SWING.boton();
@@ -103,18 +106,12 @@ public class LoginForm extends javax.swing.JPanel {
 
         circulo.setPreferredSize(new java.awt.Dimension(55, 55));
 
-        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel7.setText("Contraseña");
-
         txtContraseña.setHint("CONTRASEÑA");
         txtContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContraseñaActionPerformed(evt);
             }
         });
-
-        lbCorreo.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        lbCorreo.setText("Correo");
 
         btnIngresar.setBackground(new java.awt.Color(78, 62, 108));
         btnIngresar.setForeground(new java.awt.Color(204, 204, 204));
@@ -167,9 +164,7 @@ public class LoginForm extends javax.swing.JPanel {
                     .addGroup(circuloLayout.createSequentialGroup()
                         .addGroup(circuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(lbCorreo))
+                            .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 55, Short.MAX_VALUE))))
         );
         circuloLayout.setVerticalGroup(
@@ -179,17 +174,13 @@ public class LoginForm extends javax.swing.JPanel {
                     .addGroup(circuloLayout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, circuloLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
-                        .addGap(40, 40, 40)))
-                .addComponent(lbCorreo)
-                .addGap(18, 18, 18)
+                        .addGap(77, 77, 77)))
                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18)
+                .addGap(68, 68, 68)
                 .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -344,8 +335,6 @@ public class LoginForm extends javax.swing.JPanel {
     private javax.swing.JPanel circulo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel lbCorreo;
     private View.SWING.Contraseña txtContraseña;
     private View.SWING.textField txtCorreo;
     // End of variables declaration//GEN-END:variables

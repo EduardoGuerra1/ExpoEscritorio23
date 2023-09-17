@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package View.Application.form;
 
 import static View.Application.form.RecuQR.encryptPassword;
 import View.aplicacion.Application;
+import com.formdev.flatlaf.FlatClientProperties;
 import expoescritorio.Controller.ControllerFull;
 import static expoescritorio.Controller.ControllerFull.putApiAsync;
 import expoescritorio.Controller.PersonasController;
@@ -42,6 +39,12 @@ public class RecuCel extends javax.swing.JPanel {
 
     public RecuCel() {
         initComponents();
+        
+        //Hints TextFields y JPassword
+        txtCorreo.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Correo");
+        txtCodigo.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Código Recibido");
+        txtContraseña.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Nueva Contraseña");
+        
         txtCodigo.setDocument(new PlainDocument() {
             @Override
             public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
@@ -139,7 +142,6 @@ public class RecuCel extends javax.swing.JPanel {
         lb2.setText("Ingrese su nueva contraseña:");
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Recuperacion por SMS");
 
         btnRegresar.setForeground(new java.awt.Color(204, 204, 204));

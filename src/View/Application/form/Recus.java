@@ -65,7 +65,6 @@ public class Recus extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Recuperación de Contraseña");
 
         btnRegresar.setForeground(new java.awt.Color(204, 204, 204));
