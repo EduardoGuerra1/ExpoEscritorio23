@@ -191,28 +191,8 @@ public class MessageEditPersonas extends javax.swing.JPanel {
             
         }
         
-        
-        
-        try{
-            ByteArrayInputStream in = new ByteArrayInputStream(estudiante.getFoto());
-            BufferedImage image = ImageIO.read(in);
-            in.close();
-            mImageFile = new File("outputImage.jpg");
-            ImageIO.write(image, "jpg", mImageFile);
-            System.out.println("hola k ase");
-            ImageIcon mIcono = new ImageIcon(image);
-            
-            lbImagen1.setIcon(mIcono);
-            lbImagen1.revalidate();
-            lbImagen1.repaint();
-            lbImagen1.setVisible(true);
-
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        
-        System.out.println("esta no la cuento");
+       
+         System.out.println("");
         
         String tipoPersona = TiposPersonasController.getTipoPersonaAsync(estudiante.getIdTipoPersona()).join();
         
@@ -223,6 +203,7 @@ public class MessageEditPersonas extends javax.swing.JPanel {
         txtCodigo1.setText(estudiante.getCodigo());
         dpNacimiento1.setDate(nacimiento);
         TxTelefono.setText(estudiante.getTelefonoPersona());
+
         
         
 
