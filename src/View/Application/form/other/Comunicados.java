@@ -68,6 +68,7 @@ public class Comunicados extends javax.swing.JPanel {
          tableModel.addColumn("Titulo");
         
         cargarDatos();
+        table1.getTableHeader().setReorderingAllowed(false); 
         
     }
 

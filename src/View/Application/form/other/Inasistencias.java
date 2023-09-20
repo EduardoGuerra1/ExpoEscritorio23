@@ -80,6 +80,7 @@ public class Inasistencias extends javax.swing.JPanel {
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Estudiante", "Docente", "Estado","Fecha"});
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
+        table1.getTableHeader().setReorderingAllowed(false); 
     }
     
     private void mostrarReporte() {

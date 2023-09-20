@@ -65,6 +65,7 @@ public class SalonesPantalla extends javax.swing.JPanel {
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Salones Código",});
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
+        table1.getTableHeader().setReorderingAllowed(false); 
     }
 
     /**

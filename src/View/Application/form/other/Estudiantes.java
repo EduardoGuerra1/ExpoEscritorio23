@@ -68,7 +68,7 @@ public class Estudiantes extends javax.swing.JPanel {
         tableModel.setColumnIdentifiers(new Object[]{"Codigo", "Nombre", "Especialidad", "Grado"});
 
         cargarDatos();
-
+table1.getTableHeader().setReorderingAllowed(false);  
         table1.setDefaultEditor(Object.class, null);
     }
 

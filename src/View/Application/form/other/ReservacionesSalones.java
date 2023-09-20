@@ -82,6 +82,7 @@ public class ReservacionesSalones extends javax.swing.JPanel {
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Motivo","Docente", "Inicio", "Final","Estado"});
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
+        table1.getTableHeader().setReorderingAllowed(false);
     }
     
        private void mostrarReporte() {

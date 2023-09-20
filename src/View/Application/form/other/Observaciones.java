@@ -57,6 +57,7 @@ public class Observaciones extends javax.swing.JPanel {
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Estudiante", "Docente", "Detalle","Fecha"});
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
+        table1.getTableHeader().setReorderingAllowed(false); 
         
     }
     public void deleteAllTableRows(JTable table) {

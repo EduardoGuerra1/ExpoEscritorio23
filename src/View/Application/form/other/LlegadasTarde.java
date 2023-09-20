@@ -59,6 +59,7 @@ public class LlegadasTarde extends javax.swing.JPanel {
         tableModel.setColumnIdentifiers(new Object[]{"idLlegadaTarde", "TipoLlegadaTarde", "Estudiante","Docente","estado","fecha"});
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
+        table1.getTableHeader().setReorderingAllowed(false); 
     }   
     
      public void deleteAllTableRows(JTable table) {

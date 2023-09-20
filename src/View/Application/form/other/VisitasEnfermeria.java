@@ -65,6 +65,7 @@ String bg = getBackground().toString();
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Fecha", "Detalle de Visita", "Persona"});
         cargarDatos();
         table1.setDefaultEditor(Object.class, null);
+        table1.getTableHeader().setReorderingAllowed(false); 
     }
 
     public void cargarDatos() {

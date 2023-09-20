@@ -80,6 +80,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
         cargarDatos();
 
         table1.setDefaultEditor(Object.class, null);
+        table1.getTableHeader().setReorderingAllowed(false);      
     }
 
     private void mostrarReporte() {

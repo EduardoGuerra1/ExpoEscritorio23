@@ -59,6 +59,7 @@ public class Credenciales extends javax.swing.JPanel {
         cargarDatos();
 
         table1.setDefaultEditor(Object.class, null);
+        table1.getTableHeader().setReorderingAllowed(false); 
     }
 
     public void cargarDatos() {
