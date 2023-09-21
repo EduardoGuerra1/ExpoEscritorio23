@@ -26,6 +26,9 @@ import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -70,7 +73,26 @@ String bg = getBackground().toString();
         table1.getTableHeader().setReorderingAllowed(false); 
                 rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
         table1.setRowSorter(rowSorter);
-        
+              Buscador.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+
+                        
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                      
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
     }
 
     public void cargarDatos() {

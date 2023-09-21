@@ -108,7 +108,7 @@ public class MainForm extends JLayeredPane {
                 } else if (subIndex == 4) {
                     Application.showForm(new Observaciones());
                 } else if (subIndex == 5) {
-                    Application.showForm(new SolicitudesPermisos());
+                    Application.showForm(new LlegadasTarde());
                 } else if (subIndex == 6) {
                     Application.showForm(new Inasistencias());
                 } else {

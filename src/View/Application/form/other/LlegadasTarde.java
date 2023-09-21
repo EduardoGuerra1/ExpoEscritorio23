@@ -24,6 +24,9 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 
 
@@ -58,12 +61,32 @@ public class LlegadasTarde extends javax.swing.JPanel {
                 + "font:$h1.font");
         // Obtén el modelo de la tabla existente
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-        tableModel.setColumnIdentifiers(new Object[]{"idLlegadaTarde", "TipoLlegadaTarde", "Estudiante","Docente","estado","fecha"});
+        tableModel.setColumnIdentifiers(new Object[]{"ID", "Estudiante","Docente","Fecha"});
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
         table1.getTableHeader().setReorderingAllowed(false); 
                         rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
         table1.setRowSorter(rowSorter);
+              Buscador.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+
+                        
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                      
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
     }   
     
      public void deleteAllTableRows(JTable table) {
@@ -83,10 +106,8 @@ public void cargarDatosAsync() {
                 
                 tableModel.addRow(new Object[]{
                     llegadasTarde.getIdLlegadaTarde(),
-                    llegadasTarde.getTipoLlegadaTarde(),
                     llegadasTarde.getEstudiante(), 
                     llegadasTarde.getDocente(), 
-                    llegadasTarde.getEstado(), 
                     inicioFormatted
                     
                 });
@@ -117,7 +138,7 @@ public void cargarDatosAsync() {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 516, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,14 +156,14 @@ public void cargarDatosAsync() {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(37, 37, 37)
                 .addComponent(lb1)
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(15, 15, 15)
                 .addComponent(lb1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,7 +207,7 @@ public void cargarDatosAsync() {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGap(19, 19, 19)
                         .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -197,15 +218,11 @@ public void cargarDatosAsync() {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)))
+                    .addComponent(btnDelete1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Buscador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -299,12 +316,11 @@ public void cargarDatosAsync() {
         if (textoBusqueda.isEmpty()) {
             // Si el JTextField está vacío, muestra todas las filas.
             rowSorter.setRowFilter(null);
-             System.out.println("No sirve ");
         } else {
             // Crea un filtro para mostrar solo las filas cuyo nombre de estudiante contiene el texto de búsqueda.
             RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", 1); // 1 representa la columna del estudiante
             rowSorter.setRowFilter(rowFilter);
-             System.out.println("Si sirve ");
+    
            
         }
     }//GEN-LAST:event_BuscadorKeyTyped
