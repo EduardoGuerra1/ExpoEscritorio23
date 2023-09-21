@@ -12,12 +12,14 @@ import expoescritorio.Controller.PersonasController;
 import expoescritorio.Models.Personas;
 import expoescritorio.Models.PersonasLo;
 import java.awt.CardLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import raven.toast.Notifications;
 
@@ -36,12 +38,15 @@ public class LoginForm extends javax.swing.JPanel {
     public LoginForm() {
         initComponents();
         
+        //Panel
         circulo.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:50;"
                 + "background:lighten(@background,7%);");
         
         txtContraseña.putClientProperty(FlatClientProperties.STYLE, ""
-                + "showRevealButton:true");
+                +"showCapsLock: true;"
+                +"showRevealButton: true");
+        //Hints 
         txtCorreo.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Correo");
         txtContraseña.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Contraseña");
         
@@ -338,4 +343,5 @@ public class LoginForm extends javax.swing.JPanel {
     private View.SWING.Contraseña txtContraseña;
     private View.SWING.textField txtCorreo;
     // End of variables declaration//GEN-END:variables
+
 }

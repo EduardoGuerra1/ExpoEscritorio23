@@ -49,6 +49,7 @@ import javax.swing.text.PlainDocument;
  */
 public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
        List<PersonasLo> listaIdPersonas = new ArrayList<>();
+       List<Personas> mySearch = new ArrayList<Personas>();
        
        private Boolean noti;
     public MessageAddVisitaEnfermeria() {
@@ -216,6 +217,16 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         jLabel1.setText("Detalle de visita");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
         add(cbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 160, -1));
+
+        cbPersona.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                cbPersonaPopupMenuWillBecomeVisible(evt);
+            }
+        });
         add(cbPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 160, -1));
 
         jLabel3.setText("Persona");
@@ -230,6 +241,9 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         txtVisita.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtVisitaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtVisitaKeyTyped(evt);
             }
         });
         add(txtVisita, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 400, 50));
@@ -308,6 +322,16 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
             playValidacion();
         }
     }//GEN-LAST:event_txtVisitaKeyReleased
+
+    private void txtVisitaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVisitaKeyTyped
+        // TODO add your handling code here:
+       
+
+    }//GEN-LAST:event_txtVisitaKeyTyped
+
+    private void cbPersonaPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cbPersonaPopupMenuWillBecomeVisible
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbPersonaPopupMenuWillBecomeVisible
 
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);

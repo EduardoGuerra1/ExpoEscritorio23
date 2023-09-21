@@ -1,5 +1,6 @@
 package View.aplicacion;
 
+import View.Application.form.Carga;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
@@ -13,7 +14,11 @@ import View.Application.form.RecuCel;
 import View.Application.form.Recus;
 import View.Application.form.nosotross;
 import View.glasspanepopup.GlassPanePopup;
+import java.awt.event.ActionListener;
 import raven.toast.Notifications;
+import java.awt.event.ActionEvent;
+import javax.swing.Timer;
+
 
 
 public class Application extends javax.swing.JFrame {
@@ -25,6 +30,7 @@ public class Application extends javax.swing.JFrame {
     private final RecuCel recuSMS;
     private final RecuCorreo1 recuCorreo;
     private final nosotross nosotross;
+    private final Carga carga;
 
     public Application() {
         /*Constructor de la clase*/
@@ -38,15 +44,17 @@ public class Application extends javax.swing.JFrame {
         recuSMS = new RecuCel();/*Crea una instancia de la clase RecuQR*/
         recuCorreo = new RecuCorreo1();/* Crea una instancia de la clase RecuCorreo1*/
         nosotross = new nosotross();
-        setContentPane(loginForm);/*Establece el contenido de la ventana como LoginForm*/
+        carga = new Carga();
+        setContentPane(carga);
         Notifications.getInstance().setJFrame(this);/*Configura notificaciones*/
         GlassPanePopup.install(this);/*Instala un GlassPanePopup en la ventana*/
 
-        setContentPane(loginForm);
+        setContentPane(carga);
+        
         Notifications.getInstance().setJFrame(this);
         GlassPanePopup.install(this);
+              
     }
-
     public static void showForm(Component component) {
         component.applyComponentOrientation(app.getComponentOrientation());
         app.mainForm.showForm(component);
