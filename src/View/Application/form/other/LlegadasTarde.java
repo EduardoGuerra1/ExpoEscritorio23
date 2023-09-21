@@ -170,6 +170,9 @@ public void cargarDatosAsync() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 BuscadorKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                BuscadorKeyTyped(evt);
+            }
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -184,7 +187,7 @@ public void cargarDatosAsync() {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
@@ -286,6 +289,10 @@ public void cargarDatosAsync() {
     }//GEN-LAST:event_btnDelete1MouseClicked
 
     private void BuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyPressed
+
+    }//GEN-LAST:event_BuscadorKeyPressed
+
+    private void BuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyTyped
                rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
         table1.setRowSorter(rowSorter);
                 String textoBusqueda = Buscador.getText().trim().toLowerCase();
@@ -300,7 +307,7 @@ public void cargarDatosAsync() {
              System.out.println("Si sirve ");
            
         }
-    }//GEN-LAST:event_BuscadorKeyPressed
+    }//GEN-LAST:event_BuscadorKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
