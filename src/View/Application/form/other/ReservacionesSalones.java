@@ -36,9 +36,11 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -53,7 +55,7 @@ import org.json.JSONObject;
  * @author educs
  */
 public class ReservacionesSalones extends javax.swing.JPanel {
-
+ private TableRowSorter<DefaultTableModel> rowSorter;
     /**
      * Creates new form TiposCodigos
      */
@@ -83,6 +85,8 @@ public class ReservacionesSalones extends javax.swing.JPanel {
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
         table1.getTableHeader().setReorderingAllowed(false);
+                rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
+        table1.setRowSorter(rowSorter);
     }
     
        private void mostrarReporte() {
@@ -116,6 +120,7 @@ public class ReservacionesSalones extends javax.swing.JPanel {
         table1 = new View.ExampleTable.Table();
         btnDelete = new View.BotonesText.Buttons();
         btnEdit1 = new View.BotonesText.Buttons();
+        Buscador = new View.BotonesText.CustomTextField();
 
         lb.setText("Gestión de las Reservaciones de salones");
         lb.setToolTipText("");
@@ -144,6 +149,12 @@ public class ReservacionesSalones extends javax.swing.JPanel {
             }
         });
 
+        Buscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BuscadorKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -153,7 +164,9 @@ public class ReservacionesSalones extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
+                .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,7 +177,8 @@ public class ReservacionesSalones extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -414,8 +428,25 @@ public int ActualizarDatos(int id ){
 
     }//GEN-LAST:event_btnEdit1MouseClicked
 
+    private void BuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyPressed
+ rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
+        table1.setRowSorter(rowSorter);
+                String textoBusqueda = Buscador.getText().trim().toLowerCase();
+        if (textoBusqueda.isEmpty()) {
+            // Si el JTextField está vacío, muestra todas las filas.
+            rowSorter.setRowFilter(null);
+   
+        } else {
+            // Crea un filtro para mostrar solo las filas cuyo nombre de estudiante contiene el texto de búsqueda.
+            RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", 2); // 1 representa la columna del estudiante
+            rowSorter.setRowFilter(rowFilter);
+           
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscadorKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.BotonesText.CustomTextField Buscador;
     private View.BotonesText.Buttons btnDelete;
     private View.BotonesText.Buttons btnEdit1;
     private javax.swing.JPanel jPanel1;

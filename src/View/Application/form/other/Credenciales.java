@@ -28,8 +28,10 @@ import java.util.concurrent.CompletableFuture;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,6 +43,7 @@ public class Credenciales extends javax.swing.JPanel {
 
     PersonasController controller = new PersonasController();
     List<Personas> myPersonas = new ArrayList<Personas>();
+     private TableRowSorter<DefaultTableModel> rowSorter;
 
     /**
      * Creates new form CodigosDisciplinarios
@@ -54,12 +57,14 @@ public class Credenciales extends javax.swing.JPanel {
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
 
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"Codigo", "Nombre", "Tipo Persona", "email"});
+        tableModel.setColumnIdentifiers(new Object[]{"Codigo", "Nombre", "Tipo Persona", "Correo"});
 
         cargarDatos();
 
         table1.setDefaultEditor(Object.class, null);
         table1.getTableHeader().setReorderingAllowed(false); 
+                rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
+        table1.setRowSorter(rowSorter);
     }
 
     public void cargarDatos() {
@@ -98,6 +103,7 @@ public class Credenciales extends javax.swing.JPanel {
         btnAdd = new View.BotonesText.Buttons();
         btnEdit = new View.BotonesText.Buttons();
         btnDelete = new View.BotonesText.Buttons();
+        Buscador = new View.BotonesText.CustomTextField();
         lb = new javax.swing.JLabel();
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
@@ -141,22 +147,31 @@ public class Credenciales extends javax.swing.JPanel {
             }
         });
 
+        Buscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BuscadorKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +179,8 @@ public class Credenciales extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -390,8 +406,26 @@ public class Credenciales extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnEditActionPerformed
 
+    private void BuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyPressed
+        rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
+        table1.setRowSorter(rowSorter);
+        String textoBusqueda = Buscador.getText().trim().toLowerCase();
+        if (textoBusqueda.isEmpty()) {
+            // Si el JTextField está vacío, muestra todas las filas.
+            rowSorter.setRowFilter(null);
+  
+        } else {
+            // Crea un filtro para mostrar solo las filas cuyo nombre de estudiante contiene el texto de búsqueda.
+            RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", 1); // 1 representa la columna del estudiante
+            rowSorter.setRowFilter(rowFilter);
+
+
+        }
+    }//GEN-LAST:event_BuscadorKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.BotonesText.CustomTextField Buscador;
     private View.BotonesText.Buttons btnAdd;
     private View.BotonesText.Buttons btnDelete;
     private View.BotonesText.Buttons btnEdit;

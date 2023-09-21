@@ -24,8 +24,10 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -38,7 +40,8 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author educs
  */
 public class CodigosEstudiantes extends javax.swing.JPanel {
-
+ private TableRowSorter<DefaultTableModel> rowSorter;
+ 
     /**
      * Creates new form Observaciones
      */
@@ -69,6 +72,8 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
         table1.getTableHeader().setReorderingAllowed(false); 
+        rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
+        table1.setRowSorter(rowSorter);
     }
     public void deleteAllTableRows(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -98,7 +103,15 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             return null;
         });
 }
+ private void filterTable() {
+        String searchText = Buscador.getText().toLowerCase();
 
+        for (int row = 0; row < table1.getRowCount(); row++) {
+            String nombre = table1.getValueAt(row, 1).toString().toLowerCase();
+            boolean match = nombre.contains(searchText);
+            table1.setValueAt(match, row, 0); // Muestra/oculta la fila
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -109,6 +122,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         table1 = new View.ExampleTable.Table();
         btnDelete = new View.BotonesText.Buttons();
         buttons1 = new View.BotonesText.Buttons();
+        Buscador = new View.BotonesText.CustomTextField();
 
         lb.setText("Gestión de códigos asignados");
 
@@ -136,6 +150,12 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             }
         });
 
+        Buscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BuscadorKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -145,7 +165,9 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttons1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,7 +178,8 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttons1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -278,8 +301,26 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         mostrarReporte();
     }//GEN-LAST:event_buttons1MouseClicked
 
+    private void BuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyPressed
+         rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
+        table1.setRowSorter(rowSorter);
+                String textoBusqueda = Buscador.getText().trim().toLowerCase();
+        if (textoBusqueda.isEmpty()) {
+            // Si el JTextField está vacío, muestra todas las filas.
+            rowSorter.setRowFilter(null);
+     
+        } else {
+            // Crea un filtro para mostrar solo las filas cuyo nombre de estudiante contiene el texto de búsqueda.
+            RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", 1); // 1 representa la columna del estudiante
+            rowSorter.setRowFilter(rowFilter);
+
+           
+        }
+    }//GEN-LAST:event_BuscadorKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.BotonesText.CustomTextField Buscador;
     private View.BotonesText.Buttons btnDelete;
     private View.BotonesText.Buttons buttons1;
     private javax.swing.JPanel jPanel1;

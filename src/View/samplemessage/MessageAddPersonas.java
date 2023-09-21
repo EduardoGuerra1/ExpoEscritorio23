@@ -242,6 +242,8 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         add(cbTipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, 160, -1));
 
         Tipos.setEditable(false);
+        Tipos.setText("Docente");
+        Tipos.setToolTipText("");
         Tipos.setEnabled(false);
         Tipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

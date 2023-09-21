@@ -52,6 +52,8 @@
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  <Component id="Buscador" min="-2" pref="143" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnReport" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -69,6 +71,7 @@
                       <Component id="btnReport" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
                       <Component id="btnAdd" min="-2" pref="49" max="-2" attributes="0"/>
                       <Component id="btnDelete" min="-2" pref="49" max="-2" attributes="0"/>
+                      <Component id="Buscador" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -128,6 +131,11 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnReportMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="View.BotonesText.CustomTextField" name="Buscador">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BuscadorKeyPressed"/>
           </Events>
         </Component>
       </SubComponents>
