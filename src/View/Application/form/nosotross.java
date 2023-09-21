@@ -26,11 +26,14 @@ public class nosotross extends javax.swing.JPanel {
         lbMision.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
         lbMision1.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbMision2.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbMision3.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         
         lbMision.setText("Nuestra Misión");
         
@@ -42,11 +45,14 @@ public class nosotross extends javax.swing.JPanel {
         lbVision.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
         lbVision1.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbVision2.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbVision3.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         
         lbVision.setText("Nuestra Visión");
         
@@ -102,6 +108,15 @@ public class nosotross extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/nosotros.gif.gif"))); // NOI18N
 
+        Panel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Panel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Panel1MouseExited(evt);
+            }
+        });
+
         lbMision.setText("jLabel2");
 
         lbMision1.setText("Somos una comunidad de salesianos consagrados");
@@ -136,6 +151,15 @@ public class nosotross extends javax.swing.JPanel {
                 .addComponent(lbMision3)
                 .addContainerGap(48, Short.MAX_VALUE))
         );
+
+        Panel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Panel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Panel2MouseExited(evt);
+            }
+        });
 
         lbVision.setText("jLabel2");
 
@@ -226,6 +250,90 @@ public class nosotross extends javax.swing.JPanel {
         // TODO add your handling code here:
         Application.logout();
     }//GEN-LAST:event_btnLoginMouseClicked
+
+    private void Panel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Panel1MouseEntered
+        // TODO add your handling code here:
+         lbMision.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font;"
+                 + "foreground: darken(@foreground,7%);");
+        lbMision1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbMision2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbMision3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        
+        Panel1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:darken(@background,10%);");
+    }//GEN-LAST:event_Panel1MouseEntered
+
+    private void Panel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Panel1MouseExited
+        // TODO add your handling code here:
+        
+         lbMision.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font;");
+        lbMision1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbMision2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbMision3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        
+        Panel1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:lighten(@background,5%);");
+    }//GEN-LAST:event_Panel1MouseExited
+
+    private void Panel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Panel2MouseEntered
+        // TODO add your handling code here:
+        lbVision.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font;");
+        lbVision1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbVision2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbVision3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        
+        lbVision.setText("Nuestra Visión");
+        
+        Panel2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:darken(@background,10%);");
+        
+    }//GEN-LAST:event_Panel2MouseEntered
+
+    private void Panel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Panel2MouseExited
+        // TODO add your handling code here:
+        
+        lbVision.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font;");
+        lbVision1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbVision2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbVision3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        
+        lbVision.setText("Nuestra Visión");
+        
+        Panel2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:lighten(@background,5%);");
+    }//GEN-LAST:event_Panel2MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

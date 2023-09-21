@@ -49,15 +49,20 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         lbTitulo2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
         lbContenido.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbContenido1.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbContenido2.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbContenido3.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbContenido4.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
 
         lbContenido.setText("El Sistema de Administración ");
         //+ "(SAE), es una herramienta que facilita la gestión disciplinaria y administrativa de los estudiantes del Instituto Técnico Ricaldone.");
@@ -73,11 +78,14 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         lbIntegridad.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
         lbIntegridad1.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbIntegridad2.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbIntegridad3.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
 
         pIntegridad.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:50;"
@@ -87,37 +95,45 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         lbSolidaridad.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
         lbSolidaridad1.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbSolidaridad2.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbSolidaridad3.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbSolidaridad4.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
 
         pSolidaridad.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:50;"
-                + "background:lighten($Menu.background,3%);");
+                + "background:lighten($Menu.background,7%);");
 
         //FE
         lbFe.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font;");
         lbFe1.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbFe2.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbFe3.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
         lbFe4.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
 
         pFe.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:50;"
                 + "background:lighten($Menu.background,7%);");
 
-        panel1.putClientProperty(FlatClientProperties.STYLE, ""
+       panel1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:50;"
-                + "background:lighten(@background,5%);");
+                + "background:lighten(@background,3%);");
         /* panel2.putClientProperty(FlatClientProperties.STYLE, ""
                + "arc:50;"
                + "background:lighten($Menu.background,7%);");
@@ -127,10 +143,12 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
                + "background:lighten(@background,8%);");*/
         panel4.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:50;"
-                + "background:lighten(@background,10%);");
+                + "background:lighten(@background,3%);");
 
     }
 
+    
+    
     private void cambiarColorRGB(int red, int green, int blue) {
         Color nuevoColor = new Color(red, green, blue);
         panel1.setBackground(nuevoColor);
@@ -212,6 +230,15 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
         jPanel1.add(panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 210, 70));
 
+        panel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel1MouseExited(evt);
+            }
+        });
+
         lbBienvenido.setText("Bienvenido a SAE");
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
@@ -226,9 +253,9 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(lbBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(37, 37, 37))
         );
 
         jPanel1.add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 870, 120));
@@ -256,7 +283,15 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
         jPanel1.add(panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 210, 70));
 
-        lbContenido.setForeground(new java.awt.Color(153, 153, 153));
+        panel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel4MouseExited(evt);
+            }
+        });
+
         lbContenido.setText("lbContenido");
 
         lbContenido1.setForeground(new java.awt.Color(153, 153, 153));
@@ -309,6 +344,15 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         lbTitulo2.setText("Valores del Instituto Técnico Ricaldone:");
         jPanel1.add(lbTitulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
 
+        pIntegridad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pIntegridadMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pIntegridadMouseExited(evt);
+            }
+        });
+
         lbIntegridad.setText("Integridad");
 
         lbIntegridad1.setForeground(new java.awt.Color(153, 153, 153));
@@ -348,6 +392,15 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         );
 
         jPanel1.add(pIntegridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 260, 180));
+
+        pSolidaridad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pSolidaridadMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pSolidaridadMouseExited(evt);
+            }
+        });
 
         lbSolidaridad2.setForeground(new java.awt.Color(153, 153, 153));
         lbSolidaridad2.setText("de estar a la búsqueda de");
@@ -394,6 +447,15 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         );
 
         jPanel1.add(pSolidaridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, 260, 180));
+
+        pFe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pFeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pFeMouseExited(evt);
+            }
+        });
 
         lbFe4.setForeground(new java.awt.Color(153, 153, 153));
         lbFe4.setText("que motiva nuestro existir\"");
@@ -454,6 +516,207 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void panel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel4MouseEntered
+        // TODO add your handling code here:
+       
+
+        
+        int height = panel4.getHeight();
+        int width = panel4.getWidth();
+        panel4.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:darken(@background,10%);");
+        
+        lbContenido.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbContenido1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbContenido2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbContenido3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbContenido4.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+             
+        
+        
+    }//GEN-LAST:event_panel4MouseEntered
+
+    private void panel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel4MouseExited
+        // TODO add your handling code here:
+        
+        panel4.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:lighten(@background,3%);");
+        
+        lbContenido.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbContenido1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbContenido2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbContenido3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbContenido4.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        
+    }//GEN-LAST:event_panel4MouseExited
+
+    private void pIntegridadMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pIntegridadMouseEntered
+        // TODO add your handling code here:
+        
+        lbIntegridad.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbIntegridad1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbIntegridad2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbIntegridad3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+
+        pIntegridad.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:darken(@background,10%);");
+    }//GEN-LAST:event_pIntegridadMouseEntered
+
+    private void pIntegridadMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pIntegridadMouseExited
+        // TODO add your handling code here:
+        
+        lbIntegridad.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font;");
+        lbIntegridad1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbIntegridad2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbIntegridad3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+
+        pIntegridad.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:lighten($Menu.background,7%);");
+    }//GEN-LAST:event_pIntegridadMouseExited
+
+    private void pSolidaridadMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pSolidaridadMouseEntered
+        // TODO add your handling code here:
+        
+        lbSolidaridad.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font;");
+        lbSolidaridad1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbSolidaridad2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbSolidaridad3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbSolidaridad4.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+
+        pSolidaridad.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:darken(@background,10%);");
+    }//GEN-LAST:event_pSolidaridadMouseEntered
+
+    private void pSolidaridadMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pSolidaridadMouseExited
+        // TODO add your handling code here:
+        
+        lbSolidaridad.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font;");
+        lbSolidaridad1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbSolidaridad2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbSolidaridad3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbSolidaridad4.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+
+        pSolidaridad.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:lighten($Menu.background,7%);");
+    }//GEN-LAST:event_pSolidaridadMouseExited
+
+    private void pFeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pFeMouseEntered
+        // TODO add your handling code here:
+        lbFe.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font;");
+        lbFe1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbFe2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbFe3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+        lbFe4.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: darken(@foreground,7%);");
+
+        pFe.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:darken(@background,10%);");
+    }//GEN-LAST:event_pFeMouseEntered
+
+    private void pFeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pFeMouseExited
+        // TODO add your handling code here:
+        lbFe.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font;");
+        lbFe1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbFe2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbFe3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+        lbFe4.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font;"
+                + "foreground: rgb(153,153,153);");
+
+        pFe.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:lighten($Menu.background,7%);");
+    }//GEN-LAST:event_pFeMouseExited
+
+    private void panel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel1MouseEntered
+        // TODO add your handling code here:
+        panel1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:darken(@background,10%);");
+    }//GEN-LAST:event_panel1MouseEntered
+
+    private void panel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel1MouseExited
+        // TODO add your handling code here:
+        panel1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:50;"
+                + "background:lighten(@background,3%);");
+    }//GEN-LAST:event_panel1MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

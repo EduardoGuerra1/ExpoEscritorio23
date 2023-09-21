@@ -110,6 +110,10 @@
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="Panel1">
+      <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Panel1MouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Panel1MouseExited"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -166,6 +170,10 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="Panel2">
+      <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Panel2MouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Panel2MouseExited"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
