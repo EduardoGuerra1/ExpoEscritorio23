@@ -186,6 +186,11 @@ public void cargarDatosAsync() {
                 btnDelete1MouseClicked(evt);
             }
         });
+        btnDelete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelete1ActionPerformed(evt);
+            }
+        });
 
         Buscador.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -203,33 +208,53 @@ public void cargarDatosAsync() {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
+                        .addComponent(btnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDelete1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Buscador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyPressed
+
+    }//GEN-LAST:event_BuscadorKeyPressed
+
+    private void BuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyTyped
+               rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
+        table1.setRowSorter(rowSorter);
+                String textoBusqueda = Buscador.getText().trim().toLowerCase();
+        if (textoBusqueda.isEmpty()) {
+            // Si el JTextField está vacío, muestra todas las filas.
+            rowSorter.setRowFilter(null);
+        } else {
+            // Crea un filtro para mostrar solo las filas cuyo nombre de estudiante contiene el texto de búsqueda.
+            RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", 1); // 1 representa la columna del estudiante
+            rowSorter.setRowFilter(rowFilter);
+    
+           
+        }
+    }//GEN-LAST:event_BuscadorKeyTyped
+
     private void btnDelete1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete1MouseClicked
-// TODO add your handling code here:
+
 
         int selectedRow = table1.getSelectedRow();
         
@@ -257,7 +282,7 @@ public void cargarDatosAsync() {
                             // Registro eliminado con éxito
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Código eliminado exitosamente");
+                            obj.txtContent.setText("Registro eliminado exitosamente");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
@@ -272,7 +297,7 @@ public void cargarDatosAsync() {
                             // Ocurrió un error al eliminar el registro
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Error al eliminar el código, intente nuevamente.");
+                            obj.txtContent.setText("Error al eliminar el Registro, intente nuevamente.");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
@@ -305,25 +330,9 @@ public void cargarDatosAsync() {
         }
     }//GEN-LAST:event_btnDelete1MouseClicked
 
-    private void BuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyPressed
-
-    }//GEN-LAST:event_BuscadorKeyPressed
-
-    private void BuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyTyped
-               rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
-        table1.setRowSorter(rowSorter);
-                String textoBusqueda = Buscador.getText().trim().toLowerCase();
-        if (textoBusqueda.isEmpty()) {
-            // Si el JTextField está vacío, muestra todas las filas.
-            rowSorter.setRowFilter(null);
-        } else {
-            // Crea un filtro para mostrar solo las filas cuyo nombre de estudiante contiene el texto de búsqueda.
-            RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", 1); // 1 representa la columna del estudiante
-            rowSorter.setRowFilter(rowFilter);
-    
-           
-        }
-    }//GEN-LAST:event_BuscadorKeyTyped
+    private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDelete1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
