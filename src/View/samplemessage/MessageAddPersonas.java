@@ -101,6 +101,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
 
             Tipos.setVisible(false);
     }
+    
 
     @Override
     protected void paintComponent(Graphics grphcs) {

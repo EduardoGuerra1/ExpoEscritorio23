@@ -68,8 +68,8 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
                     return;
                 }
                 for (char c : str.toCharArray()) {
-                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
-                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                    if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite letras");
 
                         noti = true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
@@ -149,7 +149,7 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
             playError();
         } else {
-            if (!valida.check16(txtTipoCodigo.getText())) {
+            if (!valida.check30(txtTipoCodigo.getText())) {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
             } else {
@@ -206,7 +206,7 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         if (noti == true) {
-            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite letras");
             playValidacion();
         }
     }//GEN-LAST:event_txtTipoCodigoKeyReleased

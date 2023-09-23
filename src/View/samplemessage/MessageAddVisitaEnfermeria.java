@@ -55,6 +55,7 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
     public MessageAddVisitaEnfermeria() {
 
         initComponents();
+        cbPeriodo.setVisible(false);
         setOpaque(false);
         txtPersona.setVisible(false);
         txtTitle.setBackground(new Color(0, 0, 0, 0));

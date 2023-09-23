@@ -77,7 +77,7 @@ public class MessageEditComunicados extends javax.swing.JPanel {
                     return;
                 }
                 for (char c : str.toCharArray()) {
-                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                    if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '.') {
                      
                         noti = true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
@@ -253,7 +253,7 @@ public class MessageEditComunicados extends javax.swing.JPanel {
     private void txtTituloKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloKeyReleased
         // TODO add your handling code here:
         if(noti==true){
-            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite letras");
             playValidacion();
         }
         

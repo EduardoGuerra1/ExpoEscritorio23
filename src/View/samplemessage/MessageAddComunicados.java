@@ -98,7 +98,7 @@ public class MessageAddComunicados extends javax.swing.JPanel {
                     return;
                 }
                 for (char c : str.toCharArray()) {
-                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                    if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '.') {
                         // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
 
                         noti = true;
@@ -306,7 +306,7 @@ public class MessageAddComunicados extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         if (noti == true) {
-            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite letras");
             playValidacion();
         }
     }//GEN-LAST:event_txtTituloKeyReleased
