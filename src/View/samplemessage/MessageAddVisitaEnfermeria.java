@@ -300,6 +300,10 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
             }
+          else if (txtPersona.getText().isBlank() ) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Selecionar La persona");
+            playError();
+        }
         else {
                 GlassPanePopup.closePopupLast();
             enviarDatosHaciaApi();
