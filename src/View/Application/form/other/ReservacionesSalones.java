@@ -84,7 +84,7 @@ public class ReservacionesSalones extends javax.swing.JPanel {
         // Obtén el modelo de la tabla existente
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"ID", "Motivo","Docente", "Inicio", "Final","Estado"});
+        tableModel.setColumnIdentifiers(new Object[]{"ID", "Motivo","Docente","Fecha", "Inicio", "Final","Estado"});
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
         table1.getTableHeader().setReorderingAllowed(false);
@@ -265,12 +265,14 @@ public void cargarDatosAsync() {
             for (ReservacionesSalonestring tipoCodigo : encargadosList) {
                 String Fecha = tipoCodigo.getInicio().substring(0, 5);
                 String Fecha1 = tipoCodigo.getFinal().substring(0, 5);
-                 String estadoTexto = tipoCodigo.getEstado() == 1 ? "No Aceptada" : "Aceptada";
+                 String estadoTexto = tipoCodigo.getEstado() == 1 ? "Pendiente" : "Aceptada";
+                  String inicioFormatted = tipoCodigo.getFecha().substring(0, 10);
                 
                 tableModel.addRow(new Object[]{
                     tipoCodigo.getIdReservacionSalon(),
                     tipoCodigo.getMotivoReserva(),
                     tipoCodigo.getReservante(),
+                    inicioFormatted,
                     Fecha,
                     Fecha1,
                     estadoTexto, 
@@ -344,7 +346,7 @@ public int ActualizarDatos(int id ){
                             // Registro eliminado con éxito
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Código eliminado exitosamente");
+                            obj.txtContent.setText("Registro eliminado exitosamente");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
@@ -359,7 +361,7 @@ public int ActualizarDatos(int id ){
                             // Ocurrió un error al eliminar el registro
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Error al eliminar el código, intente nuevamente.");
+                            obj.txtContent.setText("Error al eliminar el Registro, intente nuevamente.");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
@@ -396,9 +398,9 @@ public int ActualizarDatos(int id ){
       int selectedRow = table1.getSelectedRow();
     if (selectedRow != -1) {
         Object id = table1.getValueAt(selectedRow, 0);
-        Object Estado = table1.getValueAt(selectedRow, 5);
+        Object Estado = table1.getValueAt(selectedRow, 6);
         String Estado1 = Estado.toString(); 
-        if(Estado1 == "No Aceptada"){
+        if(Estado1 == "Pendiente"){
         System.out.println(id);
         Message obj = new Message();
         obj.txtTitle.setText("Aviso");

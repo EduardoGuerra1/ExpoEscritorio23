@@ -14,10 +14,11 @@ public class ReservacionesSalonestring {
     String Reservante;       // Nombre del reservante.
     String motivoReserva;    // Motivo de la reserva del salón.
     int idReservante;        // Identificador del reservante.
-    int Estado;              // Estado de la reserva.
+    int Estado; 
+    String Fecha; 
 
     // Constructor de la clase que toma varios parámetros para inicializar los campos.
-    public ReservacionesSalonestring(int idReservacionSalon, String Salon, String Inicio, String Final, String Reservante, String motivoReserva, int idReservante, int Estado) {
+    public ReservacionesSalonestring(int idReservacionSalon, String Salon, String Inicio, String Final, String Reservante, String motivoReserva, int idReservante, int Estado, String Fecha) {
         this.idReservacionSalon = idReservacionSalon;
         this.Salon = Salon;
         this.Inicio = Inicio;
@@ -26,6 +27,7 @@ public class ReservacionesSalonestring {
         this.motivoReserva = motivoReserva;
         this.idReservante = idReservante;
         this.Estado = Estado;
+        this.Fecha = Fecha; 
     }
 }
 

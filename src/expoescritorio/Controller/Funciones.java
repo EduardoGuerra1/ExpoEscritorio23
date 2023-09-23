@@ -188,7 +188,8 @@ byte[] idEstudiante= Base64.getDecoder().decode(jsonObject.getString("archivo"))
                         String motivoReserva = jsonObject.getString("motivoReserva");
                         int idReservante= jsonObject.getInt("idReservante");
                         int Estado= jsonObject.getInt("estado");
-                        modelList.add(new ReservacionesSalonestring(idReservacionSalon, Salon, Inicio,Final,Reservante,motivoReserva, idReservante, Estado));
+                        String Fecha = jsonObject.getString("fecha");
+                        modelList.add(new ReservacionesSalonestring(idReservacionSalon, Salon, Inicio,Final,Reservante,motivoReserva, idReservante, Estado, Fecha));
                     }
                 }else {
                      // Si la solicitud no es exitosa, se muestra un mensaje de error junto con el código de estado HTTP.
