@@ -190,7 +190,6 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         cbPersona = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         txtPersona = new View.BotonesText.CustomTextField();
-        jLabel2 = new javax.swing.JLabel();
         txtVisita = new View.BotonesText.CustomTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -235,9 +234,6 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
 
         txtPersona.setEnabled(false);
         add(txtPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 230, 50));
-
-        jLabel2.setText("Período");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
 
         txtVisita.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -293,13 +289,13 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         if (txtVisita.getText().isBlank() ) {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
             playError();
-        }else {
-            if (!valida.check6(txtVisita.getText()) ) {
+        }
+          else if (!valida.check100(txtVisita.getText()) ) {
                 //Muestra la notificacion y el sonido de error
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
             }
-            else{
+        else {
                 GlassPanePopup.closePopupLast();
             enviarDatosHaciaApi();
             Timer timer = new Timer(500, (ActionEvent e) -> {
@@ -309,7 +305,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
             });
             timer.setRepeats(false);
             timer.start();
-            }
+            
         }
 
 
@@ -424,7 +420,6 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
     public javax.swing.JComboBox<String> cbPeriodo;
     public javax.swing.JComboBox<String> cbPersona;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     public View.BotonesText.CustomTextField txtPersona;
     public javax.swing.JLabel txtTitle;

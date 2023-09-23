@@ -189,6 +189,10 @@ public class MessageEditComunicados extends javax.swing.JPanel {
         if (txtTitulo.getText().isBlank()){
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El comunicado debe tener un título"); 
             playError();
+        }
+        else if(!Validaciones.check30(txtTitulo.getText())){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El Titulo es muy grande");
+            playValidacion();
         }else {
             
             enviarDatosHaciaApi();

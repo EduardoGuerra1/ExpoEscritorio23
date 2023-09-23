@@ -47,6 +47,9 @@ import java.util.Date;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -100,6 +103,88 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         });
 
             Tipos.setVisible(false);
+            
+             TxTelefono.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+
+                        
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                      
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });// ha
+               txtNombres1.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+
+                        
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                      
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
+              txtApellidos.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+
+                        
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                      
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });   
+              txtCodigo.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+
+                        
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                      
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
+              
     }
     
 
@@ -235,6 +320,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         jLabel12.setText("Codigo:");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, -1));
 
+        dpNacimiento.setToolTipText("");
         dpNacimiento.setDateFormatString("yyyy-MM-dd");
         add(dpNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 180, -1));
 
@@ -266,15 +352,21 @@ public class MessageAddPersonas extends javax.swing.JPanel {
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
+             Date selectedDate = dpNacimiento.getDate();
+           Date currentDate = new Date(); // Fecha actual
+          Boolean band1 = true, band2 = true;
+        
+        
+         if (txtNombres1.getText().isBlank() || txtApellidos.getText().isBlank() || txtCodigo.getText().isBlank() || TxTelefono.getText().isBlank() || txtClave.getText().isBlank()) {
+           Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Los campos no pueden estar vacíos");
+          playError();
+         }
+         else if (dpNacimiento.getDate() == null) {
+           Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Por favor, asegúrate de completar tu fecha de nacimiento en un formato válido");
+          playError();
+        }
 
-        Boolean band1 = true, band2 = true;
-        
-        
-        if (txtNombres1.getText().isBlank() || txtApellidos.getText().isEmpty() || txtCodigo.getText().isEmpty()) {
-            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Los campos no pueden estar vacíos");
-            playError();
-        }  
-        else if(!Validaciones.checkName(txtNombres1.getText()) || !Validaciones.checkName(txtApellidos.getText())){
+        else if(!Validaciones.checkName(txtNombres1.getText()) && !Validaciones.checkName(txtApellidos.getText())){
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El nombre o apellido es inválido");
             playError();
         }
@@ -290,6 +382,11 @@ public class MessageAddPersonas extends javax.swing.JPanel {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "La contraseña debe ser de al menos 6 carácteres");
             playValidacion();
         }
+        else if(!Validaciones.onlyInts(TxTelefono.getText())){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El codigo solo debe tener números");
+            playValidacion();
+        }
+        
         else {
             try {
                 enviarDatosHaciaApi();

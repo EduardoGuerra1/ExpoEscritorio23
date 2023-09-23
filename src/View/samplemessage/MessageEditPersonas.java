@@ -44,6 +44,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.Timer;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import org.json.JSONException;
 import raven.toast.Notifications;
 import org.json.JSONObject;
@@ -226,7 +229,91 @@ public class MessageEditPersonas extends javax.swing.JPanel {
             }
             
             cbTipoUsuario.setSelectedIndex(indx1);
-        
+            
+          TxTelefono.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+
+                        
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                      
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
+          txtNombres2.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+
+                        
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                      
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
+              txtApellidos1.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+
+                        
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                      
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
+                 txtCodigo1.setDocument(new PlainDocument() { // desde aca 
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                if (str == null) {
+                    return;
+                }
+                for (char c : str.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                        // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+
+                        
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    }
+                else{
+                      
+                    }
+                }
+                super.insertString(offset, str, attr);
+            }
+        });
+          
+          
+          
+          
     }
 
     /**
@@ -625,29 +712,8 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
     }
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        // TODO add your handling code here:
 
-        if (txtNombres.getText().isBlank() || txtApellidos.getText().isBlank() || txtCodigo.getText().isEmpty()) {
-            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Los campos no puede estar vacíos");
-            playError();
-        }  else {
-            try {
-                enviarDatosHaciaApi();
-            } catch (IOException ex) {
-                Logger.getLogger(MessageAddEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
-            playError();
-            }
-            Timer timer = new Timer(500, (ActionEvent e) -> {
-                Estudiantes cd = new Estudiantes();
-
-                frm.deleteAllTableRows(frm.table1);
-                frm.cargarDatos();
-            });
-            timer.setRepeats(false);
-            timer.start();
-        }
-
+        
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -723,13 +789,15 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
     }//GEN-LAST:event_btnAceptar1MouseClicked
 
     private void btnAceptar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptar1ActionPerformed
-        // TODO add your handling code here:
-        if (txtNombres2.getText().isEmpty() || txtApellidos1.getText().isEmpty() || txtCodigo1.getText().isEmpty()) {
+
+        if (txtNombres2.getText().isEmpty() || txtApellidos1.getText().isEmpty() || txtCodigo1.getText().isEmpty() || TxTelefono.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Los campos no puede estar vacío");
         }  
-        else if(!Validaciones.checkName(txtNombres2.getText()) || !Validaciones.checkName(txtApellidos1.getText())){
+
+        else if(!Validaciones.checkName(txtNombres2.getText()) && !Validaciones.checkName(txtApellidos1.getText())){
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El nombre o apellido es invalido");
         }
+
         else if(!Validaciones.checkDateDown(dpNacimiento1.getDate().toInstant().atOffset(ZoneOffset.UTC))){
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "La fecha de nacimiento no es válida");
         }
@@ -739,6 +807,9 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
         else if(!txtClave1.getText().isEmpty() && txtClave1.getText().length()<6){
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "La contraseña debe ser de al menos 6 caracteres");
         }
+         else if(!Validaciones.isPhoneNumber(TxTelefono.getText())){
+            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Ingresa tu número de teléfono en formato +503");
+        }       
         else {
             try {
                 enviarDatosHaciaApi();

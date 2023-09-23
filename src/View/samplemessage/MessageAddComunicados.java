@@ -242,7 +242,11 @@ public class MessageAddComunicados extends javax.swing.JPanel {
         } else if (txtTitulo.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El comunicado debe tener un título");
             playError();
-        } else {
+        } else if(!Validaciones.check30(txtTitulo.getText())){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El Titulo es muy grande");
+            playValidacion();
+        }
+        else {
             GlassPanePopup.closePopupLast();
             enviarDatosHaciaApi();
 
