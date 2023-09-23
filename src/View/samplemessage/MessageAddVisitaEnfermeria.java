@@ -212,6 +212,11 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
                 btnAceptarMouseClicked(evt);
             }
         });
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
         add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, 120, -1));
 
         jLabel1.setText("Detalle de visita");
@@ -290,7 +295,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
             playError();
         }
-          else if (!valida.check100(txtVisita.getText()) ) {
+          else if (!valida.check30(txtVisita.getText()) ) {
                 //Muestra la notificacion y el sonido de error
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
@@ -330,8 +335,13 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         // TODO add your handling code here:
     }//GEN-LAST:event_cbPersonaPopupMenuWillBecomeVisible
 
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);
+        
     }
 
     private void enviarDatosHaciaApi() {
