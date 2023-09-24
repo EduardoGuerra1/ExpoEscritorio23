@@ -66,7 +66,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
 
         String[] items = {"Estudiantes", "Docente", "Código"};
         
-        CustomComboBox cb = new CustomComboBox(items);
+     
         
         
        
