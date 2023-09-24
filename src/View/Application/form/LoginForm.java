@@ -4,6 +4,7 @@
  */
 package View.Application.form;
 
+import Services.Validaciones;
 import View.aplicacion.Application;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
@@ -230,8 +231,7 @@ public class LoginForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRecuperacionesMouseClicked
 
     private void btnIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseClicked
-        // TODO add your handling code here:
-        /*Método que se ejecuta al hacer clic en el botón "Iniciar Sesión"*/
+    Validaciones valida = new Validaciones();
         String Correo = this.txtCorreo.getText();
         String Contraseña = this.txtContraseña.getText();
 
@@ -239,7 +239,13 @@ public class LoginForm extends javax.swing.JPanel {
             /*Validación de campos vacíos*/
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Los campos no pueden estar vacios");
             playError();
-        }else{
+        }
+        else if (!valida.checkEmail(this.txtCorreo.getText()) ) {
+                //Muestra la notificacion y el sonido de error
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Tiene que ser un correo");
+                playError();
+            }
+        else{
             /*Llamada a un controlador para procesar la autenticación*/
             PersonasLo personas = PersonasController.callApiAndProcessResponse(Correo, Contraseña);
             int id = personas.getIdTipoPersona();
