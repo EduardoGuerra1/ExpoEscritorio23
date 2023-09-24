@@ -101,14 +101,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             }
         });// ha
 
-       cbSearch.putClientProperty(FlatClientProperties.STYLE, ""
-                + "arrowType: triangle;"
-                + "arc: 10;"
-                + "buttonBackground: lighten(@background,10%);"
-                + "popupBackground: lighten(@background,10%);"
-                + "selectionArc: 10;"
-                + "innerOutlineWidth: 0.5;"
-                + "innerFocusWidth: 0.5");
+       
     }
 
     public void deleteAllTableRows(JTable table) {
@@ -162,7 +155,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         Buscador = new View.BotonesText.CustomTextField();
         jLabel1 = new javax.swing.JLabel();
         btnRecargar = new View.BotonesText.Buttons();
-        cbSearch = new javax.swing.JComboBox<>();
+        cbSearch = new View.BotonesText.CustomComboBox();
 
         lb.setText("Gestión de códigos asignados");
 
@@ -208,8 +201,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             }
         });
 
-        cbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiantes", "Docente", "Código" }));
-        cbSearch.setMinimumSize(new java.awt.Dimension(94, 25));
+        cbSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Estudiantes", "Docente", "Código" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -226,10 +218,10 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttons1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,7 +242,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addComponent(cbSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -404,7 +396,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
     private View.BotonesText.Buttons btnDelete;
     private View.BotonesText.Buttons btnRecargar;
     private View.BotonesText.Buttons buttons1;
-    private javax.swing.JComboBox<String> cbSearch;
+    private View.BotonesText.CustomComboBox cbSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
