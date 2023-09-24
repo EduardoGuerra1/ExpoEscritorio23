@@ -492,7 +492,7 @@ public class Credenciales extends javax.swing.JPanel {
             rowSorter.setRowFilter(null);
   
         } else {
-            int indice = customComboBox1.getSelectedIndex();
+            int indice = customComboBox2.getSelectedIndex();
             // Crea un filtro para mostrar solo las filas cuyo nombre de estudiante contiene el texto de búsqueda.
             RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", indice); // 1 representa la columna del estudiante
             rowSorter.setRowFilter(rowFilter);
