@@ -197,8 +197,7 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
             }
         });
 
-        cbSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fecha", "Detalle", "Persona" }));
-        cbSearch.setSelectedIndex(2);
+        cbSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Detalle", "Persona" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -376,7 +375,7 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
             rowSorter.setRowFilter(null);
         } else {
             int indice = cbSearch.getSelectedIndex();
-            int index = indice + 1;
+            int index = indice + 2;
             // Crea un filtro para mostrar solo las filas cuyo nombre de estudiante contiene el texto de búsqueda.
             RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", index); // 1 representa la columna del estudiante
             rowSorter.setRowFilter(rowFilter);

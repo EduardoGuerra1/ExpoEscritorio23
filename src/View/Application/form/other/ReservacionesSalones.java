@@ -84,7 +84,7 @@ public class ReservacionesSalones extends javax.swing.JPanel {
         // Obtén el modelo de la tabla existente
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"ID", "Motivo","Docente","Fecha", "Inicio", "Final","Estado"});
+        tableModel.setColumnIdentifiers(new Object[]{"ID", "Motivo","Docente","Fecha", "Hora","Salón", "Estado"});
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
         table1.getTableHeader().setReorderingAllowed(false);
@@ -193,7 +193,7 @@ public class ReservacionesSalones extends javax.swing.JPanel {
             }
         });
 
-        cbSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Motivo", "Docente" }));
+        cbSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Motivo", "Docente", "Salón", "Estado" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -273,8 +273,6 @@ public void cargarDatosAsync() {
         .thenAccept(encargadosList -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
             for (ReservacionesSalonestring tipoCodigo : encargadosList) {
-                String Fecha = tipoCodigo.getInicio().substring(0, 5);
-                String Fecha1 = tipoCodigo.getFinal().substring(0, 5);
                  String estadoTexto = tipoCodigo.getEstado() == 1 ? "Pendiente" : "Aceptada";
                   String inicioFormatted = tipoCodigo.getFecha().substring(0, 10);
                 
@@ -283,8 +281,8 @@ public void cargarDatosAsync() {
                     tipoCodigo.getMotivoReserva(),
                     tipoCodigo.getReservante(),
                     inicioFormatted,
-                    Fecha,
-                    Fecha1,
+                    tipoCodigo.getInicio(),
+                    tipoCodigo.getSalon(),
                     estadoTexto, 
                     
                    
@@ -495,9 +493,19 @@ public int ActualizarDatos(int id ){
    
         } else {
             int indice = cbSearch.getSelectedIndex();
-            int index = indice + 1;
+            int valor  ;
+            if (indice == 2) {
+            valor = 5;
+            }
+            else if (indice == 3) {
+            valor = 6;
+            } 
+            else {
+              valor = indice + 1;
+            }
+            
             // Crea un filtro para mostrar solo las filas cuyo nombre de estudiante contiene el texto de búsqueda.
-            RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", index); // 1 representa la columna del estudiante
+            RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", valor); // 1 representa la columna del estudiante
             rowSorter.setRowFilter(rowFilter);
            
         }    

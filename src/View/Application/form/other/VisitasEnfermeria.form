@@ -174,13 +174,11 @@
         <Component class="View.BotonesText.CustomComboBox" name="cbSearch">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Fecha"/>
-                <StringItem index="1" value="Detalle"/>
-                <StringItem index="2" value="Persona"/>
+              <StringArray count="2">
+                <StringItem index="0" value="Detalle"/>
+                <StringItem index="1" value="Persona"/>
               </StringArray>
             </Property>
-            <Property name="selectedIndex" type="int" value="2"/>
           </Properties>
         </Component>
       </SubComponents>
