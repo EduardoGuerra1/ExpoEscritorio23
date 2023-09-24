@@ -8,8 +8,11 @@ import Services.Validaciones;
 import View.Application.form.other.RangoDeHoras;
 import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
 import expoescritorio.Controller.ControllerFull;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -36,11 +39,29 @@ import raven.toast.Notifications;
 public class MessageAddRangoHoras extends javax.swing.JPanel {
 
     private Boolean noti;
+    RangoDeHoras frm = null;
 
-    public MessageAddRangoHoras() {
+    public MessageAddRangoHoras(RangoDeHoras frmRangoDeHoras) {
 
         initComponents();
         setOpaque(false);
+
+        
+         String bg = getBackground().toString();
+
+        if (bg.contains("r=49")) {
+            System.out.println("Modo oscuro");
+        } else {
+            System.out.println("Modo claro");
+            EventQueue.invokeLater(() -> {
+                // FlatAnimatedLafChange.showSnapshot();
+                FlatIntelliJLaf.setup();
+                FlatLaf.updateUI();
+                //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+            });
+        }
+        
+        this.frm = frmRangoDeHoras;
 
         txtTitle.setBackground(new Color(0, 0, 0, 0));
         txtTitle.setOpaque(false);
@@ -165,7 +186,7 @@ public class MessageAddRangoHoras extends javax.swing.JPanel {
                     playError();
                 } else {
                     enviarDatosHaciaApi();
-                     GlassPanePopup.closePopupLast();
+                    GlassPanePopup.closePopupLast();
                     Timer timer = new Timer(500, (ActionEvent e) -> {
                         RangoDeHoras tc = new RangoDeHoras();
                         tc.cargarDatosAsync();
@@ -181,7 +202,7 @@ public class MessageAddRangoHoras extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btnAceptarMouseClicked
-private void playValidacion() {
+    private void playValidacion() {
         String filepath = "src/View/sounds/validacion.wav";
 
         PlayMusic(filepath);
@@ -194,23 +215,23 @@ private void playValidacion() {
         PlayMusic(filepath);
 
     }
-    
+
     private static void PlayMusic(String location) {
         try {
             File musicPath = new File(location);
-            
-            if(musicPath.exists()){
+
+            if (musicPath.exists()) {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-            }else{
+            } else {
                 System.out.println("No se encuentra el archivo de sonido");
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-   
+
     }
 
     private void FinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalActionPerformed
@@ -219,7 +240,7 @@ private void playValidacion() {
 
     private void txtTipoCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoCodigoKeyReleased
         // TODO add your handling code here:
-        if(noti==true){
+        if (noti == true) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite letras");
             playValidacion();
         }
@@ -232,9 +253,7 @@ private void playValidacion() {
 
     private void enviarDatosHaciaApi() {
 
-        MessageAddRangoHoras msg = new MessageAddRangoHoras();
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
-
         String codigoConductual = txtTipoCodigo.getText();
         String selectedInicio = Inicio.getSelectedTime();
         String selectedFinal = Final.getSelectedTime();
@@ -259,7 +278,11 @@ private void playValidacion() {
                 if (success) {
                     // La solicitud POST fue exitosa
                     System.out.println("Datos enviados correctamente a la API");
+                    frm.deleteAllTableRows(frm.table1);
+                    frm.cargarDatosAsync();
 
+                    // boolean pC = panelClosing() == true;
+                    GlassPanePopup.closePopupLast();
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");

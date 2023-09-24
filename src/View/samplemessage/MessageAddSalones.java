@@ -35,12 +35,16 @@ import raven.toast.Notifications;
  */
 public class MessageAddSalones extends javax.swing.JPanel {
 
-    
     private Boolean noti;
-    public MessageAddSalones() {
+
+    SalonesPantalla frm = null;
+
+    public MessageAddSalones(SalonesPantalla frmSalonesPantalla) {
 
         initComponents();
         setOpaque(false);
+
+        this.frm = frmSalonesPantalla;
 
         txtTitle.setBackground(new Color(0, 0, 0, 0));
         txtTitle.setOpaque(false);
@@ -54,12 +58,11 @@ public class MessageAddSalones extends javax.swing.JPanel {
                 }
                 for (char c : str.toCharArray()) {
                     if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
-                      // Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
-                        noti=true;
-                      return; // Ignora el carácter si no es letra, número, espacio o punto
-                    }
-                else{
-                        noti=false;
+                        // Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
+                        noti = true;
+                        return; // Ignora el carácter si no es letra, número, espacio o punto
+                    } else {
+                        noti = false;
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -128,23 +131,16 @@ public class MessageAddSalones extends javax.swing.JPanel {
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
         Validaciones valida = new Validaciones();
-        if (txtTipoCodigo.getText().isBlank() ) {
+        if (txtTipoCodigo.getText().isBlank()) {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
             playError();
-        }else {
-            if (!valida.check6(txtTipoCodigo.getText()) ) {
+        } else {
+            if (!valida.check6(txtTipoCodigo.getText())) {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
-            }
-            else{
-            enviarDatosHaciaApi();
-            Timer timer = new Timer(500, (ActionEvent e) -> {
-                SalonesPantalla tc = new SalonesPantalla();
-                tc.cargarDatosAsync();
-                tc.deleteAllTableRows(tc.table1);
-            });
-            timer.setRepeats(false);
-            timer.start();
+            } else {
+                enviarDatosHaciaApi();
+
             }
         }
 
@@ -153,7 +149,7 @@ public class MessageAddSalones extends javax.swing.JPanel {
 
     private void txtTipoCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoCodigoKeyReleased
         // TODO add your handling code here:
-         if(noti==true){
+        if (noti == true) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
             playValidacion();
         }
@@ -173,23 +169,23 @@ public class MessageAddSalones extends javax.swing.JPanel {
         PlayMusic(filepath);
 
     }
-    
+
     private static void PlayMusic(String location) {
         try {
             File musicPath = new File(location);
-            
-            if(musicPath.exists()){
+
+            if (musicPath.exists()) {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-            }else{
+            } else {
                 System.out.println("No se encuentra el archivo de sonido");
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-   
+
     }
 
     public void eventOK(ActionListener event) {
@@ -198,18 +194,14 @@ public class MessageAddSalones extends javax.swing.JPanel {
 
     private void enviarDatosHaciaApi() {
 
-       
-        MessageAddSalones msg = new MessageAddSalones();
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
-        
         String codigoConductual = txtTipoCodigo.getText();
 
-        
         System.out.println(codigoConductual);
         try {
             // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
-            
+
             jsonData.put("codigoSalon", codigoConductual);
 
             // Llamar al método postApiAsync para enviar los datos
@@ -223,7 +215,11 @@ public class MessageAddSalones extends javax.swing.JPanel {
                 if (success) {
                     // La solicitud POST fue exitosa
                     System.out.println("Datos enviados correctamente a la API");
+                    frm.deleteAllTableRows(frm.table1);
+                    frm.cargarDatosAsync();
 
+                    // boolean pC = panelClosing() == true;
+                    GlassPanePopup.closePopupLast();
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");

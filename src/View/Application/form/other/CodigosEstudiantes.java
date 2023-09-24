@@ -5,6 +5,7 @@
 package View.Application.form.other;
 
 import Reportes.ConexionSQL;
+import View.BotonesText.CustomComboBox;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import com.formdev.flatlaf.FlatClientProperties;
@@ -12,17 +13,14 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
 import expoescritorio.Controller.ControllerFull;
 import static expoescritorio.Controller.Funciones.GetCodigosString;
-import static expoescritorio.Controller.Funciones.GetInasisitencias;
-import static expoescritorio.Controller.Funciones.GetObservaciones;
 import expoescritorio.Models.CodigosConductualesString;
-import expoescritorio.Models.CodigosString;
-import expoescritorio.Models.Inasisitenciastring;
-import expoescritorio.Models.ObservacionesString;
+import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import javax.swing.ComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.WindowConstants;
@@ -43,38 +41,45 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author educs
  */
 public class CodigosEstudiantes extends javax.swing.JPanel {
- private TableRowSorter<DefaultTableModel> rowSorter;
- 
+
+    private TableRowSorter<DefaultTableModel> rowSorter;
+
     /**
      * Creates new form Observaciones
      */
     public CodigosEstudiantes() {
         initComponents();
-        
+
         String bg = getBackground().toString();
+
+        if (bg.contains("r=49")) {
+            System.out.println("Modo oscuro");
+        } else {
+            System.out.println("Modo claro");
+            EventQueue.invokeLater(() -> {
+                // FlatAnimatedLafChange.showSnapshot();
+                FlatIntelliJLaf.setup();
+                FlatLaf.updateUI();
+                //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+            });
+        }
+
+        String[] items = {"Estudiantes", "Docente", "Código"};
+        
+        CustomComboBox cb = new CustomComboBox(items);
+        
         
        
-        if(bg.contains("r=49")){
-            System.out.println("Modo oscuro");
-        }else{
-            System.out.println("Modo claro");
-             EventQueue.invokeLater(() -> {
-                   // FlatAnimatedLafChange.showSnapshot();
-                    FlatIntelliJLaf.setup();
-                    FlatLaf.updateUI();
-                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
-                });
-        }
-        
+
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         // Obtén el modelo de la tabla existente
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"ID", "Estudiante", "Docente", "CodigoConductual","Fecha"});
+        tableModel.setColumnIdentifiers(new Object[]{"ID", "Estudiante", "Docente", "CodigoConductual", "Fecha"});
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
-        table1.getTableHeader().setReorderingAllowed(false); 
+        table1.getTableHeader().setReorderingAllowed(false);
         rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
         table1.setRowSorter(rowSorter);
         Buscador.setDocument(new PlainDocument() { // desde aca 
@@ -87,46 +92,54 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
                     if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
                         // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
 
-                        
                         return; // Ignora el carácter si no es letra, número, espacio o punto
-                    }
-                else{
-                      
+                    } else {
+
                     }
                 }
                 super.insertString(offset, str, attr);
             }
         });// ha
+
+       cbSearch.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arrowType: triangle;"
+                + "arc: 10;"
+                + "buttonBackground: lighten(@background,10%);"
+                + "popupBackground: lighten(@background,10%);"
+                + "selectionArc: 10;"
+                + "innerOutlineWidth: 0.5;"
+                + "innerFocusWidth: 0.5");
     }
+
     public void deleteAllTableRows(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         while (model.getRowCount() > 0) {
             model.removeRow(0);
         }
     }
-   public void cargarDatosAsync() {
-    GetCodigosString()
-        .thenAccept(encargadosList -> {
-            DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-            for (CodigosConductualesString tipoCodigo : encargadosList) {
-                String Fecha = tipoCodigo.getFecha().substring(0, 11);
-                
-                tableModel.addRow(new Object[]{
-                    tipoCodigo.getIdCodigoConductualPersona(),
-                    tipoCodigo.getEstudiante(),
-                    tipoCodigo.getDocente(),
-                    tipoCodigo.getCodigoConductual(),
-                    Fecha,
-                   
+
+    public void cargarDatosAsync() {
+        GetCodigosString()
+                .thenAccept(encargadosList -> {
+                    DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
+                    for (CodigosConductualesString tipoCodigo : encargadosList) {
+                        String Fecha = tipoCodigo.getFecha().substring(0, 11);
+
+                        tableModel.addRow(new Object[]{
+                            tipoCodigo.getIdCodigoConductualPersona(),
+                            tipoCodigo.getEstudiante(),
+                            tipoCodigo.getDocente(),
+                            tipoCodigo.getCodigoConductual(),
+                            Fecha,});
+                    }
+                })
+                .exceptionally(throwable -> {
+                    throwable.printStackTrace();
+                    return null;
                 });
-            }
-        })
-        .exceptionally(throwable -> {
-            throwable.printStackTrace();
-            return null;
-        });
-}
- private void filterTable() {
+    }
+
+    private void filterTable() {
         String searchText = Buscador.getText().toLowerCase();
 
         for (int row = 0; row < table1.getRowCount(); row++) {
@@ -135,6 +148,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             table1.setValueAt(match, row, 0); // Muestra/oculta la fila
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -146,8 +160,9 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         btnDelete = new View.BotonesText.Buttons();
         buttons1 = new View.BotonesText.Buttons();
         Buscador = new View.BotonesText.CustomTextField();
-        cbSearch = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        btnRecargar = new View.BotonesText.Buttons();
+        cbSearch = new javax.swing.JComboBox<>();
 
         lb.setText("Gestión de códigos asignados");
 
@@ -184,9 +199,17 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             }
         });
 
-        cbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiantes", "Docente", "Código" }));
-
         jLabel1.setText("Buscar por:");
+
+        btnRecargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/reload.png"))); // NOI18N
+        btnRecargar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRecargarMouseClicked(evt);
+            }
+        });
+
+        cbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiantes", "Docente", "Código" }));
+        cbSearch.setMinimumSize(new java.awt.Dimension(94, 25));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -204,6 +227,8 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttons1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -214,15 +239,19 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttons1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttons1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRecargar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
-                .addGap(18, 46, Short.MAX_VALUE)
+                            .addComponent(jLabel1)
+                            .addComponent(cbSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -236,31 +265,29 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(27, 27, 27)
                 .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(19, 19, 19)
                 .addComponent(lb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-       int selectedRow = table1.getSelectedRow();
-        
-        
+        int selectedRow = table1.getSelectedRow();
 
         // Verificar si se ha seleccionado una fila
         if (selectedRow != -1) {
             // Obtener los datos de las columnas de la fila seleccionada
             Object id = table1.getValueAt(selectedRow, 0);
-                System.out.println(id);
+            System.out.println(id);
             Message obj = new Message();
             obj.txtTitle.setText("Aviso");
             obj.txtContent.setText("¿Desea eliminar este registro?");
@@ -348,28 +375,34 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
     }//GEN-LAST:event_BuscadorKeyPressed
 
     private void BuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyTyped
-                rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
+        rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
         table1.setRowSorter(rowSorter);
-                String textoBusqueda = Buscador.getText().trim().toLowerCase();
+        String textoBusqueda = Buscador.getText().trim().toLowerCase();
         if (textoBusqueda.isEmpty()) {
             // Si el JTextField está vacío, muestra todas las filas.
             rowSorter.setRowFilter(null);
-     
+
         } else {
             int indice = cbSearch.getSelectedIndex();
             int index = indice + 1;
             // Crea un filtro para mostrar solo las filas cuyo nombre de estudiante contiene el texto de búsqueda.
-            RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*",index ); // 1 representa la columna del estudiante
+            RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", index); // 1 representa la columna del estudiante
             rowSorter.setRowFilter(rowFilter);
 
-           
         } // TODO add your handling code here:
     }//GEN-LAST:event_BuscadorKeyTyped
+
+    private void btnRecargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecargarMouseClicked
+        // TODO add your handling code here:
+        deleteAllTableRows(table1);
+        cargarDatosAsync();
+    }//GEN-LAST:event_btnRecargarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.BotonesText.CustomTextField Buscador;
     private View.BotonesText.Buttons btnDelete;
+    private View.BotonesText.Buttons btnRecargar;
     private View.BotonesText.Buttons buttons1;
     private javax.swing.JComboBox<String> cbSearch;
     private javax.swing.JLabel jLabel1;

@@ -52,9 +52,15 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
        List<Personas> mySearch = new ArrayList<Personas>();
        
        private Boolean noti;
-    public MessageAddVisitaEnfermeria() {
+       VisitasEnfermeria frm = null;
+       
+    public MessageAddVisitaEnfermeria(VisitasEnfermeria frmVisitasEnfermeria) {
 
         initComponents();
+        
+        
+        this.frm = frmVisitasEnfermeria;
+        
         cbPeriodo.setVisible(false);
         setOpaque(false);
         txtPersona.setVisible(false);
@@ -307,14 +313,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         else {
                 GlassPanePopup.closePopupLast();
             enviarDatosHaciaApi();
-            Timer timer = new Timer(500, (ActionEvent e) -> {
-                 VisitasEnfermeria cd = new VisitasEnfermeria();
-                cd.cargarDatos();
-                cd.deleteAllTableRows(cd.table1);
-            });
-            timer.setRepeats(false);
-            timer.start();
-            
+             
         }
 
 
@@ -352,9 +351,9 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         int num = 4;
         int num1 = 1;
 
-        MessageAddVisitaEnfermeria msg = new MessageAddVisitaEnfermeria();
+        
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
-        int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbPeriodo);
+        int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(cbPeriodo);
         // TODO add your handling code here:
 
         // Obtener la fecha actual del sistema
@@ -387,13 +386,10 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
                 if (success) {
                     // La solicitud POST fue exitosa
                     System.out.println("Datos enviados correctamente a la API");
+                    frm.deleteAllTableRows(frm.table1);
+                    frm.cargarDatos();
 
-                    CodigosDisciplinarios cd = new CodigosDisciplinarios();
-
-                    cd.cargarDatos();
-
-                    cd.deleteAllTableRows(cd.table1);
-                    boolean pC = panelClosing() == true;
+                    // boolean pC = panelClosing() == true;
                     GlassPanePopup.closePopupLast();
 
                 } else {

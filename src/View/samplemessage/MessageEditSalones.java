@@ -37,11 +37,14 @@ public class MessageEditSalones extends javax.swing.JPanel {
 
     public int id;
     private Boolean noti;
-    public MessageEditSalones() {
+    SalonesPantalla frm = null;
+    public MessageEditSalones(SalonesPantalla frmSalonesPantalla) {
 
         initComponents();
         setOpaque(false);
 
+        
+        this.frm = frmSalonesPantalla;
         txtTitle.setBackground(new Color(0, 0, 0, 0));
         txtTitle.setOpaque(false);
         txtTitle.putClientProperty(FlatClientProperties.STYLE, ""
@@ -219,6 +222,12 @@ public class MessageEditSalones extends javax.swing.JPanel {
                     // La solicitud PUT fue exitosa
                     System.out.println("Datos actualizados correctamente en la API");
 
+                    
+                    frm.deleteAllTableRows(frm.table1);
+                    frm.cargarDatosAsync();
+
+                    // boolean pC = panelClosing() == true;
+                    GlassPanePopup.closePopupLast();
                     // Realizar las acciones necesarias después de la actualización, si es necesario
                 } else {
                     // La solicitud PUT falló

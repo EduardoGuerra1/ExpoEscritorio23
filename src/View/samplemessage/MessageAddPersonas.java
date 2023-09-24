@@ -61,6 +61,8 @@ public class MessageAddPersonas extends javax.swing.JPanel {
     String rute = "";
     Credenciales frm = null;
     
+    private Boolean noti;
+    
     public MessageAddPersonas(Credenciales frmCredenciales) {
         initComponents();
         setOpaque(false);
@@ -111,14 +113,14 @@ public class MessageAddPersonas extends javax.swing.JPanel {
                     return;
                 }
                 for (char c : str.toCharArray()) {
-                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                    if (!Character.isDigit(c) && !Character.isWhitespace(c) && c != '+') {
                         // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
 
-                        
+                        noti = true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
                     }
                 else{
-                      
+                      noti = false;
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -131,14 +133,14 @@ public class MessageAddPersonas extends javax.swing.JPanel {
                     return;
                 }
                 for (char c : str.toCharArray()) {
-                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                    if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
                         // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
 
-                        
+                        noti=true;  
                         return; // Ignora el carácter si no es letra, número, espacio o punto
                     }
                 else{
-                      
+                        noti=false;
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -151,14 +153,14 @@ public class MessageAddPersonas extends javax.swing.JPanel {
                     return;
                 }
                 for (char c : str.toCharArray()) {
-                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                    if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
                         // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
-
+                        noti=true;
                         
                         return; // Ignora el carácter si no es letra, número, espacio o punto
                     }
                 else{
-                      
+                      noti=false;
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -171,14 +173,14 @@ public class MessageAddPersonas extends javax.swing.JPanel {
                     return;
                 }
                 for (char c : str.toCharArray()) {
-                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c)) {
                         // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
 
-                        
+                        noti=true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
                     }
                 else{
-                      
+                      noti=false;
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -281,6 +283,11 @@ public class MessageAddPersonas extends javax.swing.JPanel {
                 txtNombres1ActionPerformed(evt);
             }
         });
+        txtNombres1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombres1KeyReleased(evt);
+            }
+        });
         add(txtNombres1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 260, 30));
 
         jLabel6.setText("Apellidos:");
@@ -289,6 +296,11 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         txtApellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidosActionPerformed(evt);
+            }
+        });
+        txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApellidosKeyReleased(evt);
             }
         });
         add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 260, 30));
@@ -345,6 +357,11 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         TxTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxTelefonoActionPerformed(evt);
+            }
+        });
+        TxTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxTelefonoKeyReleased(evt);
             }
         });
         add(TxTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 260, 30));
@@ -500,6 +517,33 @@ public class MessageAddPersonas extends javax.swing.JPanel {
     private void TxTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxTelefonoActionPerformed
+
+    private void txtNombres1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombres1KeyReleased
+        // TODO add your handling code here:
+        if(noti==true){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite letras.");
+            playValidacion();
+        }
+        
+        
+    }//GEN-LAST:event_txtNombres1KeyReleased
+
+    private void TxTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxTelefonoKeyReleased
+        // TODO add your handling code here:
+        if(noti==true){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números.");
+            playValidacion();
+        }
+    }//GEN-LAST:event_TxTelefonoKeyReleased
+
+    private void txtApellidosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyReleased
+        // TODO add your handling code here:
+        
+        if(noti==true){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite letras.");
+            playValidacion();
+        }
+    }//GEN-LAST:event_txtApellidosKeyReleased
 
     public void eventOK(ActionListener event) {
     }

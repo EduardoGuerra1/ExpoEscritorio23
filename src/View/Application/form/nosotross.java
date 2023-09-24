@@ -90,7 +90,7 @@ public class nosotross extends javax.swing.JPanel {
         lbNosotros.setText("SOBRE NOSOTROS");
 
         btnLogin.setForeground(new java.awt.Color(102, 102, 102));
-        btnLogin.setText("Inicio Sesión");
+        btnLogin.setText("Inicio de Sesión");
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

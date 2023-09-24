@@ -41,25 +41,26 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author educs
  */
 public class VisitasEnfermeria extends javax.swing.JPanel {
- private TableRowSorter<DefaultTableModel> rowSorter;
+
+    private TableRowSorter<DefaultTableModel> rowSorter;
+
     /**
      * Creates new form VisitasEnfermeria
      */
     public VisitasEnfermeria() {
         initComponents();
-String bg = getBackground().toString();
-        
-       
-        if(bg.contains("r=49")){
+        String bg = getBackground().toString();
+
+        if (bg.contains("r=49")) {
             System.out.println("Modo oscuro");
-        }else{
+        } else {
             System.out.println("Modo claro");
-             EventQueue.invokeLater(() -> {
-                   // FlatAnimatedLafChange.showSnapshot();
-                    FlatIntelliJLaf.setup();
-                    FlatLaf.updateUI();
-                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
-                });
+            EventQueue.invokeLater(() -> {
+                // FlatAnimatedLafChange.showSnapshot();
+                FlatIntelliJLaf.setup();
+                FlatLaf.updateUI();
+                //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+            });
         }
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
@@ -70,10 +71,10 @@ String bg = getBackground().toString();
         tableModel.setColumnIdentifiers(new Object[]{"ID", "Fecha", "Detalle de Visita", "Persona"});
         cargarDatos();
         table1.setDefaultEditor(Object.class, null);
-        table1.getTableHeader().setReorderingAllowed(false); 
-                rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
+        table1.getTableHeader().setReorderingAllowed(false);
+        rowSorter = new TableRowSorter<>((DefaultTableModel) table1.getModel());
         table1.setRowSorter(rowSorter);
-              Buscador.setDocument(new PlainDocument() { // desde aca 
+        Buscador.setDocument(new PlainDocument() { // desde aca 
             @Override
             public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
                 if (str == null) {
@@ -83,11 +84,9 @@ String bg = getBackground().toString();
                     if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
                         // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
 
-                        
                         return; // Ignora el carácter si no es letra, número, espacio o punto
-                    }
-                else{
-                      
+                    } else {
+
                     }
                 }
                 super.insertString(offset, str, attr);
@@ -100,7 +99,7 @@ String bg = getBackground().toString();
         future.thenAccept(visitas -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
             for (VisitasEnfermeriaString visita : visitas) {
-                String inicioFormatted = visita.getFecha().substring(0, 10); 
+                String inicioFormatted = visita.getFecha().substring(0, 10);
                 tableModel.addRow(new Object[]{
                     visita.getIdVisitaEnfermeria(),
                     inicioFormatted,
@@ -125,7 +124,7 @@ String bg = getBackground().toString();
             ex.getMessage();
         }
     }
-    
+
     public void deleteAllTableRows(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         while (model.getRowCount() > 0) {
@@ -146,6 +145,7 @@ String bg = getBackground().toString();
         Buscador = new View.BotonesText.CustomTextField();
         jLabel1 = new javax.swing.JLabel();
         cbSearch = new javax.swing.JComboBox<>();
+        btnReload = new View.BotonesText.Buttons();
         lb = new javax.swing.JLabel();
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
@@ -193,6 +193,13 @@ String bg = getBackground().toString();
         cbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fecha", "Detalle", "Persona" }));
         cbSearch.setSelectedIndex(2);
 
+        btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/reload.png"))); // NOI18N
+        btnReload.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReloadMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -209,28 +216,34 @@ String bg = getBackground().toString();
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))))
+                        .addGap(10, 10, 10))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 9, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(4, 4, 4)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -255,27 +268,21 @@ String bg = getBackground().toString();
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(lb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
-        MessageAddVisitaEnfermeria obj = new MessageAddVisitaEnfermeria();
-        obj.txtTitle.setText("Agregar na visita de enfermeria al estudiante");
+        MessageAddVisitaEnfermeria obj = new MessageAddVisitaEnfermeria(this);
+        obj.txtTitle.setText("Agregar una visita de enfermeria al estudiante");
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
-                Timer timer = new Timer(500, (ActionEvent e) -> {
-                    cargarDatos();
-                    deleteAllTableRows(table1);
-                    
-                });
-                timer.setRepeats(false);
-                timer.start();
+
+               
             }
         });
         GlassPanePopup.showPopup(obj);
@@ -377,15 +384,23 @@ String bg = getBackground().toString();
             RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + textoBusqueda + ".*", index); // 1 representa la columna del estudiante
             rowSorter.setRowFilter(rowFilter);
 
-
         }
     }//GEN-LAST:event_BuscadorKeyTyped
+
+    private void btnReloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReloadMouseClicked
+
+        deleteAllTableRows(table1);
+        cargarDatos();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReloadMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private View.BotonesText.CustomTextField Buscador;
     private View.BotonesText.Buttons btnAdd;
     private View.BotonesText.Buttons btnDelete;
+    private View.BotonesText.Buttons btnReload;
     private View.BotonesText.Buttons btnReport;
     private javax.swing.JComboBox<String> cbSearch;
     private javax.swing.JLabel jLabel1;
