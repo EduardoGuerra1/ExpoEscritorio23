@@ -45,7 +45,7 @@ public class Application extends javax.swing.JFrame {
         recuCorreo = new RecuCorreo1();/* Crea una instancia de la clase RecuCorreo1*/
         nosotross = new nosotross();
         carga = new Carga();
-        setContentPane(carga);
+        setContentPane(carga);/* Setea para que la pantalla de carga sea lo primero que se muestre*/
         Notifications.getInstance().setJFrame(this);/*Configura notificaciones*/
         GlassPanePopup.install(this);/*Instala un GlassPanePopup en la ventana*/
 

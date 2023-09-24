@@ -26,7 +26,7 @@ public class Carga extends javax.swing.JPanel {
                 + "font:$h3.font;");
         carga.setText("Cargando...");
         
-        Timer timer = new Timer(6000, (ActionEvent e) -> {
+        Timer timer = new Timer(6000, (ActionEvent e) -> { /*Tiempo que debe durar la pantalla de carga*/
                     System.out.println("Se acabó el timer");
                      Application.logout();
                      
@@ -57,13 +57,10 @@ public class Carga extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(carga)))
+                    .addComponent(jLabel2)
+                    .addComponent(carga))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

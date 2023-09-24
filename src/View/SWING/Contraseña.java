@@ -30,7 +30,7 @@ public class Contraseña extends JPasswordField{
         /*Constructor*/
         setBorder(new EmptyBorder(10,10,10,10));
         setBackground(new Color(10,10,10,10));
-        setHorizontalAlignment(JTextField.CENTER);
+        setHorizontalAlignment(JTextField.LEFT);
     }
     
     @Override
