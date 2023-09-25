@@ -19,12 +19,11 @@ public class ComunicadosModel {
     byte[] archivo;     // Nombre del archivo adjunto al comunicado.
 
     // Constructor de la clase que toma varios parámetros para inicializar los campos.
-    public ComunicadosModel(int idComunicado, int idGrado, String detalle, String fecha, byte[] archivo) {
+    public ComunicadosModel(int idComunicado, int idGrado, String detalle, String fecha) {
         this.idComunicado = idComunicado;
         this.idGrado = idGrado;
         this.detalle = detalle;
         this.fecha = fecha;
-        this.archivo = archivo;
     }
 
     // Constructor vacío por defecto.

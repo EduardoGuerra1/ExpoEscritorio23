@@ -52,8 +52,7 @@ public class Funciones {
                             int idPeriodo= jsonObject.getInt("idGrado");
                             String fecha= jsonObject.getString("fecha");
                             String detalle = jsonObject.getString("detalle");
-byte[] idEstudiante= Base64.getDecoder().decode(jsonObject.getString("archivo")); 
-                            modelList.add(new ComunicadosModel(idObservacion, idPeriodo,fecha,detalle, idEstudiante));
+                            modelList.add(new ComunicadosModel(idObservacion, idPeriodo,fecha,detalle));
                         }
                     }else {
                         // Si la solicitud no es exitosa, se muestra un mensaje de error junto con el código de estado HTTP.
