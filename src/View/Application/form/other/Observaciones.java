@@ -140,6 +140,11 @@ public class Observaciones extends javax.swing.JPanel {
 
             }
         ));
+        table1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table1);
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/delete.png"))); // NOI18N
@@ -338,6 +343,10 @@ public class Observaciones extends javax.swing.JPanel {
         deleteAllTableRows(table1);
         cargarDatosAsync();
     }//GEN-LAST:event_btnReloadMouseClicked
+
+    private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_table1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
