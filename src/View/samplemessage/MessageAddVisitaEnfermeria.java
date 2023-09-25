@@ -28,6 +28,7 @@ import raven.toast.Notifications;
 import Services.Validaciones;
 import View.Application.form.other.VisitasEnfermeria;
 import expoescritorio.Controller.PeriodosController;
+import expoescritorio.Controller.PersonasController;
 import static expoescritorio.Controller.PersonasController.getPersonasAsync;
 import expoescritorio.Models.Periodos;
 //import  expoescritorio.Controller.PersonasController.getPersonasAsync;
@@ -39,6 +40,9 @@ import java.util.Date;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -49,7 +53,9 @@ import javax.swing.text.PlainDocument;
  */
 public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
        List<PersonasLo> listaIdPersonas = new ArrayList<>();
-       List<Personas> mySearch = new ArrayList<Personas>();
+       List<PersonasLo> mySearch = new ArrayList<PersonasLo>();
+       List<Periodos> periodos = new ArrayList<Periodos>();
+       private TableRowSorter<DefaultTableModel> rowSorter;
        
        private Boolean noti;
        VisitasEnfermeria frm = null;
@@ -61,9 +67,8 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
         
         this.frm = frmVisitasEnfermeria;
         
-        cbPeriodo.setVisible(false);
         setOpaque(false);
-        txtPersona.setVisible(false);
+        cbPersona.setVisible(false);
         txtTitle.setBackground(new Color(0, 0, 0, 0));
         txtTitle.setOpaque(false);
         txtTitle.putClientProperty(FlatClientProperties.STYLE, ""
@@ -85,25 +90,10 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
         */
 
         CompletableFuture<List<PersonasLo>> futurePersonas = getPersonasAsync(2);
-
-        // Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
-        futurePersonas.thenAccept(personasList -> {
-            // Crear un arreglo de nombres y apellidos para usar en el combobox
-            String[] nombresApellidos = new String[personasList.size()];
-            String[] ID = new String[personasList.size()];
-            for (int i = 0; i < personasList.size(); i++) {
-                PersonasLo persona = personasList.get(i);
-                listaIdPersonas = personasList;
-                
-                nombresApellidos[i] = persona.getCodigo()+ " " +persona.getNombrePersona() + " " + persona.getApellidoPersona();
-                ID[i] = persona.getIdPersona() + " ";
-            }
-
-            // Agregar los nombres y apellidos al combobox
-            cbPersona.setModel(new DefaultComboBoxModel<>(nombresApellidos));
-            //cbPersona.setModel(new DefaultComboBoxModel<>(ID));
-            
-        });
+        
+       
+        
+        mySearch = futurePersonas.join();
 
         String selectedText = (String) cbPersona.getSelectedItem();
         txtPersona.setText(selectedText);
@@ -141,6 +131,16 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
                 super.insertString(offset, str, attr);
             }
         });
+        
+        DefaultTableModel tableModel = (DefaultTableModel) tablaAlumnos.getModel();
+
+        // Establece los "ColumnIdentifiers" en el modelo de la tabla
+        tableModel.setColumnIdentifiers(new Object[]{"Codigo", "Nombre"});
+        cargarDatos();
+        tablaAlumnos.setDefaultEditor(Object.class, null);
+        tablaAlumnos.getTableHeader().setReorderingAllowed(false);
+        rowSorter = new TableRowSorter<>((DefaultTableModel) tablaAlumnos.getModel());
+        tablaAlumnos.setRowSorter(rowSorter);
 
     }
 private int compararNombreApellido(String nombre, String apellido, List<Personas> personasList) {
@@ -178,6 +178,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
             periodosList = PeriodosController.getPeriodosApiAsync().get();
             for (Periodos periodo : periodosList) {
                 cbPeriodo.addItem(String.valueOf(periodo.getIdPeriodo()));
+                periodos.add(periodo);
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -197,6 +198,9 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         jLabel3 = new javax.swing.JLabel();
         txtPersona = new View.BotonesText.CustomTextField();
         txtVisita = new View.BotonesText.CustomTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaAlumnos = new View.ExampleTable.Table();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -210,7 +214,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
                 btnCancelarMouseClicked(evt);
             }
         });
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, 120, -1));
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 510, 120, -1));
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -223,38 +227,57 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
                 btnAceptarActionPerformed(evt);
             }
         });
-        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, 120, -1));
+        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 510, 120, -1));
 
         jLabel1.setText("Detalle de visita");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
-        add(cbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 160, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
+        add(cbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, 160, -1));
 
         cbPersona.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
-            }
-            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
-            }
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
                 cbPersonaPopupMenuWillBecomeVisible(evt);
             }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
         });
-        add(cbPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 160, -1));
+        add(cbPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 160, -1));
 
-        jLabel3.setText("Persona");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
+        jLabel3.setText("Periodo");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, -1, -1));
 
-        txtPersona.setEnabled(false);
-        add(txtPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 230, 50));
+        txtPersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPersonaKeyTyped(evt);
+            }
+        });
+        add(txtPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 540, 50));
 
         txtVisita.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtVisitaKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtVisitaKeyTyped(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtVisitaKeyReleased(evt);
+            }
         });
-        add(txtVisita, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 400, 50));
+        add(txtVisita, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 400, 50));
+
+        jLabel4.setText("Persona");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
+
+        tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tablaAlumnos);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 690, 180));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
@@ -297,7 +320,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
 
        Validaciones valida = new Validaciones();
-        if (txtVisita.getText().isBlank() ) {
+        if (txtVisita.getText().isEmpty() ) {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
             playError();
         }
@@ -306,10 +329,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
             }
-          else if (txtPersona.getText().isBlank() ) {
-            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Selecionar La persona");
-            playError();
-        }
+          
         else {
                 GlassPanePopup.closePopupLast();
             enviarDatosHaciaApi();
@@ -319,6 +339,16 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
+    public void cargarDatos() {
+            DefaultTableModel tableModel = (DefaultTableModel) tablaAlumnos.getModel();
+            for (PersonasLo item : mySearch) {
+                tableModel.addRow(new Object[]{
+                    item.getCodigo(),
+                    item.getNombrePersona()+" "+item.getApellidoPersona()
+                });
+            }
+    }
+    
     private void txtVisitaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVisitaKeyReleased
         // TODO add your handling code here:
         
@@ -341,6 +371,35 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void txtPersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPersonaKeyTyped
+        // TODO add your handling code here:
+        
+        rowSorter = new TableRowSorter<>((DefaultTableModel) tablaAlumnos.getModel());
+        tablaAlumnos.setRowSorter(rowSorter);
+        if (txtPersona.getText().isEmpty()) {
+            // Si el JTextField está vacío, muestra todas las filas.
+            rowSorter.setRowFilter(null);
+        } else {
+            int index;
+            
+            String filtro = txtPersona.getText().toLowerCase();
+            String ini = ""; 
+            ini+=filtro.charAt(0);
+                    
+                    
+            if(Validaciones.onlyLetters(ini)){
+                index = 1;
+            }
+            else index = 0;
+            
+            // Crea un filtro para mostrar solo las filas cuyo nombre de estudiante contiene el texto de búsqueda.
+            RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i).*" + filtro + ".*", index); // 1 representa la columna del estudiante
+            rowSorter.setRowFilter(rowFilter);
+
+        }
+        
+    }//GEN-LAST:event_txtPersonaKeyTyped
 
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);
@@ -370,8 +429,8 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         try {
             // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
-            jsonData.put("idPeriodo", 1);
-            jsonData.put("idPersona",  txtPersona.getText());
+            jsonData.put("idPeriodo", periodos.get(cbPeriodo.getSelectedIndex()).getIdPeriodo());
+            jsonData.put("idPersona",  tablaAlumnos.getValueAt(tablaAlumnos.getSelectedRow(), 0));
             jsonData.put("fecha", fechaFormateada);
             jsonData.put("detalleVisitia", txtVisita.getText());
 
@@ -431,6 +490,9 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
     public javax.swing.JComboBox<String> cbPersona;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    public View.ExampleTable.Table tablaAlumnos;
     public View.BotonesText.CustomTextField txtPersona;
     public javax.swing.JLabel txtTitle;
     private View.BotonesText.CustomTextField txtVisita;
