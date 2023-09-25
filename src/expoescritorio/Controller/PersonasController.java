@@ -109,10 +109,8 @@ public class PersonasController {
                         int idTipoPersona = jsonObject.getInt("idTipoPersona");
                         String correo = jsonObject.getString("correo");
                         String claveCredenciales = jsonObject.getString("claveCredenciales");
-                        byte[] foto = jsonObject.getString("foto").getBytes();
                         String telefonoPersona = jsonObject.getString("telefonoPersona");
-                        
-                        modelList.add(new Personas(idPersona, codigo, nombre, apellido, nacimiento, idTipoPersona, correo, claveCredenciales, foto, telefonoPersona));
+                        modelList.add(new Personas(idPersona, codigo, nombre, apellido, nacimiento, idTipoPersona, correo, claveCredenciales,  telefonoPersona));
                     }
                 }else {
                     System.out.println("La solicitud HTTP no fue exitosa. Código de estado: " + responseCode);

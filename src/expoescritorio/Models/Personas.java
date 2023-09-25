@@ -31,7 +31,7 @@ public class Personas {
         this.foto = foto;
     }
 
-    public Personas(int idPersona, String codigo, String nombrePersona, String apellidoPersona, String nacimientoPersona, int idTipoPersona, String correo, String claveCredenciales, byte[] foto, String telefonoPersona) {
+    public Personas(int idPersona, String codigo, String nombrePersona, String apellidoPersona, String nacimientoPersona, int idTipoPersona, String correo, String claveCredenciales, String telefonoPersona) {
         this.idPersona = idPersona;
         this.codigo = codigo;
         this.nombrePersona = nombrePersona;
@@ -40,7 +40,6 @@ public class Personas {
         this.idTipoPersona = idTipoPersona;
         this.correo = correo;
         this.claveCredenciales = claveCredenciales;
-        this.foto = foto;
         this.telefonoPersona = telefonoPersona;
     }
     
