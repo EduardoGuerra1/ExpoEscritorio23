@@ -419,7 +419,7 @@ int selectedRow = table1.getSelectedRow();
         Object id = table1.getValueAt(selectedRow, 0);
         Object Estado = table1.getValueAt(selectedRow, 3);
         String Estado1 = Estado.toString(); 
-        if(Estado1 == "Injustificada"){
+        if(Estado1 == "Sin motivo"){
         System.out.println(id);
         Message obj = new Message();
         obj.txtTitle.setText("Aviso");
