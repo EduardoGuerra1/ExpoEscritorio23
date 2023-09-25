@@ -201,7 +201,7 @@ public class Inasistencias extends javax.swing.JPanel {
             }
         });
 
-        cbSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Estudiante", "Docente" }));
+        cbSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Estudiante", "Docente", "Estado" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -288,7 +288,7 @@ public void cargarDatosAsync() {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
             for (Inasisitenciastring tipoCodigo : encargadosList) {
                 String Fecha = tipoCodigo.getFecha().substring(0, 11);
-                 String estadoTexto = tipoCodigo.getEstado() == 1 ? "Injustificada" : "Justificada";
+                 String estadoTexto = tipoCodigo.getEstado() == 1 ? "Sin motivo" : "Justificada";
                 
                 tableModel.addRow(new Object[]{
                     tipoCodigo.getIdInasistencia(),
