@@ -64,7 +64,7 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
 
         initComponents();
         
-        
+        cbPeriodo.setVisible(false);
         this.frm = frmVisitasEnfermeria;
         
         setOpaque(false);
@@ -195,7 +195,6 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         jLabel1 = new javax.swing.JLabel();
         cbPeriodo = new javax.swing.JComboBox<>();
         cbPersona = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
         txtPersona = new View.BotonesText.CustomTextField();
         txtVisita = new View.BotonesText.CustomTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -234,18 +233,15 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
         add(cbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, 160, -1));
 
         cbPersona.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                cbPersonaPopupMenuWillBecomeVisible(evt);
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                cbPersonaPopupMenuWillBecomeVisible(evt);
             }
         });
         add(cbPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 160, -1));
-
-        jLabel3.setText("Periodo");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, -1, -1));
 
         txtPersona.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -503,7 +499,6 @@ Message obj = new Message();
     public javax.swing.JComboBox<String> cbPeriodo;
     public javax.swing.JComboBox<String> cbPersona;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     public View.ExampleTable.Table tablaAlumnos;
