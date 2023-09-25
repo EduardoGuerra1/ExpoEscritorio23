@@ -54,9 +54,9 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lbEstudinte" pref="311" max="32767" attributes="0"/>
                               <Component id="lbDocente" alignment="0" pref="311" max="32767" attributes="0"/>
-                              <Component id="lbCod" alignment="0" pref="311" max="32767" attributes="0"/>
                               <Component id="lbFecha" pref="311" max="32767" attributes="0"/>
                               <Component id="lbIdent" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbCod" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

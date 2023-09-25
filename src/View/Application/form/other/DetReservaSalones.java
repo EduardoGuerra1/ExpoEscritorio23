@@ -80,7 +80,8 @@ public class DetReservaSalones extends javax.swing.JPanel {
 
         initComponents();
         setOpaque(false);
-
+        lb1.setVisible(false);
+        lbIdent.setVisible(false);
         
        lb1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h2.font");

@@ -77,11 +77,12 @@ public class DetCod extends javax.swing.JPanel {
     CodigosEstudiantes frm = null;
 
     public DetCod(CodigosEstudiantes frmCodigosEst) {
-
+     
         initComponents();
         setOpaque(false);
 
-        
+        lb1.setVisible(false);
+        lbIdent.setVisible(false);
        lb1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h2.font");
          lb2.putClientProperty(FlatClientProperties.STYLE, ""
@@ -201,9 +202,9 @@ public class DetCod extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbEstudinte, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
                             .addComponent(lbDocente, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                            .addComponent(lbCod, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
                             .addComponent(lbFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                            .addComponent(lbIdent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lbIdent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbCod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
