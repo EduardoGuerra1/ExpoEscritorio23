@@ -215,11 +215,7 @@ public class MessageEditPersonas extends javax.swing.JPanel {
         
         this.modelEstudiante = estudiante;
         
-        txtNombres2.setText(estudiante.getNombrePersona());
-        txtApellidos1.setText(estudiante.getApellidoPersona());
-        txtCodigo1.setText(estudiante.getCodigo());
-        dpNacimiento1.setDate(nacimiento);
-        TxTelefono.setText(estudiante.getTelefonoPersona());
+       
 
         
         
@@ -325,7 +321,11 @@ public class MessageEditPersonas extends javax.swing.JPanel {
             }
         });
           
-          
+           txtNombres2.setText(estudiante.getNombrePersona());
+        txtApellidos1.setText(estudiante.getApellidoPersona());
+        txtCodigo1.setText(estudiante.getCodigo());
+        dpNacimiento1.setDate(nacimiento);
+        TxTelefono.setText(estudiante.getTelefonoPersona());
           
           
     }
