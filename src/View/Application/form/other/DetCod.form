@@ -38,7 +38,6 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel5" alignment="1" min="-2" pref="146" max="-2" attributes="0"/>
                                       <Component id="jLabel4" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                                      <Component id="lb2" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
@@ -52,15 +51,20 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lbEstudinte" pref="311" max="32767" attributes="0"/>
-                              <Component id="lbDocente" alignment="0" pref="311" max="32767" attributes="0"/>
-                              <Component id="lbFecha" pref="311" max="32767" attributes="0"/>
+                              <Component id="lbDocente" alignment="0" pref="435" max="32767" attributes="0"/>
+                              <Component id="lbFecha" pref="435" max="32767" attributes="0"/>
                               <Component id="lbIdent" alignment="0" max="32767" attributes="0"/>
                               <Component id="lbCod" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
+                          <Component id="lb2" min="-2" pref="140" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lbEstudinte" min="-2" pref="275" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -74,10 +78,10 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbEstudinte" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="lb2" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="lbEstudinte" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="lbDocente" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
@@ -147,14 +151,6 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbEstudinte">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel2"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JLabel" name="lbCod">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel2"/>
@@ -176,6 +172,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel2"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </Component>
+        <Component class="View.BotonesText.CustomTextField" name="lbEstudinte">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lbEstudinteActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
