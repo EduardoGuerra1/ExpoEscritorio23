@@ -77,7 +77,7 @@ public class MessageEditComunicados extends javax.swing.JPanel {
                     return;
                 }
                 for (char c : str.toCharArray()) {
-                    if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '.') {
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && c != '.') {
                      
                         noti = true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
