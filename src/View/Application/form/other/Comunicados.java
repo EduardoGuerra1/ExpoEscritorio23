@@ -45,7 +45,7 @@ public class Comunicados extends javax.swing.JPanel {
         
         initComponents();
         String bg = getBackground().toString();
-        
+        table1.setDefaultEditor(Object.class, null);
        
         if(bg.contains("r=49")){
             System.out.println("Modo oscuro");
