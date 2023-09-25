@@ -329,6 +329,10 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
             }
+          else if (tablaAlumnos.getSelectedRow() == -1){
+              Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Seleccione un estudiante");
+                playError();
+          }
           
         else {
                 GlassPanePopup.closePopupLast();
