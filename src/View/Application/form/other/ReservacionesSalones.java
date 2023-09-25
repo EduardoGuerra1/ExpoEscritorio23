@@ -40,6 +40,7 @@ import javax.swing.RowFilter;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -159,6 +160,11 @@ public class ReservacionesSalones extends javax.swing.JPanel {
 
             }
         ));
+        table1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table1);
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/delete.png"))); // NOI18N
@@ -274,13 +280,12 @@ public void cargarDatosAsync() {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
             for (ReservacionesSalonestring tipoCodigo : encargadosList) {
                  String estadoTexto = tipoCodigo.getEstado() == 1 ? "Pendiente" : "Aceptada";
-                  String inicioFormatted = tipoCodigo.getFecha().substring(0, 10);
                 
                 tableModel.addRow(new Object[]{
                     tipoCodigo.getIdReservacionSalon(),
                     tipoCodigo.getMotivoReserva(),
                     tipoCodigo.getReservante(),
-                    inicioFormatted,
+                    tipoCodigo.getFecha(),
                     tipoCodigo.getInicio(),
                     tipoCodigo.getSalon(),
                     estadoTexto, 
@@ -518,6 +523,31 @@ public int ActualizarDatos(int id ){
         deleteAllTableRows(table1);
         cargarDatosAsync();
     }//GEN-LAST:event_btnReloadMouseClicked
+
+    private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
+           if (evt.getClickCount() == 2)
+        {
+        DetReservaSalones obj =new DetReservaSalones(this);
+        int index = table1.getSelectedRow();
+        TableModel model = table1.getModel();
+        String id = model.getValueAt(index, 0).toString();
+        String motivo = model.getValueAt(index, 1).toString();
+        String Docente = model.getValueAt(index, 2).toString();
+        String Fecha = model.getValueAt(index, 3).toString();
+        String Inicio = model.getValueAt(index, 4).toString();
+        String salon = model.getValueAt(index, 5).toString();
+        String Estado = model.getValueAt(index, 6).toString();
+        
+         obj.lbIdent.setText(id);
+         obj.lbMotivo.setText(motivo);
+         obj.lbDocente.setText(Docente);
+         obj.lbFecha.setText(Fecha);
+         obj.lbInicio.setText(Inicio);
+         obj.lbSalon.setText(salon);
+         obj.lbEstado.setText(Estado);
+         GlassPanePopup.showPopup(obj);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_table1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

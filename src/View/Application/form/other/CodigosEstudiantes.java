@@ -25,6 +25,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -167,6 +168,11 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
 
             }
         ));
+        table1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table1);
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/delete.png"))); // NOI18N
@@ -389,6 +395,28 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         deleteAllTableRows(table1);
         cargarDatosAsync();
     }//GEN-LAST:event_btnRecargarMouseClicked
+
+    private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
+           if (evt.getClickCount() == 2)
+        {
+        DetCod obj = new DetCod(this);
+        int index = table1.getSelectedRow();
+        TableModel model = table1.getModel();
+        String id = model.getValueAt(index, 0).toString();
+        String estudiante = model.getValueAt(index, 1).toString();
+        String Docente = model.getValueAt(index, 2).toString();
+        String Cod = model.getValueAt(index, 3).toString();
+        String Fecha = model.getValueAt(index, 4).toString();
+        
+        
+         obj.lbIdent.setText(id);
+         obj.lbEstudinte.setText(estudiante);
+         obj.lbDocente.setText(Docente);
+         obj.lbCod.setText(Cod);
+         obj.lbFecha.setText(Fecha);
+         GlassPanePopup.showPopup(obj);
+        }
+    }//GEN-LAST:event_table1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -22,6 +22,7 @@ import java.util.concurrent.CompletableFuture;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -345,7 +346,25 @@ public class Observaciones extends javax.swing.JPanel {
     }//GEN-LAST:event_btnReloadMouseClicked
 
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
-        // TODO add your handling code here:
+          if (evt.getClickCount() == 2)
+        {
+        DetObservaciones obj = new DetObservaciones(this);
+        int index = table1.getSelectedRow();
+        TableModel model = table1.getModel();
+        String id = model.getValueAt(index, 0).toString();
+        String estudiante = model.getValueAt(index, 1).toString();
+        String Docente = model.getValueAt(index, 2).toString();
+        String Cod = model.getValueAt(index, 3).toString();
+        String Fecha = model.getValueAt(index, 4).toString();
+        
+        
+         obj.lbIdent.setText(id);
+         obj.lbEstudinte.setText(estudiante);
+         obj.lbDocente.setText(Docente);
+         obj.lbDetalle.setText(Cod);
+         obj.lbFecha.setText(Fecha);
+         GlassPanePopup.showPopup(obj);
+        }
     }//GEN-LAST:event_table1MouseClicked
 
 
