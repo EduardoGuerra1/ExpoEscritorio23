@@ -216,6 +216,18 @@ public class MessageEditTipoCodigos extends javax.swing.JPanel {
                     // La solicitud PUT fue exitosa
                     System.out.println("Datos actualizados correctamente en la API");
 
+                    
+                    Message obj = new Message();
+                    obj.txtTitle.setText("Aviso");
+                    obj.txtContent.setText("Datos actualizados correctamente");
+                    obj.eventOK(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+                            System.out.println("Click OK");
+                            GlassPanePopup.closePopupLast();
+                        }
+                    });
+                    GlassPanePopup.showPopup(obj);
                     // Realizar las acciones necesarias después de la actualización, si es necesario
                 } else {
                     // La solicitud PUT falló

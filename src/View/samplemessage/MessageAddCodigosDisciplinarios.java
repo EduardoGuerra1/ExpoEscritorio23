@@ -39,8 +39,10 @@ import javax.sound.sampled.Clip;
  * @author educs
  */
 public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
-   int nivel1 = 1; 
-   int tipo = 4; 
+
+    int nivel1 = 1;
+    int tipo = 4;
+
     public MessageAddCodigosDisciplinarios() {
 
         initComponents();
@@ -77,59 +79,57 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         CompletableFuture<List<NivelesCodigosConductuales>> futureNivelesCodigos = NivelesCodigosConductualesController.getNivelesCodigosConductualesAsyn();
 
 // Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
-       futureNivelesCodigos.thenAccept(nivelesCodigosList -> {
-    // Crear un arreglo de niveles de códigos conductuales para usar en el combobox
-    String[] nivelesCodigos = new String[nivelesCodigosList.size()];
-    int[] ids = new int[nivelesCodigosList.size()];
+        futureNivelesCodigos.thenAccept(nivelesCodigosList -> {
+            // Crear un arreglo de niveles de códigos conductuales para usar en el combobox
+            String[] nivelesCodigos = new String[nivelesCodigosList.size()];
+            int[] ids = new int[nivelesCodigosList.size()];
 
-    for (int i = 0; i < nivelesCodigosList.size(); i++) {
-        NivelesCodigosConductuales nivelCodigo = nivelesCodigosList.get(i);
-        nivelesCodigos[i] = nivelCodigo.getNivelCodigoConductual();
-        ids[i] = nivelCodigo.getIdNivelCodigoConductual();
-    }
+            for (int i = 0; i < nivelesCodigosList.size(); i++) {
+                NivelesCodigosConductuales nivelCodigo = nivelesCodigosList.get(i);
+                nivelesCodigos[i] = nivelCodigo.getNivelCodigoConductual();
+                ids[i] = nivelCodigo.getIdNivelCodigoConductual();
+            }
 
-    // Agregar los niveles de códigos conductuales al combobox
-    cbNivelCodigoConductual.setModel(new DefaultComboBoxModel<>(nivelesCodigos));
+            // Agregar los niveles de códigos conductuales al combobox
+            cbNivelCodigoConductual.setModel(new DefaultComboBoxModel<>(nivelesCodigos));
 
-    // Agregar un ActionListener al JComboBox para obtener el ID seleccionado
-    cbNivelCodigoConductual.addActionListener(e -> {
-        int selectedIndex = cbNivelCodigoConductual.getSelectedIndex();
-        int selectedId = ids[selectedIndex];
-         nivel1 = selectedId; 
-        
-        // Hacer algo con el ID seleccionado...
-    });
-});
+            // Agregar un ActionListener al JComboBox para obtener el ID seleccionado
+            cbNivelCodigoConductual.addActionListener(e -> {
+                int selectedIndex = cbNivelCodigoConductual.getSelectedIndex();
+                int selectedId = ids[selectedIndex];
+                nivel1 = selectedId;
+
+                // Hacer algo con el ID seleccionado...
+            });
+        });
 
 // Declara una variable para almacenar el índice seleccionadoalor inicial por defecto o un valor que indique "no seleccionado"
-
 // ...
-
-CompletableFuture<List<TiposCodigosConductuales>> futureTiposCodigos = TiposCodigosConductualesController.getTiposCodigosConductualesAsync();
+        CompletableFuture<List<TiposCodigosConductuales>> futureTiposCodigos = TiposCodigosConductualesController.getTiposCodigosConductualesAsync();
 
 // Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
-futureTiposCodigos.thenAccept(tiposCodigosList -> {
-    // Crear un arreglo de tipos de códigos conductuales para usar en el combobox
-    String[] tiposCodigos = new String[tiposCodigosList.size()];
-    int[] ids = new int[tiposCodigosList.size()];
+        futureTiposCodigos.thenAccept(tiposCodigosList -> {
+            // Crear un arreglo de tipos de códigos conductuales para usar en el combobox
+            String[] tiposCodigos = new String[tiposCodigosList.size()];
+            int[] ids = new int[tiposCodigosList.size()];
 
-    for (int i = 0; i < tiposCodigosList.size(); i++) {
-        TiposCodigosConductuales tipoCodigo = tiposCodigosList.get(i);
-        tiposCodigos[i] = tipoCodigo.getTipoCodigoConductual();
-        ids[i] = tipoCodigo.getIdTipoCodigoConductual();
-    }
+            for (int i = 0; i < tiposCodigosList.size(); i++) {
+                TiposCodigosConductuales tipoCodigo = tiposCodigosList.get(i);
+                tiposCodigos[i] = tipoCodigo.getTipoCodigoConductual();
+                ids[i] = tipoCodigo.getIdTipoCodigoConductual();
+            }
 
-    // Agregar los tipos de códigos conductuales al combobox
-    cbTiposCodigosConductuales.setModel(new DefaultComboBoxModel<>(tiposCodigos));
+            // Agregar los tipos de códigos conductuales al combobox
+            cbTiposCodigosConductuales.setModel(new DefaultComboBoxModel<>(tiposCodigos));
 
-    // Agregar un ActionListener al JComboBox para obtener el índice seleccionado
-    cbTiposCodigosConductuales.addActionListener(e -> {
-      int  selectedTipoCodigoIndex = cbTiposCodigosConductuales.getSelectedIndex();
-        int selectedId = ids[selectedTipoCodigoIndex];
-        tipo = selectedId; 
-        // Hacer algo con el ID seleccionado...
-    });
-});
+            // Agregar un ActionListener al JComboBox para obtener el índice seleccionado
+            cbTiposCodigosConductuales.addActionListener(e -> {
+                int selectedTipoCodigoIndex = cbTiposCodigosConductuales.getSelectedIndex();
+                int selectedId = ids[selectedTipoCodigoIndex];
+                tipo = selectedId;
+                // Hacer algo con el ID seleccionado...
+            });
+        });
         String selectedText = (String) cbTiposCodigosConductuales.getSelectedItem();
         txtCodigoConductual.setText(selectedText);
         // Agrega el ActionListener al JComboBox
@@ -247,20 +247,21 @@ futureTiposCodigos.thenAccept(tiposCodigosList -> {
         Validaciones valida = new Validaciones();
         if (txtCodigoConductual.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
-playError();
+            playError();
         } else {
             if (!valida.check50(txtCodigoConductual.getText())) {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
             } else {
                 enviarDatosHaciaApi();
-            Timer timer = new Timer(500, (ActionEvent e) -> {
-                CodigosDisciplinarios tc = new CodigosDisciplinarios();
-                tc.cargarDatos();
-                tc.deleteAllTableRows(tc.table1);
-            });
-            timer.setRepeats(false);
-            timer.start();
+
+                Timer timer = new Timer(500, (ActionEvent e) -> {
+                    CodigosDisciplinarios tc = new CodigosDisciplinarios();
+                    tc.cargarDatos();
+                    tc.deleteAllTableRows(tc.table1);
+                });
+                timer.setRepeats(false);
+                timer.start();
             }
         }
 
@@ -308,6 +309,7 @@ playError();
                     // La solicitud POST fue exitosa
                     System.out.println("Datos enviados correctamente a la API");
 
+                    
                     CodigosDisciplinarios cd = new CodigosDisciplinarios();
 
                     cd.cargarDatos();
@@ -315,6 +317,19 @@ playError();
                     cd.deleteAllTableRows(cd.table1);
                     boolean pC = panelClosing() == true;
                     GlassPanePopup.closePopupLast();
+                    
+                    
+                    Message obj = new Message();
+                    obj.txtTitle.setText("Aviso");
+                    obj.txtContent.setText("Datos enviados correctamente");
+                    obj.eventOK(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+                            System.out.println("Click OK");
+                            GlassPanePopup.closePopupLast();
+                        }
+                    });
+                    GlassPanePopup.showPopup(obj);
 
                 } else {
                     // La solicitud POST falló

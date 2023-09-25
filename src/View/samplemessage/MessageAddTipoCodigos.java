@@ -241,6 +241,18 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
                     // La solicitud POST fue exitosa
                     System.out.println("Datos enviados correctamente a la API");
 
+                    
+                    Message obj = new Message();
+                    obj.txtTitle.setText("Aviso");
+                    obj.txtContent.setText("Datos enviados correctamente");
+                    obj.eventOK(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+                            System.out.println("Click OK");
+                            GlassPanePopup.closePopupLast();
+                        }
+                    });
+                    GlassPanePopup.showPopup(obj);
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");

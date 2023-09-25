@@ -410,7 +410,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         
         
          obj.lbIdent.setText(id);
-         obj.lbEstudinte.setText(estudiante);
+         obj.lbEstudiante.setText(estudiante);
          obj.lbDocente.setText(Docente);
          obj.lbCod.setText(Cod);
          obj.lbFecha.setText(Fecha);

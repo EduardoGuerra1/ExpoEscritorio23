@@ -214,6 +214,18 @@ public class MessageAddEstudiante extends javax.swing.JPanel {
                     cd.deleteAllTableRows(cd.table1);
                     boolean pC = panelClosing() == true;
                     GlassPanePopup.closePopupLast();
+                    
+                    Message obj = new Message();
+                    obj.txtTitle.setText("Aviso");
+                    obj.txtContent.setText("Datos enviados correctamente");
+                    obj.eventOK(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+                            System.out.println("Click OK");
+                            GlassPanePopup.closePopupLast();
+                        }
+                    });
+                    GlassPanePopup.showPopup(obj);
 
                 } else {
                     // La solicitud POST falló

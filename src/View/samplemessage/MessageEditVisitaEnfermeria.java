@@ -357,6 +357,18 @@ public class MessageEditVisitaEnfermeria extends javax.swing.JPanel {
                     boolean pC = panelClosing() == true;
                     GlassPanePopup.closePopupLast();
 
+                    
+                    Message obj = new Message();
+                    obj.txtTitle.setText("Aviso");
+                    obj.txtContent.setText("Datos actualizados correctamente");
+                    obj.eventOK(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+                            System.out.println("Click OK");
+                            GlassPanePopup.closePopupLast();
+                        }
+                    });
+                    GlassPanePopup.showPopup(obj);
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");

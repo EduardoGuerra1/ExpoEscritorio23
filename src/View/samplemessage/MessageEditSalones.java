@@ -228,6 +228,20 @@ public class MessageEditSalones extends javax.swing.JPanel {
 
                     // boolean pC = panelClosing() == true;
                     GlassPanePopup.closePopupLast();
+                    
+                    
+                    
+                    Message obj = new Message();
+                    obj.txtTitle.setText("Aviso");
+                    obj.txtContent.setText("Datos actualizados correctamente");
+                    obj.eventOK(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+                            System.out.println("Click OK");
+                            GlassPanePopup.closePopupLast();
+                        }
+                    });
+                    GlassPanePopup.showPopup(obj);
                     // Realizar las acciones necesarias después de la actualización, si es necesario
                 } else {
                     // La solicitud PUT falló
