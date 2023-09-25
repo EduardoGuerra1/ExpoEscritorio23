@@ -215,7 +215,6 @@ public class DetReservaSalones extends javax.swing.JPanel {
 
         lbIdent.setText("jLabel2");
 
-        lbMotivo.setBackground(new java.awt.Color(60, 63, 65));
         lbMotivo.setColumns(20);
         lbMotivo.setRows(5);
         jScrollPane1.setViewportView(lbMotivo);
