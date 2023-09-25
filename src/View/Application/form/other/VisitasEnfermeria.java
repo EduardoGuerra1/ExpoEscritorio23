@@ -25,6 +25,7 @@ import javax.swing.RowFilter;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -156,6 +157,11 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
 
             }
         ));
+        table1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table1);
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icons/add1.png"))); // NOI18N
@@ -390,6 +396,25 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnReloadMouseClicked
+
+    private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
+          if (evt.getClickCount() == 2)
+        {
+        DetEnferemeria obj = new DetEnferemeria(this);
+        int index = table1.getSelectedRow();
+        TableModel model = table1.getModel();
+        String id = model.getValueAt(index, 0).toString();
+         String fecha = model.getValueAt(index, 1).toString();
+        String Detalle = model.getValueAt(index, 2).toString();
+        String Persona = model.getValueAt(index, 3).toString();
+        
+         obj.lbIdent.setText(id);
+         obj.lbMotivo.setText(Detalle);
+         obj.lbDocente.setText(Persona);
+         obj.lbFecha.setText(fecha);
+         GlassPanePopup.showPopup(obj);
+        }
+    }//GEN-LAST:event_table1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

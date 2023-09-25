@@ -542,7 +542,7 @@ public int ActualizarDatos(int id ){
          obj.lbMotivo.setText(motivo);
          obj.lbDocente.setText(Docente);
          obj.lbFecha.setText(Fecha);
-         obj.lbInicio.setText(Inicio);
+         obj.lbHora.setText(Inicio);
          obj.lbSalon.setText(salon);
          obj.lbEstado.setText(Estado);
          GlassPanePopup.showPopup(obj);
