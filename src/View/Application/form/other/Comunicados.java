@@ -63,7 +63,7 @@ public class Comunicados extends javax.swing.JPanel {
         
          DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
             // Agregar las columnas al modelo de tabla
-         tableModel.addColumn("ID Comunicado");
+         tableModel.addColumn("ID");
                   tableModel.addColumn("Fecha");
          tableModel.addColumn("Titulo");
         

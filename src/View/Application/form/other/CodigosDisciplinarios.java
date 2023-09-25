@@ -75,7 +75,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
 
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"Id", "Tipo", "Nivel"});
+        tableModel.setColumnIdentifiers(new Object[]{"ID", "Tipo", "Nivel"});
 
         cargarDatos();
 

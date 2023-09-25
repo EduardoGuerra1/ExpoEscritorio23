@@ -302,6 +302,10 @@ public class RecuCorreo1 extends javax.swing.JPanel {
                     lb0.setVisible(true);
                     txtCorreo.setVisible(true);
                     btnEnviar.setVisible(true);
+                            txtCorreo.setText("");
+        txtCodigo.setText("");
+        txtContraseña.setText("");
+        Code = controller.generateRandomCode();
                 } else {
                     Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
                     playError();
