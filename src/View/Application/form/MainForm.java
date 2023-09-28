@@ -100,11 +100,11 @@ public class MainForm extends JLayeredPane {
                 Application.showForm(new PantallaInicio());
             } else if (index == 1) {
                 if (subIndex == 1) {
-                    Application.showForm(new CodigosEstudiantes());
+                    Application.showForm(new TiposCodigos());
                 } else if (subIndex == 2) {
                     Application.showForm(new CodigosDisciplinarios());
                 } else if (subIndex == 3) {
-                    Application.showForm(new TiposCodigos());
+                    Application.showForm(new CodigosEstudiantes());
                 } else if (subIndex == 4) {
                     Application.showForm(new Observaciones());
                 } else if (subIndex == 5) {
@@ -118,13 +118,13 @@ public class MainForm extends JLayeredPane {
             } else if (index == 2) {
                 Application.showForm(new Comunicados());
             } else if (index == 3) {
-                Application.showForm(new RangoDeHoras());
-            } else if (index == 4) {
                 Application.showForm(new VisitasEnfermeria());
-            }else if (index == 5) {
+            } else if (index == 4) {
               if (subIndex == 1) {
-                    Application.showForm(new SalonesPantalla());
+                    Application.showForm(new RangoDeHoras());
                 } else if (subIndex == 2) {
+                  Application.showForm(new SalonesPantalla());
+                } else if (subIndex == 3) {
                   Application.showForm(new ReservacionesSalones());
                 } else {
                     action.cancel();
