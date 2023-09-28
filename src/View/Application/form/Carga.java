@@ -22,11 +22,9 @@ public class Carga extends javax.swing.JPanel {
     public Carga() {
         initComponents();
         
-        carga.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:$h3.font;");
-        carga.setText("Cargando...");
         
-        Timer timer = new Timer(6000, (ActionEvent e) -> { /*Tiempo que debe durar la pantalla de carga*/
+        
+        Timer timer = new Timer(4000, (ActionEvent e) -> { /*Tiempo que debe durar la pantalla de carga*/
                     System.out.println("Se acabó el timer");
                      Application.logout();
                      
@@ -45,38 +43,30 @@ public class Carga extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        carga = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        carga.setText("jLabel2");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/carga (6).gif"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/carga (13).gif"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(carga))
-                .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(carga)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel carga;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
