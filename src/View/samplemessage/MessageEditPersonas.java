@@ -92,7 +92,7 @@ public class MessageEditPersonas extends javax.swing.JPanel {
             String base64Image="";
             
             if(rute==""){
-                base64Image = Base64.getEncoder().encodeToString(modelEstudiante.getFoto());
+               
             }
             else{
                 fotoPath = Paths.get(rute);
@@ -125,8 +125,11 @@ public class MessageEditPersonas extends javax.swing.JPanel {
             jsonData.put("idTipoPersona", "Estudiante");
             jsonData.put("correo",txtCodigo1.getText()+"@ricaldone.edu.sv");
             jsonData.put("telefonoPersona", TxTelefono.getText());
-            if(!txtClave.getText().isEmpty()) jsonData.put("claveCredenciales", Encriptacion.encryptPassword(txtClave1.getText()));
-            else jsonData.put("claveCredenciales", modelEstudiante.getClaveCredenciales());
+if (txtClave1.getText().isEmpty()) {
+    jsonData.put("claveCredenciales", modelEstudiante.getClaveCredenciales());
+} else {
+    jsonData.put("claveCredenciales", Encriptacion.encryptPassword(txtClave1.getText()));
+}
             if(rute == "") jsonData.put("foto", JSONObject.NULL);
             else jsonData.put("foto", base64Image);
             
@@ -648,17 +651,6 @@ public class MessageEditPersonas extends javax.swing.JPanel {
 
         jLabel17.setText("Telefono:");
         jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
-
-        TxTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxTelefonoActionPerformed(evt);
-            }
-        });
-        TxTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                TxTelefonoKeyReleased(evt);
-            }
-        });
         jPanel2.add(TxTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 260, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
