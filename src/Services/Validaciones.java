@@ -144,8 +144,7 @@ public static boolean checkDateDown(OffsetDateTime date) {
             return false;// Si encuentra un carácter que no es válido, devuelve false.
         }
         return true;// Si todos los caracteres son dígitos numéricos o, como máximo, un punto decimal, devuelve true.
-    }
-    // Compara la longitud de la cadena de texto 
+    }    // Compara la longitud de la cadena de texto 
     public static boolean check20(String palabra) {
         return palabra.length() <= 20;
     }

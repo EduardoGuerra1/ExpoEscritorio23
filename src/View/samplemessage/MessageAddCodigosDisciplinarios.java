@@ -211,7 +211,6 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         String codigoConductual = Codigos.getText();
         System.out.println(codigoConductual);
         try {
-            // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
             jsonData.put("TipoCodigoConductual", codigoConductual);
             jsonData.put("IdNivelCodigoConductual", nivel1);
@@ -249,7 +248,6 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
                         }
                     });
                     GlassPanePopup.showPopup(obj);
-
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
@@ -261,14 +259,6 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         }
     }
 
-    private int obtenerIdSeleccionadoComboBox(JComboBox<String> comboBox) {
-        int selectedIndex = (int) comboBox.getSelectedIndex();
-        // Aquí deberías obtener el ID correspondiente al valor seleccionado en el ComboBox
-        // Puedes tener una lista de objetos con ID y valor asociado y buscar el ID basado en el valor seleccionado.
-        // Por simplicidad, aquí asumiremos que el valor seleccionado es el ID directamente.
-
-        return selectedIndex;
-    }
 
     public boolean panelClosing() {
         // Realiza las acciones necesarias antes de cerrar el panel

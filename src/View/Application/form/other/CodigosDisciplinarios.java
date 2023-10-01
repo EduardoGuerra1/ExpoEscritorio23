@@ -234,14 +234,10 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         // TODO add your handling code here:
-
         int selectedRow = table1.getSelectedRow();
-
         // Verificar si se ha seleccionado una fila
         if (selectedRow != -1) {
-            // Obtener los datos de las columnas de la fila seleccionada
             Object id = table1.getValueAt(selectedRow, 0);
-
             Message obj = new Message();
             obj.txtTitle.setText("Aviso");
             obj.txtContent.setText("¿Desea eliminar este registro?");
