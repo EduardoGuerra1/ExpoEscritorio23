@@ -326,7 +326,7 @@ public class MessageEditComunicados extends javax.swing.JPanel {
             System.out.println(formattedDateTime);
             
             jsonData.put("idComunicado",id);
-            jsonData.put("idGrado", 2);
+            jsonData.put("idGrado", 1);
             jsonData.put("detalle", txtTitulo.getText());
             jsonData.put("fecha", formattedDateTime);
             if(rute == "") jsonData.put("archivo", JSONObject.NULL);
