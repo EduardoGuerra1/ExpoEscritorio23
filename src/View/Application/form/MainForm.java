@@ -129,9 +129,9 @@ public class MainForm extends JLayeredPane {
                 } else {
                     action.cancel();
                 }
-            } else if (index == 6) {
+            } else if (index == 5) {
                 Application.showForm(new Credenciales());
-            } else if (index == 7) {
+            } else if (index == 6) {
                 Application.logout();
             } else {
                 action.cancel();
