@@ -50,35 +50,10 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
 
         txtTitle.setBackground(new Color(0, 0, 0, 0));
         txtTitle.setOpaque(false);
-        txtCodigoConductual.setVisible(false);
         txtTitle.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h4.font");
-        /*// Obtener los datos de la API y cargarlos en el ComboBox
-        List<TiposCodigosConductuales> tiposCodigosConductualesList = TiposCodigosConductualesController.getTiposCodigosConductualesFromApi();
-        for (TiposCodigosConductuales tipoCodigoConductual : tiposCodigosConductualesList) {
-            cbTiposCodigosConductuales.addItem(tipoCodigoConductual.getTipoCodigoConductual());
-        }
-
-        try {
-            // Obtener la lista de niveles de códigos conductuales de manera asíncrona
-            CompletableFuture<List<NivelesCodigosConductuales>> nivelesFuture = NivelesCodigosConductualesController.getNivelesCodigosConductualesAsync();
-            List<NivelesCodigosConductuales> nivelesCodigosConductualesList = nivelesFuture.get();
-
-            // Limpiar el ComboBox antes de agregar los nuevos elementos
-            cbNivelCodigoConductual.removeAllItems();
-
-            // Agregar los niveles de códigos conductuales al ComboBox
-            for (NivelesCodigosConductuales nivelesCodigosConductuales : nivelesCodigosConductualesList) {
-                cbNivelCodigoConductual.addItem(nivelesCodigosConductuales.getNivelCodigoConductual());
-            }
-        } catch (InterruptedException | ExecutionException e) {
-            // Manejar las excepciones aquí
-            System.out.println("Error al obtener la lista de niveles de códigos conductuales: " + e.getMessage());
-        }*/
-
+       
         CompletableFuture<List<NivelesCodigosConductuales>> futureNivelesCodigos = NivelesCodigosConductualesController.getNivelesCodigosConductualesAsyn();
-
-// Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
         futureNivelesCodigos.thenAccept(nivelesCodigosList -> {
             // Crear un arreglo de niveles de códigos conductuales para usar en el combobox
             String[] nivelesCodigos = new String[nivelesCodigosList.size()];
@@ -103,44 +78,7 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
             });
         });
 
-// Declara una variable para almacenar el índice seleccionadoalor inicial por defecto o un valor que indique "no seleccionado"
-// ...
-        CompletableFuture<List<TiposCodigosConductuales>> futureTiposCodigos = TiposCodigosConductualesController.getTiposCodigosConductualesAsync();
 
-// Agregar un ActionListener para cargar los datos del combobox una vez que estén disponibles
-        futureTiposCodigos.thenAccept(tiposCodigosList -> {
-            // Crear un arreglo de tipos de códigos conductuales para usar en el combobox
-            String[] tiposCodigos = new String[tiposCodigosList.size()];
-            int[] ids = new int[tiposCodigosList.size()];
-
-            for (int i = 0; i < tiposCodigosList.size(); i++) {
-                TiposCodigosConductuales tipoCodigo = tiposCodigosList.get(i);
-                tiposCodigos[i] = tipoCodigo.getTipoCodigoConductual();
-                ids[i] = tipoCodigo.getIdTipoCodigoConductual();
-            }
-
-            // Agregar los tipos de códigos conductuales al combobox
-            cbTiposCodigosConductuales.setModel(new DefaultComboBoxModel<>(tiposCodigos));
-
-            // Agregar un ActionListener al JComboBox para obtener el índice seleccionado
-            cbTiposCodigosConductuales.addActionListener(e -> {
-                int selectedTipoCodigoIndex = cbTiposCodigosConductuales.getSelectedIndex();
-                int selectedId = ids[selectedTipoCodigoIndex];
-                tipo = selectedId;
-                // Hacer algo con el ID seleccionado...
-            });
-        });
-        String selectedText = (String) cbTiposCodigosConductuales.getSelectedItem();
-        txtCodigoConductual.setText(selectedText);
-        // Agrega el ActionListener al JComboBox
-        cbTiposCodigosConductuales.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Obtiene el elemento seleccionado y actualiza el JTextField
-                String selectedText = (String) cbTiposCodigosConductuales.getSelectedItem();
-                txtCodigoConductual.setText(selectedText);
-            }
-        });
 
     }
 
@@ -161,11 +99,10 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         txtTitle = new javax.swing.JLabel();
         btnCancelar = new View.BotonesText.Buttons();
         btnAceptar = new View.BotonesText.Buttons();
-        jLabel1 = new javax.swing.JLabel();
-        cbTiposCodigosConductuales = new javax.swing.JComboBox<>();
         cbNivelCodigoConductual = new javax.swing.JComboBox<>();
-        txtCodigoConductual = new View.BotonesText.CustomTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        Codigos = new View.BotonesText.CustomTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -188,22 +125,14 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
             }
         });
         add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, 120, -1));
-
-        jLabel1.setText("Tipo de Código:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
-        add(cbTiposCodigosConductuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 160, -1));
         add(cbNivelCodigoConductual, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 160, -1));
 
-        txtCodigoConductual.setEnabled(false);
-        txtCodigoConductual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoConductualActionPerformed(evt);
-            }
-        });
-        add(txtCodigoConductual, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 230, 50));
+        jLabel3.setText("Descripción:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
-        jLabel3.setText("Nivel de Código:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
+        jLabel4.setText("Nivel de Código:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
+        add(Codigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 210, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
@@ -245,11 +174,11 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         Validaciones valida = new Validaciones();
-        if (txtCodigoConductual.getText().isEmpty()) {
+        if (Codigos.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
             playError();
         } else {
-            if (!valida.check50(txtCodigoConductual.getText())) {
+            if (!valida.check25(Codigos.getText())) {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
             } else {
@@ -268,10 +197,6 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
-    private void txtCodigoConductualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoConductualActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoConductualActionPerformed
-
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);
     }
@@ -283,22 +208,16 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
 
         MessageAddCodigosDisciplinarios msg = new MessageAddCodigosDisciplinarios();
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
-        int idTipoCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbTiposCodigosConductuales) + num;
-        int idNivelCodigoConductual = obtenerIdSeleccionadoComboBox(msg.cbNivelCodigoConductual) + num1;
-        String codigoConductual = txtCodigoConductual.getText();
-
-        System.out.println(idTipoCodigoConductual);
-        System.out.println(idNivelCodigoConductual);
+        String codigoConductual = Codigos.getText();
         System.out.println(codigoConductual);
         try {
             // Crear un objeto JSON con los datos recopilados
             JSONObject jsonData = new JSONObject();
-            jsonData.put("idTipoCodigoConductual", tipo);
-            jsonData.put("idNivelCodigoConductual", nivel1);
-            jsonData.put("codigoConductual", codigoConductual);
+            jsonData.put("TipoCodigoConductual", codigoConductual);
+            jsonData.put("IdNivelCodigoConductual", nivel1);
 
             // Llamar al método postApiAsync para enviar los datos
-            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductuales/save"; // Reemplaza esto con la URL de tu API
+            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosP/save"; // Reemplaza esto con la URL de tu API
             String jsonString = jsonData.toString();
 
             CompletableFuture<Boolean> postFuture = ControllerFull.postApiAsync(endpointUrl, jsonString);
@@ -363,13 +282,12 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
 // Método para obtener el ID seleccionado de un JComboBox
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.BotonesText.CustomTextField Codigos;
     private View.BotonesText.Buttons btnAceptar;
     private View.BotonesText.Buttons btnCancelar;
     public javax.swing.JComboBox<String> cbNivelCodigoConductual;
-    public javax.swing.JComboBox<String> cbTiposCodigosConductuales;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    public View.BotonesText.CustomTextField txtCodigoConductual;
+    private javax.swing.JLabel jLabel4;
     public javax.swing.JLabel txtTitle;
     // End of variables declaration//GEN-END:variables
 }

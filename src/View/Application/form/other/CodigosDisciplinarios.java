@@ -249,7 +249,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
 
-                    String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductuales/delete";
+                    String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosP/delete";
                     // Código para eliminar el registro de la API
                     CompletableFuture<Boolean> deleteFuture = ControllerFull.DeleteApiAsync(endpointUrl, (int) id);
 
