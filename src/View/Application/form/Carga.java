@@ -7,6 +7,10 @@ package View.Application.form;
 import View.aplicacion.Application;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -23,6 +27,13 @@ public class Carga extends javax.swing.JPanel {
         initComponents();
         
         
+        Timer login = new Timer(2800, (ActionEvent e) -> { /*Tiempo que debe durar la pantalla de carga*/
+                    System.out.println("Se acabó el timer");
+                    
+                     login();
+        });
+                login.setRepeats(false);
+                login.start();
         
         Timer timer = new Timer(4000, (ActionEvent e) -> { /*Tiempo que debe durar la pantalla de carga*/
                     System.out.println("Se acabó el timer");
@@ -32,6 +43,32 @@ public class Carga extends javax.swing.JPanel {
                 timer.setRepeats(false);
                 timer.start();
                
+    }
+    
+    
+    private void login() {
+        String filepath = "src/View/sounds/login.wav";
+
+        PlayMusic(filepath);
+
+    }
+    //Metodo para reproducir sonidos
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();//Codigo para reproducir el clip de audio
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
     }
 
     /**
