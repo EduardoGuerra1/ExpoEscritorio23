@@ -19,8 +19,12 @@ import expoescritorio.Models.TiposCodigosConductuales;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -205,6 +209,51 @@ public class TiposCodigos extends javax.swing.JPanel {
             }
         });
     }
+    
+    private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    
+    private void playAbrir() {
+        String filepath = "src/View/sounds/abrir.wav";
+
+        PlayMusic(filepath);
+
+    }
+     private void playCerrar() {
+        String filepath = "src/View/sounds/cerrar.wav";
+
+        PlayMusic(filepath);
+
+    }
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    //metodo para reproducir sonidos
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();//Codigo para que el audio se reproduzca
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
@@ -228,6 +277,7 @@ public class TiposCodigos extends javax.swing.JPanel {
             }
         });
         GlassPanePopup.showPopup(obj);
+        playAbrir();
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
@@ -261,6 +311,7 @@ public class TiposCodigos extends javax.swing.JPanel {
                 }
             });
             GlassPanePopup.showPopup(msg);
+            playAbrir();
         } else {
             Message obj = new Message();
             obj.txtTitle.setText("Aviso");
@@ -335,6 +386,7 @@ public class TiposCodigos extends javax.swing.JPanel {
                 }
             });
             GlassPanePopup.showPopup(obj);
+            playAbrir();
 
         } else {
             Message obj = new Message();

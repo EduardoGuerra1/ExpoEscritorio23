@@ -33,6 +33,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import raven.toast.Notifications;
 import Services.Validaciones;
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -148,8 +152,32 @@ public class MessageAddEstudiante extends javax.swing.JPanel {
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         GlassPanePopup.closePopupLast();
+        playCerrar();
     }//GEN-LAST:event_btnCancelarMouseClicked
 
+    private void playCerrar() {
+        String filepath = "src/View/sounds/cerrar.wav";
+
+        PlayMusic(filepath);
+
+    }
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+
+            if (musicPath.exists()) {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            } else {
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
 

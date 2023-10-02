@@ -50,22 +50,25 @@ import javax.swing.text.PlainDocument;
 import org.json.JSONException;
 import raven.toast.Notifications;
 import org.json.JSONObject;
+
 /**
  *
  * @author thatsgonzalez
  */
 public class MessageEditPersonas extends javax.swing.JPanel {
+
     List<TiposPersonas> secciones = new ArrayList<TiposPersonas>();
     String rute = "";
     Personas modelEstudiante = null;
     File mImageFile = null;
     Credenciales frm = null;
-    
+
     private Boolean noti;
+
     /**
      * Creates new form MessageEditEstudiante
      */
-    
+
     public boolean panelClosing() {
         // Realiza las acciones necesarias antes de cerrar el panel
         System.out.println("El panel se va a cerrar.");
@@ -75,67 +78,62 @@ public class MessageEditPersonas extends javax.swing.JPanel {
         cd.deleteAllTableRows(cd.table1);
         return false;
     }
-    
+
     public void eventOK(ActionListener event) {
         btnAceptar1.addActionListener(event);
     }
-    
+
     private void enviarDatosHaciaApi() throws FileNotFoundException, IOException {
-        
-        
-        
-        try{
+
+        try {
             JSONObject jsonData = new JSONObject();
-            
+
             Path fotoPath;
             byte[] imageBytes;
-            String base64Image="";
-            
-            if(rute==""){
-               
-            }
-            else{
+            String base64Image = "";
+
+            if (rute == "") {
+
+            } else {
                 fotoPath = Paths.get(rute);
                 // Read the image file and encode it to Base64
                 imageBytes = Files.readAllBytes(fotoPath);
                 base64Image = Base64.getEncoder().encodeToString(imageBytes);
             }
-            
+
             /*FileInputStream fileInputStream = new FileInputStream(imageFile);
 
             // Read the image file and encode it to Base64
             byte[] imageBytes = new byte[(int) imageFile.length()];
             fileInputStream.read(imageBytes);*/
-     
-            
-            
-            
             jsonData.put("idPersona", modelEstudiante.getIdPersona());
             jsonData.put("codigo", txtCodigo1.getText());
             jsonData.put("nombrePersona", txtNombres2.getText());
             jsonData.put("apellidoPersona", txtApellidos1.getText());
-            
+
             Date selectedDate = dpNacimiento1.getDate();
-            
+
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String formattedDate = dateFormat.format(selectedDate);
-             
-            
+
             jsonData.put("nacimientoPersona", formattedDate);
             jsonData.put("idTipoPersona", "Estudiante");
-            jsonData.put("correo",txtCodigo1.getText()+"@ricaldone.edu.sv");
+            jsonData.put("correo", txtCodigo1.getText() + "@ricaldone.edu.sv");
             jsonData.put("telefonoPersona", TxTelefono.getText());
-if (txtClave1.getText().isEmpty()) {
-    jsonData.put("claveCredenciales", modelEstudiante.getClaveCredenciales());
-} else {
-    jsonData.put("claveCredenciales", Encriptacion.encryptPassword(txtClave1.getText()));
-}
-            if(rute == "") jsonData.put("foto", JSONObject.NULL);
-            else jsonData.put("foto", base64Image);
-            
+            if (txtClave1.getText().isEmpty()) {
+                jsonData.put("claveCredenciales", modelEstudiante.getClaveCredenciales());
+            } else {
+                jsonData.put("claveCredenciales", Encriptacion.encryptPassword(txtClave1.getText()));
+            }
+            if (rute == "") {
+                jsonData.put("foto", JSONObject.NULL);
+            } else {
+                jsonData.put("foto", base64Image);
+            }
+
             String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Credenciales/update"; // Reemplaza esto con la URL de tu API
             String jsonString = jsonData.toString();
-            
+
             CompletableFuture<Boolean> postFuture = ControllerFull.putApiAsync(endpointUrl, jsonString);
 
             // Manejar la respuesta de la API
@@ -149,10 +147,9 @@ if (txtClave1.getText().isEmpty()) {
                     frm.deleteAllTableRows(frm.table1);
                     frm.cargarDatos();
 
-                    
                     boolean pC = panelClosing() == true;
                     GlassPanePopup.closePopupLast();
-                    
+
                     Message obj = new Message();
                     obj.txtTitle.setText("Aviso");
                     obj.txtContent.setText("Datos actualizados correctamente");
@@ -169,81 +166,67 @@ if (txtClave1.getText().isEmpty()) {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
                     Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "No se pueden editar los datos de los administradores, intente nuevamente");
-            playError();
-                    
+                    playError();
+
                 }
             });
-            
-        }
-        catch (JSONException e) {
+
+        } catch (JSONException e) {
             // Manejar la excepción JSONException aquí
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch(Exception e){
-           e.printStackTrace();
-        }
-        
+
     }
-    
+
     public MessageEditPersonas(Personas estudiante, Credenciales frmCredenciales) throws SQLException, IOException {
         initComponents();
         setOpaque(false);
-         cbTipoUsuario.setVisible(false);
+        cbTipoUsuario.setVisible(false);
         txtTitle.setBackground(new Color(0, 0, 0, 0));
         txtTitle.setOpaque(false);
         txtTitle.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h4.font");
-        
+
         this.frm = frmCredenciales;
-        
-        CompletableFuture<List<TiposPersonas>> seccionesFuture = 
-                TiposPersonasController.getTiposPersonasApiAsync();
-        
+
+        CompletableFuture<List<TiposPersonas>> seccionesFuture
+                = TiposPersonasController.getTiposPersonasApiAsync();
+
         secciones = seccionesFuture.join();
-        
-        
-        
+
         Date nacimiento = null;
-        try{
+        try {
             nacimiento = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(estudiante.getNacimientoPersona());
+        } catch (Exception e) {
+
         }
-        catch(Exception e){
-            
-        }
-        
-       
-         System.out.println("");
-        
+
+        System.out.println("");
+
         String tipoPersona = TiposPersonasController.getTipoPersonaAsync(estudiante.getIdTipoPersona()).join();
-        
+
         this.modelEstudiante = estudiante;
-        
-       
 
-        
-        
+        // Limpiar el ComboBox antes de agregar los nuevos elementos
+        cbTipoUsuario.removeAllItems();
 
-            // Limpiar el ComboBox antes de agregar los nuevos elementos
-            cbTipoUsuario.removeAllItems();
+        int cnt = 0;
+        int indx1 = 0;
 
-            int cnt = 0;
-            int indx1 = 0;
-            
-            
-            // Agregar los niveles de códigos conductuales al ComboBox
-            
-            
-            for(TiposPersonas grados : secciones){
-                if(grados.getTipoPersona() == tipoPersona){
-                    indx1 = cnt;
-                }
-                cnt++;
-                cbTipoUsuario.addItem(grados.getTipoPersona());
+        // Agregar los niveles de códigos conductuales al ComboBox
+        for (TiposPersonas grados : secciones) {
+            if (grados.getTipoPersona() == tipoPersona) {
+                indx1 = cnt;
             }
-            
-            cbTipoUsuario.setSelectedIndex(indx1);
-            
-          TxTelefono.setDocument(new PlainDocument() { // desde aca 
+            cnt++;
+            cbTipoUsuario.addItem(grados.getTipoPersona());
+        }
+
+        cbTipoUsuario.setSelectedIndex(indx1);
+
+        TxTelefono.setDocument(new PlainDocument() { // desde aca 
             @Override
             public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
                 if (str == null) {
@@ -253,17 +236,16 @@ if (txtClave1.getText().isEmpty()) {
                     if (!Character.isDigit(c) && !Character.isWhitespace(c) && c != '+') {
                         // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
 
-                        noti=true;
+                        noti = true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
-                    }
-                else{
-                      noti= false;
+                    } else {
+                        noti = false;
                     }
                 }
                 super.insertString(offset, str, attr);
             }
         });
-          txtNombres2.setDocument(new PlainDocument() { // desde aca 
+        txtNombres2.setDocument(new PlainDocument() { // desde aca 
             @Override
             public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
                 if (str == null) {
@@ -272,18 +254,17 @@ if (txtClave1.getText().isEmpty()) {
                 for (char c : str.toCharArray()) {
                     if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
                         // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
-                        noti=true;
-                        
+                        noti = true;
+
                         return; // Ignora el carácter si no es letra, número, espacio o punto
-                    }
-                else{
-                      noti = false;
+                    } else {
+                        noti = false;
                     }
                 }
                 super.insertString(offset, str, attr);
             }
         });
-              txtApellidos1.setDocument(new PlainDocument() { // desde aca 
+        txtApellidos1.setDocument(new PlainDocument() { // desde aca 
             @Override
             public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
                 if (str == null) {
@@ -292,18 +273,17 @@ if (txtClave1.getText().isEmpty()) {
                 for (char c : str.toCharArray()) {
                     if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
                         // Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números y letras");
-                        
-                        noti=true;  
+
+                        noti = true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
-                    }
-                else{
-                      noti=false;
+                    } else {
+                        noti = false;
                     }
                 }
                 super.insertString(offset, str, attr);
             }
         });
-                 txtCodigo1.setDocument(new PlainDocument() { // desde aca 
+        txtCodigo1.setDocument(new PlainDocument() { // desde aca 
             @Override
             public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
                 if (str == null) {
@@ -315,22 +295,20 @@ if (txtClave1.getText().isEmpty()) {
 
                         noti = true;
                         return; // Ignora el carácter si no es letra, número, espacio o punto
-                    }
-                else{
-                      noti=false;
+                    } else {
+                        noti = false;
                     }
                 }
                 super.insertString(offset, str, attr);
             }
         });
-          
-           txtNombres2.setText(estudiante.getNombrePersona());
+
+        txtNombres2.setText(estudiante.getNombrePersona());
         txtApellidos1.setText(estudiante.getApellidoPersona());
         txtCodigo1.setText(estudiante.getCodigo());
         dpNacimiento1.setDate(nacimiento);
         TxTelefono.setText(estudiante.getTelefonoPersona());
-          
-          
+
     }
 
     /**
@@ -683,23 +661,30 @@ if (txtClave1.getText().isEmpty()) {
         // TODO add your handling code here:
         rute = "";
         JFileChooser chooser = new JFileChooser();
-        
-FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","png", "jpeg");
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG", "jpg", "png", "jpeg");
         chooser.setFileFilter(filter);
-        
+
         int res = chooser.showOpenDialog(this);
-        
-        if(res == JFileChooser.APPROVE_OPTION){
+
+        if (res == JFileChooser.APPROVE_OPTION) {
             rute = chooser.getSelectedFile().getPath();
-            
+
             Image mImagen = new ImageIcon(rute).getImage();
             ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(lbImagen1.getWidth(), lbImagen1.getHeight(), Image.SCALE_SMOOTH));
             lbImagen1.setIcon(mIcono);
-            
+
         }
 
     }//GEN-LAST:event_btnImagenActionPerformed
 
+    
+     private void playCerrar() {
+        String filepath = "src/View/sounds/cerrar.wav";
+
+        PlayMusic(filepath);
+
+    }
     private void playValidacion() {
         String filepath = "src/View/sounds/validacion.wav";
 
@@ -713,28 +698,28 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
         PlayMusic(filepath);
 
     }
-    
+
     private static void PlayMusic(String location) {
         try {
             File musicPath = new File(location);
-            
-            if(musicPath.exists()){
+
+            if (musicPath.exists()) {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-            }else{
+            } else {
                 System.out.println("No se encuentra el archivo de sonido");
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-   
+
     }
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
 
-        
+
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -786,12 +771,12 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
         // TODO add your handling code here:
         rute = "";
         JFileChooser chooser = new JFileChooser();
-       FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","png", "jpeg");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG", "jpg", "png", "jpeg");
         chooser.setFileFilter(filter);
 
         int res = chooser.showOpenDialog(this);
 
-        if(res == JFileChooser.APPROVE_OPTION){
+        if (res == JFileChooser.APPROVE_OPTION) {
             rute = chooser.getSelectedFile().getPath();
 
             Image mImagen = new ImageIcon(rute).getImage();
@@ -805,7 +790,6 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
     private void btnAceptar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptar1MouseClicked
         // TODO add your handling code here:
 
-        
 
     }//GEN-LAST:event_btnAceptar1MouseClicked
 
@@ -813,25 +797,17 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
 
         if (txtNombres2.getText().isEmpty() || txtApellidos1.getText().isEmpty() || txtCodigo1.getText().isEmpty() || TxTelefono.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Los campos no puede estar vacío");
-        }  
-
-        else if(!Validaciones.checkName(txtNombres2.getText()) && !Validaciones.checkName(txtApellidos1.getText())){
+        } else if (!Validaciones.checkName(txtNombres2.getText()) && !Validaciones.checkName(txtApellidos1.getText())) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El nombre o apellido es invalido");
-        }
-
-        else if(!Validaciones.checkDateDown(dpNacimiento1.getDate().toInstant().atOffset(ZoneOffset.UTC))){
+        } else if (!Validaciones.checkDateDown(dpNacimiento1.getDate().toInstant().atOffset(ZoneOffset.UTC))) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "La fecha de nacimiento no es válida");
-        }
-        else if(!Validaciones.onlyInts(txtCodigo1.getText())){
+        } else if (!Validaciones.onlyInts(txtCodigo1.getText())) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El codigo solo debe tener números");
-        }
-        else if(!txtClave1.getText().isEmpty() && txtClave1.getText().length()<6){
+        } else if (!txtClave1.getText().isEmpty() && txtClave1.getText().length() < 6) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "La contraseña debe ser de al menos 6 caracteres");
-        }
-         else if(!Validaciones.isPhoneNumber(TxTelefono.getText())){
+        } else if (!Validaciones.isPhoneNumber(TxTelefono.getText())) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Ingresa tu número de teléfono en formato +503");
-        }       
-        else {
+        } else {
             try {
                 enviarDatosHaciaApi();
             } catch (IOException ex) {
@@ -866,12 +842,13 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
 
     private void btnCancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelar1MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnCancelar1MouseClicked
 
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
         // TODO add your handling code here:
         GlassPanePopup.closePopupLast();
+        playCerrar();
     }//GEN-LAST:event_btnCancelar1ActionPerformed
 
     private void TxTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxTelefonoActionPerformed
@@ -880,7 +857,7 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
 
     private void TxTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxTelefonoKeyReleased
         // TODO add your handling code here:
-        if(noti==true){
+        if (noti == true) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite números.");
             playValidacion();
         }
@@ -888,7 +865,7 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
 
     private void txtNombres2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombres2KeyReleased
         // TODO add your handling code here:
-        if(noti==true){
+        if (noti == true) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite letras.");
             playValidacion();
         }
@@ -896,7 +873,7 @@ FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG","jpg","
 
     private void txtApellidos1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidos1KeyReleased
         // TODO add your handling code here:
-        if(noti==true){
+        if (noti == true) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite letras.");
             playValidacion();
         }

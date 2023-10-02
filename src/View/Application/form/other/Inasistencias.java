@@ -31,8 +31,12 @@ import expoescritorio.Models.TiposCodigosConductuales;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.Timer;
@@ -336,6 +340,32 @@ public int ActualizarDatos(int id ){
 }
 
 
+private void playAbrir() {
+        String filepath = "src/View/sounds/abrir.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
+    
+
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         // TODO add your handling code here:
 
@@ -396,6 +426,7 @@ public int ActualizarDatos(int id ){
                 }
             });
             GlassPanePopup.showPopup(obj);
+            playAbrir();
 
         } else {
             Message obj = new Message();
@@ -460,6 +491,8 @@ int selectedRow = table1.getSelectedRow();
             }
         });
         GlassPanePopup.showPopup(obj);
+        
+        playAbrir();
         }
         else{
         Message obj = new Message();

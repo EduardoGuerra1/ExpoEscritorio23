@@ -21,8 +21,12 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.Timer;
@@ -182,6 +186,7 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         GlassPanePopup.closePopupLast();
+        playCerrar();
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
@@ -207,6 +212,45 @@ public class MessageEditCodigosDisciplinarios extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
+    
+    private void playCerrar() {
+        String filepath = "src/View/sounds/cerrar.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    private void playValidacion() {
+        String filepath = "src/View/sounds/validacion.wav";
+
+        PlayMusic(filepath);
+
+    }
+
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    //Metodo para reproducir sonidos
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();//Codigo para reproducir el clip de audio
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
     public void eventOK(ActionListener event) {
         btnAceptar.addActionListener(event);
     }

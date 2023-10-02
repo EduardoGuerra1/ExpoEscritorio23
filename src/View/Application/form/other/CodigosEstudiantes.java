@@ -18,7 +18,11 @@ import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.concurrent.CompletableFuture;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -66,11 +70,6 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         }
 
         String[] items = {"Estudiantes", "Docente", "Código"};
-        
-     
-        
-        
-       
 
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
@@ -102,7 +101,6 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             }
         });// ha
 
-       
     }
 
     public void deleteAllTableRows(JTable table) {
@@ -334,6 +332,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
                 }
             });
             GlassPanePopup.showPopup(obj);
+            playAbrir();
 
         } else {
             Message obj = new Message();
@@ -364,6 +363,34 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             ex.getMessage();
         }
     }
+    
+    
+    private void playAbrir() {
+        String filepath = "src/View/sounds/abrir.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
+    
+    
     private void buttons1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons1MouseClicked
         mostrarReporte();
     }//GEN-LAST:event_buttons1MouseClicked
@@ -397,24 +424,22 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRecargarMouseClicked
 
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
-           if (evt.getClickCount() == 2)
-        {
-        DetCod obj = new DetCod(this);
-        int index = table1.getSelectedRow();
-        TableModel model = table1.getModel();
-        String id = model.getValueAt(index, 0).toString();
-        String estudiante = model.getValueAt(index, 1).toString();
-        String Docente = model.getValueAt(index, 2).toString();
-        String Cod = model.getValueAt(index, 3).toString();
-        String Fecha = model.getValueAt(index, 4).toString();
-        
-        
-         obj.lbIdent.setText(id);
-         obj.lbEstudiante.setText(estudiante);
-         obj.lbDocente.setText(Docente);
-         obj.lbCod.setText(Cod);
-         obj.lbFecha.setText(Fecha);
-         GlassPanePopup.showPopup(obj);
+        if (evt.getClickCount() == 2) {
+            DetCod obj = new DetCod(this);
+            int index = table1.getSelectedRow();
+            TableModel model = table1.getModel();
+            String id = model.getValueAt(index, 0).toString();
+            String estudiante = model.getValueAt(index, 1).toString();
+            String Docente = model.getValueAt(index, 2).toString();
+            String Cod = model.getValueAt(index, 3).toString();
+            String Fecha = model.getValueAt(index, 4).toString();
+
+            obj.lbIdent.setText(id);
+            obj.lbEstudiante.setText(estudiante);
+            obj.lbDocente.setText(Docente);
+            obj.lbCod.setText(Cod);
+            obj.lbFecha.setText(Fecha);
+            GlassPanePopup.showPopup(obj);
         }
     }//GEN-LAST:event_table1MouseClicked
 

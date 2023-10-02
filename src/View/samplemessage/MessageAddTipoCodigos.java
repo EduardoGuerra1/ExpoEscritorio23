@@ -139,6 +139,7 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         GlassPanePopup.closePopupLast();
+        playCerrar();
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
@@ -155,6 +156,7 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
             } else {
                 enviarDatosHaciaApi();
                 GlassPanePopup.closePopupLast();
+                playCerrar();
                 Timer timer = new Timer(500, (ActionEvent e) -> {
                     TiposCodigos tc = new TiposCodigos();
                     System.out.println("se actualizaron los datos desde el mensaje");
@@ -177,6 +179,13 @@ public class MessageAddTipoCodigos extends javax.swing.JPanel {
 
     }
 
+    
+    private void playCerrar() {
+        String filepath = "src/View/sounds/cerrar.wav";
+
+        PlayMusic(filepath);
+
+    }
     private void playError() {
         String filepath = "src/View/sounds/error.wav";
 

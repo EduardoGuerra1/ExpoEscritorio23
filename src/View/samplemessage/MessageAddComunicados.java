@@ -200,6 +200,7 @@ public class MessageAddComunicados extends javax.swing.JPanel {
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         GlassPanePopup.closePopupLast();
+        playCerrar();
     }//GEN-LAST:event_btnCancelarMouseClicked
     private void playValidacion() {
         String filepath = "src/View/sounds/validacion.wav";
@@ -208,6 +209,13 @@ public class MessageAddComunicados extends javax.swing.JPanel {
 
     }
 
+    
+    private void playCerrar() {
+        String filepath = "src/View/sounds/cerrar.wav";
+
+        PlayMusic(filepath);
+
+    }
     private void playError() {
         String filepath = "src/View/sounds/error.wav";
 

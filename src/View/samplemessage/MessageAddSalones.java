@@ -126,6 +126,7 @@ public class MessageAddSalones extends javax.swing.JPanel {
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         GlassPanePopup.closePopupLast();
+        playCerrar();
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
@@ -156,6 +157,13 @@ public class MessageAddSalones extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtTipoCodigoKeyReleased
 
+    
+    private void playCerrar() {
+        String filepath = "src/View/sounds/cerrar.wav";
+
+        PlayMusic(filepath);
+
+    }
     private void playValidacion() {
         String filepath = "src/View/sounds/validacion.wav";
 

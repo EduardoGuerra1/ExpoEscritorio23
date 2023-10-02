@@ -425,6 +425,12 @@ public class MessageAddPersonas extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 
+    private void playCerrar() {
+        String filepath = "src/View/sounds/cerrar.wav";
+
+        PlayMusic(filepath);
+
+    }
     private void playValidacion() {
         String filepath = "src/View/sounds/validacion.wav";
 
@@ -484,8 +490,10 @@ public class MessageAddPersonas extends javax.swing.JPanel {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        playCerrar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
         // TODO add your handling code here:
         rute = "";
