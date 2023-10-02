@@ -26,8 +26,6 @@ import javax.swing.ImageIcon;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-import net.glxn.qrgen.QRCode;
-import net.glxn.qrgen.image.ImageType;
 import raven.toast.Notifications;
 
 public class RecuQR extends javax.swing.JPanel {
@@ -352,10 +350,6 @@ public class RecuQR extends javax.swing.JPanel {
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
 
-        txtTexto.setText(controller.generateRandomCode());
-        ByteArrayOutputStream out = QRCode.from(this.txtTexto.getText()).to(ImageType.PNG).stream();
-        ImageIcon imageIcon = new ImageIcon(out.toByteArray());
-        this.lblImagen.setIcon(imageIcon);
 
     }//GEN-LAST:event_btnEnviarMouseClicked
 
