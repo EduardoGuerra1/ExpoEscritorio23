@@ -12,10 +12,10 @@ public class ConexionSQL { // <- Editar por el nombre del archivo de la clase
     public static Connection getConexion(){
         
          //Cadena de conexión
-        String conexionUrl  = "jdbc:sqlserver://Expo2023.mssql.somee.com;" // <- Editar por su puerto de SQL
-                            + "databaseName=Expo2023;" // <- Editar por su base de datos
-                            + "user=Daniel0822_SQLLogin_1;"
-                            + "password=upb7jvougo;" 
+        String conexionUrl  = "jdbc:sqlserver://SAE2023.mssql.somee.com;" // <- Editar por su puerto de SQL
+                            + "databaseName=SAE2023;" // <- Editar por su base de datos
+                            + "user=Expo_SQLLogin_2;"
+                            + "password=u2agtmow35;" 
                             + "encrypt=true;trustServerCertificate=true";
         
         //Retornamos la conexion
