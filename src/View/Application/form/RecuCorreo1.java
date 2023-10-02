@@ -316,7 +316,7 @@ public class RecuCorreo1 extends javax.swing.JPanel {
             CompletableFuture<List<TiposPersonas>> encargadosFuture = getTiposPersonasApiAsync();
         } else {
             System.out.println(" no se que paso ");
-            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ocurrió un error, intente nuevamente");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Código incorrecto. Inténtalo de nuevo");
             playError();
         }
     }//GEN-LAST:event_btnRestablecerMouseClicked
