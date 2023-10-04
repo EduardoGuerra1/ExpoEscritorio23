@@ -37,7 +37,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/View/icon/png/carga (18).gif"/>
+          <Image iconType="3" name="/View/icon/png/carga (19).gif"/>
         </Property>
       </Properties>
     </Component>

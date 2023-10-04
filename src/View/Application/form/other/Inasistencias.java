@@ -70,7 +70,7 @@ public class Inasistencias extends javax.swing.JPanel {
         String bg = getBackground().toString();
         
        
-        if(bg.contains("r=49")){
+        if(bg.contains("r=24")){
             System.out.println("Modo oscuro");
         }else{
             System.out.println("Modo claro");

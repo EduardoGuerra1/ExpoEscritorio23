@@ -29,6 +29,8 @@ import raven.toast.Notifications;
  * @author gyaci
  */
 public class LoginForm extends javax.swing.JPanel {
+    
+    
 
     /*Declaración de variables de componentes y paneles*/
     private CardLayout cardLayout;
@@ -40,6 +42,9 @@ public class LoginForm extends javax.swing.JPanel {
         initComponents();
         
         //Panel
+        label1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font;");
+        
         circulo.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:50;"
                 + "background:lighten(@background,7%);");
@@ -90,7 +95,7 @@ public class LoginForm extends javax.swing.JPanel {
         btnIngresar = new View.SWING.boton();
         btnRecuperaciones = new View.SWING.boton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        label1 = new javax.swing.JLabel();
 
         btnLogin.setForeground(new java.awt.Color(102, 102, 102));
         btnLogin.setText("Inicio de Sesión");
@@ -145,8 +150,8 @@ public class LoginForm extends javax.swing.JPanel {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/SAE.png"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabel1.setText("Bienvenido a SAE");
+        label1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        label1.setText("Bienvenido a SAE");
 
         javax.swing.GroupLayout circuloLayout = new javax.swing.GroupLayout(circulo);
         circulo.setLayout(circuloLayout);
@@ -161,30 +166,27 @@ public class LoginForm extends javax.swing.JPanel {
             .addGroup(circuloLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(circuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(circuloLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(circuloLayout.createSequentialGroup()
-                        .addGroup(circuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 55, Short.MAX_VALUE))))
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 55, Short.MAX_VALUE))
+            .addGroup(circuloLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(label1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         circuloLayout.setVerticalGroup(
             circuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(circuloLayout.createSequentialGroup()
                 .addGroup(circuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(circuloLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, circuloLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(77, 77, 77)))
+                        .addGap(82, 82, 82)
+                        .addComponent(label1))
+                    .addGroup(circuloLayout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68)
                 .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -344,8 +346,8 @@ public class LoginForm extends javax.swing.JPanel {
     private View.BotonLogin.boton3 btnNosotros;
     private View.SWING.boton btnRecuperaciones;
     private javax.swing.JPanel circulo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel label1;
     private View.SWING.Contraseña txtContraseña;
     private View.SWING.textField txtCorreo;
     // End of variables declaration//GEN-END:variables
