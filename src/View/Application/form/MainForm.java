@@ -100,7 +100,7 @@ public class MainForm extends JLayeredPane {
                 Application.showForm(new View.Application.form.other.PantallaPrincipal());
             } else if (index == 1) {
                 if (subIndex == 1) {
-                    Application.showForm(new TiposCodigos());
+                    Application.showForm(new Avisos());
                 } else if (subIndex == 2) {
                     Application.showForm(new CodigosDisciplinarios());
                 } else if (subIndex == 3) {

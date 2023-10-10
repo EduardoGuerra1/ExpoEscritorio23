@@ -4,9 +4,15 @@
  */
 package View.Application.form.other;
 
+import View.menu.mode.ToolBarAccentColor;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.util.LoggingFacade;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.util.Collections;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
 
 /**
  *
@@ -44,19 +50,228 @@ public class Avisos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        buttons1 = new View.BotonesText.Buttons();
+        buttons2 = new View.BotonesText.Buttons();
+        buttons3 = new View.BotonesText.Buttons();
+        buttons4 = new View.BotonesText.Buttons();
+        buttons5 = new View.BotonesText.Buttons();
+        buttons6 = new View.BotonesText.Buttons();
+        buttons7 = new View.BotonesText.Buttons();
+
+        jRadioButton1.setBackground(new java.awt.Color(6, 156, 151));
+
+        jButton1.setBackground(new java.awt.Color(6, 156, 151));
+
+        buttons1.setBackground(new java.awt.Color(6, 156, 151));
+        buttons1.setMaximumSize(new java.awt.Dimension(25, 25));
+        buttons1.setMinimumSize(new java.awt.Dimension(25, 25));
+        buttons1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttons1MouseClicked(evt);
+            }
+        });
+
+        buttons2.setBackground(new java.awt.Color(6, 16, 156));
+        buttons2.setMaximumSize(new java.awt.Dimension(25, 25));
+        buttons2.setMinimumSize(new java.awt.Dimension(25, 25));
+        buttons2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttons2MouseClicked(evt);
+            }
+        });
+
+        buttons3.setBackground(new java.awt.Color(156, 6, 133));
+        buttons3.setMaximumSize(new java.awt.Dimension(25, 25));
+        buttons3.setMinimumSize(new java.awt.Dimension(25, 25));
+        buttons3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttons3MouseClicked(evt);
+            }
+        });
+
+        buttons4.setBackground(new java.awt.Color(247, 5, 70));
+        buttons4.setMaximumSize(new java.awt.Dimension(25, 25));
+        buttons4.setMinimumSize(new java.awt.Dimension(25, 25));
+        buttons4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttons4MouseClicked(evt);
+            }
+        });
+
+        buttons5.setBackground(new java.awt.Color(247, 82, 5));
+        buttons5.setMaximumSize(new java.awt.Dimension(25, 25));
+        buttons5.setMinimumSize(new java.awt.Dimension(25, 25));
+        buttons5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttons5MouseClicked(evt);
+            }
+        });
+
+        buttons6.setBackground(new java.awt.Color(255, 204, 0));
+        buttons6.setMaximumSize(new java.awt.Dimension(25, 25));
+        buttons6.setMinimumSize(new java.awt.Dimension(25, 25));
+        buttons6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttons6MouseClicked(evt);
+            }
+        });
+
+        buttons7.setBackground(new java.awt.Color(227, 152, 127));
+        buttons7.setMaximumSize(new java.awt.Dimension(25, 25));
+        buttons7.setMinimumSize(new java.awt.Dimension(25, 25));
+        buttons7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttons7MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(buttons1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttons2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttons3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttons4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttons5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttons6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttons7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttons7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttons6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttons5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttons4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttons3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttons2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttons1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jRadioButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(138, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(jRadioButton1)
+                        .addGap(91, 91, 91))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+     private final String[] accentColorKeys = {
+        "App.accent.default", "App.accent.blue", "App.accent.purple", "App.accent.red",
+        "App.accent.orange", "App.accent.yellow", "App.accent.green",};
+     
+     // Método para convertir un color en su representación hexadecimal
+    private String toHexCode(Color color) {
+        return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+    }
+     
+     private void colorAccentChanged(String colorKey) {
+       
+        Color color = UIManager.getColor(colorKey);
+
+        Class<? extends LookAndFeel> lafClass = UIManager.getLookAndFeel().getClass();
+        try {
+            FlatLaf.setGlobalExtraDefaults(Collections.singletonMap("@accentColor", toHexCode(color)));
+            FlatLaf.setup(lafClass.newInstance());
+            FlatLaf.updateUI();
+        } catch (InstantiationException | IllegalAccessException ex) {
+            LoggingFacade.INSTANCE.logSevere(null, ex);
+        }
+    }
+    
+    private void buttons1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons1MouseClicked
+        String key = accentColorKeys[0];
+         colorAccentChanged(key);
+    }//GEN-LAST:event_buttons1MouseClicked
+
+    private void buttons2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons2MouseClicked
+        // TODO add your handling code here:
+         String key = accentColorKeys[1];
+         colorAccentChanged(key);
+    }//GEN-LAST:event_buttons2MouseClicked
+
+    private void buttons3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons3MouseClicked
+        // TODO add your handling code here:
+        
+        String key = accentColorKeys[2];
+         colorAccentChanged(key);
+    }//GEN-LAST:event_buttons3MouseClicked
+
+    private void buttons4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons4MouseClicked
+        // TODO add your handling code here:
+        String key = accentColorKeys[3];
+         colorAccentChanged(key);
+    }//GEN-LAST:event_buttons4MouseClicked
+
+    private void buttons5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons5MouseClicked
+        // TODO add your handling code here:
+        String key = accentColorKeys[4];
+         colorAccentChanged(key);
+    }//GEN-LAST:event_buttons5MouseClicked
+
+    private void buttons6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons6MouseClicked
+        // TODO add your handling code here:
+        String key = accentColorKeys[5];
+         colorAccentChanged(key);
+    }//GEN-LAST:event_buttons6MouseClicked
+
+    private void buttons7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons7MouseClicked
+        // TODO add your handling code here:
+        String key = accentColorKeys[6];
+         colorAccentChanged(key);
+    }//GEN-LAST:event_buttons7MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.BotonesText.Buttons buttons1;
+    private View.BotonesText.Buttons buttons2;
+    private View.BotonesText.Buttons buttons3;
+    private View.BotonesText.Buttons buttons4;
+    private View.BotonesText.Buttons buttons5;
+    private View.BotonesText.Buttons buttons6;
+    private View.BotonesText.Buttons buttons7;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
     // End of variables declaration//GEN-END:variables
 }
