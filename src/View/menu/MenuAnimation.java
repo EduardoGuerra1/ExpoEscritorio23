@@ -1,5 +1,6 @@
 package View.menu;
 
+import View.Application.form.MainForm;
 import com.formdev.flatlaf.util.Animator;
 import java.util.HashMap;
 
@@ -8,6 +9,8 @@ public class MenuAnimation {
     // HashMap que almacena objetos MenuItem y objetos Animator
     private static final HashMap<MenuItem, Animator> hash = new HashMap<>();
 
+    private static final HashMap<Menu, Animator> hash1 = new HashMap<>();
+    
     // Método estático para animar un MenuItem (menú) con una transición de mostrar u ocultar
     public static void animate(MenuItem menu, boolean show) {
         // Verifica si ya existe una animación en curso para el mismo MenuItem y la detiene si es el caso
@@ -53,4 +56,6 @@ public class MenuAnimation {
         // Agrega el MenuItem y su animador correspondiente al HashMap
         hash.put(menu, animator);
     }
+    
+    
 }

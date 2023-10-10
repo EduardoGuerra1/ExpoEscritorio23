@@ -339,12 +339,29 @@ public class Ajustes extends javax.swing.JPanel {
     private void buttons1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons1MouseClicked
         String key = accentColorKeys[0];
         colorAccentChanged(key);
+        
+        buttons1.setText("✓");
+        buttons2.setText("");
+        buttons3.setText("");
+        buttons4.setText("");
+        buttons5.setText("");
+        buttons6.setText("");
+        buttons7.setText("");
+        
     }//GEN-LAST:event_buttons1MouseClicked
 
     private void buttons2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons2MouseClicked
         // TODO add your handling code here:
         String key = accentColorKeys[1];
         colorAccentChanged(key);
+        
+        buttons1.setText("");
+        buttons2.setText("✓");
+        buttons3.setText("");
+        buttons4.setText("");
+        buttons5.setText("");
+        buttons6.setText("");
+        buttons7.setText("");
     }//GEN-LAST:event_buttons2MouseClicked
 
     private void buttons3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons3MouseClicked
@@ -352,30 +369,72 @@ public class Ajustes extends javax.swing.JPanel {
 
         String key = accentColorKeys[2];
         colorAccentChanged(key);
+        
+        buttons1.setText("");
+        buttons2.setText("");
+        buttons3.setText("✓");
+        buttons4.setText("");
+        buttons5.setText("");
+        buttons6.setText("");
+        buttons7.setText("");
     }//GEN-LAST:event_buttons3MouseClicked
 
     private void buttons4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons4MouseClicked
         // TODO add your handling code here:
         String key = accentColorKeys[3];
         colorAccentChanged(key);
+        
+        
+        buttons1.setText("");
+        buttons2.setText("");
+        buttons3.setText("");
+        buttons4.setText("✓");
+        buttons5.setText("");
+        buttons6.setText("");
+        buttons7.setText("");
     }//GEN-LAST:event_buttons4MouseClicked
 
     private void buttons5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons5MouseClicked
         // TODO add your handling code here:
         String key = accentColorKeys[4];
         colorAccentChanged(key);
+        
+        buttons1.setText("");
+        buttons2.setText("");
+        buttons3.setText("");
+        buttons4.setText("");
+        buttons5.setText("✓");
+        buttons6.setText("");
+        buttons7.setText("");
     }//GEN-LAST:event_buttons5MouseClicked
 
     private void buttons6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons6MouseClicked
         // TODO add your handling code here:
         String key = accentColorKeys[5];
         colorAccentChanged(key);
+        
+        buttons1.setText("");
+        buttons2.setText("");
+        buttons3.setText("");
+        buttons4.setText("");
+        buttons5.setText("");
+        buttons6.setText("✓");
+        buttons7.setText("");
     }//GEN-LAST:event_buttons6MouseClicked
 
     private void buttons7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons7MouseClicked
         // TODO add your handling code here:
         String key = accentColorKeys[6];
         colorAccentChanged(key);
+        
+        
+        buttons1.setText("");
+        buttons2.setText("");
+        buttons3.setText("");
+        buttons4.setText("");
+        buttons5.setText("");
+        buttons6.setText("");
+        buttons7.setText("✓");
     }//GEN-LAST:event_buttons7MouseClicked
 
     private void btnDarkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDarkMouseClicked

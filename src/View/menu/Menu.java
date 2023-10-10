@@ -40,6 +40,24 @@ public class Menu extends JPanel {
     };
 
     // Definición de elementos del menú
+    private boolean menuShow;
+    private float animate;
+
+    public boolean isMenuShow() {
+        return menuShow;
+    }
+
+    public void setMenuShow(boolean menuShow) {
+        this.menuShow = menuShow;
+    }
+
+    public float getAnimate() {
+        return animate;
+    }
+
+    public void setAnimate(float animate) {
+        this.animate = animate;
+    }
     public boolean isMenuFull() {
         return menuFull;
     }
@@ -84,7 +102,7 @@ public class Menu extends JPanel {
         putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:20,5,5,5;"
                 + "background:$Menu.background;"
-                + "arc:50");
+                + "arc:10");
         header = new JLabel(headerName);
         header.setIcon(new ImageIcon(getClass().getResource("/View/icon/png/")));
         header.putClientProperty(FlatClientProperties.STYLE, ""
