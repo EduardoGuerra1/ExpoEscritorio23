@@ -35,7 +35,6 @@ public class Table extends JTable {
                 headerLabel.setFont(new Font("Segoe UI", Font.BOLD, FONT_SIZE + 2));
                 headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
                 headerLabel.setOpaque(true);
-                headerLabel.setBackground(HEADER_BACKGROUND_COLOR);
                 headerLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                 return headerLabel;
             }
@@ -67,7 +66,6 @@ public class Table extends JTable {
 
         // Configura el panel de la esquina superior derecha.
         JPanel cornerPanel = new JPanel();
-        cornerPanel.setBackground(Color.WHITE);
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, cornerPanel);
 
         // Elimina los bordes del JScrollPane.
@@ -95,7 +93,6 @@ public class Table extends JTable {
             // Configura la apariencia de la celda seleccionada.
             if (isSelected) {
                 label.setBackground(SELECTED_COLOR);
-                label.setForeground(Color.WHITE);
                 label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
                 label.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(SELECTED_COLOR, 3),
@@ -103,13 +100,8 @@ public class Table extends JTable {
                 ));
             } else {
                 // Configura la apariencia de las celdas no seleccionadas.
-                label.setBackground(row % 2 == 0 ? UNSELECTED_COLOR : Color.WHITE);
-                label.setForeground(Color.BLACK);
-                label.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
-                label.setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(Color.WHITE, BORDER_RADIUS),
-                        BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1)
-                ));
+
+                
             }
 
             label.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));

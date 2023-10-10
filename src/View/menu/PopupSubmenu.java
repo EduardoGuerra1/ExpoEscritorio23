@@ -47,7 +47,7 @@ public class PopupSubmenu extends JPanel{
                 + "background:$Menu.background;"
                 + "borderColor:$Menu.background;");
         putClientProperty(FlatClientProperties.STYLE, ""
-                + "border:0,3,0,3;"
+                + "border:0,4,0,4;"
                 + "background:$Menu.background;"
                 + "foreground:$Menu.lineColor");
         for (int i = 1; i < menus.length; i++) {

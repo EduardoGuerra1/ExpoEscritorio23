@@ -4,6 +4,7 @@
  */
 package View.Application.form.other;
 
+import View.BotonesText.Buttons;
 import View.ExampleTable.BordeRedondeado;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.Color;
@@ -19,6 +20,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import View.evento.CambioColor;
+import java.awt.Component;
+import javax.swing.JButton;
 
 public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
@@ -154,7 +158,20 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         panel1.setBackground(nuevoColor);
         panel1.repaint(); // Refresca la interfaz de usuario para mostrar el cambio
     }
+    
+     public CambioColor getEvent() {
+        return event;
+    }
 
+    public void setEvent(CambioColor event) {
+        this.event = event;
+    }
+
+    private CambioColor event;
+    
+    
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,6 +181,7 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttons1 = new View.BotonesText.Buttons();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -198,6 +216,9 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
         lbFe2 = new javax.swing.JLabel();
         lbFe1 = new javax.swing.JLabel();
         lbFe = new javax.swing.JLabel();
+        color1 = new View.BotonesText.Buttons();
+
+        buttons1.setText("buttons1");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -503,6 +524,15 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
 
         jPanel1.add(pFe, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 470, 290, 180));
 
+        color1.setBackground(new java.awt.Color(255, 51, 51));
+        color1.setForeground(new java.awt.Color(255, 0, 51));
+        color1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                color1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(color1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, 50, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -718,8 +748,15 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
                 + "background:lighten(@background,3%);");
     }//GEN-LAST:event_panel1MouseExited
 
+    private void color1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color1ActionPerformed
+        // TODO add your handling code here:
+        setSelected(color1);
+    }//GEN-LAST:event_color1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.BotonesText.Buttons buttons1;
+    private View.BotonesText.Buttons color1;
     private javax.swing.JLabel date;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -776,6 +813,21 @@ public class PantallaInicio extends javax.swing.JPanel implements Runnable {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    private void setSelected(Buttons cmd) {
+        event.colorChange(cmd.getBackground());
+        for (Component com : getComponents()) {
+            Buttons cm = (Buttons) com;
+    }
+        }
+         public void setSelectedColor(Color color) {
+        for (Component com : getComponents()) {
+            if (com.getBackground().getRGB() == color.getRGB()) {
+                setSelected((Buttons) com);
+                break;
             }
         }
     }

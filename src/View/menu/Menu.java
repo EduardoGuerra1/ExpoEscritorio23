@@ -35,6 +35,7 @@ public class Menu extends JPanel {
         {"Reserva de Salones", "Rango de Horas", "Creación de Salones", "Solicitudes de Reserva"},
         {"~Adicionales~"},
         {"Credenciales"},
+        {"Ajustes"},
         {"Cerrar Sesión"}
     };
 
@@ -114,8 +115,8 @@ public class Menu extends JPanel {
         toolBarAccentColor = new ToolBarAccentColor(this);
         add(header);
         add(scroll);
-        add(lightDarkMode);
-        add(toolBarAccentColor);
+        //add(lightDarkMode);
+        //add(toolBarAccentColor);
     }
 
     private void createMenu() {

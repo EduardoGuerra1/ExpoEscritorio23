@@ -4,12 +4,17 @@
  */
 package View.Application.form.other;
 
+import View.BotonesText.Buttons;
 import View.ExampleTable.BordeRedondeado;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 import javax.swing.SwingUtilities;
+import View.evento.CambioColor;
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JButton;
 
 /**
  *
@@ -582,7 +587,7 @@ public class PantallaPrincipal extends javax.swing.JPanel implements Runnable {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(lbTitulo2)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -600,7 +605,7 @@ public class PantallaPrincipal extends javax.swing.JPanel implements Runnable {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -611,7 +616,7 @@ public class PantallaPrincipal extends javax.swing.JPanel implements Runnable {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(74, 74, 74)))
                 .addComponent(lbTitulo2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -832,6 +837,15 @@ public class PantallaPrincipal extends javax.swing.JPanel implements Runnable {
                 + "background:lighten($Menu.background,7%);");
     }//GEN-LAST:event_pFeMouseExited
 
+    public CambioColor getEvent() {
+        return event;
+    }
+
+    public void setEvent(CambioColor event) {
+        this.event = event;
+    }
+
+    private CambioColor event;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel date;
@@ -899,4 +913,19 @@ public class PantallaPrincipal extends javax.swing.JPanel implements Runnable {
         }
     }
 
+    private void setSelected(Buttons cmd) {
+        event.colorChange(cmd.getBackground());
+        for (Component com : getComponents()) {
+            Buttons cm = (Buttons) com;
+    }
+        }
+        
+    public void setSelectedColor(Color color) {
+        for (Component com : getComponents()) {
+            if (com.getBackground().getRGB() == color.getRGB()) {
+                setSelected((Buttons) com);
+                break;
+           }
+        }
+    }
 }

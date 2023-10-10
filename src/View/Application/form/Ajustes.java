@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package View.Application.form.other;
+package View.Application.form;
 
 import View.aplicacion.Application;
 import View.menu.mode.ToolBarAccentColor;
@@ -22,14 +22,24 @@ import javax.swing.UIManager;
  *
  * @author gyaci
  */
-public class Avisos extends javax.swing.JPanel {
+public class Ajustes extends javax.swing.JPanel {
 
     /**
      * Creates new form Avisos
      */
-    public Avisos() {
+    public Ajustes() {
         initComponents();
 
+       lb.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h1.font");
+       lbColor1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h2.font");
+       lbColor2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h2.font");
+       lbColor3.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font");
+       lbColor4.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:$h3.font");
        
         String bg = getBackground().toString();
 
@@ -78,8 +88,8 @@ public class Avisos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        lbColor = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buttons1 = new View.BotonesText.Buttons();
         buttons2 = new View.BotonesText.Buttons();
@@ -91,12 +101,20 @@ public class Avisos extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         btnDark = new View.BotonesText.Buttons();
         btnLight = new View.BotonesText.Buttons();
+        lbColor1 = new javax.swing.JLabel();
+        lbColor3 = new javax.swing.JLabel();
+        lbColor2 = new javax.swing.JLabel();
+        lbColor4 = new javax.swing.JLabel();
+        lb = new javax.swing.JLabel();
 
-        jRadioButton1.setBackground(new java.awt.Color(6, 156, 151));
+        lbColor.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
+        lbColor.setForeground(new java.awt.Color(230, 230, 230));
+        lbColor.setText("Theme Color");
 
-        jButton1.setBackground(new java.awt.Color(6, 156, 151));
+        jLabel4.setForeground(new java.awt.Color(128, 128, 128));
+        jLabel4.setText("Select color to set theme system");
 
-        buttons1.setBackground(new java.awt.Color(6, 156, 151));
+        buttons1.setBackground(new java.awt.Color(176, 224, 230));
         buttons1.setMaximumSize(new java.awt.Dimension(25, 25));
         buttons1.setMinimumSize(new java.awt.Dimension(25, 25));
         buttons1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,7 +123,7 @@ public class Avisos extends javax.swing.JPanel {
             }
         });
 
-        buttons2.setBackground(new java.awt.Color(6, 16, 156));
+        buttons2.setBackground(new java.awt.Color(255, 218, 185));
         buttons2.setMaximumSize(new java.awt.Dimension(25, 25));
         buttons2.setMinimumSize(new java.awt.Dimension(25, 25));
         buttons2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -114,7 +132,7 @@ public class Avisos extends javax.swing.JPanel {
             }
         });
 
-        buttons3.setBackground(new java.awt.Color(156, 6, 133));
+        buttons3.setBackground(new java.awt.Color(192, 217, 217));
         buttons3.setMaximumSize(new java.awt.Dimension(25, 25));
         buttons3.setMinimumSize(new java.awt.Dimension(25, 25));
         buttons3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -123,7 +141,7 @@ public class Avisos extends javax.swing.JPanel {
             }
         });
 
-        buttons4.setBackground(new java.awt.Color(247, 5, 70));
+        buttons4.setBackground(new java.awt.Color(255, 160, 122));
         buttons4.setMaximumSize(new java.awt.Dimension(25, 25));
         buttons4.setMinimumSize(new java.awt.Dimension(25, 25));
         buttons4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -132,7 +150,7 @@ public class Avisos extends javax.swing.JPanel {
             }
         });
 
-        buttons5.setBackground(new java.awt.Color(247, 82, 5));
+        buttons5.setBackground(new java.awt.Color(50, 205, 50));
         buttons5.setMaximumSize(new java.awt.Dimension(25, 25));
         buttons5.setMinimumSize(new java.awt.Dimension(25, 25));
         buttons5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -140,8 +158,13 @@ public class Avisos extends javax.swing.JPanel {
                 buttons5MouseClicked(evt);
             }
         });
+        buttons5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttons5ActionPerformed(evt);
+            }
+        });
 
-        buttons6.setBackground(new java.awt.Color(255, 204, 0));
+        buttons6.setBackground(new java.awt.Color(255, 105, 180));
         buttons6.setMaximumSize(new java.awt.Dimension(25, 25));
         buttons6.setMinimumSize(new java.awt.Dimension(25, 25));
         buttons6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,7 +173,7 @@ public class Avisos extends javax.swing.JPanel {
             }
         });
 
-        buttons7.setBackground(new java.awt.Color(227, 152, 127));
+        buttons7.setBackground(new java.awt.Color(255, 165, 0));
         buttons7.setMaximumSize(new java.awt.Dimension(25, 25));
         buttons7.setMinimumSize(new java.awt.Dimension(25, 25));
         buttons7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -232,38 +255,65 @@ public class Avisos extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        lbColor1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lbColor1.setText("Modo Oscuro/Claro");
+
+        lbColor3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbColor3.setText("Seleccione el modo en que desea utilizar el sistema.");
+
+        lbColor2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lbColor2.setText("Selector de Tema");
+
+        lbColor4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbColor4.setText("Seleccione el color de selector que desea utilizar en modo claro.");
+
+        lb.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lb.setText("Modo Oscuro/Claro");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jRadioButton1)
-                .addGap(31, 31, 31)
+                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(305, Short.MAX_VALUE))
+                        .addComponent(lb)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbColor1)
+                            .addComponent(lbColor3)
+                            .addComponent(lbColor2)
+                            .addComponent(lbColor4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 365, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(64, 64, 64))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButton1)
-                        .addGap(45, 45, 45))))
+                        .addGap(155, 155, 155)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(lb)
+                        .addGap(71, 71, 71)
+                        .addComponent(lbColor1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbColor3)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbColor2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbColor4))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(366, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -362,6 +412,10 @@ public class Avisos extends javax.swing.JPanel {
                 + "background:null");
     }//GEN-LAST:event_btnLightMouseClicked
 
+    private void buttons5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttons5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttons5ActionPerformed
+
     private void changeMode(boolean dark) {
         if (FlatLaf.isLafDark() != dark) {
             if (dark) {
@@ -397,9 +451,14 @@ public class Avisos extends javax.swing.JPanel {
     private View.BotonesText.Buttons buttons5;
     private View.BotonesText.Buttons buttons6;
     private View.BotonesText.Buttons buttons7;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JLabel lb;
+    private javax.swing.JLabel lbColor;
+    private javax.swing.JLabel lbColor1;
+    private javax.swing.JLabel lbColor2;
+    private javax.swing.JLabel lbColor3;
+    private javax.swing.JLabel lbColor4;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import View.aplicacion.Application;
 import View.Application.form.other.Asistencias;
-import View.Application.form.other.Avisos;
 import View.Application.form.other.PantallaInicio;
 import View.Application.form.other.CodigosDisciplinarios;
 import View.Application.form.other.CodigosEstudiantes;
@@ -34,6 +33,7 @@ import View.Application.form.other.SalonesPantalla;
 import View.Application.form.other.SolicitudesPermisos;
 import View.Application.form.other.TiposCodigos;
 import View.Application.form.other.VisitasEnfermeria;
+import View.Application.form.Ajustes;
 import View.menu.Menu;
 import View.menu.MenuAction;
 import View.samplemessage.MessageEditCodigosDisciplinarios;
@@ -100,7 +100,7 @@ public class MainForm extends JLayeredPane {
                 Application.showForm(new View.Application.form.other.PantallaPrincipal());
             } else if (index == 1) {
                 if (subIndex == 1) {
-                    Application.showForm(new Avisos());
+                    Application.showForm(new Ajustes());
                 } else if (subIndex == 2) {
                     Application.showForm(new CodigosDisciplinarios());
                 } else if (subIndex == 3) {
@@ -132,6 +132,8 @@ public class MainForm extends JLayeredPane {
             } else if (index == 5) {
                 Application.showForm(new Credenciales());
             } else if (index == 6) {
+                Application.showForm(new Ajustes());
+            } else if (index == 7) {
                 Application.logout();
             } else {
                 action.cancel();

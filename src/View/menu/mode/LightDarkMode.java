@@ -127,7 +127,7 @@ public class LightDarkMode extends JPanel {
     private void addStyle(JButton button, boolean style) {
         if (style) {
             button.putClientProperty(FlatClientProperties.STYLE, ""
-                    + "arc:999;"
+                    + "arc:800;"
                     + "background:$Menu.lightdark.button.background;"
                     + "foreground:$Menu.foreground;"
                     + "focusWidth:0;"
