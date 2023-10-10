@@ -27,6 +27,8 @@ import org.json.JSONObject;
 import raven.toast.Notifications;
 import Services.Validaciones;
 import View.Application.form.other.VisitasEnfermeria;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
 import expoescritorio.Controller.PeriodosController;
 import expoescritorio.Controller.PersonasController;
 import static expoescritorio.Controller.PersonasController.getPersonasAsync;
@@ -34,6 +36,7 @@ import expoescritorio.Models.Periodos;
 //import  expoescritorio.Controller.PersonasController.getPersonasAsync;
 import expoescritorio.Models.Personas;
 import expoescritorio.Models.PersonasLo;
+import java.awt.EventQueue;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -61,7 +64,19 @@ public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
        VisitasEnfermeria frm = null;
        
     public MessageAddVisitaEnfermeria(VisitasEnfermeria frmVisitasEnfermeria) {
+String bg = getBackground().toString();
 
+        if (bg.contains("r=24")) {
+            System.out.println("Modo oscuro");
+        } else {
+            System.out.println("Modo claro");
+            EventQueue.invokeLater(() -> {
+                // FlatAnimatedLafChange.showSnapshot();
+                FlatIntelliJLaf.setup();
+                FlatLaf.updateUI();
+                //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+            });
+        }
         initComponents();
         
         cbPeriodo.setVisible(false);

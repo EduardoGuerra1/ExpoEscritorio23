@@ -52,7 +52,7 @@ public class MainForm extends JLayeredPane {
 
     private void init() {
         /*Configura el borde y el diseño del formulario*/
-        setBorder(new EmptyBorder(5, 5, 5, 5));
+        setBorder(new EmptyBorder(0,0, 0, 0));
         setLayout(new MainFormLayout());
         /*Inicializa el menú y el panel principal*/
         menu = new Menu();
