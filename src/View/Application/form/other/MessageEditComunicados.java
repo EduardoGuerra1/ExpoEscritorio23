@@ -114,7 +114,7 @@ public class MessageEditComunicados extends javax.swing.JPanel {
         btnImagen1 = new View.BotonesText.Buttons();
         jLabel13 = new javax.swing.JLabel();
         lbArchivo = new javax.swing.JLabel();
-        txtTitulo = new javax.swing.JTextField();
+        txtTitulo = new View.BotonesText.CustomTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -164,18 +164,7 @@ public class MessageEditComunicados extends javax.swing.JPanel {
 
         lbArchivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         add(lbArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 220, 190));
-
-        txtTitulo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTituloActionPerformed(evt);
-            }
-        });
-        txtTitulo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTituloKeyReleased(evt);
-            }
-        });
-        add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 260, 30));
+        add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 280, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
@@ -250,19 +239,6 @@ public class MessageEditComunicados extends javax.swing.JPanel {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTituloActionPerformed
-
-    private void txtTituloKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloKeyReleased
-        // TODO add your handling code here:
-        if(noti==true){
-            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El campo solo permite letras");
-            playValidacion();
-        }
-        
-    }//GEN-LAST:event_txtTituloKeyReleased
 
      
     
@@ -398,6 +374,6 @@ public class MessageEditComunicados extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lbArchivo;
     public javax.swing.JLabel txtTitle;
-    public javax.swing.JTextField txtTitulo;
+    public View.BotonesText.CustomTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }
