@@ -138,7 +138,7 @@ public class MenuItem extends JPanel {
                 + "selectedForeground:$Menu.button.selectedForeground;"
                 + "borderWidth:0;"
                 + "focusWidth:0;"
-                + "arc:10;"
+                + "arc:30;"
                 + "iconTextGap:10;"
                 + "margin:5,11,5,11");
         return button;

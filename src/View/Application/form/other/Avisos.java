@@ -5,8 +5,11 @@
 package View.Application.form.other;
 
 import View.menu.mode.ToolBarAccentColor;
+import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
 import com.formdev.flatlaf.util.LoggingFacade;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -25,20 +28,44 @@ public class Avisos extends javax.swing.JPanel {
      */
     public Avisos() {
         initComponents();
+
+       
         String bg = getBackground().toString();
+
+        if (bg.contains("r=24")) {
+            System.out.println("Modo oscuro");
+             btnDark.putClientProperty(FlatClientProperties.STYLE, ""
+                + "background:rgb(65, 75, 85);"
+                + "foreground:$Menu.foreground;");
+        
+      
+        
+
+        btnLight.putClientProperty(FlatClientProperties.STYLE, ""
+                + "background:$Menu.lightdark.button.background;"
+                + "foreground:$Menu.foreground;"
+                + "background:null");
+        } else {
+            System.out.println("Modo claro");
+            EventQueue.invokeLater(() -> {
+                // FlatAnimatedLafChange.showSnapshot();
+                FlatIntelliJLaf.setup();
+                FlatLaf.updateUI();
+                //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+            });
+            
+            btnLight.putClientProperty(FlatClientProperties.STYLE, ""
+                + "background:$Menu.lightdark.button.background;"
+                + "foreground:$Menu.foreground;");
+
+        btnDark.putClientProperty(FlatClientProperties.STYLE, ""
+                + "background:$Menu.lightdark.button.background;"
+                + "foreground:$Menu.foreground;"
+                + "background:null");
+        }
+        
         
        
-        if(bg.contains("r=24")){
-            System.out.println("Modo oscuro");
-        }else{
-            System.out.println("Modo claro");
-             EventQueue.invokeLater(() -> {
-                   // FlatAnimatedLafChange.showSnapshot();
-                    FlatIntelliJLaf.setup();
-                    FlatLaf.updateUI();
-                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
-                });
-        }
     }
 
     /**
@@ -60,6 +87,9 @@ public class Avisos extends javax.swing.JPanel {
         buttons5 = new View.BotonesText.Buttons();
         buttons6 = new View.BotonesText.Buttons();
         buttons7 = new View.BotonesText.Buttons();
+        jPanel2 = new javax.swing.JPanel();
+        btnDark = new View.BotonesText.Buttons();
+        btnLight = new View.BotonesText.Buttons();
 
         jRadioButton1.setBackground(new java.awt.Color(6, 156, 151));
 
@@ -164,49 +194,93 @@ public class Avisos extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnDark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/menu/mode/dark.png"))); // NOI18N
+        btnDark.setToolTipText("Modo Oscuro");
+        btnDark.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDarkMouseClicked(evt);
+            }
+        });
+
+        btnLight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/menu/mode/light.png"))); // NOI18N
+        btnLight.setToolTipText("Modo Claro");
+        btnLight.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLightMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnLight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDark, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDark, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
                         .addComponent(jRadioButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(242, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(230, 235, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(138, Short.MAX_VALUE)
+                .addGap(85, 85, 85)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(21, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jRadioButton1)
-                        .addGap(91, 91, 91))))
+                        .addGap(45, 45, 45))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-     private final String[] accentColorKeys = {
+    private final String[] accentColorKeys = {
         "App.accent.default", "App.accent.blue", "App.accent.purple", "App.accent.red",
         "App.accent.orange", "App.accent.yellow", "App.accent.green",};
-     
-     // Método para convertir un color en su representación hexadecimal
+
+    // Método para convertir un color en su representación hexadecimal
     private String toHexCode(Color color) {
         return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
     }
-     
-     private void colorAccentChanged(String colorKey) {
-       
+
+    private void colorAccentChanged(String colorKey) {
+
         Color color = UIManager.getColor(colorKey);
 
         Class<? extends LookAndFeel> lafClass = UIManager.getLookAndFeel().getClass();
@@ -218,51 +292,107 @@ public class Avisos extends javax.swing.JPanel {
             LoggingFacade.INSTANCE.logSevere(null, ex);
         }
     }
-    
+
     private void buttons1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons1MouseClicked
         String key = accentColorKeys[0];
-         colorAccentChanged(key);
+        colorAccentChanged(key);
     }//GEN-LAST:event_buttons1MouseClicked
 
     private void buttons2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons2MouseClicked
         // TODO add your handling code here:
-         String key = accentColorKeys[1];
-         colorAccentChanged(key);
+        String key = accentColorKeys[1];
+        colorAccentChanged(key);
     }//GEN-LAST:event_buttons2MouseClicked
 
     private void buttons3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons3MouseClicked
         // TODO add your handling code here:
-        
+
         String key = accentColorKeys[2];
-         colorAccentChanged(key);
+        colorAccentChanged(key);
     }//GEN-LAST:event_buttons3MouseClicked
 
     private void buttons4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons4MouseClicked
         // TODO add your handling code here:
         String key = accentColorKeys[3];
-         colorAccentChanged(key);
+        colorAccentChanged(key);
     }//GEN-LAST:event_buttons4MouseClicked
 
     private void buttons5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons5MouseClicked
         // TODO add your handling code here:
         String key = accentColorKeys[4];
-         colorAccentChanged(key);
+        colorAccentChanged(key);
     }//GEN-LAST:event_buttons5MouseClicked
 
     private void buttons6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons6MouseClicked
         // TODO add your handling code here:
         String key = accentColorKeys[5];
-         colorAccentChanged(key);
+        colorAccentChanged(key);
     }//GEN-LAST:event_buttons6MouseClicked
 
     private void buttons7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons7MouseClicked
         // TODO add your handling code here:
         String key = accentColorKeys[6];
-         colorAccentChanged(key);
+        colorAccentChanged(key);
     }//GEN-LAST:event_buttons7MouseClicked
+
+    private void btnDarkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDarkMouseClicked
+        changeMode(true);
+
+        btnDark.putClientProperty(FlatClientProperties.STYLE, ""
+                + "background:rgb(65, 75, 85);"
+                + "foreground:$Menu.foreground;");
+        
+      
+        
+
+        btnLight.putClientProperty(FlatClientProperties.STYLE, ""
+                + "background:$Menu.lightdark.button.background;"
+                + "foreground:$Menu.foreground;"
+                + "background:null");
+    }//GEN-LAST:event_btnDarkMouseClicked
+
+    private void btnLightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLightMouseClicked
+        // TODO add your handling code here:
+        changeMode(false);
+
+        btnLight.putClientProperty(FlatClientProperties.STYLE, ""
+                + "background:$Menu.lightdark.button.background;"
+                + "foreground:$Menu.foreground;");
+
+        btnDark.putClientProperty(FlatClientProperties.STYLE, ""
+                + "background:$Menu.lightdark.button.background;"
+                + "foreground:$Menu.foreground;"
+                + "background:null");
+    }//GEN-LAST:event_btnLightMouseClicked
+
+    private void changeMode(boolean dark) {
+        if (FlatLaf.isLafDark() != dark) {
+            if (dark) {
+                EventQueue.invokeLater(() -> {
+                    // Cambiar al modo oscuro con una animación
+                    FlatAnimatedLafChange.showSnapshot();
+                    FlatDarculaLaf.setup();
+                    FlatLaf.updateUI();
+
+                    FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+            } else {
+                EventQueue.invokeLater(() -> {
+                    // Cambiar al modo claro con una animación
+                    FlatAnimatedLafChange.showSnapshot();
+                    FlatIntelliJLaf.setup();
+                    FlatLaf.updateUI();
+
+                    FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.BotonesText.Buttons btnDark;
+    private View.BotonesText.Buttons btnLight;
     private View.BotonesText.Buttons buttons1;
     private View.BotonesText.Buttons buttons2;
     private View.BotonesText.Buttons buttons3;
@@ -272,6 +402,7 @@ public class Avisos extends javax.swing.JPanel {
     private View.BotonesText.Buttons buttons7;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
     // End of variables declaration//GEN-END:variables
 }

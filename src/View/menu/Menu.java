@@ -70,7 +70,7 @@ public class Menu extends JPanel {
     protected final boolean hideMenuTitleOnMinimum = true;
     protected final int menuTitleLeftInset = 5;
     protected final int menuTitleVgap = 5;
-    protected final int menuMaxWidth = 250;
+    protected final int menuMaxWidth = 240;
     protected final int menuMinWidth = 60;
     protected final int headerFullHgap = 5;
 
@@ -81,9 +81,9 @@ public class Menu extends JPanel {
     private void init() {
         setLayout(new MenuLayout());
         putClientProperty(FlatClientProperties.STYLE, ""
-                + "border:20,2,2,2;"
+                + "border:20,5,5,5;"
                 + "background:$Menu.background;"
-                + "arc:10");
+                + "arc:50");
         header = new JLabel(headerName);
         header.setIcon(new ImageIcon(getClass().getResource("/View/icon/png/")));
         header.putClientProperty(FlatClientProperties.STYLE, ""
