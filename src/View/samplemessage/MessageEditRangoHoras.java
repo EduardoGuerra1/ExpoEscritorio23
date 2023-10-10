@@ -8,8 +8,11 @@ import Services.Validaciones;
 import View.Application.form.other.RangoDeHoras;
 import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
 import expoescritorio.Controller.ControllerFull;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -41,6 +44,22 @@ public class MessageEditRangoHoras extends javax.swing.JPanel {
     public MessageEditRangoHoras() {
 
         initComponents();
+        
+        String bg = getBackground().toString();
+        
+       
+        if(bg.contains("r=24")){
+            System.out.println("Modo oscuro");
+        }else{
+            System.out.println("Modo claro");
+             EventQueue.invokeLater(() -> {
+                   // FlatAnimatedLafChange.showSnapshot();
+                    FlatIntelliJLaf.setup();
+                    FlatLaf.updateUI();
+                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+        }
+        
         setOpaque(false);
 
         txtTitle.setBackground(new Color(0, 0, 0, 0));

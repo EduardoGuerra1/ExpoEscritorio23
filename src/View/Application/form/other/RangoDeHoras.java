@@ -51,17 +51,18 @@ public class RangoDeHoras extends javax.swing.JPanel {
         initComponents();
 
         String bg = getBackground().toString();
-
-        if (bg.contains("r=24")) {
+        
+       
+        if(bg.contains("r=24")){
             System.out.println("Modo oscuro");
-        } else {
+        }else{
             System.out.println("Modo claro");
-            EventQueue.invokeLater(() -> {
-                // FlatAnimatedLafChange.showSnapshot();
-                FlatIntelliJLaf.setup();
-                FlatLaf.updateUI();
-                //FlatAnimatedLafChange.hideSnapshotWithAnimation();
-            });
+             EventQueue.invokeLater(() -> {
+                   // FlatAnimatedLafChange.showSnapshot();
+                    FlatIntelliJLaf.setup();
+                    FlatLaf.updateUI();
+                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
         }
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
@@ -269,6 +270,7 @@ public class RangoDeHoras extends javax.swing.JPanel {
             }
         });
         GlassPanePopup.showPopup(obj);
+        
         playAbrir();
     }//GEN-LAST:event_btnAddMouseClicked
 

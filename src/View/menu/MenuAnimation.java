@@ -19,7 +19,7 @@ public class MenuAnimation {
         menu.setMenuShow(show);
 
         // Crea un nuevo objeto Animator para gestionar la animación
-        Animator animator = new Animator(400, new Animator.TimingTarget() {
+        Animator animator = new Animator(1000, new Animator.TimingTarget() {
             // Implementa el método timingEvent para actualizar la animación en cada paso
             @Override
             public void timingEvent(float f) {

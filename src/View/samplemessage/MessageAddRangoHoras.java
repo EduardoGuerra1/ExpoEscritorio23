@@ -10,6 +10,7 @@ import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
 import expoescritorio.Controller.ControllerFull;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -48,17 +49,18 @@ public class MessageAddRangoHoras extends javax.swing.JPanel {
 
         
          String bg = getBackground().toString();
-
-        if (bg.contains("r=49")) {
+        
+       
+        if(bg.contains("r=24")){
             System.out.println("Modo oscuro");
-        } else {
+        }else{
             System.out.println("Modo claro");
-            EventQueue.invokeLater(() -> {
-                // FlatAnimatedLafChange.showSnapshot();
-                FlatIntelliJLaf.setup();
-                FlatLaf.updateUI();
-                //FlatAnimatedLafChange.hideSnapshotWithAnimation();
-            });
+             EventQueue.invokeLater(() -> {
+                   // FlatAnimatedLafChange.showSnapshot();
+                    FlatIntelliJLaf.setup();
+                    FlatLaf.updateUI();
+                    //FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
         }
         
         this.frm = frmRangoDeHoras;
