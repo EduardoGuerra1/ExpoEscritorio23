@@ -96,6 +96,8 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
 
         cargarDatos();
 
+
+
         table1.setDefaultEditor(Object.class, null);
         table1.getTableHeader().setReorderingAllowed(false);      
     }
@@ -116,6 +118,10 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
     }
 
     public void cargarDatos() {
+                int columnIndexToHide = 0; // Índice de la columna del ID que deseas ocultar
+table1.getColumnModel().getColumn(columnIndexToHide).setMinWidth(0);
+table1.getColumnModel().getColumn(columnIndexToHide).setMaxWidth(0);
+table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
         CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
         future.thenAccept(codigosConductuales -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
@@ -138,6 +144,7 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
                 });
             }
         });
+        
     }
 
     public void deleteAllTableRows(JTable table) {

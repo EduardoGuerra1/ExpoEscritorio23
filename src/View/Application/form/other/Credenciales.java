@@ -128,6 +128,10 @@ public class Credenciales extends javax.swing.JPanel {
     }
 
     public void cargarDatos() {
+                        int columnIndexToHide = 0; // Índice de la columna del ID que deseas ocultar
+table1.getColumnModel().getColumn(columnIndexToHide).setMinWidth(0);
+table1.getColumnModel().getColumn(columnIndexToHide).setMaxWidth(0);
+table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
         CompletableFuture<List<Personas>> future = PersonasController.getPersonasAsyncs();
         future.thenAccept(personas -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();

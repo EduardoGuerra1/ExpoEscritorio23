@@ -115,6 +115,10 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
     }
 
     public void cargarDatos() {
+                                int columnIndexToHide = 0; // Índice de la columna del ID que deseas ocultar
+table1.getColumnModel().getColumn(columnIndexToHide).setMinWidth(0);
+table1.getColumnModel().getColumn(columnIndexToHide).setMaxWidth(0);
+table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
         CompletableFuture<List<VisitasEnfermeriaString>> future = Funciones.GetVisitasEnfermeria();
         future.thenAccept(visitas -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();

@@ -304,6 +304,10 @@ public class Inasistencias extends javax.swing.JPanel {
     }
 
 public void cargarDatosAsync() {
+                    int columnIndexToHide = 0; // Índice de la columna del ID que deseas ocultar
+table1.getColumnModel().getColumn(columnIndexToHide).setMinWidth(0);
+table1.getColumnModel().getColumn(columnIndexToHide).setMaxWidth(0);
+table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
     GetInasisitencias()
         .thenAccept(encargadosList -> {
             DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
