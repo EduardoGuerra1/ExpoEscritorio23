@@ -33,7 +33,6 @@ public class Table extends JTable {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel headerLabel = new JLabel(value.toString());
                 headerLabel.setFont(new Font("Segoe UI", Font.BOLD, FONT_SIZE + 2));
-                headerLabel.setForeground(Color.WHITE);
                 headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
                 headerLabel.setOpaque(true);
                 headerLabel.setBackground(HEADER_BACKGROUND_COLOR);
