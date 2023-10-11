@@ -44,6 +44,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import org.json.JSONException;
 import org.json.JSONObject;
+import raven.toast.Notifications;
 
 /**
  *
@@ -72,6 +73,18 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
                 //FlatAnimatedLafChange.hideSnapshotWithAnimation();
             });
         }
+        
+        
+        btnReload.setEnabled(false);
+        
+        Timer timer = new Timer(1500, (ActionEvent e) -> { 
+                    
+                     btnReload.setEnabled(true);
+        });
+                timer.setRepeats(false);
+                timer.start();
+        
+        
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
 
@@ -353,11 +366,39 @@ public class CodigosDisciplinarios extends javax.swing.JPanel {
         }
    
     }
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    
     
     private void btnReloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReloadMouseClicked
         // TODO add your handling code here:
-        deleteAllTableRows(table1);
+        
+        if(btnReload.isEnabled() ==false){
+            
+           Notifications.getInstance().clearAll();
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Espere un momento");
+                playError();
+        }
+        else{
+            
+            deleteAllTableRows(table1);
         cargarDatos();
+        
+        btnReload.setEnabled(false);
+        
+        Timer timer = new Timer(1500, (ActionEvent e) -> { 
+                    
+                     btnReload.setEnabled(true);
+        });
+                timer.setRepeats(false);
+                timer.start();
+        
+        }
         
     }//GEN-LAST:event_btnReloadMouseClicked
 

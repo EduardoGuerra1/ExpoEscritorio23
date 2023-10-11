@@ -25,12 +25,14 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+import raven.toast.Notifications;
 
 /**
  *
@@ -58,6 +60,21 @@ public class Observaciones extends javax.swing.JPanel {
                     //FlatAnimatedLafChange.hideSnapshotWithAnimation();
                 });
         }
+        
+        
+        
+        btnReload.setEnabled(false);
+        
+        Timer timer = new Timer(1500, (ActionEvent e) -> { 
+                    
+                     btnReload.setEnabled(true);
+        });
+                timer.setRepeats(false);
+                timer.start();
+        
+        
+        
+        
         
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
@@ -368,11 +385,37 @@ playAbrir();
         }
     }//GEN-LAST:event_BuscadorKeyTyped
 
+    
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
     private void btnReloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReloadMouseClicked
         // TODO add your handling code here:
         
-        deleteAllTableRows(table1);
+        if(btnReload.isEnabled() ==false){
+            
+           Notifications.getInstance().clearAll();
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Espere un momento");
+                playError();
+        }
+        else{
+           deleteAllTableRows(table1);
         cargarDatosAsync();
+        
+        btnReload.setEnabled(false);
+        
+        Timer timer = new Timer(1500, (ActionEvent e) -> { 
+                    
+                     btnReload.setEnabled(true);
+        });
+                timer.setRepeats(false);
+                timer.start();
+        
+        }
     }//GEN-LAST:event_btnReloadMouseClicked
 
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked

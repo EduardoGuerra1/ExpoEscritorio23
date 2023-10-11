@@ -32,6 +32,7 @@ import javax.sound.sampled.Clip;
 import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import raven.toast.Notifications;
 
 /**
  *
@@ -62,6 +63,15 @@ public class Comunicados extends javax.swing.JPanel {
                     //FlatAnimatedLafChange.hideSnapshotWithAnimation();
                 });
         }
+        
+         btnReload.setEnabled(false);
+
+            Timer timer = new Timer(1500, (ActionEvent e) -> {
+
+                btnReload.setEnabled(true);
+            });
+            timer.setRepeats(false);
+            timer.start();
         lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
         
@@ -384,11 +394,37 @@ public class Comunicados extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditActionPerformed
 
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
     private void btnReloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReloadMouseClicked
         // TODO add your handling code here:
         
-         deleteAllTableRows(table1);
+         if(btnReload.isEnabled() ==false){
+            
+           Notifications.getInstance().clearAll();
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Espere un momento");
+                playError();
+        }
+        else{
+            deleteAllTableRows(table1);
         cargarDatos();
+        
+        btnReload.setEnabled(false);
+        
+        Timer timer = new Timer(1500, (ActionEvent e) -> { 
+                    
+                     btnReload.setEnabled(true);
+        });
+                timer.setRepeats(false);
+                timer.start();
+        
+        }
+        
     }//GEN-LAST:event_btnReloadMouseClicked
 
 

@@ -30,32 +30,29 @@ public class Ajustes extends javax.swing.JPanel {
     public Ajustes() {
         initComponents();
 
-       lb.putClientProperty(FlatClientProperties.STYLE, ""
+        lb.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h1.font");
-       lbColor1.putClientProperty(FlatClientProperties.STYLE, ""
+        lbColor1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h2.font");
-       lbColor2.putClientProperty(FlatClientProperties.STYLE, ""
+        lbColor2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h2.font");
-       lbColor3.putClientProperty(FlatClientProperties.STYLE, ""
+        lbColor3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font");
-       lbColor4.putClientProperty(FlatClientProperties.STYLE, ""
+        lbColor4.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font");
-       
+
         String bg = getBackground().toString();
 
         if (bg.contains("r=24")) {
             System.out.println("Modo oscuro");
-             btnDark.putClientProperty(FlatClientProperties.STYLE, ""
-                + "background:rgb(65, 75, 85);"
-                + "foreground:$Menu.foreground;");
-        
-      
-        
+            btnDark.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "background:rgb(65, 75, 85);"
+                    + "foreground:$Menu.foreground;");
 
-        btnLight.putClientProperty(FlatClientProperties.STYLE, ""
-                + "background:$Menu.lightdark.button.background;"
-                + "foreground:$Menu.foreground;"
-                + "background:null");
+            btnLight.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "background:$Menu.lightdark.button.background;"
+                    + "foreground:$Menu.foreground;"
+                    + "background:null");
         } else {
             System.out.println("Modo claro");
             EventQueue.invokeLater(() -> {
@@ -64,19 +61,21 @@ public class Ajustes extends javax.swing.JPanel {
                 FlatLaf.updateUI();
                 //FlatAnimatedLafChange.hideSnapshotWithAnimation();
             });
-            
-            btnLight.putClientProperty(FlatClientProperties.STYLE, ""
-                + "background:$Menu.lightdark.button.background;"
-                + "foreground:$Menu.foreground;");
 
-        btnDark.putClientProperty(FlatClientProperties.STYLE, ""
-                + "background:$Menu.lightdark.button.background;"
-                + "foreground:$Menu.foreground;"
-                + "background:null");
+            btnLight.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "background:$Menu.lightdark.button.background;"
+                    + "foreground:$Menu.foreground;");
+
+            btnDark.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "background:$Menu.lightdark.button.background;"
+                    + "foreground:$Menu.foreground;"
+                    + "background:null");
         }
+
         
         
-       
+        
+        
     }
 
     /**
@@ -339,7 +338,7 @@ public class Ajustes extends javax.swing.JPanel {
     private void buttons1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons1MouseClicked
         String key = accentColorKeys[0];
         colorAccentChanged(key);
-        
+
         buttons1.setText("✓");
         buttons2.setText("");
         buttons3.setText("");
@@ -347,14 +346,14 @@ public class Ajustes extends javax.swing.JPanel {
         buttons5.setText("");
         buttons6.setText("");
         buttons7.setText("");
-        
+
     }//GEN-LAST:event_buttons1MouseClicked
 
     private void buttons2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons2MouseClicked
         // TODO add your handling code here:
         String key = accentColorKeys[1];
         colorAccentChanged(key);
-        
+
         buttons1.setText("");
         buttons2.setText("✓");
         buttons3.setText("");
@@ -369,7 +368,7 @@ public class Ajustes extends javax.swing.JPanel {
 
         String key = accentColorKeys[2];
         colorAccentChanged(key);
-        
+
         buttons1.setText("");
         buttons2.setText("");
         buttons3.setText("✓");
@@ -383,8 +382,7 @@ public class Ajustes extends javax.swing.JPanel {
         // TODO add your handling code here:
         String key = accentColorKeys[3];
         colorAccentChanged(key);
-        
-        
+
         buttons1.setText("");
         buttons2.setText("");
         buttons3.setText("");
@@ -398,7 +396,7 @@ public class Ajustes extends javax.swing.JPanel {
         // TODO add your handling code here:
         String key = accentColorKeys[4];
         colorAccentChanged(key);
-        
+
         buttons1.setText("");
         buttons2.setText("");
         buttons3.setText("");
@@ -412,7 +410,7 @@ public class Ajustes extends javax.swing.JPanel {
         // TODO add your handling code here:
         String key = accentColorKeys[5];
         colorAccentChanged(key);
-        
+
         buttons1.setText("");
         buttons2.setText("");
         buttons3.setText("");
@@ -426,8 +424,7 @@ public class Ajustes extends javax.swing.JPanel {
         // TODO add your handling code here:
         String key = accentColorKeys[6];
         colorAccentChanged(key);
-        
-        
+
         buttons1.setText("");
         buttons2.setText("");
         buttons3.setText("");
@@ -443,9 +440,6 @@ public class Ajustes extends javax.swing.JPanel {
         btnDark.putClientProperty(FlatClientProperties.STYLE, ""
                 + "background:rgb(65, 75, 85);"
                 + "foreground:$Menu.foreground;");
-        
-      
-        
 
         btnLight.putClientProperty(FlatClientProperties.STYLE, ""
                 + "background:$Menu.lightdark.button.background;"

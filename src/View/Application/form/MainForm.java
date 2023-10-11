@@ -99,18 +99,27 @@ public class MainForm extends JLayeredPane {
             if (index == 0) {
                 Application.showForm(new View.Application.form.other.PantallaPrincipal());
             } else if (index == 1) {
-                if (subIndex == 1) {
-                    Application.showForm(new Ajustes());
-                } else if (subIndex == 2) {
+                if (subIndex == 1){
                     Application.showForm(new CodigosDisciplinarios());
-                } else if (subIndex == 3) {
+                 //   Application.showForm(new Ajustes());
+                
+                } else if (subIndex == 2) {
+                    
+                    
                     Application.showForm(new CodigosEstudiantes());
+                } else if (subIndex == 3) {
+                    
+                    
+                     Application.showForm(new Observaciones());
                 } else if (subIndex == 4) {
-                    Application.showForm(new Observaciones());
-                } else if (subIndex == 5) {
+                   
+                    
                     Application.showForm(new LlegadasTarde());
-                } else if (subIndex == 6) {
+                } else if (subIndex == 5) {
+                    
                     Application.showForm(new Inasistencias());
+                } else if (subIndex == 6) {
+                    
                 } else {
                     action.cancel();
                 }

@@ -244,7 +244,7 @@ public class LoginForm extends javax.swing.JPanel {
         }
         else if (!valida.checkEmail(this.txtCorreo.getText()) ) {
                 //Muestra la notificacion y el sonido de error
-                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Tiene que ser un correo");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Ingrese una dirección de correo válida");
                 playError();
             }
         else{
@@ -261,7 +261,7 @@ public class LoginForm extends javax.swing.JPanel {
                     /*Mostrar mensaje de acceso denegado si no es administrador*/
                     Message obj = new Message();
                     obj.txtTitle.setText("Aviso");
-                    obj.txtContent.setText("Acceso denegado, no es administrador.");
+                    obj.txtContent.setText("Acceso denegado, usted no es un administrador.");
                     obj.eventOK(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {

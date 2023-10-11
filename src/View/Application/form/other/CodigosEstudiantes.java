@@ -27,6 +27,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -40,6 +41,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import raven.toast.Notifications;
 
 /**
  *
@@ -69,6 +71,15 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             });
         }
 
+         btnRecargar.setEnabled(false);
+
+            Timer timer = new Timer(1500, (ActionEvent e) -> {
+
+                btnRecargar.setEnabled(true);
+            });
+            timer.setRepeats(false);
+            timer.start();
+        
         String[] items = {"Estudiantes", "Docente", "Código"};
 
         lb.putClientProperty(FlatClientProperties.STYLE, ""
@@ -363,34 +374,33 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             ex.getMessage();
         }
     }
-    
-    
+
     private void playAbrir() {
         String filepath = "src/View/sounds/abrir.wav";
 
         PlayMusic(filepath);
 
     }
-    
+
     private static void PlayMusic(String location) {
         try {
             File musicPath = new File(location);
-            
-            if(musicPath.exists()){
+
+            if (musicPath.exists()) {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-            }else{
+            } else {
                 System.out.println("No se encuentra el archivo de sonido");
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-   
+
     }
-    
-    
+
+
     private void buttons1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons1MouseClicked
         mostrarReporte();
     }//GEN-LAST:event_buttons1MouseClicked
@@ -417,10 +427,37 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         } // TODO add your handling code here:
     }//GEN-LAST:event_BuscadorKeyTyped
 
+    private void playError() {
+        String filepath = "src/View/sounds/error.wav";
+
+        PlayMusic(filepath);
+
+    }
+    
+    
     private void btnRecargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecargarMouseClicked
         // TODO add your handling code here:
-        deleteAllTableRows(table1);
-        cargarDatosAsync();
+
+        if (btnRecargar.isEnabled() == false) {
+
+            Notifications.getInstance().clearAll();
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Espere un momento");
+            playError();
+        } else {
+            deleteAllTableRows(table1);
+            cargarDatosAsync();
+
+            btnRecargar.setEnabled(false);
+
+            Timer timer = new Timer(1500, (ActionEvent e) -> {
+
+                btnRecargar.setEnabled(true);
+            });
+            timer.setRepeats(false);
+            timer.start();
+
+        }
+
     }//GEN-LAST:event_btnRecargarMouseClicked
 
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
