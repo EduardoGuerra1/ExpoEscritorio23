@@ -69,8 +69,8 @@ import javax.swing.text.PlainDocument;
  * @author educs
  */
 public class MessageAddComunicados extends javax.swing.JPanel {
+    private boolean procesoEnCurso = false;
 
-    List<GradosView> grados = new ArrayList<GradosView>();
 
     String rute = "";
     Comunicados frm = null;
@@ -87,7 +87,7 @@ public class MessageAddComunicados extends javax.swing.JPanel {
                 + "font:$h4.font");
         // Obtener los datos de la API y cargarlos en el ComboBox
 
-        grados = Funciones.GetGrados().join();
+
 
         this.frm = frmComunicados;
 
@@ -245,13 +245,18 @@ public class MessageAddComunicados extends javax.swing.JPanel {
         }
         else {
             GlassPanePopup.closePopupLast();
+            btnAceptar.setEnabled(false);
             enviarDatosHaciaApi();
+       
+Timer timer = new Timer(500, (ActionEvent e) -> {
+    if (!procesoEnCurso) {
+        Comunicados cd = new Comunicados();
+        cd.cargarDatos();
+        //  cd.deleteAllTableRows(cd.table1);
+             btnAceptar.setEnabled(true);
+    }
+});
 
-            Timer timer = new Timer(500, (ActionEvent e) -> {
-                CodigosDisciplinarios cd = new CodigosDisciplinarios();
-                cd.cargarDatos();
-                //  cd.deleteAllTableRows(cd.table1);
-            });
             timer.setRepeats(false);
             timer.start();
 
@@ -304,6 +309,12 @@ public class MessageAddComunicados extends javax.swing.JPanel {
     }
 
     private void enviarDatosHaciaApi() {
+            if (procesoEnCurso) {
+                System.out.println("Le di dos veces xd ");
+        return;
+    }
+
+    procesoEnCurso = true;
         try {
             JSONObject jsonData = new JSONObject();
 
@@ -362,8 +373,10 @@ public class MessageAddComunicados extends javax.swing.JPanel {
                         }
                     });
                     GlassPanePopup.showPopup(obj);
+                      procesoEnCurso = false;
 
                 } else {
+                      procesoEnCurso = false;
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
                 }
@@ -372,6 +385,7 @@ public class MessageAddComunicados extends javax.swing.JPanel {
         } catch (Exception e) {
             // Manejar la excepción JSONException aquí
             e.printStackTrace();
+              procesoEnCurso = false;
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
         }
     }

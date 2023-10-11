@@ -38,7 +38,7 @@ import raven.toast.Notifications;
  * @author educs
  */
 public class MessageAddRangoHoras extends javax.swing.JPanel {
-
+ private boolean procesoEnCurso = false;
     private Boolean noti;
     RangoDeHoras frm = null;
 
@@ -188,15 +188,21 @@ public class MessageAddRangoHoras extends javax.swing.JPanel {
                     Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Titulo Es Muy Largo");
                     playError();
                 } else {
+                        btnAceptar.setEnabled(false);
                     enviarDatosHaciaApi();
                     GlassPanePopup.closePopupLast();
-                    Timer timer = new Timer(500, (ActionEvent e) -> {
+                   Timer timer = new Timer(500, (ActionEvent e) -> {
+                    if (!procesoEnCurso) {
                         RangoDeHoras tc = new RangoDeHoras();
                         tc.cargarDatosAsync();
                         tc.deleteAllTableRows(tc.table1);
+                        btnAceptar.setEnabled(true);
+                    }
                     });
                     timer.setRepeats(false);
                     timer.start();
+                   
+                  
                 }
             }
         } else {
@@ -264,7 +270,11 @@ public class MessageAddRangoHoras extends javax.swing.JPanel {
     }
 
     private void enviarDatosHaciaApi() {
-
+            if (procesoEnCurso) {
+                System.out.println("Le di dos veces xd ");
+        return;
+    }
+             procesoEnCurso = true;
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
         String codigoConductual = txtTipoCodigo.getText();
         String selectedInicio = Inicio.getSelectedTime();
@@ -307,14 +317,17 @@ public class MessageAddRangoHoras extends javax.swing.JPanel {
                         }
                     });
                     GlassPanePopup.showPopup(obj);
+                    procesoEnCurso = false;
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
+                    procesoEnCurso = false;
                 }
             });
         } catch (JSONException e) {
             // Manejar la excepción JSONException aquí
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+            procesoEnCurso = false;
         }
     }
 

@@ -34,7 +34,7 @@ import raven.toast.Notifications;
  * @author educs
  */
 public class MessageAddSalones extends javax.swing.JPanel {
-
+ private boolean procesoEnCurso = false;
     private Boolean noti;
 
     SalonesPantalla frm = null;
@@ -140,7 +140,9 @@ public class MessageAddSalones extends javax.swing.JPanel {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
             } else {
+                  btnAceptar.setEnabled(false);
                 enviarDatosHaciaApi();
+                 btnAceptar.setEnabled(true);
 
             }
         }
@@ -201,7 +203,11 @@ public class MessageAddSalones extends javax.swing.JPanel {
     }
 
     private void enviarDatosHaciaApi() {
-
+            if (procesoEnCurso) {
+                System.out.println("Le di dos veces xd ");
+        return;
+    }
+             procesoEnCurso = true;
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
         String codigoConductual = txtTipoCodigo.getText();
 
@@ -241,14 +247,17 @@ public class MessageAddSalones extends javax.swing.JPanel {
                         }
                     });
                     GlassPanePopup.showPopup(obj);
+                    procesoEnCurso = false;
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
+                    procesoEnCurso = false;
                 }
             });
         } catch (JSONException e) {
             // Manejar la excepción JSONException aquí
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+            procesoEnCurso = false;
         }
     }
 

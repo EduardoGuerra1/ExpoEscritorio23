@@ -64,6 +64,7 @@ import raven.toast.Notifications;
  * @author educs
  */
 public class ReservacionesSalones extends javax.swing.JPanel {
+         private boolean procesoEnCurso = false;
  private TableRowSorter<DefaultTableModel> rowSorter;
     /**
      * Creates new form TiposCodigos
@@ -321,6 +322,7 @@ public void cargarDatosAsync() {
 }
 
 public int ActualizarDatos(int id ){
+    procesoEnCurso = true;
  try {
             JSONObject jsonData = new JSONObject();
             jsonData.put("idReservacionSalon", id);
@@ -335,16 +337,18 @@ public int ActualizarDatos(int id ){
                     // La solicitud PUT fue exitosa
                     System.out.println("Datos actualizados correctamente en la API");
                     
-                   
+                    procesoEnCurso = false;
                 } else {
                     // La solicitud PUT falló
                     System.out.println("Error al actualizar los datos en la API");
+                     procesoEnCurso = false;
                 }
             });
             return 1; 
         } catch (JSONException e) {
            
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+             procesoEnCurso = false;
             return 0;
         }
 }
@@ -377,7 +381,7 @@ private void playAbrir() {
     
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        // TODO add your handling code here:
+       // TODO add your handling code here:
 
         int selectedRow = table1.getSelectedRow();
         
@@ -394,6 +398,8 @@ private void playAbrir() {
             obj.eventOK(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
+                if (!procesoEnCurso) {
+                procesoEnCurso = true; 
 
                     String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/ReservacionesSalones/delete";
                     // Código para eliminar el registro de la API
@@ -416,6 +422,8 @@ private void playAbrir() {
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                                                        procesoEnCurso = false; 
+
                         } else {
                             // Ocurrió un error al eliminar el registro
                             Message obj = new Message();
@@ -429,10 +437,13 @@ private void playAbrir() {
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                                                        procesoEnCurso = false; 
+
                         }
                     });
 
                     GlassPanePopup.closePopupLast();
+                    }else{System.out.println("Le dio DOs veces xd");}
                 }
             });
             GlassPanePopup.showPopup(obj);
@@ -454,7 +465,7 @@ playAbrir();
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnEdit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEdit1MouseClicked
-      int selectedRow = table1.getSelectedRow();
+       int selectedRow = table1.getSelectedRow();
     if (selectedRow != -1) {
         Object id = table1.getValueAt(selectedRow, 0);
         Object Estado = table1.getValueAt(selectedRow, 6);
@@ -467,22 +478,26 @@ playAbrir();
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                if(!procesoEnCurso){
                 int updateResult = ActualizarDatos((int) id);
                 GlassPanePopup.closePopupLast();
-                if (updateResult == 1) {                
+                if (updateResult == 1) { 
+                    procesoEnCurso = true; 
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
                             obj.txtContent.setText("Reservaciom Actualizada exitosamente");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
-
+                                     if(!procesoEnCurso){
                                     cargarDatosAsync();
                                     deleteAllTableRows(table1);
                                     GlassPanePopup.closePopupLast();
+                                     }
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                            procesoEnCurso = false; 
                 } else {
                     // Error al actualizar
                     Message errorMessage = new Message();
@@ -496,7 +511,11 @@ playAbrir();
                         }
                     });
                     GlassPanePopup.showPopup(errorMessage);
+                    
                 }
+                }
+                else {
+                    System.out.println("Dio DOble click");}
             }
         });
         GlassPanePopup.showPopup(obj);

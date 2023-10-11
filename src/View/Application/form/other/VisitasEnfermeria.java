@@ -47,7 +47,7 @@ import raven.toast.Notifications;
  * @author educs
  */
 public class VisitasEnfermeria extends javax.swing.JPanel {
-
+  private boolean procesoEnCurso = false;
     private TableRowSorter<DefaultTableModel> rowSorter;
 
     /**
@@ -338,7 +338,7 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        // TODO add your handling code here:
+      // TODO add your handling code here:
 
         int selectedRow = table1.getSelectedRow();
 
@@ -353,6 +353,8 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
             obj.eventOK(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
+                                                    if (!procesoEnCurso) {
+                procesoEnCurso = true; 
 
                     String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/VisitasEnfermeria/delete";
                     // Código para eliminar el registro de la API
@@ -374,6 +376,7 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                            procesoEnCurso = false; 
                         } else {
                             // Ocurrió un error al eliminar el registro
                             Message obj = new Message();
@@ -387,10 +390,14 @@ public class VisitasEnfermeria extends javax.swing.JPanel {
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                            procesoEnCurso = false; 
                         }
                     });
 
                     GlassPanePopup.closePopupLast();
+                }
+                                else{System.out.println("Le dio dos veces ");}
+                
                 }
             });
             GlassPanePopup.showPopup(obj);

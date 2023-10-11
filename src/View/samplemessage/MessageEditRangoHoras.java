@@ -37,7 +37,7 @@ import raven.toast.Notifications;
  * @author educs
  */
 public class MessageEditRangoHoras extends javax.swing.JPanel {
-
+    private boolean procesoEnCurso = false;
     public int id;
     private Boolean noti;
 
@@ -225,11 +225,15 @@ public class MessageEditRangoHoras extends javax.swing.JPanel {
                     Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                     playError();
                 } else {
+                     btnAceptar.setEnabled(false);
                     actualizarDatosHaciaApi();
                     Timer timer = new Timer(500, (ActionEvent e) -> {
+                     if (!procesoEnCurso) {
                         RangoDeHoras tc = new RangoDeHoras();
                         tc.cargarDatosAsync();
                         tc.deleteAllTableRows(tc.table1);
+                         btnAceptar.setEnabled(true);
+                     }
                     });
                     timer.setRepeats(false);
                     timer.start();
@@ -259,6 +263,12 @@ public class MessageEditRangoHoras extends javax.swing.JPanel {
     }
 
     public void actualizarDatosHaciaApi() {
+                    if (procesoEnCurso) {
+                System.out.println("Le di dos veces xd ");
+        return;
+    }
+
+    procesoEnCurso = true;
         String codigoSalon = txtTipoCodigo.getText();
         String selectedInicio = Inicio.getSelectedTime();
         String selectedFinal = Final.getSelectedTime();
@@ -295,14 +305,17 @@ public class MessageEditRangoHoras extends javax.swing.JPanel {
                     });
                     GlassPanePopup.showPopup(obj);
                     // Realizar las acciones necesarias después de la actualización, si es necesario
+                     procesoEnCurso = false;
                 } else {
                     // La solicitud PUT falló
                     System.out.println("Error al actualizar los datos en la API");
+                     procesoEnCurso = false;
                 }
             });
         } catch (JSONException e) {
             // Manejar la excepción JSONException aquí
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+             procesoEnCurso = false;
         }
     }
 

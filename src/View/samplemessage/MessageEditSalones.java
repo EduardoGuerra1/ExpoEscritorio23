@@ -34,7 +34,7 @@ import raven.toast.Notifications;
  * @author educs
  */
 public class MessageEditSalones extends javax.swing.JPanel {
-
+    private boolean procesoEnCurso = false;
     public int id;
     private Boolean noti;
     SalonesPantalla frm = null;
@@ -182,11 +182,15 @@ public class MessageEditSalones extends javax.swing.JPanel {
                 playError();
             }
             else{
+                btnAceptar.setEnabled(false);
             actualizarDatosHaciaApi();
-            Timer timer = new Timer(500, (ActionEvent e) -> {
+              Timer timer = new Timer(500, (ActionEvent e) -> {
+               if (!procesoEnCurso) {
                 SalonesPantalla tc = new SalonesPantalla();
                 tc.cargarDatosAsync();
                 tc.deleteAllTableRows(tc.table1);
+                 btnAceptar.setEnabled(true);
+             }
             });
             timer.setRepeats(false);
             timer.start();
@@ -210,6 +214,12 @@ public class MessageEditSalones extends javax.swing.JPanel {
     }
 
     public void actualizarDatosHaciaApi() {
+                            if (procesoEnCurso) {
+                System.out.println("Le di dos veces xd ");
+        return;
+    }
+
+    procesoEnCurso = true;
         String codigoSalon = txtTipoCodigo.getText();
 
         try {
@@ -250,15 +260,18 @@ public class MessageEditSalones extends javax.swing.JPanel {
                         }
                     });
                     GlassPanePopup.showPopup(obj);
+                    procesoEnCurso = false;
                     // Realizar las acciones necesarias después de la actualización, si es necesario
                 } else {
                     // La solicitud PUT falló
                     System.out.println("Error al actualizar los datos en la API");
+                    procesoEnCurso = false;
                 }
             });
         } catch (JSONException e) {
             // Manejar la excepción JSONException aquí
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+            procesoEnCurso = false;
         }
     }
 

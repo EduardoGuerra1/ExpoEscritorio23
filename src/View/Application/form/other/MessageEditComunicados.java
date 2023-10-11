@@ -45,7 +45,7 @@ import javax.swing.text.PlainDocument;
  * @author educs
  */
 public class MessageEditComunicados extends javax.swing.JPanel {
-
+    private boolean procesoEnCurso = false;
     List<GradosView> grados = new ArrayList<GradosView>();
     public int id ; 
     String rute = "";
@@ -184,14 +184,16 @@ public class MessageEditComunicados extends javax.swing.JPanel {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El Titulo es muy grande");
             playValidacion();
         }else {
-            
+            btnAceptar.setEnabled(false);
             enviarDatosHaciaApi();
             Timer timer = new Timer(500, (ActionEvent e) -> {
+           if (!procesoEnCurso) {
                 Comunicados cd = new Comunicados();
                 cd.cargarDatos();
                 cd.deleteAllTableRows(cd.table1);
                     boolean pC = panelClosing() == true;
-                    
+                    btnAceptar.setEnabled(true);
+           }      
             });
             timer.setRepeats(false);
             timer.start();
@@ -287,6 +289,11 @@ public class MessageEditComunicados extends javax.swing.JPanel {
     }
 
     private void enviarDatosHaciaApi() {
+                    if (procesoEnCurso) {
+                System.out.println("Le di dos veces xd ");
+        return;
+    }
+             procesoEnCurso = true;
         try{
             JSONObject jsonData = new JSONObject();
             
@@ -299,6 +306,7 @@ public class MessageEditComunicados extends javax.swing.JPanel {
                 // Read the image file and encode it to Base64
                 imageBytes = Files.readAllBytes(fotoPath);
                 base64Image = Base64.getEncoder().encodeToString(imageBytes);
+             
             }
             else{
                 System.out.println("SI no hay nada ");
@@ -329,12 +337,13 @@ public class MessageEditComunicados extends javax.swing.JPanel {
                     // La solicitud POST fue exitosa
                     System.out.println("Datos enviados correctamente a la API");
 
-                    
+                       procesoEnCurso = false;
 
 
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
+                       procesoEnCurso = false;
                 }
             });
             
@@ -343,6 +352,7 @@ public class MessageEditComunicados extends javax.swing.JPanel {
             // Manejar la excepción JSONException aquí
             e.printStackTrace();
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+               procesoEnCurso = false;
         }
     }
 

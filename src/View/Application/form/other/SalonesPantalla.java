@@ -40,7 +40,7 @@ import raven.toast.Notifications;
  * @author educs
  */
 public class SalonesPantalla extends javax.swing.JPanel {
-
+  private boolean procesoEnCurso = false;
     /**
      * Creates new form TiposCodigos
      */
@@ -335,6 +335,8 @@ private void playAbrir() {
             obj.eventOK(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
+                if (!procesoEnCurso) {
+                procesoEnCurso = true; 
 
                     String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Salones/delete";
                     // Código para eliminar el registro de la API
@@ -357,6 +359,7 @@ private void playAbrir() {
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                            procesoEnCurso = false; 
                         } else {
                             // Ocurrió un error al eliminar el registro
                             Message obj = new Message();
@@ -370,15 +373,20 @@ private void playAbrir() {
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                                                        procesoEnCurso = false; 
+
                         }
                     });
 
                     GlassPanePopup.closePopupLast();
+                     }else{System.out.println("Le dio DOs veces xd");}
                 }
+                
             });
             GlassPanePopup.showPopup(obj);
             playAbrir();
         } else {
+            
             Message obj = new Message();
             obj.txtTitle.setText("Aviso");
             obj.txtContent.setText("Debe seleccionar una fila.");

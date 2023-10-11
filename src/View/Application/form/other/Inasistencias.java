@@ -61,6 +61,7 @@ import raven.toast.Notifications;
  * @author educs
  */
 public class Inasistencias extends javax.swing.JPanel {
+      private boolean procesoEnCurso = false;
  private TableRowSorter<DefaultTableModel> rowSorter;
     /**
      * Creates new form TiposCodigos
@@ -327,6 +328,8 @@ public void cargarDatosAsync() {
 }
 
 public int ActualizarDatos(int id ){
+
+             procesoEnCurso = true;
  try {
             JSONObject jsonData = new JSONObject();
             jsonData.put("idInasistencia", id);
@@ -339,19 +342,24 @@ public int ActualizarDatos(int id ){
             putFuture.thenAccept(success -> {
                 if (success) {
                     // La solicitud PUT fue exitosa
+
                     System.out.println("Datos actualizados correctamente en la API");
-                    
-                   
+                    procesoEnCurso = false;
+
+               
                 } else {
                     // La solicitud PUT falló
                     System.out.println("Error al actualizar los datos en la API");
+                    procesoEnCurso = false;
+                   
                 }
             });
-            return 1; 
+           return 1; 
         } catch (JSONException e) {
-           
+            procesoEnCurso = false;
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
-            return 0;
+             return 0; 
+            
         }
 }
 
@@ -383,81 +391,85 @@ private void playAbrir() {
     
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        // TODO add your handling code here:
+       int selectedRow = table1.getSelectedRow();
 
-        int selectedRow = table1.getSelectedRow();
-        
-        
+// Verificar si se ha seleccionado una fila
+if (selectedRow != -1) {
+    // Obtener los datos de las columnas de la fila seleccionada
+    Object id = table1.getValueAt(selectedRow, 0);
+    System.out.println(id);
 
-        // Verificar si se ha seleccionado una fila
-        if (selectedRow != -1) {
-            // Obtener los datos de las columnas de la fila seleccionada
-            Object id = table1.getValueAt(selectedRow, 0);
-                System.out.println(id);
-            Message obj = new Message();
-            obj.txtTitle.setText("Aviso");
-            obj.txtContent.setText("¿Desea eliminar este registro?");
-            obj.eventOK(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
+    Message obj = new Message();
+    obj.txtTitle.setText("Aviso");
+    obj.txtContent.setText("¿Desea eliminar este registro?");
+    obj.eventOK(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if (!procesoEnCurso) {
+                procesoEnCurso = true; 
+                String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Inasistencias/delete";
+                // Código para eliminar el registro de la API
+                CompletableFuture<Boolean> deleteFuture = ControllerFull.DeleteApiAsync(endpointUrl, (int) id);
 
-                    String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/Inasistencias/delete";
-                    // Código para eliminar el registro de la API
-                    CompletableFuture<Boolean> deleteFuture = ControllerFull.DeleteApiAsync(endpointUrl, (int) id);
+                // Manejar la respuesta de la API
+                deleteFuture.thenAccept(deleted -> {
+                    if (deleted) {
+                        // Registro eliminado con éxito
+                        Message obj = new Message();
+                        obj.txtTitle.setText("Aviso");
+                        obj.txtContent.setText("Registro eliminado exitosamente");
+                        obj.eventOK(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent ae) {
+                               
+                                cargarDatosAsync();
+                                deleteAllTableRows(table1);
+                                GlassPanePopup.closePopupLast();
+                            }
+                        });
+                        GlassPanePopup.showPopup(obj);
+                        procesoEnCurso = false; 
+                    } else {
+                        // Ocurrió un error al eliminar el registro
+                        Message obj = new Message();
+                        obj.txtTitle.setText("Aviso");
+                        obj.txtContent.setText("Error al eliminar el registro, intente nuevamente.");
+                        obj.eventOK(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent ae) {
+                                GlassPanePopup.closePopupLast();
+                            }
+                        });
+                        GlassPanePopup.showPopup(obj);
+                        procesoEnCurso = false; 
+                    }
+                });
+            } else {
+                // Si el proceso está en curso, puedes mostrar un mensaje o tomar otra acción.
+                System.out.println("El proceso está en curso. No se puede ejecutar cargarDatosAsync.");
+                procesoEnCurso = false; 
+            }
 
-                    // Manejar la respuesta de la API
-                    deleteFuture.thenAccept(deleted -> {
-                        if (deleted) {
-                            // Registro eliminado con éxito
-                            Message obj = new Message();
-                            obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Registro eliminado exitosamente");
-                            obj.eventOK(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent ae) {
-
-                                    cargarDatosAsync();
-                                    deleteAllTableRows(table1);
-                                    GlassPanePopup.closePopupLast();
-                                }
-                            });
-                            GlassPanePopup.showPopup(obj);
-                        } else {
-                            // Ocurrió un error al eliminar el registro
-                            Message obj = new Message();
-                            obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Error al eliminar el registro, intente nuevamente.");
-                            obj.eventOK(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent ae) {
-
-                                    GlassPanePopup.closePopupLast();
-                                }
-                            });
-                            GlassPanePopup.showPopup(obj);
-                        }
-                    });
-
-                    GlassPanePopup.closePopupLast();
-                }
-            });
-            GlassPanePopup.showPopup(obj);
-            playAbrir();
-
-        } else {
-            Message obj = new Message();
-            obj.txtTitle.setText("Aviso");
-            obj.txtContent.setText("Debe seleccionar una fila.");
-            obj.eventOK(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    System.out.println("Click OK");
-                    GlassPanePopup.closePopupLast();
-                }
-            });
-            GlassPanePopup.showPopup(obj);
-
+            GlassPanePopup.closePopupLast();
         }
+    });
+    GlassPanePopup.showPopup(obj);
+    playAbrir();
+
+} else {
+    Message obj = new Message();
+    obj.txtTitle.setText("Aviso");
+    obj.txtContent.setText("Debe seleccionar una fila.");
+    obj.eventOK(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            System.out.println("Click OK");
+            GlassPanePopup.closePopupLast();
+        }
+    });
+    GlassPanePopup.showPopup(obj);
+}
+
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnEdit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEdit1MouseClicked
@@ -474,23 +486,29 @@ int selectedRow = table1.getSelectedRow();
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int updateResult = ActualizarDatos((int) id);
+                if(!procesoEnCurso){
+              int updateResult = ActualizarDatos((int) id);
                 GlassPanePopup.closePopupLast();
-                if (updateResult == 1) {                
+                if (updateResult == 1) {
+                    procesoEnCurso = true; 
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
                             obj.txtContent.setText("Inasistencia Actualizada exitosamente");
                             obj.eventOK(new ActionListener() {
                                 @Override
-                                public void actionPerformed(ActionEvent ae) {
-
-                                    cargarDatosAsync();
+                                public void actionPerformed(ActionEvent ae) {                  
+                                     if(!procesoEnCurso){
+                                      cargarDatosAsync();  
+                                     
                                     deleteAllTableRows(table1);
                                     GlassPanePopup.closePopupLast();
+                                     }else{System.out.println("No se puede dos veces ");}
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                             procesoEnCurso = false; 
                 } else {
+
                     // Error al actualizar
                     Message errorMessage = new Message();
                     errorMessage.txtTitle.setText("Aviso");
@@ -504,6 +522,9 @@ int selectedRow = table1.getSelectedRow();
                     });
                     GlassPanePopup.showPopup(errorMessage);
                 }
+                }
+                else {
+                    System.out.println("Dio DOble click");}
             }
         });
         GlassPanePopup.showPopup(obj);

@@ -55,6 +55,7 @@ import javax.swing.text.PlainDocument;
  * @author educs
  */
 public class MessageAddVisitaEnfermeria extends javax.swing.JPanel {
+        private boolean procesoEnCurso = false;
        List<PersonasLo> listaIdPersonas = new ArrayList<>();
        List<PersonasLo> mySearch = new ArrayList<PersonasLo>();
        List<Periodos> periodos = new ArrayList<Periodos>();
@@ -263,7 +264,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
                 txtPersonaKeyTyped(evt);
             }
         });
-        add(txtPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 540, 50));
+        add(txtPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 400, 50));
 
         txtVisita.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -429,8 +430,12 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
     }
 
     private void enviarDatosHaciaApi() {
-        int num = 4;
-        int num1 = 1;
+            if (procesoEnCurso) {
+                System.out.println("Le di dos veces xd ");
+        return;
+    }
+
+    procesoEnCurso = true;
 
         
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
@@ -483,14 +488,17 @@ Message obj = new Message();
                         }
                     });
                     GlassPanePopup.showPopup(obj);
+                     procesoEnCurso = false;
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
+                     procesoEnCurso = false;
                 }
             });
         } catch (JSONException e) {
             // Manejar la excepción JSONException aquí
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+             procesoEnCurso = false;
         }
     }
 

@@ -39,7 +39,7 @@ import javax.sound.sampled.Clip;
  * @author educs
  */
 public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
-
+        private boolean procesoEnCurso = false;
     int nivel1 = 1;
     int tipo = 4;
 
@@ -189,13 +189,21 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();
             } else {
+                btnAceptar.setEnabled(false);
                 enviarDatosHaciaApi();
+               
+Timer timer = new Timer(500, (ActionEvent e) -> {
+    if (!procesoEnCurso) {
+        CodigosDisciplinarios cd = new CodigosDisciplinarios();
+        cd.cargarDatos();
+        //  cd.deleteAllTableRows(cd.table1);
+         btnAceptar.setEnabled(true);
+    }
+    else {
+        System.out.println("Esta verdadero ");
+    }
+});
 
-                Timer timer = new Timer(500, (ActionEvent e) -> {
-                    CodigosDisciplinarios tc = new CodigosDisciplinarios();
-                    tc.cargarDatos();
-                    tc.deleteAllTableRows(tc.table1);
-                });
                 timer.setRepeats(false);
                 timer.start();
             }
@@ -209,9 +217,11 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
     }
 
     private void enviarDatosHaciaApi() {
-
-        int num = 4;
-        int num1 = 1;
+            if (procesoEnCurso) {
+                System.out.println("Le di dos veces xd ");
+        return;
+    }
+             procesoEnCurso = true;
 
         MessageAddCodigosDisciplinarios msg = new MessageAddCodigosDisciplinarios();
         // Obtener los valores seleccionados del ComboBox y el texto del TextField
@@ -255,14 +265,17 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
                         }
                     });
                     GlassPanePopup.showPopup(obj);
+                       procesoEnCurso = false;
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
+                       procesoEnCurso = false;
                 }
             });
         } catch (JSONException e) {
             // Manejar la excepción JSONException aquí
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+               procesoEnCurso = false;
         }
     }
 

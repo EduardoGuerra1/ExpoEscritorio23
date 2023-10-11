@@ -48,7 +48,7 @@ import raven.toast.Notifications;
  * @author educs
  */
 public class CodigosEstudiantes extends javax.swing.JPanel {
-
+  private boolean procesoEnCurso = false;
     private TableRowSorter<DefaultTableModel> rowSorter;
 
     /**
@@ -301,6 +301,8 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
             obj.eventOK(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
+                     if (!procesoEnCurso) {
+                procesoEnCurso = true; 
 
                     String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductualesPersonas/delete";
                     // Código para eliminar el registro de la API
@@ -323,6 +325,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                              procesoEnCurso = false; 
                         } else {
                             // Ocurrió un error al eliminar el registro
                             Message obj = new Message();
@@ -336,10 +339,13 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                              procesoEnCurso = false; 
                         }
                     });
 
                     GlassPanePopup.closePopupLast();
+                                    }
+                                else{System.out.println("Le dio dos veces ");}
                 }
             });
             GlassPanePopup.showPopup(obj);
