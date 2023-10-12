@@ -148,7 +148,7 @@ public class LoginForm extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/SAE.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/icon/png/logo nuevo uwww (1).png"))); // NOI18N
 
         label1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         label1.setText("Bienvenido a SAE");

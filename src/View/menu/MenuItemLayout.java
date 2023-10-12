@@ -51,7 +51,7 @@ public class MenuItemLayout implements LayoutManager {
                     }
                 }
             }
-            return new Dimension(5, height);
+            return new Dimension(0, height);
         }
     }
 
