@@ -327,7 +327,7 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
     
     
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        // TODO add your handling code here:
+         Timer timer = new Timer(5000, (ActionEvent e) -> {
         MessageAddVisitaEnfermeria obj = new MessageAddVisitaEnfermeria(this);
         obj.txtTitle.setText("Agregar una visita de enfermeria al estudiante");
         obj.eventOK(new ActionListener() {
@@ -339,6 +339,7 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
         });
         GlassPanePopup.showPopup(obj);
         playAbrir();
+        });
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
