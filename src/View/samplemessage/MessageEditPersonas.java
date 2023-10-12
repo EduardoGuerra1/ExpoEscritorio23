@@ -820,18 +820,21 @@ public class MessageEditPersonas extends javax.swing.JPanel {
             try {
                 btnAceptar.setEnabled(false);
                 enviarDatosHaciaApi();
-                 btnAceptar.setEnabled(true);
-            } catch (IOException ex) {
-                Logger.getLogger(MessageAddEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-            }
             Timer timer = new Timer(500, (ActionEvent e) -> {
+                     if (!procesoEnCurso) {
                 Estudiantes cd = new Estudiantes();
 
                 cd.cargarDatos();
                 cd.deleteAllTableRows(cd.table1);
+                     }
             });
             timer.setRepeats(false);
             timer.start();
+                 btnAceptar.setEnabled(true);
+            } catch (IOException ex) {
+                Logger.getLogger(MessageAddEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }//GEN-LAST:event_btnAceptar1ActionPerformed
 

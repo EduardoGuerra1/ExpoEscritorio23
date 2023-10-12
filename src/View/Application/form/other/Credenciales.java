@@ -51,7 +51,7 @@ import raven.toast.Notifications;
  * @author gyaci
  */
 public class Credenciales extends javax.swing.JPanel {
-
+private boolean procesoEnCurso = false;
     PersonasController controller = new PersonasController();
     List<Personas> myPersonas = new ArrayList<Personas>();
      private TableRowSorter<DefaultTableModel> rowSorter;
@@ -356,6 +356,9 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
             obj.eventOK(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
+                                                                        if (!procesoEnCurso) {
+                procesoEnCurso = true; 
+
                     CompletableFuture<Boolean> deleteFuture = PersonasController.deleteCodigoPersona(id.toString());
 
                     // Manejar la respuesta de la API
@@ -374,6 +377,7 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                            procesoEnCurso = false; 
                         } else {
                             // Ocurrió un error al eliminar el registro
                             Message obj = new Message();
@@ -387,10 +391,13 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
+                            procesoEnCurso = false; 
                         }
                     });
 
                     GlassPanePopup.closePopupLast();
+                     GlassPanePopup.closePopupLast();
+                                                    }else{System.out.println("Le dio DOs veces xd");}
                 }
             });
             GlassPanePopup.showPopup(obj);
