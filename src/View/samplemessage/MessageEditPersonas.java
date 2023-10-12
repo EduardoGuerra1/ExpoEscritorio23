@@ -56,7 +56,7 @@ import org.json.JSONObject;
  * @author thatsgonzalez
  */
 public class MessageEditPersonas extends javax.swing.JPanel {
-
+    private boolean procesoEnCurso = false;
     List<TiposPersonas> secciones = new ArrayList<TiposPersonas>();
     String rute = "";
     Personas modelEstudiante = null;
@@ -84,7 +84,12 @@ public class MessageEditPersonas extends javax.swing.JPanel {
     }
 
     private void enviarDatosHaciaApi() throws FileNotFoundException, IOException {
+                    if (procesoEnCurso) {
+                System.out.println("Le di dos veces xd ");
+        return;
+    }
 
+    procesoEnCurso = true;
         try {
             JSONObject jsonData = new JSONObject();
 
@@ -161,12 +166,14 @@ public class MessageEditPersonas extends javax.swing.JPanel {
                         }
                     });
                     GlassPanePopup.showPopup(obj);
+                    procesoEnCurso = false;
 
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
                     Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "No se pueden editar los datos de los administradores, intente nuevamente");
                     playError();
+                      procesoEnCurso = false;
 
                 }
             });
@@ -174,8 +181,10 @@ public class MessageEditPersonas extends javax.swing.JPanel {
         } catch (JSONException e) {
             // Manejar la excepción JSONException aquí
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+              procesoEnCurso = false;
         } catch (Exception e) {
             e.printStackTrace();
+              procesoEnCurso = false;
         }
 
     }
@@ -809,7 +818,9 @@ public class MessageEditPersonas extends javax.swing.JPanel {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Ingresa tu número de teléfono en formato +503");
         } else {
             try {
+                btnAceptar.setEnabled(false);
                 enviarDatosHaciaApi();
+                 btnAceptar.setEnabled(true);
             } catch (IOException ex) {
                 Logger.getLogger(MessageAddEstudiante.class.getName()).log(Level.SEVERE, null, ex);
             }
