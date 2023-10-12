@@ -47,6 +47,8 @@ import raven.toast.Notifications;
  * @author educs
  */
 public class VisitasEnfermeria extends javax.swing.JPanel {
+    public boolean isFormOpen = false;
+
   private boolean procesoEnCurso = false;
     private TableRowSorter<DefaultTableModel> rowSorter;
 
@@ -327,7 +329,7 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
     
     
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-         Timer timer = new Timer(5000, (ActionEvent e) -> {
+         if (!isFormOpen) {
         MessageAddVisitaEnfermeria obj = new MessageAddVisitaEnfermeria(this);
         obj.txtTitle.setText("Agregar una visita de enfermeria al estudiante");
         obj.eventOK(new ActionListener() {
@@ -339,7 +341,11 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
         });
         GlassPanePopup.showPopup(obj);
         playAbrir();
-        });
+         }
+         else{           Notifications.getInstance().clearAll();
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Espere un momento");
+                playError();}
+        
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
