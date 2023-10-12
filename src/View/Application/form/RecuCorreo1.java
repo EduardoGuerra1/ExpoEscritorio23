@@ -150,7 +150,7 @@ public class RecuCorreo1 extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel2.setText("Recuperacion por Correo Electrónico ");
+        jLabel2.setText("Recuperación por Correo Electrónico ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

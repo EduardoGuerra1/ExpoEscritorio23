@@ -87,7 +87,7 @@ public class CodigosEstudiantes extends javax.swing.JPanel {
         // Obtén el modelo de la tabla existente
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
         // Establece los "ColumnIdentifiers" en el modelo de la tabla
-        tableModel.setColumnIdentifiers(new Object[]{"ID", "Estudiante", "Docente", "CodigoConductual", "Fecha"});
+        tableModel.setColumnIdentifiers(new Object[]{"ID", "Estudiante", "Docente", "Código Conductual", "Fecha"});
         cargarDatosAsync();
         table1.setDefaultEditor(Object.class, null);
         table1.getTableHeader().setReorderingAllowed(false);
@@ -318,7 +318,7 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
                             // Registro eliminado con éxito
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Codigos Conductual eliminado");
+                            obj.txtContent.setText("Código Conductual eliminado");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {
@@ -334,7 +334,7 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
                             // Ocurrió un error al eliminar el registro
                             Message obj = new Message();
                             obj.txtTitle.setText("Aviso");
-                            obj.txtContent.setText("Error al eliminar la Codigo, intente nuevamente.");
+                            obj.txtContent.setText("Error al eliminar la Código, intente nuevamente.");
                             obj.eventOK(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent ae) {

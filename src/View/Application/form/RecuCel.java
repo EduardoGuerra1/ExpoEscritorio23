@@ -142,7 +142,7 @@ public class RecuCel extends javax.swing.JPanel {
         lb2.setText("Ingrese su nueva contraseña:");
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel2.setText("Recuperacion por SMS");
+        jLabel2.setText("Recuperación por SMS");
 
         btnRegresar.setForeground(new java.awt.Color(204, 204, 204));
         btnRegresar.setText("Regresar a Opciones");

@@ -179,7 +179,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SansSerif" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Recuperacion por Correo Electr&#xf3;nico "/>
+        <Property name="text" type="java.lang.String" value="Recuperaci&#xf3;n por Correo Electr&#xf3;nico "/>
       </Properties>
     </Component>
   </SubComponents>

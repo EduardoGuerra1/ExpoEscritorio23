@@ -87,7 +87,7 @@ public class Menu extends JPanel {
 
     // Configuración de diseño del menú
     protected final boolean hideMenuTitleOnMinimum = true;
-    protected final int menuTitleLeftInset = 5;
+    protected final int menuTitleLeftInset = 10;
     protected final int menuTitleVgap = 5;
     protected final int menuMaxWidth = 240;
     protected final int menuMinWidth = 60;
