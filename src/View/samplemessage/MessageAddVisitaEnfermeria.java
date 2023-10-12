@@ -295,6 +295,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         GlassPanePopup.closePopupLast();
         playCerrar();
+        frm.isFormOpen = false;
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void playCerrar() {
