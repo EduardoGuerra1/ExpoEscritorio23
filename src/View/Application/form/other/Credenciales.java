@@ -420,99 +420,9 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
-        // TODO add your handling code here:
-        /*
-        int num = 4;
-        int num1 = 1;
-        int selectedRow = table1.getSelectedRow();
-
-        // Verificar si se ha seleccionado una fila
-        if (selectedRow != -1) {
-            // Obtener los datos de las columnas de la fila seleccionada
-            Object data1 = table1.getValueAt(selectedRow, 1);
-            Object data2 = table1.getValueAt(selectedRow, 2);
-            Object data3 = table1.getValueAt(selectedRow, 3);
-            Object id = table1.getValueAt(selectedRow, 0);
-
-            MessageEditCodigosDisciplinarios msg = new MessageEditCodigosDisciplinarios();
-            msg.txtTitle.setText("Actualización de Código Disciplinario");
-            msg.cbTiposCodigosConductuales.setSelectedIndex((int) data1 - num);
-            msg.cbNivelCodigoConductual.setSelectedIndex((int) data2 - num1);
-            msg.txtCodigoConductual.setText(data3.toString());
-            msg.id = (int) id;
-
-            msg.eventOK(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    System.out.println("Click OK");
-                    msg.actualizarDatosHaciaApi();
-                    CompletableFuture<List<CodigosConductuales>> future = controller.getCodigosConductualesApiAsync();
-                    future.thenAccept(codigosConductuales -> {
-                        deleteAllTableRows(table1);
-                        DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-                        for (CodigosConductuales codigo : codigosConductuales) {
-                            tableModel.addRow(new Object[]{
-                                codigo.getIdCodigoConductual(),
-                                codigo.getIdTipoCodigoConductual(),
-                                codigo.getIdNivelCodigoConductual(),
-                                codigo.getCodigoConductual()
-                            });
-                        }
-                    });
-
-                    GlassPanePopup.closePopupLast();
-                    Timer timer = new Timer(500, (ActionEvent e) -> {
-                        deleteAllTableRows(table1);
-                        cargarDatos();
-                    });
-                    timer.setRepeats(false);
-                    timer.start();
-                }
-            });
-            GlassPanePopup.showPopup(msg);
-
-        } else {
-            Message obj = new Message();
-            obj.txtTitle.setText("Aviso");
-            obj.txtContent.setText("Debe seleccionar una fila.");
-            obj.eventOK(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    System.out.println("Click OK");
-                    GlassPanePopup.closePopupLast();
-                }
-            });
-            GlassPanePopup.showPopup(obj);
-
-        }
-         */
-    }//GEN-LAST:event_btnEditMouseClicked
-
-    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-
-    }//GEN-LAST:event_btnAddMouseClicked
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-
-        MessageAddPersonas obj = new MessageAddPersonas(this);
-        obj.txtTitle.setText("Añadir Credencial");
-        obj.eventOK(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                System.out.println("Click OK");
-                deleteAllTableRows(table1);
-                cargarDatos();
-                GlassPanePopup.closePopupLast();
-            }
-        });
-        GlassPanePopup.showPopup(obj);
-
-playAbrir();
-    }//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+        if (evt.getClickCount() == 1)
+        {
+              // TODO add your handling code here:
 
         int indx = table1.getSelectedRow();
         if (indx == -1) {
@@ -540,6 +450,40 @@ playAbrir();
             }
         }
 
+        }
+        else 
+        { 
+            Notifications.getInstance().clearAll();
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Dar solo una vez al botón");
+                playError();
+        }
+    }//GEN-LAST:event_btnEditMouseClicked
+
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
+
+    }//GEN-LAST:event_btnAddMouseClicked
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+
+        MessageAddPersonas obj = new MessageAddPersonas(this);
+        obj.txtTitle.setText("Añadir Credencial");
+        obj.eventOK(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.out.println("Click OK");
+                deleteAllTableRows(table1);
+                cargarDatos();
+                GlassPanePopup.closePopupLast();
+            }
+        });
+        GlassPanePopup.showPopup(obj);
+
+playAbrir();
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+      
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void BuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyPressed

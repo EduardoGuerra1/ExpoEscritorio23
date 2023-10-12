@@ -797,13 +797,10 @@ public class MessageEditPersonas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnImagen1ActionPerformed
 
     private void btnAceptar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptar1MouseClicked
-        // TODO add your handling code here:
+     
 
-
-    }//GEN-LAST:event_btnAceptar1MouseClicked
-
-    private void btnAceptar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptar1ActionPerformed
-
+            
+        
         if (txtNombres2.getText().isEmpty() || txtApellidos1.getText().isEmpty() || txtCodigo1.getText().isEmpty() || TxTelefono.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Los campos no puede estar vacío");
         } else if (!Validaciones.checkName(txtNombres2.getText()) && !Validaciones.checkName(txtApellidos1.getText())) {
@@ -836,6 +833,13 @@ public class MessageEditPersonas extends javax.swing.JPanel {
             }
             
         }
+        
+
+    }//GEN-LAST:event_btnAceptar1MouseClicked
+
+    private void btnAceptar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptar1ActionPerformed
+       
+       
     }//GEN-LAST:event_btnAceptar1ActionPerformed
 
     private void txtNombres2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombres2ActionPerformed
