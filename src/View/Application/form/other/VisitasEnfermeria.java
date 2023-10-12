@@ -329,6 +329,9 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
     
     
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
+        if (evt.getClickCount() == 1)
+        {
+            
         
         if (!isFormOpen) {
         MessageAddVisitaEnfermeria obj = new MessageAddVisitaEnfermeria(this);
@@ -346,6 +349,13 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
          else{           Notifications.getInstance().clearAll();
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Espere un momento");
                 playError();}
+        }
+        else 
+        { 
+            Notifications.getInstance().clearAll();
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Dar solo una vez al botón");
+                playError();
+        }
         
     }//GEN-LAST:event_btnAddMouseClicked
 
