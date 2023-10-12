@@ -474,6 +474,7 @@ private int compararNombreApellido(String nombre, String apellido, List<Personas
                     System.out.println("Datos enviados correctamente a la API");
                     frm.deleteAllTableRows(frm.table1);
                     frm.cargarDatos();
+                    frm.isFormOpen = false; 
 
                     // boolean pC = panelClosing() == true;
                     GlassPanePopup.closePopupLast();
@@ -493,12 +494,14 @@ Message obj = new Message();
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
                      procesoEnCurso = false;
+                     frm.isFormOpen = false; 
                 }
             });
         } catch (JSONException e) {
             // Manejar la excepción JSONException aquí
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
              procesoEnCurso = false;
+             frm.isFormOpen = false; 
         }
     }
 
