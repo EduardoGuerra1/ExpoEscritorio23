@@ -56,7 +56,7 @@ import javax.swing.text.PlainDocument;
  * @author educs
  */
 public class MessageAddPersonas extends javax.swing.JPanel {
-    
+     private boolean procesoEnCurso = false;
     List<TiposPersonas> secciones = new ArrayList<TiposPersonas>();
     String rute = "";
     Credenciales frm = null;
@@ -558,7 +558,12 @@ public class MessageAddPersonas extends javax.swing.JPanel {
 
     private void enviarDatosHaciaApi() throws FileNotFoundException, IOException {
         
-        
+                    if (procesoEnCurso) {
+                System.out.println("Le di dos veces xd ");
+        return;
+    }
+
+    procesoEnCurso = true;
         
         try{
             JSONObject jsonData = new JSONObject();
@@ -617,9 +622,11 @@ Message obj = new Message();
                         }
                     });
                     GlassPanePopup.showPopup(obj);
+                    procesoEnCurso = false;
                 } else {
                     // La solicitud POST falló
                     System.out.println("Error al enviar los datos a la API");
+                    procesoEnCurso = false;
                 }
             });
             
@@ -628,57 +635,10 @@ Message obj = new Message();
             // Manejar la excepción JSONException aquí
             e.printStackTrace();
             System.out.println("Error al crear el objeto JSON: " + e.getMessage());
+            procesoEnCurso = false;
         }
         
-/*
-        int num = 4;
-        int num1 = 1;
 
-        MessageAddEstudiante msg = new MessageAddEstudiante();
-        // Obtener los valores seleccionados del ComboBox y el texto del TextField
-       
-        String codigoConductual = txtCodigoConductual.getText();
-
-        System.out.println(idTipoCodigoConductual);
-        System.out.println(idNivelCodigoConductual);
-        System.out.println(codigoConductual);
-        try {
-            // Crear un objeto JSON con los datos recopilados
-            JSONObject jsonData = new JSONObject();
-            jsonData.put("idTipoCodigoConductual", idTipoCodigoConductual);
-            jsonData.put("idNivelCodigoConductual", idNivelCodigoConductual);
-            jsonData.put("codigoConductual", codigoConductual);
-
-            // Llamar al método postApiAsync para enviar los datos
-            String endpointUrl = "https://expo2023-6f28ab340676.herokuapp.com/CodigosConductuales/save"; // Reemplaza esto con la URL de tu API
-            String jsonString = jsonData.toString();
-
-            CompletableFuture<Boolean> postFuture = ControllerFull.postApiAsync(endpointUrl, jsonString);
-
-            // Manejar la respuesta de la API
-            postFuture.thenAccept(success -> {
-                if (success) {
-                    // La solicitud POST fue exitosa
-                    System.out.println("Datos enviados correctamente a la API");
-
-                    CodigosDisciplinarios cd = new CodigosDisciplinarios();
-
-                    cd.cargarDatos();
-
-                    cd.deleteAllTableRows(cd.table1);
-                    boolean pC = panelClosing() == true;
-                    GlassPanePopup.closePopupLast();
-
-                } else {
-                    // La solicitud POST falló
-                    System.out.println("Error al enviar los datos a la API");
-                }
-            });
-        } catch (JSONException e) {
-            // Manejar la excepción JSONException aquí
-            System.out.println("Error al crear el objeto JSON: " + e.getMessage());
-        }
-*/
     }
 
     private int obtenerIdSeleccionadoComboBox(JComboBox<String> comboBox) {

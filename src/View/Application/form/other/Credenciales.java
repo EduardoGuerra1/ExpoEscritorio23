@@ -356,7 +356,7 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
             obj.eventOK(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                                                                        if (!procesoEnCurso) {
+                if (!procesoEnCurso) {
                 procesoEnCurso = true; 
 
                     CompletableFuture<Boolean> deleteFuture = PersonasController.deleteCodigoPersona(id.toString());
@@ -391,12 +391,12 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
                                 }
                             });
                             GlassPanePopup.showPopup(obj);
-                            procesoEnCurso = false; 
+                              procesoEnCurso = false; 
                         }
                     });
 
                     GlassPanePopup.closePopupLast();
-                     GlassPanePopup.closePopupLast();
+                    
                                                     }else{System.out.println("Le dio DOs veces xd");}
                 }
             });
