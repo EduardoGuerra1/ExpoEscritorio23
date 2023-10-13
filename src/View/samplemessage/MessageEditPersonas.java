@@ -804,7 +804,7 @@ public class MessageEditPersonas extends javax.swing.JPanel {
         if (txtNombres2.getText().isEmpty() || txtApellidos1.getText().isEmpty() || txtCodigo1.getText().isEmpty() || TxTelefono.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Los campos no puede estar vacío");
         } else if (!Validaciones.checkName(txtNombres2.getText()) && !Validaciones.checkName(txtApellidos1.getText())) {
-            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El nombre o apellido es invalido");
+            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El nombre o apellido no es invalido");
         } else if (!Validaciones.checkDateDown(dpNacimiento1.getDate().toInstant().atOffset(ZoneOffset.UTC))) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "La fecha de nacimiento no es válida");
         } else if (!Validaciones.onlyInts(txtCodigo1.getText())) {
@@ -813,7 +813,18 @@ public class MessageEditPersonas extends javax.swing.JPanel {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "La contraseña debe ser de al menos 6 caracteres");
         } else if (!Validaciones.isPhoneNumber(TxTelefono.getText())) {
             Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "Ingresa tu número de teléfono en formato +503");
-        } else {
+        } 
+         else if (!Validaciones.check12(TxTelefono.getText())) {
+            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo Telefono es muy grande");
+        } 
+        else if (!Validaciones.check8(txtCodigo1.getText())) {
+            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_CENTER, "El Campo codigo es muy grande");
+        }
+         else if(!Validaciones.check100(txtClave.getText())){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El Campo Contraseña es muy grande");
+            playValidacion();
+        }
+        else {
             try {
                 btnAceptar.setEnabled(false);
                 enviarDatosHaciaApi();

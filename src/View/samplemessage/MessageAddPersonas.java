@@ -384,7 +384,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
         }
 
         else if(!Validaciones.checkName(txtNombres1.getText()) && !Validaciones.checkName(txtApellidos.getText())){
-            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El nombre o apellido es inválido");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El nombre o apellido no es inválido");
             playError();
         }
         else if(!Validaciones.checkDateDown(dpNacimiento.getDate().toInstant().atOffset(ZoneOffset.UTC))){
@@ -401,11 +401,19 @@ public class MessageAddPersonas extends javax.swing.JPanel {
             playValidacion();
         }
         else if(!Validaciones.onlyInts(TxTelefono.getText())){
-            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El codigo solo debe tener números");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El Numero solo debe tener números");
             playValidacion();
         }
-         else if(!Validaciones.check8(TxTelefono.getText())){
-            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El codigo solo debe tener números");
+         else if(!Validaciones.check8(txtCodigo.getText())){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El Campo codigo es muy grande");
+            playValidacion();
+        }
+                  else if(!Validaciones.check8(TxTelefono.getText())){
+           Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El Campo Telefono es muy grande");
+            playValidacion();
+        }
+                   else if(!Validaciones.check100(txtClave.getText())){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El Campo Contraseña es muy grande");
             playValidacion();
         }
         

@@ -196,6 +196,9 @@ public static boolean checkDateDown(OffsetDateTime date) {
         public static boolean check16(String palabra) {
         return palabra.length() <= 16 ;
     }
+                public static boolean check14(String palabra) {
+        return palabra.length() <= 14 ;
+    }
     // Compara la longitud de la cadena de texto 
     public static boolean checkPassword(String pass) {
         return pass.length() >= 8;

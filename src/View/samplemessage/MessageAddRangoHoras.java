@@ -182,9 +182,10 @@ public class MessageAddRangoHoras extends javax.swing.JPanel {
             if (txtTipoCodigo.getText().isBlank()) {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
                 playError();
-            } else {
+            } 
+            else {
                 Validaciones valida = new Validaciones();
-                if (!valida.check16(txtTipoCodigo.getText())) {
+                if (!valida.check14(txtTipoCodigo.getText())) {
                     Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Titulo Es Muy Largo");
                     playError();
                 } else {

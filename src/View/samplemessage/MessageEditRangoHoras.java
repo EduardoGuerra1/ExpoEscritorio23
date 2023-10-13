@@ -221,7 +221,7 @@ public class MessageEditRangoHoras extends javax.swing.JPanel {
                 playError();
             } else {
                 Validaciones valida = new Validaciones();
-                if (!valida.check16(txtTipoCodigo.getText())) {
+                if (!valida.check14(txtTipoCodigo.getText())) {
                     Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                     playError();
                 } else {
