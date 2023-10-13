@@ -446,7 +446,7 @@ playAbrir();
          obj.lbIdent.setText(id);
          obj.lbEstudinte.setText(estudiante);
          obj.lbDocente.setText(Docente);
-         obj.lbDetalle.setText(Cod);
+         obj.Detalle.setText(Cod);
          obj.lbFecha.setText(Fecha);
          GlassPanePopup.showPopup(obj);
         }

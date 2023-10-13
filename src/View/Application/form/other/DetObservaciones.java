@@ -108,9 +108,10 @@ public class DetObservaciones extends javax.swing.JPanel {
             lbDocente.putClientProperty(FlatClientProperties.STYLE, ""
                + "font:$h3.font;"
                 + "foreground: rgb(153,153,153);");
-            lbDetalle.putClientProperty(FlatClientProperties.STYLE, ""
+            Detalle.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;"
                 + "foreground: rgb(153,153,153);");
+            Detalle.disable();
             lbFecha.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$h3.font;"
                 + "foreground: rgb(153,153,153);");
@@ -153,7 +154,6 @@ public class DetObservaciones extends javax.swing.JPanel {
         lbFecha = new javax.swing.JLabel();
         lbDocente = new javax.swing.JLabel();
         lbEstudinte = new javax.swing.JLabel();
-        lbDetalle = new javax.swing.JLabel();
         btnCancelar = new View.BotonesText.Buttons();
         lbIdent = new javax.swing.JLabel();
         pEstudiantes = new javax.swing.JPanel();
@@ -165,6 +165,8 @@ public class DetObservaciones extends javax.swing.JPanel {
         pFecha = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         lbInfo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Detalle = new javax.swing.JTextArea();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -177,8 +179,6 @@ public class DetObservaciones extends javax.swing.JPanel {
         lbDocente.setText("jLabel2");
 
         lbEstudinte.setText("jLabel2");
-
-        lbDetalle.setText("jLabel2");
 
         btnCancelar.setText("Cerrar");
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -259,18 +259,22 @@ public class DetObservaciones extends javax.swing.JPanel {
         pFechaLayout.setHorizontalGroup(
             pFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pFechaLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(51, 51, 51)
                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pFechaLayout.setVerticalGroup(
             pFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pFechaLayout.createSequentialGroup()
+            .addGroup(pFechaLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         lbInfo.setText("Información");
+
+        Detalle.setColumns(20);
+        Detalle.setRows(5);
+        jScrollPane1.setViewportView(Detalle);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -295,10 +299,10 @@ public class DetObservaciones extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbInfo)
                             .addComponent(lbFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbEstudinte, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbIdent, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lbIdent, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addGap(19, 19, 19))
         );
         jPanel2Layout.setVerticalGroup(
@@ -321,9 +325,9 @@ public class DetObservaciones extends javax.swing.JPanel {
                             .addComponent(lbDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pDocente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -361,16 +365,15 @@ public class DetObservaciones extends javax.swing.JPanel {
 // Método para obtener el ID seleccionado de un JComboBox
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextArea Detalle;
     private View.BotonesText.Buttons btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb1;
     private javax.swing.JLabel lb2;
-    private javax.swing.JLabel lb3;
-    private javax.swing.JLabel lb5;
-    public javax.swing.JLabel lbDetalle;
     public javax.swing.JLabel lbDocente;
     public javax.swing.JLabel lbEstudinte;
     public javax.swing.JLabel lbFecha;
@@ -378,8 +381,6 @@ public class DetObservaciones extends javax.swing.JPanel {
     private javax.swing.JLabel lbInfo;
     private javax.swing.JPanel pDetalle;
     private javax.swing.JPanel pDocente;
-    private javax.swing.JPanel pEstudiante;
-    private javax.swing.JPanel pEstudiante2;
     private javax.swing.JPanel pEstudiantes;
     private javax.swing.JPanel pFecha;
     // End of variables declaration//GEN-END:variables

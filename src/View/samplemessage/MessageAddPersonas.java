@@ -391,6 +391,7 @@ public class MessageAddPersonas extends javax.swing.JPanel {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "La fecha de nacimiento no es válida");
             playError();
         }
+      
         else if(!Validaciones.onlyInts(txtCodigo.getText())){
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El codigo solo debe tener números");
             playValidacion();
@@ -400,6 +401,10 @@ public class MessageAddPersonas extends javax.swing.JPanel {
             playValidacion();
         }
         else if(!Validaciones.onlyInts(TxTelefono.getText())){
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El codigo solo debe tener números");
+            playValidacion();
+        }
+         else if(!Validaciones.check8(TxTelefono.getText())){
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_CENTER, "El codigo solo debe tener números");
             playValidacion();
         }
