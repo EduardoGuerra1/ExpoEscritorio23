@@ -9,6 +9,7 @@ import View.BotonesText.CustomComboBox;
 import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import View.samplemessage.MessageREPORTInasistencia;
+import View.samplemessage.MessageReportCodigos;
 import View.samplemessage.MessageReportInasisitencias;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatIntelliJLaf;
@@ -415,10 +416,11 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
     
     private void buttons1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons1MouseClicked
         
-//      MessageREPORTInasistencia obj = new MessageREPORTInasistencia(this);
-//        obj.txtTitle.setText("Añadir Credencial");
-//        GlassPanePopup.showPopup(obj);
-//mostrarReporte();
+    MessageReportCodigos obj = new MessageReportCodigos();
+            
+            
+            GlassPanePopup.showPopup(obj);
+            playAbrir();
     }//GEN-LAST:event_buttons1MouseClicked
 
     private void BuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyPressed
