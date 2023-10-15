@@ -171,6 +171,10 @@ private void playError() {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "La fecha no es válida");
             playError();
         }
+          else if(!Validaciones.checkDateNotGreaterThanToday(dpNacimiento.getDate().toInstant().atOffset(ZoneOffset.UTC))){
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "La fecha no es válida");
+            playError();
+        }
          else{
         mostrarReporte();
          }

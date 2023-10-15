@@ -24,7 +24,12 @@ public class Validaciones {
             return false;// La cadena no coincide con el formato de una dirección de correo electrónico.
         }
     }
+    public static boolean checkDateNotGreaterThanToday(OffsetDateTime date) {
+    OffsetDateTime currentDate = OffsetDateTime.now();
     
+    return date.isBefore(currentDate) || date.isEqual(currentDate);
+}
+
     // Compara la fecha de inicio con la fecha y hora actuales.
     public static boolean checkRangeDate(OffsetDateTime begin, OffsetDateTime end) {
         return begin.compareTo(OffsetDateTime.now()) >= 0 && end.compareTo(begin) >= 0;
