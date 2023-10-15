@@ -15,6 +15,7 @@ import View.samplemessage.MessageEditCodigosDisciplinarios;
 import View.samplemessage.MessageEditRangoHoras;
 import View.samplemessage.MessageEditSalones;
 import View.samplemessage.MessageEditTipoCodigos;
+import View.samplemessage.MessageReportCodigos;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
@@ -564,7 +565,9 @@ int selectedRow = table1.getSelectedRow();
     }//GEN-LAST:event_btnEdit1MouseClicked
 
     private void btnReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteMouseClicked
-        mostrarReporte();
+       MessageReportCodigos obj = new MessageReportCodigos();
+            GlassPanePopup.showPopup(obj);
+            playAbrir();
     }//GEN-LAST:event_btnReporteMouseClicked
 
     private void BuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyPressed

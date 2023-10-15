@@ -9,6 +9,8 @@ import View.glasspanepopup.GlassPanePopup;
 import View.samplemessage.Message;
 import View.samplemessage.MessageAddRangoHoras;
 import View.samplemessage.MessageAddVisitaEnfermeria;
+import View.samplemessage.MessageReportCodigos;
+import View.samplemessage.MessageReportVisitas;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
@@ -441,7 +443,8 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportMouseClicked
-        mostrarReporte();
+        MessageReportVisitas obj = new MessageReportVisitas();
+            GlassPanePopup.showPopup(obj);
     }//GEN-LAST:event_btnReportMouseClicked
 
     private void BuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscadorKeyPressed

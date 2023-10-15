@@ -416,9 +416,7 @@ table1.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
     
     private void buttons1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons1MouseClicked
         
-    MessageReportCodigos obj = new MessageReportCodigos();
-            
-            
+    MessageReportInasisitencias obj = new MessageReportInasisitencias();
             GlassPanePopup.showPopup(obj);
             playAbrir();
     }//GEN-LAST:event_buttons1MouseClicked
