@@ -264,10 +264,10 @@ public class Ajustes extends javax.swing.JPanel {
         lbColor2.setText("Selector de Tema");
 
         lbColor4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbColor4.setText("Seleccione el color de selector que desea utilizar en modo claro.");
+        lbColor4.setText("Seleccione el color de selector que desea utilizar.");
 
         lb.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lb.setText("Modo Oscuro/Claro");
+        lb.setText("Ajustes");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -184,7 +184,12 @@ public class MessageAddCodigosDisciplinarios extends javax.swing.JPanel {
         if (Codigos.getText().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo no puede estar vacío");
             playError();
-        } else {
+        } 
+        else if (!Validaciones.onlyLetters(Codigos.getText())) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El campo solo permite letras");
+            playError();
+        }
+        else {
             if (!valida.check25(Codigos.getText())) {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "El Campo es muy grande");
                 playError();

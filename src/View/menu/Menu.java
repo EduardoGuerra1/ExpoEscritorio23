@@ -26,7 +26,7 @@ public class Menu extends JPanel {
     // Definición de elementos del menú
     private final String menuItems[][] = {
         {"~Menú Principal~"},
-        {"Dashboard"},
+        {"Inicio"},
         {"~Área Disciplinaria~"},
         {"Gestión Disciplinaria","Códigos Disciplinarios","Códigos Asignados","Observaciones","Llegadas Tarde","Inasistencias"},
         {"Comunicados"},
