@@ -53,6 +53,13 @@ public static boolean checkDateNotOlderThan9Years(String dateString) {
         return false;
     }
 }
+public static boolean checkDateCurrentYear(OffsetDateTime date) {
+    OffsetDateTime currentDate = OffsetDateTime.now();
+    int currentYear = currentDate.getYear();
+    
+    return date.getYear() == currentYear;
+}
+
 public static boolean checkDateDown(OffsetDateTime date) {
     OffsetDateTime currentDate = OffsetDateTime.now();
     OffsetDateTime nineYearsAgo = currentDate.minusYears(9);

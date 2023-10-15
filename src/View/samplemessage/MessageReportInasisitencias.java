@@ -5,12 +5,18 @@
 package View.samplemessage;
 
 import Reportes.ConexionSQL;
+import Services.Validaciones;
 import View.glasspanepopup.GlassPanePopup;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.Color;
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.WindowConstants;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -18,6 +24,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import raven.toast.Notifications;
 
 /**
  *
@@ -111,18 +118,18 @@ public class MessageReportInasisitencias extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTitle)
-                    .addComponent(dpNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAceptar3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dpNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTitle))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,8 +137,8 @@ public class MessageReportInasisitencias extends javax.swing.JPanel {
                 .addGap(47, 47, 47)
                 .addComponent(txtTitle)
                 .addGap(18, 18, 18)
-                .addComponent(dpNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addComponent(dpNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAceptar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,16 +153,46 @@ public class MessageReportInasisitencias extends javax.swing.JPanel {
     private void dpNacimientoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpNacimientoPropertyChange
     
     }//GEN-LAST:event_dpNacimientoPropertyChange
+private void playError() {
+        String filepath = "src/View/sounds/error.wav";
 
+        PlayMusic(filepath);
+
+    }
+    
+    private static void PlayMusic(String location) {
+        try {
+            File musicPath = new File(location);
+            
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            }else{
+                System.out.println("No se encuentra el archivo de sonido");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+   
+    }
     private void btnAceptar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptar3MouseClicked
-       mostrarReporte();
+       if (dpNacimiento.getDate() == null) {
+           Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Por favor, asegúrate de completar tu fecha en un formato válido");
+          playError();
+        }
+         else if(!Validaciones.checkDateCurrentYear(dpNacimiento.getDate().toInstant().atOffset(ZoneOffset.UTC))){
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "La fecha no es válida");
+            playError();
+        }
+         else{
+        mostrarReporte();
+         }
     }//GEN-LAST:event_btnAceptar3MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private View.BotonesText.Buttons btnAceptar;
-    private View.BotonesText.Buttons btnAceptar1;
-    private View.BotonesText.Buttons btnAceptar2;
     private View.BotonesText.Buttons btnAceptar3;
     private View.BotonesText.Buttons btnCancelar;
     private com.toedter.calendar.JDateChooser dpNacimiento;
